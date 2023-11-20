@@ -1,4 +1,4 @@
-import { LoaderFunction, LoaderFunctionArgs, json } from "@remix-run/node";
+import { LoaderFunction, LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { FC } from "react";
 import Contact from "~/components/Contact/Contact";
@@ -17,9 +17,15 @@ export const loader: LoaderFunction = async ({
   return json({ contact });
 };
 
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+
+  return [{
+    title: data.contact.id
+  }]
+}
+
 const ContactPage: FC = () => {
-  const { contact }: { contact: ContactMutation } =
-    useLoaderData<typeof loader>();
+  const { contact }: { contact: ContactMutation } = useLoaderData<typeof loader>();
   return <Contact contact={contact} />;
 };
 
