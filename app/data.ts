@@ -7,7 +7,7 @@ import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
 import invariant from "tiny-invariant";
 
-type ContactMutation = {
+export type ContactMutation = {
   id?: string;
   first?: string;
   last?: string;
@@ -79,7 +79,8 @@ export async function createEmptyContact() {
 }
 
 export async function getContact(id: string) {
-  return fakeContacts.get(id);
+  const contact = await fakeContacts.get(id);
+  return contact;
 }
 
 export async function updateContact(id: string, updates: ContactMutation) {

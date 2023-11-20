@@ -1,0 +1,37 @@
+.card {
+  border-radius: 15px;
+  background-color: rgba(240, 248, 255, 0.597);
+  box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.366);
+  -webkit-box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.267);
+  -moz-box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.385);
+}
+.card:hover {
+  background-color: rgb(133, 133, 203);
+  color: white;
+}
+.avatar {
+  width: 50%;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  gap: 30px;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+.link:visited {
+  color: inherit;
+}

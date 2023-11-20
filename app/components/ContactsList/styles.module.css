@@ -1,0 +1,14 @@
+.wrapper{
+  display: flex;
+  justify-content: center;
+}
+.ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+  gap: 10px;
+}
