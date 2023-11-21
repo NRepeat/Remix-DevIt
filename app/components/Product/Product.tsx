@@ -1,9 +1,14 @@
 import { FC } from "react";
 import styles from "./styles.module.css";
-import { Link } from "@remix-run/react";
 import { Product } from "~/types/types";
+import { AddToCart } from "../AddToCart/AddToCart";
 
-const SingleProduct: FC<{ product: Product }> = ({ product }) => {
+export interface SingleProduct{ 
+  product:Product,
+  quantity:number 
+}
+
+const SingleProduct: FC< SingleProduct> = ({ product ,quantity}) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -17,11 +22,8 @@ const SingleProduct: FC<{ product: Product }> = ({ product }) => {
             <p> {product.description}</p>
             <p>${product.price}</p>
           </div>
-          <Link to={"/"}>
-          <button className={styles.bcontact}>Add to cart</button>
-        </Link>
+          <AddToCart product={product}  quantity={quantity}/>
         </div>
-    
       </div>
     </div>
   );
