@@ -11,7 +11,7 @@ import invariant from "tiny-invariant";
 
 
 export const CartIcon: FC = () => {
-  const data = useRouteLoaderData<typeof loader>("root")
+  const data = useRouteLoaderData<typeof loader>("root")  //return the loader data by route id
   invariant(data, "Missing data")
 
   const quantity = data.cart.reduce((accumulator, item) => {return accumulator + item.quantity;},0);
