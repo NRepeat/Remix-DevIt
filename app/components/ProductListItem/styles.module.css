@@ -4,6 +4,7 @@
   box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.366);
   -webkit-box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.267);
   -moz-box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.385);
+  transition: all 0.1s;
 
 }
 .card:hover {
@@ -63,8 +64,12 @@
   text-decoration: none;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+  transition: all 0.1s;
 }
-
+.addToCartB:hover{
+  background-color: greenyellow;
+  color: black;
+}
 .link {
   text-decoration: none;
   color: black;

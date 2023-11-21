@@ -1,7 +1,11 @@
-import { LoaderFunction, json } from "@remix-run/node";
+import { LoaderFunction, MetaArgs, MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { getProducts } from "~/services/product.server";
+
+
+
+
 
 export const loader = async () => {
   const products = await getProducts();
