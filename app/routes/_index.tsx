@@ -1,19 +1,20 @@
 import { LoaderFunction, json } from "@remix-run/node";
 import {  useLoaderData } from "@remix-run/react";
 import ContactsList from "~/components/ContactsList/ContactsList";
-import { ContactRecord, getContacts } from "~/data";
+import { getProducts } from "~/services/product.server";
 
-export const loader: LoaderFunction = async () => {
-  const contacts: ContactRecord[] = await getContacts();
 
-  return contacts;
-};
+export const loader: LoaderFunction =async () => {
+  const products = await getProducts()
+  return json({products})
+}
+
 
 function Home() {
-  const contacts: ContactRecord[] = useLoaderData<typeof loader>();
+const products = useLoaderData<typeof loader>()
+  console.log("🚀 ~ file: _index.tsx:15 ~ Home ~ products:", products)
   return (
     <div>
-      <ContactsList contacts={contacts} />
     </div>
   );
 }
