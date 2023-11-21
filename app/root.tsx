@@ -24,7 +24,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
-  const data = useLoaderData<typeof loader>();
+ useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -36,7 +36,6 @@ export default function App() {
       <body>
         <div id="detail">
           <Header  />
-
           <Outlet />
         </div>
         <ScrollRestoration />

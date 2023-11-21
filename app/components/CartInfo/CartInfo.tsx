@@ -10,17 +10,11 @@ import invariant from "tiny-invariant";
 
 
 
-export const CartIcon:FC= () => {
-const data = useRouteLoaderData<typeof loader>("root") 
-invariant(data, "Missing data")
-console.log("🚀 ~ file: CartInfo.tsx:23 ~ data:", data)
+export const CartIcon: FC = () => {
+  const data = useRouteLoaderData<typeof loader>("root")
+  invariant(data, "Missing data")
 
-  const quantity = data.cart.reduce((accumulator, item) => {
-   
-      return accumulator + item.quantity;
-  
-  
-  }, 0);
+  const quantity = data.cart.reduce((accumulator, item) => {return accumulator + item.quantity;},0);
 
   return (
     <Link to={"/cart"}>

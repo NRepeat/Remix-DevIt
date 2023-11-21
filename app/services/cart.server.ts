@@ -6,14 +6,13 @@ export type SessionCart = {
   [key: string | number]: number;
   
 };
-type q = {
-  productId: string,
-  quantity: number
-}
+
 export class Cart {
-  constructor(private session: Session) {}
+  constructor(private session: Session) {
+  }
   loadCart() {
-    return this.session.get(SESSION_KEY) ?? {};
+   const cart:SessionCart =  this.session.get(SESSION_KEY) ?? {}
+    return  cart;
   }
   saveCart(cart: SessionCart) {
     this.session.set(SESSION_KEY, cart);
@@ -29,10 +28,9 @@ export class Cart {
     this.saveCart(cart);
   }
   items() {
-    return Object.entries(this.loadCart()).map(([productId, quantity] ) => ({
-      productId,
-      quantity,
-    }));
+    Object.entries(this.loadCart())
+    console.log("🚀 ~ file: cart.server.ts:35 ~ Cart ~ items ~ Object.entries(this.loadCart()):", Object.entries(this.loadCart()))
+    return Object.entries(this.loadCart()).map(([productId,quantity]) => ({productId,quantity}));
   }
 }
 
