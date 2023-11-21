@@ -4,8 +4,12 @@ export const SESSION_KEY = "cart";
 
 export type SessionCart = {
   [key: string | number]: number;
+  
 };
-
+type q = {
+  productId: string,
+  quantity: number
+}
 export class Cart {
   constructor(private session: Session) {}
   loadCart() {
@@ -25,7 +29,7 @@ export class Cart {
     this.saveCart(cart);
   }
   items() {
-    return Object.entries(this.loadCart()).map(([productId, quantity]) => ({
+    return Object.entries(this.loadCart()).map(([productId, quantity] ) => ({
       productId,
       quantity,
     }));

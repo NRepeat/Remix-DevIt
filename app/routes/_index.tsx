@@ -17,7 +17,6 @@ function Home() {
   const { products } = useLoaderData<typeof loader>();
   return (
     <div>
-      <Header/>
       <ProductsList products={products.products} />
     </div>
   );

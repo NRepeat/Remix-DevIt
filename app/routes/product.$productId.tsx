@@ -19,7 +19,6 @@ export const loader = async ({ params ,request}: LoaderFunctionArgs) => {
     throw new Response("Not Found", { status: 404 });
   }
   const session = await getSession(request.headers.get("Cookie"));
-  console.log("🚀 ~ file: product.$productId.tsx:22 ~ loader ~ session :", session )
   const cart = createCart(session);
   return json({ product, cart:cart.items() });
 };
@@ -50,7 +49,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 };
 function ProductPage() {
   const { product ,cart} = useLoaderData<typeof loader>();
-  console.log("🚀 ~ file: product.$productId.tsx:53 ~ ProductPage ~ cart:", cart)
   const quantity = (cart.find(item => Number(item.productId) === product.id)?.quantity ?? 0) as number;
   return <Product product={product} quantity={quantity} />;
 }
