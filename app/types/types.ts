@@ -25,8 +25,12 @@ stock:number,
 brand:string,
 category:string,
 thumbnail:string,
-images:string[]
+images:string[]    
+}
 
-
-    
+export type ProductResponse = { 
+    limit:number,
+    skip:number,
+    total:number,
+    products:Product[]
 }

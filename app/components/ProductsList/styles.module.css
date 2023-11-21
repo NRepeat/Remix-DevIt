@@ -2,13 +2,10 @@
   display: flex;
   justify-content: center;
 }
-.ul{
+.list{
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 100%;
   flex-wrap: wrap;
-  flex-direction: row;
   list-style: none;
   gap: 10px;
+  padding: 10px;
 }
