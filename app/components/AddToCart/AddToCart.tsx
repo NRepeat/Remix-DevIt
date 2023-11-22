@@ -11,7 +11,6 @@ export interface AddToCartProps {
 
 export const AddToCart: FC<AddToCartProps> = ({ product }) => {
 const n  = useNavigation()
-  console.log("🚀 ~ file: AddToCart.tsx:14 ~ n :", n )
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");
 
