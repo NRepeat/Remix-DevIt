@@ -17,15 +17,8 @@ export class Cart {
     this.session.set(SESSION_KEY, cart);
   }
  
-  addProduct(productId: string | number, quantity: string) {
+  addProduct(productId: string | number) {
     const cart = this.loadCart();
-
-    const error = this.session.get("error") ?? {};
-
-    if (cart[productId] + 1 > +quantity) {
-      this.session.flash("error", "Out of stock");
-      return
-    }
     cart[productId] = (cart[productId] ?? 0) + 1;
 
     this.saveCart(cart);

@@ -2,16 +2,16 @@ import {
   ActionFunctionArgs,
   LoaderFunctionArgs,
   MetaFunction,
+  defer,
   json,
-  redirect,
 } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Await, useLoaderData, useNavigation, useParams } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Product from "~/components/Product/Product";
 import { createCart } from "~/services/cart.server";
 import { getProduct } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
-
+import style from "../style.module.css";
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   invariant(params.productId, "Missing contactId param");
   const product = await getProduct(params.productId);
@@ -21,26 +21,17 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   }
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
-  return json({ product, cart: cart.items() });
+  return defer({ product, cart: cart.items() });
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = request.formData();
   const productId = (await formData).get("productId");
-  const productStock = (await formData).get("productStock");
   invariant(typeof productId === "string", "Missing product id");
-  invariant(typeof productStock === "string", "Missing product stock");
   const session = await getSession(request.headers.get("Cookie"));
 
   const cart = createCart(session);
-  cart.addProduct(productId, productStock);
-  if (session.data.__flash_error__) {
-redirect("/error/1")
-    return json(
-      { data: "Out of stock", success: false },
-      { headers: { "Set-Cookie": await commitSession(session) } }
-    );
-  }
+  cart.addProduct(productId);
 
   return json(
     { success: true },
@@ -59,10 +50,16 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 function ProductPage() {
-  const { product, cart } = useLoaderData<typeof loader>();
-  const quantity = (cart.find((item) => Number(item.productId) === product.id)
+  const navigation = useNavigation();
+  const data = useLoaderData<typeof loader>();
+  const quantity = (data.cart.find((item) => Number(item.productId) === data.product.id)
     ?.quantity ?? 0) as number;
-  return <Product product={product} quantity={quantity} />;
+  
+  return (
+    <div className={navigation.state === "loading" && navigation.location.pathname === '/'  ? style.loading : ""}>
+       <Product product={data.product} quantity={quantity} />
+    </div>
+  );
 }
 
 export default ProductPage;

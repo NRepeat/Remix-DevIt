@@ -10,6 +10,7 @@ const ProductsList: FC<{ products: Product[] }> = ({ products}) => {
         {products.length ? (
           <ul className={styles.list}>
             {products.map((product:Product ) => (
+              
               <li key={product.id}>
                 <ProductListItem product={product} />
               </li>
@@ -17,7 +18,7 @@ const ProductsList: FC<{ products: Product[] }> = ({ products}) => {
           </ul>
         ) : (
           <p>
-            <i>No contacts</i>
+            <i>No prodacts</i>
           </p>
         )}
       </nav>

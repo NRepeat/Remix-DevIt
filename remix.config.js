@@ -2,4 +2,5 @@
 module.exports = {
   ignoredRouteFiles: ["**/.*"],
   serverModuleFormat: "cjs",
+  serverDependenciesToBundle: [/^react-icons/],
 };

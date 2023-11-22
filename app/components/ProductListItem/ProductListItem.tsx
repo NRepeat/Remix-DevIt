@@ -3,6 +3,7 @@ import { FC } from "react";
 import { Product } from "~/types/types";
 
 import styles from "./styles.module.css";
+import { AddToCart } from "../AddToCart/AddToCart";
 
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   return (
@@ -18,10 +19,10 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
                 <h2 className={styles.title}>{product.title}</h2>
                 <p className={styles.description}>{product.description}</p>
                 <p className={styles.price}>${product.price}</p>
+                <AddToCart product={product} />
               </div>
             </div>
           </Link>
-          <button className={styles.addToCartB}>Add to card</button>
         </>
       ) : (
         <i>No Item</i>

@@ -5,13 +5,16 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
+  useFetcher,
+  useNavigation,
 } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { json, LoaderFunctionArgs, type LinksFunction } from "@remix-run/node";
 import Header from "./components/Header/Header";
 import { getSession } from "./services/session.server";
 import { createCart } from "./services/cart.server";
+import style from "./style.module.css";
+import { Suspense } from "react";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -24,6 +27,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
+  const navigation = useNavigation();
   return (
     <html lang="en">
       <head>
@@ -33,10 +37,14 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <div id="detail">
-          <Header  />
+        <div className={style.container}>
+          <div
+            className={navigation.state === "loading" ? style.ldsDualRing : ""}
+          ></div>
+          <Header />
           <Outlet />
         </div>
+
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

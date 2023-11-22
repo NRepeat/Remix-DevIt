@@ -4,10 +4,10 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": "remix dev",
-    "start": "remix-serve build",
-    "typecheck": "tsc",
-    "sass": "sass --watch app/:app/"
+    "dev": "remix dev ",
+    "start":"remix-serve ./build/index.js",
+    "typecheck": "tsc"
+  
   },
   "dependencies": {
     "@remix-run/css-bundle": "^2.3.0",
