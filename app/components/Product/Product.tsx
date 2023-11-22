@@ -8,7 +8,7 @@ export interface SingleProduct{
   quantity:number 
 }
 
-const SingleProduct: FC< SingleProduct> = ({ product ,quantity}) => {
+const SingleProduct: FC< SingleProduct> = ({ product}) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -22,7 +22,7 @@ const SingleProduct: FC< SingleProduct> = ({ product ,quantity}) => {
             <p> {product.description}</p>
             <p>${product.price}</p>
           </div>
-          <AddToCart product={product}  quantity={quantity}/>
+          <AddToCart product={product}  />
         </div>
       </div>
     </div>

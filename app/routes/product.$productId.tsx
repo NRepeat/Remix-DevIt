@@ -7,7 +7,6 @@ import {
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import ErrorOutofStock from "~/components/ErrorOutofStock/ErrorOutofStock";
 import Product from "~/components/Product/Product";
 import { createCart } from "~/services/cart.server";
 import { getProduct } from "~/services/product.server";
@@ -36,8 +35,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const cart = createCart(session);
   cart.addProduct(productId, productStock);
   if (session.data.__flash_error__) {
-    redirect(`/error/${session.data.__flash_error__}`);
-
+redirect("/error/1")
     return json(
       { data: "Out of stock", success: false },
       { headers: { "Set-Cookie": await commitSession(session) } }
