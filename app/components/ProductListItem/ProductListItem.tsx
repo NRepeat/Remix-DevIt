@@ -10,7 +10,7 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
     <>
       {product ? (
         <>
-          <Link className={styles.link} to={`product/${product.id}`}>
+          <Link className={styles.link} to={`/product/${product.id}`}>
             <div className={styles.card}>
               <div className={styles.wrapper}>
                 <div className={styles.avatar}>
