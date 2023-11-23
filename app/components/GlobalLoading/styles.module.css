@@ -1,0 +1,42 @@
+.loader {
+  color: black;
+  height: 50px;
+
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0px;
+
+  left: 0px;
+  z-index: 50px;
+  animation: pulse 2s infinite;
+}
+
+
+.bar {
+  height: 5px;
+  background-color: blueviolet;
+
+  transition: all 500ms ease-in-out;
+}
+.idle {
+  width: 100%;
+}
+.animationComplete {
+  width: 0%;
+  opacity: 0;
+  transition: none;
+}
+
+.loading {
+  width: 53.3333%;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

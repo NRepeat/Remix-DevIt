@@ -1,38 +1,6 @@
-.ldsDualRing {
-  z-index: 100;
-  position: absolute;
 
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 80px;
-  height: 80px;
-}
-.ldsDualRing:after {
-  content: " ";
-  display: block;
-
-  width: 64px;
-  height: 64px;
-  margin: 8px;
-  border-radius: 50%;
-  border: 6px solid rgb(255, 1, 255);
-  border-color: rgb(255, 0, 255) transparent rgb(255, 0, 255) transparent;
-  animation: ldsDualRing 1.2s linear infinite;
-}
-@keyframes ldsDualRing {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 .container {
   width: 100wv;
   height: 100vh;
 }
 
-.loading{
-  display: none;
-}

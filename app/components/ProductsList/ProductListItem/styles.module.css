@@ -31,45 +31,6 @@
   overflow: hidden;
   margin-bottom: 20px;
 }
-
-.title{
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin: 0px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.description{ 
-  text-align: center;
-  font-size: 0.9rem;
-  height: 1.2rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  margin-bottom: 16px;
-}
-
-.addToCartB{
-  display: block;
-  width: 100%;
-  padding: 10px;
-  text-align: center;
-  color: white;
-  background-color: blueviolet;
-  border: 0;
-  outline: 0;
-  cursor: pointer;
-  text-decoration: none;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  transition: all 0.1s;
-}
-.addToCartB:hover{
-  background-color: greenyellow;
-  color: black;
-}
 .link {
   text-decoration: none;
   color: black;

@@ -14,7 +14,8 @@ import Header from "./components/Header/Header";
 import { getSession } from "./services/session.server";
 import { createCart } from "./services/cart.server";
 import style from "./style.module.css";
-import { Suspense } from "react";
+import GloabalLoader from "./components/GlobalLoading/GlobalLoading";
+
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -38,9 +39,9 @@ export default function App() {
       </head>
       <body>
         <div className={style.container}>
-          <div
-            className={navigation.state === "loading" ? style.ldsDualRing : ""}
-          ></div>
+      <GloabalLoader/>
+
+       
           <Header />
           <Outlet />
         </div>

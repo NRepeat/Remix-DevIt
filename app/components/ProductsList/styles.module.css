@@ -1,7 +1,11 @@
-.wrapper{
-
+.noProducts {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
 }
-.list{
+.list {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

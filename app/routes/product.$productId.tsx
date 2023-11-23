@@ -5,13 +5,18 @@ import {
   defer,
   json,
 } from "@remix-run/node";
-import { Await, useLoaderData, useNavigation, useParams } from "@remix-run/react";
+import { useLoaderData, useNavigation } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Product from "~/components/Product/Product";
 import { createCart } from "~/services/cart.server";
 import { getProduct } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
 import style from "../style.module.css";
+
+
+
+
+
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   invariant(params.productId, "Missing contactId param");
   const product = await getProduct(params.productId);
@@ -52,12 +57,19 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 function ProductPage() {
   const navigation = useNavigation();
   const data = useLoaderData<typeof loader>();
-  const quantity = (data.cart.find((item) => Number(item.productId) === data.product.id)
-    ?.quantity ?? 0) as number;
-  
+  const quantity = (data.cart.find(
+    (item) => Number(item.productId) === data.product.id
+  )?.quantity ?? 0) as number;
+
   return (
-    <div className={navigation.state === "loading" && navigation.location.pathname === '/'  ? style.loading : ""}>
-       <Product product={data.product} quantity={quantity} />
+    <div
+      className={
+        navigation.state === "loading" && navigation.location.pathname === "/"
+          ? style.loading
+          : ""
+      }
+    >
+      <Product product={data.product} quantity={quantity} />
     </div>
   );
 }

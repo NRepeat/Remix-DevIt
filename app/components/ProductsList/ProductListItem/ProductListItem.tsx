@@ -1,9 +1,9 @@
 import { Link } from "@remix-run/react";
 import { FC } from "react";
 import { Product } from "~/types/types";
-
 import styles from "./styles.module.css";
-import { AddToCart } from "../AddToCart/AddToCart";
+import { AddToCart } from "~/components/AddToCart/AddToCart";
+import ProductInformation from "~/components/ProductInformation/ProductInformation";
 
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   return (
@@ -16,9 +16,7 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
                 <div className={styles.avatar}>
                   <img src={product.thumbnail} alt={product.title} />
                 </div>
-                <h2 className={styles.title}>{product.title}</h2>
-                <p className={styles.description}>{product.description}</p>
-                <p className={styles.price}>${product.price}</p>
+                <ProductInformation product={product} />
                 <AddToCart product={product} />
               </div>
             </div>
