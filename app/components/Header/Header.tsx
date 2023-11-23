@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { CartIcon } from "../CartInfo/CartInfo";
 import { Link } from "@remix-run/react";
 import { SearchBar } from "./SearchBar/SearchBar";
+import Sort from "./Sort/Sort";
 
 const Header: FC = () => {
   return (
@@ -12,6 +13,7 @@ const Header: FC = () => {
           <p className={styles.title}>Store</p>
         </Link>
         <SearchBar />
+        <Sort/>
         <CartIcon />
       </div>
     </div>

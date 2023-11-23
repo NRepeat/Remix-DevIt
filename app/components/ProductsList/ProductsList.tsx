@@ -8,7 +8,6 @@ import ProductListItem from "./ProductListItem/ProductListItem";
 
 
 const ProductsList: FC<{ products: Product[] }> = ({ products }) => {
-console.log("🚀 ~ file: ProductsList.tsx:26 ~ products:", products)
 
   return (
     <div className={styles.wrapper}>

@@ -27,8 +27,8 @@ export const searchProductByCategories = async (c: string |null): Promise<Produc
   );
 };
 
-export const getLemitProdacts= async (limit: string |null,skip: string |null,...params:[string]): Promise<ProductResponse> => {
-  return fetch(`https://dummyjson.com/products/category/`).then((res) =>
+export const getLimitProdacts= async (limit: number |null,skip: number |null,...params:[string] ): Promise<ProductResponse> => {
+  return fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}&select${params.join(",")}`).then((res) =>
     res.json()
   );
 };
