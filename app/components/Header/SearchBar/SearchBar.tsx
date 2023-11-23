@@ -4,6 +4,7 @@ import { Form,  useNavigation, useSubmit } from "@remix-run/react";
 
 export const SearchBar: FC = () => {
   const nav = useNavigation();
+  const submit = useSubmit();
   useEffect(() => {
     const urlParams = new URLSearchParams(nav.location?.search);
     const qValue = urlParams?.get("q");
@@ -14,7 +15,7 @@ export const SearchBar: FC = () => {
     }
   }, [nav]);
 
-  const submit = useSubmit();
+
   return (
     <>
       <Form

@@ -15,7 +15,7 @@ import { getSession } from "./services/session.server";
 import { createCart } from "./services/cart.server";
 import style from "./style.module.css";
 import GloabalLoader from "./components/GlobalLoading/GlobalLoading";
-
+import Filter from "~/components/Sort/Sort"
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -28,7 +28,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 
 export default function App() {
-  const navigation = useNavigation();
   return (
     <html lang="en">
       <head>
@@ -41,9 +40,10 @@ export default function App() {
         <div className={style.container}>
       <GloabalLoader/>
 
-       
           <Header />
+
           <Outlet />
+          
         </div>
 
         <ScrollRestoration />

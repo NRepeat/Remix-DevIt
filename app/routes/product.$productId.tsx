@@ -57,9 +57,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 function ProductPage() {
   const navigation = useNavigation();
   const data = useLoaderData<typeof loader>();
-  const quantity = (data.cart.find(
-    (item) => Number(item.productId) === data.product.id
-  )?.quantity ?? 0) as number;
 
   return (
     <div
@@ -69,7 +66,7 @@ function ProductPage() {
           : ""
       }
     >
-      <Product product={data.product} quantity={quantity} />
+      <Product product={data.product} />
     </div>
   );
 }

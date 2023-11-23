@@ -15,3 +15,8 @@ export const searchProduct = async (q: string |null): Promise<ProductResponse> =
     res.json()
   );
 };
+export const searchProductByCategories = async (c: string |null): Promise<ProductResponse> => {
+  return fetch(`https://dummyjson.com/products/category/${c}`).then((res) =>
+    res.json()
+  );
+};
