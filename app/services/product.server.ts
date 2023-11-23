@@ -26,3 +26,9 @@ export const searchProductByCategories = async (c: string |null): Promise<Produc
     res.json()
   );
 };
+
+export const getLemitProdacts= async (limit: string |null,skip: string |null,...params:[string]): Promise<ProductResponse> => {
+  return fetch(`https://dummyjson.com/products/category/`).then((res) =>
+    res.json()
+  );
+};

@@ -2,7 +2,14 @@ import { FC } from "react";
 import styles from "./styles.module.css";
 import { Product } from "~/types/types";
 import ProductListItem from "./ProductListItem/ProductListItem";
+
+
+
+
+
 const ProductsList: FC<{ products: Product[] }> = ({ products }) => {
+console.log("🚀 ~ file: ProductsList.tsx:26 ~ products:", products)
+
   return (
     <div className={styles.wrapper}>
       <nav>
