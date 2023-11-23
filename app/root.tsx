@@ -5,8 +5,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useFetcher,
-  useNavigation,
 } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { json, LoaderFunctionArgs, type LinksFunction } from "@remix-run/node";
@@ -15,7 +13,8 @@ import { getSession } from "./services/session.server";
 import { createCart } from "./services/cart.server";
 import style from "./style.module.css";
 import GloabalLoader from "./components/GlobalLoading/GlobalLoading";
-import Filter from "~/components/Sort/Sort"
+import Sidebar from "./components/SideBar/Sidebar";
+import { getAllProductCategories } from "./services/product.server";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -24,7 +23,8 @@ export const links: LinksFunction = () => [
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
-  return json({ cart: cart.items() });
+  const cat = await getAllProductCategories();
+  return json({ cart: cart.items(), cat });
 };
 
 export default function App() {
@@ -36,14 +36,18 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className={style.body}>
+        <GloabalLoader />
+        <Header />
         <div className={style.container}>
-      <GloabalLoader/>
-
-          <Header />
-
-          <Outlet />
-          
+          <aside className={style.sidebar}>
+            <Sidebar />
+          </aside>
+          <div className={style.mainWrapper}>
+            <main className={style.main}>
+              <Outlet />
+            </main>
+          </div>
         </div>
 
         <ScrollRestoration />

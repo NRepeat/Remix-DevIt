@@ -1,6 +1,28 @@
-
-.container {
-  width: 100wv;
-  height: 100vh;
+.body {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
+.container {
+  display: flex;
+  width: 85vw;
+  justify-content: space-between;
+}
+
+.sidebar {
+  margin-top: 20px;
+  width: 30%;
+  max-width: 270px;
+  border-radius: 10px;
+  height: fit-content;
+}
+.main {
+  margin-top: 20px;
+}
+
+.mainWrapper{
+  width: 100%;
+}

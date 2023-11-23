@@ -2,11 +2,9 @@ import { FC } from "react";
 import styles from "./styles.module.css";
 import { Product } from "~/types/types";
 import ProductListItem from "./ProductListItem/ProductListItem";
-import Filter from "~/components/Sort/Sort"
 const ProductsList: FC<{ products: Product[] }> = ({ products }) => {
   return (
     <div className={styles.wrapper}>
-      <Filter  products ={products}/>
       <nav>
         {products.length ? (
           <ul className={styles.list}>

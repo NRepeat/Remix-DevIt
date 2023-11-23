@@ -8,16 +8,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const c = url.searchParams.get("c");
   const q = url.searchParams.get("q");
 
-  const {products} = await searchProductByCategories(c);
+  const {products:productc} = await searchProductByCategories(c);
   const {products:productq}= await searchProduct(q);
-  console.log("🚀 ~ file: search.tsx:13 ~ loader ~ productq:", productq)
-
-  return json([...products, ...productq]);
+  return json([...productc, ...productq]);
 }
 
-export default function  F () {
+export default function   () {
   const data = useLoaderData<typeof loader>();
-  console.log("🚀 ~ file: search.tsx:19 ~ F ~ data:", data)
   return (
     <div>
       <ProductsList products={data} />

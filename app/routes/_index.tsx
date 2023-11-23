@@ -3,7 +3,7 @@ import { Await, useLoaderData } from "@remix-run/react";
 import { Suspense } from "react";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { getProducts } from "~/services/product.server";
-import Filter from "~/components/Sort/Sort";
+import Filter from "~/components/Filtr/Sort";
 
 export const loader = async () => {
   const products = await getProducts();
