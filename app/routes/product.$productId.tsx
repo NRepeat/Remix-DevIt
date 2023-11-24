@@ -13,10 +13,6 @@ import { getProduct } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
 import style from "../style.module.css";
 
-
-
-
-
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   invariant(params.productId, "Missing contactId param");
   const product = await getProduct(params.productId);
@@ -55,17 +51,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
   ];
 };
 function ProductPage() {
-  const navigation = useNavigation();
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div
-      className={
-        navigation.state === "loading" && navigation.location.pathname === "/"
-          ? style.loading
-          : ""
-      }
-    >
+    <div>
       <Product product={data.product} />
     </div>
   );

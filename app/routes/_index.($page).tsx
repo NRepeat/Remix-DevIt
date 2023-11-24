@@ -1,5 +1,5 @@
-import { ActionFunctionArgs, LoaderFunctionArgs, defer } from "@remix-run/node";
-import { Await, useLoaderData, } from "@remix-run/react";
+import { LoaderFunctionArgs, defer, json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import Pagination from "~/components/Pagination/pagination";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { getLimitProdacts } from "~/services/product.server";
@@ -16,17 +16,18 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   return defer({ products, page, s });
 };
 
+
 function Home() {
   const data = useLoaderData<typeof loader>();
-  const currentPage = (data.page)
+
+  const currentPage = data.page;
   const totalPages = Math.ceil(data.products.total / data.products.limit);
   const sortedProducts = [...data.products.products].sort((a, b) =>
     data.s === "Price down" ? a.price - b.price : b.price - a.price
   );
 
   return (
-
-    <div >
+    <div>
       <ProductsList products={sortedProducts} />
       <div className={style.pagContainer}>
         <Pagination currentPage={currentPage} totalPages={totalPages} />
