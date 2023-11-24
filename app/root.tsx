@@ -1,33 +1,28 @@
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
+import { Links, Meta, useLoaderData } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { json, LoaderFunctionArgs, type LinksFunction } from "@remix-run/node";
-import Header from "./components/Header/Header";
 import { getSession } from "./services/session.server";
 import { createCart } from "./services/cart.server";
-import style from "./style.module.css";
-import GloabalLoader from "./components/GlobalLoading/GlobalLoading";
-import Sidebar from "./components/SideBar/Sidebar";
 import { getAllProductCategories } from "./services/product.server";
+import StorePage from "./pages/StorePage/StorePage";
+import resetlStylesHref from "./styles/reset.css";
+import globalStylesHref from "./styles/global.css";
 
 export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: resetlStylesHref },
+  { rel: "stylesheet", href: globalStylesHref },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
-  const cat = await getAllProductCategories();
-  return json({ cart: cart.items(), cat });
+  const categories = await getAllProductCategories();
+  return json({ cart: cart.items(), categories });
 };
 
 export default function App() {
+  const data = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -36,23 +31,8 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className={style.body}>
-        <GloabalLoader />
-        <Header />
-        <div className={style.container}>
-          <aside className={style.sidebar}>
-            <Sidebar />
-          </aside>
-          <div className={style.mainWrapper}>
-            <main className={style.main}>
-              <Outlet />
-            </main>
-          </div>
-        </div>
-
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+      <body className="body">
+        <StorePage data={data} />
       </body>
     </html>
   );

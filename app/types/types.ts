@@ -19,5 +19,4 @@ export type ProductResponse = {
   products: Product[];
 };
 
-export type ProductCatgoriesResponse =  []
-
+export type ProductCatgoriesResponse = string[];

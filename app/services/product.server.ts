@@ -21,7 +21,7 @@ export const getAllProductCategories = async (): Promise<ProductCatgoriesRespons
   );
 };
 
-export const searchProductByCategories = async (c: string |null): Promise<ProductResponse> => {
+export const getProductsByCategory = async (c: string |null): Promise<ProductResponse> => {
   return fetch(`https://dummyjson.com/products/category/${c}`).then((res) =>
     res.json()
   );

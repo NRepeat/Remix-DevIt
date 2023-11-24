@@ -1,5 +1,6 @@
 import { Session } from "@remix-run/node";
 
+
 export const SESSION_KEY = "cart";
 
 export type SessionCart = {
@@ -8,11 +9,13 @@ export type SessionCart = {
 
 export class Cart {
   constructor(private session: Session) {}
+
   loadCart() {
     const cart: SessionCart = this.session.get(SESSION_KEY) ?? {};
 
     return cart;
   }
+
   saveCart(cart: SessionCart) {
     this.session.set(SESSION_KEY, cart);
   }
@@ -29,6 +32,7 @@ export class Cart {
     delete cart[productId];
     this.saveCart(cart);
   }
+
   items() {
     Object.entries(this.loadCart());
  

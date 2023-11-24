@@ -2,15 +2,20 @@ import { FC } from "react";
 import styles from "./styles.module.css";
 import { Product } from "~/types/types";
 import ProductListItem from "./ProductListItem/ProductListItem";
+import Sort from "../Header/Sort/Sort";
+import SortTypesList from "../Header/Sort/SortTypesList";
 
 
+export interface ProductListProps {
+  products: Product[] 
+}
 
 
-
-const ProductsList: FC<{ products: Product[] }> = ({ products }) => {
+const ProductsList: FC<ProductListProps> = ({ products }) => {
 
   return (
     <div className={styles.wrapper}>
+      <SortTypesList/>
       <nav>
         {products.length ? (
           <ul className={styles.list}>

@@ -1,4 +1,4 @@
-import { Form, useRouteLoaderData } from "@remix-run/react";
+import {  useFetcher, useRouteLoaderData } from "@remix-run/react";
 import styles from "./styles.module.css";
 import { Product } from "~/types/types";
 import { FC } from "react";
@@ -10,6 +10,7 @@ export interface AddToCartProps {
 }
 
 export const AddToCart: FC<AddToCartProps> = ({ product }) => {
+  const fetch = useFetcher()
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");
 
@@ -17,8 +18,9 @@ export const AddToCart: FC<AddToCartProps> = ({ product }) => {
     (item) => item.productId === product.id.toString()
   );
   return (
-    <Form
+    <fetch.Form
       method="post"
+      action={`/products/${product.id}`}
       onSubmit={(event) => {
         if (cartItem && product.stock <= cartItem.quantity) {
           confirm("Out of stock.");
@@ -28,11 +30,10 @@ export const AddToCart: FC<AddToCartProps> = ({ product }) => {
     >
       <input name="productId" type="hidden" value={product.id} />
       <input name="productStock" type="hidden" value={product.stock} />
-  
+
       <button className={styles.button} type="submit">
-        {cartItem?.quantity ?? 0< 0 ? "Add More" : "Add to cart"}
+        {cartItem?.quantity ?? 0 < 0 ? "Add More" : "Add to cart"}
       </button>
-    </Form>
+    </fetch.Form>
   );
-  
 };

@@ -5,23 +5,24 @@ import {
   defer,
   json,
 } from "@remix-run/node";
-import { useLoaderData, useNavigation } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Product from "~/components/Product/Product";
 import { createCart } from "~/services/cart.server";
 import { getProduct } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
-import style from "../style.module.css";
+
 
 export const loader = async ({ params, request }: LoaderFunctionArgs) => {
   invariant(params.productId, "Missing contactId param");
   const product = await getProduct(params.productId);
+  const session = await getSession(request.headers.get("Cookie"));
+  const cart = createCart(session);
 
   if (!product) {
     throw new Response("Not Found", { status: 404 });
   }
-  const session = await getSession(request.headers.get("Cookie"));
-  const cart = createCart(session);
+ 
   return defer({ product, cart: cart.items() });
 };
 
@@ -30,7 +31,6 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   const productId = (await formData).get("productId");
   invariant(typeof productId === "string", "Missing product id");
   const session = await getSession(request.headers.get("Cookie"));
-
   const cart = createCart(session);
   cart.addProduct(productId);
 
@@ -50,14 +50,11 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
     },
   ];
 };
-function ProductPage() {
+
+function ProductRoute() {
   const data = useLoaderData<typeof loader>();
 
-  return (
-    <div>
-      <Product product={data.product} />
-    </div>
-  );
+  return <Product product={data.product} />;
 }
 
-export default ProductPage;
+export default ProductRoute;

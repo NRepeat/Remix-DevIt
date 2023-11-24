@@ -10,17 +10,18 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
     <>
       {product ? (
         <>
-          <Link className={styles.link} to={`/product/${product.id}`}>
+          <Link className={styles.link} to={`/products/${product.id}`}>
             <div className={styles.card}>
               <div className={styles.wrapper}>
                 <div className={styles.avatar}>
                   <img src={product.thumbnail} alt={product.title} />
                 </div>
                 <ProductInformation product={product} />
-                <AddToCart product={product} />
               </div>
             </div>
           </Link>
+          <AddToCart product={product} />
+       
         </>
       ) : (
         <i>No Item</i>
@@ -28,7 +29,5 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
     </>
   );
 };
-
-ProductListItem.displayName = "ProductListItem";
 
 export default ProductListItem;

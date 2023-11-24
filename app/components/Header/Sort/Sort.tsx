@@ -1,25 +1,20 @@
-import { Form, useSubmit } from "@remix-run/react";
-const Sort = () => {
-  const submit = useSubmit();
-  const sortType = ["Price up", "Price down"];
+import { FC } from "react";
+import { ProductListProps } from "~/components/ProductsList/ProductsList";
+import { Product } from "~/types/types";
 
-  return (
-    <div>
-      <Form action={`/`} role="sort">
-        <select
-          id="s"
-          name="s"
-          onChange={(event) => submit({ s: event.target.value })}
-        >
-          {sortType.map((type) => (
-            <option key={type} value={type}>
-              {type}
-            </option>
-          ))}
-        </select>
-      </Form>
-    </div>
+export interface SortedProductsListProps {
+  order: string;
+  ProductsList: FC<ProductListProps>;
+  products: Product[];
+}
+
+const SortedProductsList = ({ order, ProductsList, products }: SortedProductsListProps) => {
+  const sortedProducts = [...products].sort((a, b) =>
+    order === "asc" ? a.price - b.price : b.price - a.price
   );
+
+  return <ProductsList products={sortedProducts} />;
 };
 
-export default Sort;
+
+export default SortedProductsList;
