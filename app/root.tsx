@@ -1,4 +1,4 @@
-import { Links, Meta, useLoaderData } from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts, isRouteErrorResponse, useLoaderData, useRouteError } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { json, LoaderFunctionArgs, type LinksFunction } from "@remix-run/node";
 import { getSession } from "./services/session.server";
@@ -20,7 +20,36 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const categories = await getAllProductCategories();
   return json({ cart: cart.items(), categories });
 };
+export function ErrorBoundary() {
+  const error = useRouteError();
 
+  if (isRouteErrorResponse(error)) {
+    return (
+      <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <Scripts />
+        <Outlet />
+      </body>
+    </html>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </div>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
+}
 export default function App() {
   const data = useLoaderData<typeof loader>();
   return (

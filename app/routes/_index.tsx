@@ -1,5 +1,5 @@
 import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { isRouteErrorResponse, useLoaderData, useRouteError } from "@remix-run/react";
 import Pagination from "~/components/Pagination/pagination";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { getLimitProdacts } from "~/services/product.server";
