@@ -1,21 +1,15 @@
-import { ActionFunctionArgs } from "@remix-run/node";
 import {
   Form,
-  useLocation,
   useSearchParams,
   useSubmit,
 } from "@remix-run/react";
-import { ChangeEvent } from "react";
 
-interface SubmitTarget {
-  // Замените тип any на нужный вам тип
-  sort: string;
-  search?: string | null;
-}
+
 
 function SortTypesList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const search = searchParams.get("search");
+  const page = searchParams.get("page");
   const submit = useSubmit();
   const sortType = ["asc", "desc"];
   return (
@@ -25,9 +19,10 @@ function SortTypesList() {
         name={"sort"}
         onChange={(e) => {
           submit({
+            page: page !==null ? search : "",
             sort: e.target.value,
-            search: search !== null ? search : "",
-          });
+
+          },);
         }}
       >
         {sortType.map((type, i) => (

@@ -1,11 +1,4 @@
-.paginationContainer{
- 
-    display: flex;
-    justify-content: center;
-  width: 100%;
-
-}
-.container{
+.categoryContainer{
   display: flex;
   flex-direction: column;
   align-items: flex-start;

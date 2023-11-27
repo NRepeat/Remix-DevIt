@@ -12,9 +12,6 @@ export interface ProductListProps {
 const ProductsList: FC<ProductListProps> = ({ products }) => {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.sortOptions}>
-        <SortTypesList />
-      </div>
       <nav>
         {products.length ? (
           <ul className={styles.list}>

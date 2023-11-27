@@ -1,28 +1,29 @@
 import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
-import { isRouteErrorResponse, useLoaderData, useRouteError } from "@remix-run/react";
+import {
+  useLoaderData,
+} from "@remix-run/react";
 import Pagination from "~/components/Pagination/pagination";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { getLimitProdacts } from "~/services/product.server";
 import rootStylesHref from "../styles/rootIndex.css";
-import SortedProductsList from "~/components/Sort/Sort";
-
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: rootStylesHref },
 ];
-const limit = 6;
-const par = "";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
-  const pageQuery = url.searchParams.get("search");
-  const sortQuery = url.searchParams.get("sort");
-  const page = pageQuery ? parseInt(pageQuery) || 1 : 1;
+  const pageQuery = url.searchParams.get("page");
+  const limit = 12;
+  const par = "";
+  const page = pageQuery ? parseInt(pageQuery) : 1;
   const skip = (page - 1) * limit;
   const products = await getLimitProdacts(limit, skip, par);
-  const sortType = sortQuery !== null ? sortQuery : "asc";
-
-  return json({ products, page, sortType });
+  console.log("🚀 ~ file: _index.tsx:22 ~ loader ~ products:", products)
+  if(products.limit === 0 ){
+    throw new Response("Page Not Found", { status: 404 });
+  }
+  return json({ products, page });
 };
 
 function Home() {
@@ -31,16 +32,12 @@ function Home() {
   const totalPages = Math.ceil(data.products.total / data.products.limit);
 
   return (
-    <>
-      <SortedProductsList
-        ProductsList={ProductsList}
-        order={data.sortType}
-        products={data.products.products}
-      />
+    <div className="container">
+      <ProductsList products={data.products.products} />
       <div className="paginationContainer">
         <Pagination currentPage={currentPage} totalPages={totalPages} />
       </div>
-    </>
+    </div>
   );
 }
 

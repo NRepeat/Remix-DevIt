@@ -1,16 +1,9 @@
 import GloabalLoader from "../../components/GlobalLoading/GlobalLoading";
 import Header from "../../components/Header/Header";
 import Sidebar from "../../components/SideBar/Sidebar";
-import {
-  LiveReload,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useRouteLoaderData,
-} from "@remix-run/react";
+import { Outlet, useRouteLoaderData } from "@remix-run/react";
 import style from "./style.module.css";
 import { FC } from "react";
-
 
 export interface StorePageProps {
   data: {
@@ -23,7 +16,10 @@ export interface StorePageProps {
 }
 
 const StorePage: FC<StorePageProps> = ({ data }) => {
-  const togleSideBarVisible = !!useRouteLoaderData("routes/products.$productId") ||!!useRouteLoaderData("routes/$")
+  const togleSideBarVisible = !!useRouteLoaderData(
+    "routes/$productId"
+  );
+
   return (
     <>
       <GloabalLoader />
@@ -41,9 +37,6 @@ const StorePage: FC<StorePageProps> = ({ data }) => {
           </main>
         </div>
       </div>
-      <ScrollRestoration />
-      <Scripts />
-      <LiveReload />
     </>
   );
 };

@@ -1,0 +1,12 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  
+}
+.link{
+  color: blueviolet;
+}
+.separator {
+  margin: 0 5px;
+}

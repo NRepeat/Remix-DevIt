@@ -1,4 +1,14 @@
-import { Links, Meta, Outlet, Scripts, isRouteErrorResponse, useLoaderData, useRouteError } from "@remix-run/react";
+import {
+  Links,
+  LiveReload,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  isRouteErrorResponse,
+  useLoaderData,
+  useRouteError,
+} from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
 import { json, LoaderFunctionArgs, type LinksFunction } from "@remix-run/node";
 import { getSession } from "./services/session.server";
@@ -7,6 +17,7 @@ import { getAllProductCategories } from "./services/product.server";
 import StorePage from "./pages/StorePage/StorePage";
 import resetlStylesHref from "./styles/reset.css";
 import globalStylesHref from "./styles/global.css";
+import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: resetlStylesHref },
@@ -22,28 +33,21 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 };
 export function ErrorBoundary() {
   const error = useRouteError();
-
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div>
-      <h1>Error</h1>
-      <p>{error.data}</p>
-      <p>The status is:</p>
-      <pre>{error.status}</pre>
-    </div>
-    );
-  } else if (error instanceof Error) {
-    return (
-      <div>
-        <h1>Error</h1>
-        <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-      </div>
-    );
-  } else {
-    return <h1>Unknown Error</h1>;
-  }
+  console.error(error);
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body className="bodyError">
+        <NotFoundPageError />
+        <Outlet/>
+        <Scripts />
+      </body>
+    </html>
+  );
 }
 export default function App() {
   const data = useLoaderData<typeof loader>();
@@ -57,6 +61,9 @@ export default function App() {
       </head>
       <body className="body">
         <StorePage data={data} />
+        <ScrollRestoration />
+        <Scripts />
+        <LiveReload />
       </body>
     </html>
   );
