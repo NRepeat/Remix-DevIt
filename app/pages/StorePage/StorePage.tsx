@@ -6,6 +6,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useMatches,
   useRouteLoaderData,
 } from "@remix-run/react";
 import style from "./style.module.css";
@@ -23,7 +24,7 @@ export interface StorePageProps {
 }
 
 const StorePage: FC<StorePageProps> = ({ data }) => {
-  const togleSideBarVisible = useRouteLoaderData("routes/products.$productId");
+  const togleSideBarVisible = !!useRouteLoaderData("routes/products.$productId") ||!!useRouteLoaderData("routes/$")
   return (
     <>
       <GloabalLoader />
