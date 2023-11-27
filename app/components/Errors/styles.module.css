@@ -3,13 +3,22 @@
   width: 100%;
   height: 100%;
   display: flex;
+  gap: 20px;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   }
-  .backButton{
+  .backB{
     border: 0px;
-    background-color: white;
+    background-color: green;
     cursor: pointer;
     text-decoration: underline;
+  }
+.link{
+  color: green;
+}
+  .heading{
+    color: red;
+    font-size: 2.5rem;
+    font-weight: bold;
   }

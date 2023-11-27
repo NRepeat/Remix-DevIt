@@ -5,7 +5,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  isRouteErrorResponse,
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
@@ -17,7 +16,8 @@ import { getAllProductCategories } from "./services/product.server";
 import StorePage from "./pages/StorePage/StorePage";
 import resetlStylesHref from "./styles/reset.css";
 import globalStylesHref from "./styles/global.css";
-import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
+import { NotFoundPageError } from "./components/Errors/NotFoundPage/NotFoundPageError";
+
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: resetlStylesHref },

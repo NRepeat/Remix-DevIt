@@ -1,22 +1,17 @@
-import styles from "./styles.module.css";
-import { Link, useNavigate } from "@remix-run/react";
+import HomeButton from "../HomeButton/HomeButton";
+import styles from "../styles.module.css";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 
-function NotFoundPageError() {
-  const navigate = useNavigate();
+export function NotFoundPageError() {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     return (
       <div className={styles.errorNotFoundPage}>
-        <h1>
+        <h1 className={styles.heading}>
           {error.status} {error.statusText}
         </h1>
-        <p>{error.data}</p>
-        <Link to="/">Go to main page</Link>
-        or
-        <button className={styles.backButton} onClick={() => navigate(-1)}>
-          Back
-        </button>
+        <p className={styles.data}>{error.data}</p>
+        <HomeButton/>
       </div>
     );
   } else if (error instanceof Error) {
@@ -26,11 +21,7 @@ function NotFoundPageError() {
         <p>{error.message}</p>
         <p>The stack trace is:</p>
         <pre>{error.stack}</pre>
-        <Link to="/">Go to main page</Link>
-        or
-        <button className={styles.backButton} onClick={() => navigate(-1)}>
-          Back
-        </button>
+        <HomeButton/>
       </div>
     );
   } else {
@@ -39,25 +30,9 @@ function NotFoundPageError() {
         <div className={styles.errorNotFoundPage}>
           <h1>Unknown Error</h1>
           <h2 className="">Page not found</h2>
-          <Link to="/">Go to main page</Link>
-          or
-          <button className={styles.backButton} onClick={() => navigate(-1)}>
-            Back
-          </button>
+          <HomeButton/>
         </div>
       </>
     );
   }
-  return (
-    <div className={styles.errorNotFoundPage}>
-      <h2 className="">Page not found</h2>
-      <Link to="/">Go to main page</Link>
-      or
-      <button className={styles.backButton} onClick={() => navigate(-1)}>
-        Back
-      </button>
-    </div>
-  );
 }
-
-export default NotFoundPageError;

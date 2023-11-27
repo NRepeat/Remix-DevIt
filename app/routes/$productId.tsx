@@ -7,7 +7,7 @@ import {
   json,
 } from "@remix-run/node";
 import {
-  useLoaderData, useRouteError,
+  useLoaderData, 
 } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
