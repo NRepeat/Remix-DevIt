@@ -4,10 +4,10 @@ import styles from "../styles.module.css";
 function HomeButton() {
   const navigate = useNavigate();
   return (
-    <div>  <Link className={styles.link} to="/">Go to main page</Link>
-      <span>or</span>
+    <div className={styles.container}>
+      <Link className={styles.link} to="/">RETURN TO THE MAIN PAGE</Link>
       <button className={styles.backB} onClick={() => navigate(-1)}>
-        Back
+        RETURN TO PREVIOUS PAGE
       </button>
     </div>
   )

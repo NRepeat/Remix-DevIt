@@ -9,5 +9,10 @@
 
 .bodyError{
   height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 overflow: hidden;
+background-color: rgba(128, 0, 128, 0.193);
 }

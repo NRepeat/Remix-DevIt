@@ -6,31 +6,30 @@ export function NotFoundPageError() {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     return (
-      <div className={styles.errorNotFoundPage}>
+      <div className={styles.errorNotFound}>
         <h1 className={styles.heading}>
-          {error.status} {error.statusText}
+          {error.status}
         </h1>
-        <p className={styles.data}>{error.data}</p>
-        <HomeButton/>
+        {error.statusText && <p className={styles.status}>{error.statusText}</p>}
+        {error.data && <p className={styles.data}>{error.data}</p>}
+        <HomeButton />
       </div>
     );
   } else if (error instanceof Error) {
     return (
-      <div className={styles.errorNotFoundPage}>
-        <h1>Error</h1>
+      <div className={styles.errorNotFound}>
+        <h1 className={styles.heading}>Error</h1>
         <p>{error.message}</p>
-        <p>The stack trace is:</p>
-        <pre>{error.stack}</pre>
-        <HomeButton/>
+        <HomeButton />
       </div>
     );
   } else {
     return (
       <>
-        <div className={styles.errorNotFoundPage}>
-          <h1>Unknown Error</h1>
+        <div className={styles.errorNotFound}>
+          <h1 className={styles.heading}>Unknown Error</h1>
           <h2 className="">Page not found</h2>
-          <HomeButton/>
+          <HomeButton />
         </div>
       </>
     );
