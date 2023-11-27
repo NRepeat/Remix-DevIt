@@ -5,35 +5,30 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useLoaderData,
-  useRouteError,
 } from "@remix-run/react";
 import { cssBundleHref } from "@remix-run/css-bundle";
-import { json, LoaderFunctionArgs, type LinksFunction } from "@remix-run/node";
-import { getSession } from "./services/session.server";
-import { createCart } from "./services/cart.server";
-import { getAllProductCategories } from "./services/product.server";
-import StorePage from "./pages/StorePage/StorePage";
-import resetlStylesHref from "./styles/reset.css";
+import resetStylesHref from "./styles/reset.css";
 import globalStylesHref from "./styles/global.css";
-import { NotFoundPageError } from "./components/Errors/NotFoundPage/NotFoundPageError";
+import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
+import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
+import { createCart } from "./services/cart.server";
+import { getSession } from "./services/session.server";
 
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: resetlStylesHref },
+  { rel: "stylesheet", href: resetStylesHref },
   { rel: "stylesheet", href: globalStylesHref },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-export const loader = async ({ request }: LoaderFunctionArgs) => {
+export async function loader({request}: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
-  const categories = await getAllProductCategories();
-  return json({ cart: cart.items(), categories });
-};
+  return json({cart:cart.items()})
+}
+
 export function ErrorBoundary() {
-  const error = useRouteError();
-  console.error(error);
+
   return (
     <html>
       <head>
@@ -43,14 +38,12 @@ export function ErrorBoundary() {
       </head>
       <body className="bodyError">
         <NotFoundPageError />
-        <Outlet/>
-        <Scripts />
       </body>
     </html>
   );
 }
+
 export default function App() {
-  const data = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -60,7 +53,7 @@ export default function App() {
         <Links />
       </head>
       <body className="body">
-        <StorePage data={data} />
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

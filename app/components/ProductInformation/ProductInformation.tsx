@@ -1,6 +1,11 @@
 import { FC } from "react";
-import { SingleProduct } from "../Product/Product";
 import styles from "./styles.module.css";
+import { Product } from "~/types/types";
+
+export interface SingleProduct { 
+  product:Product
+
+}
 
 
 const ProductInformation: FC<SingleProduct> = ({ product }) => {

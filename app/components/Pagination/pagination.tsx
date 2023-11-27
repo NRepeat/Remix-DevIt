@@ -27,7 +27,7 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
           key={page}
           disabled={currentPage === page}
         >
-          <Link className={styles.link} to={`/?page=${page}`}>
+          <Link className={styles.link} to={`/products/?page=${page}`}>
             {page}
           </Link>
         </button>

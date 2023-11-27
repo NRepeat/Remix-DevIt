@@ -2,7 +2,7 @@ import HomeButton from "../HomeButton/HomeButton";
 import styles from "../styles.module.css";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 
-export function NotFoundPageError() {
+export default function NotFoundPageError() {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     return (

@@ -1,9 +1,9 @@
 import styles from "./styles.module.css";
 import FaCart from "./FaCart";
-import { Link, useRouteLoaderData } from "@remix-run/react";
+import { Link, useMatches, useRouteLoaderData } from "@remix-run/react";
 import { FC } from "react";
-import type { loader } from "~/root";
 import invariant from "tiny-invariant";
+import { loader } from "~/routes/products._index";
 
 
 export const CartIcon: FC = () => {

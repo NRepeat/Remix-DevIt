@@ -1,24 +1,30 @@
 import { FC } from "react";
-import styles from "./styles.module.css";
 import { Product } from "~/types/types";
 import { AddToCart } from "../AddToCart/AddToCart";
 import ProductInformation from "../ProductInformation/ProductInformation";
+import styles from "./styles.module.css";
 
 
 export interface SingleProduct {
-  product: Product;
+  data: {
+    product: Product;
+    cart: {
+      productId: string;
+      quantity: number;
+    };
+  }
 }
 
-const SingleProduct: FC<SingleProduct> = ({ product }) => {
+const SingleProduct: FC<SingleProduct> = ({ data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
         <div className={styles.poster}>
-          <img src={product.thumbnail} alt={product.title} />
+          <img src={data.product.thumbnail} alt={data.product.title} />
         </div>
         <div className={styles.information}>
-          <ProductInformation product={product} />
-          <AddToCart product={product} />
+          <ProductInformation product={data.product} />
+          <AddToCart product={data.product} />
         </div>
       </div>
     </div>

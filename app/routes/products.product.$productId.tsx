@@ -33,7 +33,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     throw new Response("Product Not Found", { status: 404 });
   }
 
-  return defer({ product, cart: cart.items() });
+  return json({ product, cart: cart.items()[product.id] });
 };
 
 
@@ -69,14 +69,14 @@ function ProductRoute() {
     { label: "Home", link: "/" },
     {
       label: `${data.product.category}`,
-      link: `/category/${data.product.category}`,
+      link: `/products/category/${data.product.category}`,
     },
     {label:`${data.product.title}`,link:""}
   ];
   return (
     <div className="productContainer">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <Product product={data.product} />
+      <Product data={data} />
     </div>
   );
 }

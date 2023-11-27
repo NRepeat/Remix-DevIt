@@ -6,14 +6,14 @@ import { searchProduct } from "~/services/product.server";
 export async function loader({ request }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("search");
-  const searchData = await searchProduct(searchQuery);
+  const products = await searchProduct(searchQuery);
   const sortQuery = url.searchParams.get("sort");
   const sortType = sortQuery !== null ? sortQuery : "asc";
 
-  return json({ searchData, sortType });
+  return json({ products, sortType });
 }
 
 export default function () {
   const data = useLoaderData<typeof loader>();
-  return <ProductsList products={data.searchData.products} />;
+  return <ProductsList data ={ data} />;
 }

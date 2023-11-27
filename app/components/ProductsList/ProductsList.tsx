@@ -1,25 +1,27 @@
 import { FC } from "react";
 import styles from "./styles.module.css";
-import { Product } from "~/types/types";
+import { Product, ProductResponse } from "~/types/types";
 import ProductListItem from "./ProductListItem/ProductListItem";
 import SortTypesList from "../Sort/SortTypesList";
+import { StorePageProps } from "~/pages/StorePage/StorePage";
 
-export interface ProductListProps {
-  products: Product[];
+export type ProductListProps = {
+  data: {
+    products: ProductResponse
+  };
 }
 
-
-const ProductsList: FC<ProductListProps> = ({ products }) => {
+const ProductsList: FC<ProductListProps> = ({ data }) => {
   return (
     <div className={styles.wrapper}>
       <nav>
-        {products.length ? (
+        {data.products.products.length ? (
           <ul className={styles.list}>
-            {products.map((product: Product) => (
-              <li key={product.id}>
-                <ProductListItem product={product} />
-              </li>
-            ))}
+            {data.products.products.map((product: Product) => {
+                return <li key={product.id}>
+                  <ProductListItem product={product}  />
+                </li>
+            })}
           </ul>
         ) : (
           <div className={styles.noProducts}>

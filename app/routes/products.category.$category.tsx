@@ -11,6 +11,8 @@ export const links: LinksFunction = () => [
 ];
 
 export async function loader({ params }: LoaderFunctionArgs) {
+
+
   const category = params.category;
 
   invariant(category, "Missing contactId param");
@@ -24,16 +26,16 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export default function () {
   const data = useLoaderData<typeof loader>();
   const breadcrumbs = [
-    { label: "Home", link: "/" },
+    { label: "Home", link: "/products" },
     {
       label: `${data.category}`,
-      link: `/category/${data.category}`,
+      link: `/products/category/${data.category}`,
     },
   ];
   return (
     <div className="categoryContainer">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <ProductsList products={data.products.products} />
+      <ProductsList data={data} />
     </div>
   );
 }

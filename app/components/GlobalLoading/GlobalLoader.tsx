@@ -4,7 +4,7 @@ import { useNavigation } from "@remix-run/react";
 import { FC, useEffect, useRef, useState } from "react";
 
 
-const GloabalLoader: FC = () => {
+const GlobalLoader: FC = () => {
   const transition = useNavigation();
   const active = transition.state !== "idle";
   const ref = useRef<HTMLDivElement>(null);
@@ -39,4 +39,4 @@ const GloabalLoader: FC = () => {
     </div>
   );
 };
-export default GloabalLoader;
+export default GlobalLoader;

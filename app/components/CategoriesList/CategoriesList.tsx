@@ -16,7 +16,7 @@ const CategoriesList: FC<CategoriesListProps> = ({ categories }) => {
             <li className={styles.li} key={i}>
               <Link
                 className={styles.link}
-                to={`category/${category}`}
+                to={`/products/category/${category}`}
               >
                 {category}
               </Link>

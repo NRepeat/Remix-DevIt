@@ -21,7 +21,7 @@ export const AddToCart: FC<AddToCartProps> = ({ product }) => {
   return (
     <fetch.Form
       method="post"
-      action={`/${product.id}`}
+      action={`/products/product/${product.id}`}
       onSubmit={(event) => {
         if (cartItem && product.stock <= cartItem.quantity) {
           confirm("Out of stock.");
