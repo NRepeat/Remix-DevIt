@@ -6,7 +6,6 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useMatches,
   useRouteLoaderData,
 } from "@remix-run/react";
 import style from "./style.module.css";
