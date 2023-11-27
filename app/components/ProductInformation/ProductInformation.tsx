@@ -2,6 +2,7 @@ import { FC } from "react";
 import { SingleProduct } from "../Product/Product";
 import styles from "./styles.module.css";
 
+
 const ProductInformation: FC<SingleProduct> = ({ product }) => {
   return (
     <div className={styles.container}>

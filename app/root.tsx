@@ -25,17 +25,12 @@ export function ErrorBoundary() {
 
   if (isRouteErrorResponse(error)) {
     return (
-      <html>
-      <head>
-        <title>Oh no!</title>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Scripts />
-        <Outlet />
-      </body>
-    </html>
+      <div>
+      <h1>Error</h1>
+      <p>{error.data}</p>
+      <p>The status is:</p>
+      <pre>{error.status}</pre>
+    </div>
     );
   } else if (error instanceof Error) {
     return (

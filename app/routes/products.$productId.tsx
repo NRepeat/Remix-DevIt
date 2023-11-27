@@ -5,8 +5,9 @@ import {
   defer,
   json,
 } from "@remix-run/node";
-import { Form, Link, useLoaderData, useRouteError } from "@remix-run/react";
+import { Link, useLoaderData,  } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import NotFoundPageError from "~/components/Errors/NotFoundPage/NotFoundPageError";
 import Product from "~/components/Product/Product";
 import { createCart } from "~/services/cart.server";
 import { getProduct } from "~/services/product.server";
@@ -25,19 +26,16 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
 
   return defer({ product, cart: cart.items() });
 };
+
 export function ErrorBoundary() {
   return (
-    <div>
-      <h2>Page not found</h2>
-
-      <Link to="/">Go to main page</Link>
-
-    </div>
+    <NotFoundPageError/>
   );
 }
+
 export const action = async ({ request }: ActionFunctionArgs) => {
-  const formData = request.formData();
-  const productId = (await formData).get("productId");
+  const formData = await request.formData();
+  const productId = formData.get("productId");
   invariant(typeof productId === "string", "Missing product id");
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);

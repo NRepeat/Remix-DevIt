@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { useNavigation } from "@remix-run/react";
 import { FC, useEffect, useRef, useState } from "react";
 
+
 const GloabalLoader: FC = () => {
   const transition = useNavigation();
   const active = transition.state !== "idle";

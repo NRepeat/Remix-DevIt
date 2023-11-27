@@ -4,22 +4,23 @@ import Pagination from "~/components/Pagination/pagination";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { getLimitProdacts } from "~/services/product.server";
 import rootStylesHref from "../styles/rootIndex.css";
-import SortedProductsList from "~/components/Header/Sort/Sort";
+import SortedProductsList from "~/components/Sort/Sort";
+
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: rootStylesHref },
 ];
+const limit = 6;
+const par = "";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const pageQuery = url.searchParams.get("search");
   const sortQuery = url.searchParams.get("sort");
-  const sortType = sortQuery !== null ? sortQuery : "asc";
-  const limit = 6;
-  const par = "";
   const page = pageQuery ? parseInt(pageQuery) || 1 : 1;
   const skip = (page - 1) * limit;
   const products = await getLimitProdacts(limit, skip, par);
+  const sortType = sortQuery !== null ? sortQuery : "asc";
 
   return json({ products, page, sortType });
 };

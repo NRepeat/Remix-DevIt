@@ -2,6 +2,7 @@ import { FC } from "react";
 import { ProductListProps } from "~/components/ProductsList/ProductsList";
 import { Product } from "~/types/types";
 
+
 export interface SortedProductsListProps {
   order: string;
   ProductsList: FC<ProductListProps>;

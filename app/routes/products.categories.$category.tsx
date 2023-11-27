@@ -1,7 +1,7 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import SortedProductsList from "~/components/Header/Sort/Sort";
+import SortedProductsList from "~/components/Sort/Sort";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { getProductsByCategory } from "~/services/product.server";
 

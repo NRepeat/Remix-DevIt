@@ -1,6 +1,7 @@
-import { Link } from '@remix-run/react';
-import React, { useEffect, useState } from 'react'
+import { Link } from "@remix-run/react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
+
 
 interface PaginationProps {
   currentPage: number;
@@ -21,8 +22,12 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
   return (
     <div className={styles.pag}>
       {pages.map((page) => (
-        <button className={styles.button} key={page} disabled={currentPage === page}>
-          <Link className={styles.link}  to={`/?page=${page}`}>
+        <button
+          className={styles.button}
+          key={page}
+          disabled={currentPage === page}
+        >
+          <Link className={styles.link} to={`/?page=${page}`}>
             {page}
           </Link>
         </button>
@@ -30,4 +35,4 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
     </div>
   );
 };
-export default Pagination
+export default Pagination;

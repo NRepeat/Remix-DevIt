@@ -4,6 +4,7 @@ import { CartIcon } from "../CartInfo/CartInfo";
 import { Link } from "@remix-run/react";
 import { SearchBar } from "./SearchBar/SearchBar";
 
+
 const Header: FC = () => {
   return (
     <div className={styles.header}>

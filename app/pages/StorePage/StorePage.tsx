@@ -6,9 +6,11 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useRouteLoaderData,
 } from "@remix-run/react";
 import style from "./style.module.css";
 import { FC } from "react";
+
 
 export interface StorePageProps {
   data: {
@@ -21,14 +23,18 @@ export interface StorePageProps {
 }
 
 const StorePage: FC<StorePageProps> = ({ data }) => {
+  const togleSideBarVisible = useRouteLoaderData("routes/products.$productId");
   return (
     <>
       <GloabalLoader />
       <Header />
       <div className={style.container}>
-        <aside className={style.sidebar}>
-          <Sidebar categories={data.categories} />
-        </aside>
+        {!togleSideBarVisible && (
+          <aside className={style.sidebar}>
+            <Sidebar categories={data.categories} />
+          </aside>
+        )}
+
         <div className={style.mainWrapper}>
           <main className={style.main}>
             <Outlet />

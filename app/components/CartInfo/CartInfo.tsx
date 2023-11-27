@@ -5,6 +5,7 @@ import { FC } from "react";
 import type { loader } from "~/root";
 import invariant from "tiny-invariant";
 
+
 export const CartIcon: FC = () => {
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");

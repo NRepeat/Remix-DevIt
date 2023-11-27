@@ -1,6 +1,5 @@
-import { Form, useSubmit } from "@remix-run/react";
-import { redirect } from "react-router";
-import { Link } from "react-router-dom";
+import NotFoundPageError from "~/components/Errors/NotFoundPage/NotFoundPageError";
+
 
 export function loader() {
   return new Response("Not Found", {
@@ -8,13 +7,8 @@ export function loader() {
   });
 }
 
-
-
 export default function NotFoundPage() {
-  return <>
-    Error 404
-
-<Link to="/">Go to main page</Link>
-
-  </>
+  return (
+  <NotFoundPageError/>
+  );
 }

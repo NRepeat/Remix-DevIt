@@ -13,3 +13,8 @@
   gap: 10px;
   padding: 10px;
 }
+.sortOptions{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}

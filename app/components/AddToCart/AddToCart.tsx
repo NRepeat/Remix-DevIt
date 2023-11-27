@@ -5,6 +5,7 @@ import { FC } from "react";
 import invariant from "tiny-invariant";
 import { loader } from "~/root";
 
+
 export interface AddToCartProps {
   product: Product;
 }

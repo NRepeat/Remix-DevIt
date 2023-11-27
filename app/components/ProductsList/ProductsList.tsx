@@ -2,20 +2,19 @@ import { FC } from "react";
 import styles from "./styles.module.css";
 import { Product } from "~/types/types";
 import ProductListItem from "./ProductListItem/ProductListItem";
-import Sort from "../Header/Sort/Sort";
-import SortTypesList from "../Header/Sort/SortTypesList";
-
+import SortTypesList from "../Sort/SortTypesList";
 
 export interface ProductListProps {
-  products: Product[] 
+  products: Product[];
 }
 
 
 const ProductsList: FC<ProductListProps> = ({ products }) => {
-
   return (
     <div className={styles.wrapper}>
-      <SortTypesList/>
+      <div className={styles.sortOptions}>
+        <SortTypesList />
+      </div>
       <nav>
         {products.length ? (
           <ul className={styles.list}>
@@ -26,9 +25,9 @@ const ProductsList: FC<ProductListProps> = ({ products }) => {
             ))}
           </ul>
         ) : (
-        <div className={styles.noProducts}>
-          <p>There are no products for this request</p>
-        </div>
+          <div className={styles.noProducts}>
+            <p>There are no products for this request</p>
+          </div>
         )}
       </nav>
     </div>

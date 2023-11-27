@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import { AddToCart } from "~/components/AddToCart/AddToCart";
 import ProductInformation from "~/components/ProductInformation/ProductInformation";
 
+
 const ProductListItem: FC<{ product: Product }> = ({ product }) => {
   return (
     <>
@@ -21,7 +22,6 @@ const ProductListItem: FC<{ product: Product }> = ({ product }) => {
             </div>
           </Link>
           <AddToCart product={product} />
-       
         </>
       ) : (
         <i>No Item</i>
