@@ -5,19 +5,14 @@
   flex-direction: column;
   height: 100vh;
   gap: 20px;
-  background: rgb(140, 21, 221);
-  background: linear-gradient(
-    45deg,
-    rgba(140, 21, 221, 1) 20%,
-    rgba(235, 0, 255, 0.8743872549019608) 69%,
-    rgba(235, 0, 255, 0.5830707282913166) 97%
-  );
+
+  background: var(--gradientColor)
 }
-.container > p {
+.rootIndexContainer > p {
   padding-bottom: 130px;
   font-size: 1.2rem;
 }
-.container > h1 {
+.rootIndexContainer > h1 {
   font-size: 3.5rem;
 }
 .link {

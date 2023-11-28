@@ -8,7 +8,7 @@ const Header: FC = () => {
   return (
     <div className={styles.header}>
       <div className={styles.topBar}>
-        <Link className={styles.title} to={"/"}>
+        <Link className={styles.title} to={"/products"}>
           Store
         </Link>
         <SearchBar />

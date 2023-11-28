@@ -7,20 +7,22 @@ import { StorePageProps } from "~/pages/StorePage/StorePage";
 
 export type ProductListProps = {
   data: {
-    products: ProductResponse
+    products: ProductResponse;
   };
-}
+};
 
 const ProductsList: FC<ProductListProps> = ({ data }) => {
   return (
     <div className={styles.wrapper}>
-      <nav>
+      <nav className={styles.nav}>
         {data.products.products.length ? (
           <ul className={styles.list}>
             {data.products.products.map((product: Product) => {
-                return <li key={product.id}>
-                  <ProductListItem product={product}  />
+              return  (
+                <li className={styles.li} key={product.id}>
+                  <ProductListItem product={product} />
                 </li>
+              );
             })}
           </ul>
         ) : (

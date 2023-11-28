@@ -1,11 +1,13 @@
 .button{
-  padding: 20px 50px 20px 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   width: 100%;
-  background-color: blueviolet;
+  background-color: black;
   color: white;
   font-weight: bold;
   border-radius: 5px;
   border: none;
+  transition: all 0.1s;
 }
 .button:hover {
   background-color: rgb(47, 220, 28);

@@ -1,21 +1,22 @@
 import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
-import {
-  useLoaderData,
-} from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import productIndexStylesHref from "../styles/productIndex.css";
-import { getAllProductCategories, getLimitProducts } from "~/services/product.server";
+import {
+  getAllProductCategories,
+  getLimitProducts,
+} from "~/services/product.server";
 import { getSession } from "~/services/session.server";
 import { createCart } from "~/services/cart.server";
 import ProductsListRoute from "~/pages/StorePage/StorePage";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: productIndexStylesHref},
+  { rel: "stylesheet", href: productIndexStylesHref },
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const pageQuery = url.searchParams.get("page");
-  const limit = 12;
+  const limit = 10;
   const par = "";
   const page = pageQuery ? parseInt(pageQuery) : 1;
   const skip = (page - 1) * limit;
@@ -32,10 +33,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="container">
-
-    <ProductsListRoute data={data} />
-
-  </div>
+    <div className="bg-pd-index">
+      <ProductsListRoute data={data} />
+    </div>
   );
 }

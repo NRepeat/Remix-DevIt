@@ -7,7 +7,7 @@
 
 .topBar {
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: space-between;
   padding-top: 15px;
   padding-bottom: 15px;
@@ -20,5 +20,10 @@
   font-weight: bold;
   font-size: 2rem;
   color: white;
+  padding-left: 30px;
   text-decoration: none;
+  cursor: pointer;
+}
+.title:hover{
+  color:  rgb(182, 2, 182);
 }
