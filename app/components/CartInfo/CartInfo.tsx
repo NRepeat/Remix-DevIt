@@ -15,11 +15,9 @@ export const CartIcon: FC = () => {
   }, 0);
 
   return (
-    <button className={styles.cart}>
-      <Link to={"/cart"}>
-        <FaCart />
-        {quantity && <span className={styles.quantity}> {quantity}</span>}
-      </Link>
-    </button>
+    <Link className={styles.cart} to={"/cart"}>
+      <FaCart />
+      {quantity !== 0 && <p className={styles.quantity}> {quantity}</p>}
+    </Link>
   );
 };

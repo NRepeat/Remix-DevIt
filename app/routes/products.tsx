@@ -16,10 +16,10 @@ function Home() {
 
 
   return (
-    <div className="container">
+    < >
       <Header />
       <Outlet />
-    </div>
+    </>
   );
 }
 

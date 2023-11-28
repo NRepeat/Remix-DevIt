@@ -1,7 +1,13 @@
 .cart {
-  margin-right: 20px;
-  width: 50px;
   height: auto;
-  background-color: white;
   border: 0px;
+  text-decoration: none;
+  position: relative;
+}
+
+.quantity{
+  position: absolute;
+  bottom: 0;
+  right: -5px;;
+  color: white;
 }

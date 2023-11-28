@@ -37,14 +37,14 @@ const ProductsListRoute: FC<StorePageProps> = ({ data }) => {
           </aside>
         )}
 
-        <div className={style.mainWrapper}>
+        {/* <div className={style.mainWrapper}>
           <main className={style.main}>
             <ProductsList data={data} />
             <div className="paginationContainer">
               <Pagination currentPage={data.page} totalPages={totalPages} />
             </div>
           </main>
-        </div>
+        </div> */}
       </div>
     </>
   );

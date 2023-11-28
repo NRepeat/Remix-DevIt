@@ -1,41 +1,24 @@
-.header{
+.header {
   display: flex;
   width: 100%;
   justify-content: center;
+  background-color: black;
 }
 
-.topBar{
+.topBar {
   display: flex;
-  width: 90%;
+  width: 80%;
   justify-content: space-between;
-  padding: 10px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   align-items: center;
-  box-shadow: -1px 4px 60px -24px rgba(10, 20, 130, 0.858);
-  -webkit-box-shadow: -1px 4px 60px -24px rgba(10, 20, 130, 0.858);
-  -moz-box-shadow: -1px 4px 60px -24px rgba(10, 20, 130, 0.834);
-  border-radius: 10px;
 }
 
-.serch{
-  width: 70%;
-  padding: 0px 80px 0px 10px;
+
+
+.title {
+  font-weight: bold;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
 }
-.serch>input{
-  width: 100%;
-  padding: 10px;
-}
-
-.cart{
-margin-right: 20px;
-width: 40px;
-height: 40px;
-background-color:white;
-border: 0px;
-
-  }
-
-  .title{
-    font-weight: bold;
-    font-size: 2rem;
-    padding-left: 50px;
-  }

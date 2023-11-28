@@ -7,10 +7,11 @@ export const links: LinksFunction = () => [
 ];
 
 export default function () {
-
   return (
-    <> 
-    <Link to={"/products"}>products</Link> 
-    </>
+    <div className="rootIndexContainer">
+      <h1>Welcome to Store</h1>
+      <p>Find everything you need in our e-commerce store</p>
+      <Link className="link" to={"/products"}>SHOP NOW</Link>
+    </div>
   );
 }

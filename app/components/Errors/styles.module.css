@@ -8,12 +8,12 @@
   border: 2px solid gray;
   border-radius: 5px;
   padding: 50px;
-  background: rgba(244, 255, 250, 0.648);
+  background: white;
 }
 
 .backB {
   border: 0px;
-  background: rgba(192, 228, 213, 0.144);
+  background: white;
   cursor: pointer;
   text-decoration: underline;
   color: green;

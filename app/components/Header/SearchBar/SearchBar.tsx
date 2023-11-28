@@ -20,7 +20,7 @@ export const SearchBar: FC = () => {
   return (
     <Form
       onChange={(event) => submit(event.currentTarget)}
-      className={styles.search}
+      className={styles.search }
       action="/products/search"
       role="search"
     >

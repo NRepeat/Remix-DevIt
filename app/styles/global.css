@@ -9,5 +9,10 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background-color: rgba(128, 0, 128, 0.193);
+  background: linear-gradient(
+    45deg,
+    rgba(140, 21, 221, 1) 20%,
+    rgba(235, 0, 255, 0.8743872549019608) 69%,
+    rgba(235, 0, 255, 0.5830707282913166) 97%
+  );
 }
