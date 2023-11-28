@@ -1,10 +1,11 @@
 import { Link } from "@remix-run/react";
 import styles from "./styles.module.css";
 import { FC } from "react";
+import { Category } from "@prisma/client";
 
 
 export interface CategoriesListProps {
-  categories: string[];
+  categories: Category[];
 }
 
 const CategoriesList: FC<CategoriesListProps> = ({ categories }) => {
@@ -16,9 +17,9 @@ const CategoriesList: FC<CategoriesListProps> = ({ categories }) => {
             <li className={styles.li} key={i}>
               <Link
                 className={styles.link}
-                to={`/products/category/${category}`}
+                to={`/products/category/${category.slug}`}
               >
-                {category}
+                {category.slug}
               </Link>
             </li>
           );

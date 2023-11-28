@@ -1,13 +1,11 @@
 import { FC } from "react";
 import styles from "./styles.module.css";
-import { Product, ProductResponse } from "~/types/types";
 import ProductListItem from "./ProductListItem/ProductListItem";
-import SortTypesList from "../Sort/SortTypesList";
-import { StorePageProps } from "~/pages/StorePage/StorePage";
+import { Product } from "@prisma/client";
 
 export type ProductListProps = {
   data: {
-    products: ProductResponse;
+    products: Product[];
   };
 };
 
@@ -15,9 +13,9 @@ const ProductsList: FC<ProductListProps> = ({ data }) => {
   return (
     <div className={styles.wrapper}>
       <nav className={styles.nav}>
-        {data.products.products.length ? (
+        {data.products.length ? (
           <ul className={styles.list}>
-            {data.products.products.map((product: Product) => {
+            {data.products.map((product: Product) => {
               return  (
                 <li className={styles.li} key={product.id}>
                   <ProductListItem product={product} />

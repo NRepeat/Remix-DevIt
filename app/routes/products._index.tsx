@@ -1,13 +1,12 @@
 import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import productIndexStylesHref from "../styles/productIndex.css";
-import {
-  getAllProductCategories,
-  getLimitProducts,
-} from "~/services/product.server";
+
 import { getSession } from "~/services/session.server";
 import { createCart } from "~/services/cart.server";
 import ProductsListRoute from "~/pages/StorePage/StorePage";
+import { getLimitProducts } from "~/services/dummy.server";
+import { getAllDbProductCategories, getAllDbProducts } from "~/services/product.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: productIndexStylesHref },
@@ -20,14 +19,15 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const par = "";
   const page = pageQuery ? parseInt(pageQuery) : 1;
   const skip = (page - 1) * limit;
-  const products = await getLimitProducts(limit, skip, par);
+  // const products = await getLimitProducts(limit, skip, par);
+  const products =await getAllDbProducts()
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
-  const categories = await getAllProductCategories();
-  if (products.limit === 0) {
+  const categories = await getAllDbProductCategories();
+  if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
-  return json({ products, page, cart: cart.items(), categories });
+  return json({ products, page, cart: cart.items(),categories });
 };
 
 export default function () {

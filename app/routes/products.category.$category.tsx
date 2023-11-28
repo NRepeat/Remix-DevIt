@@ -3,24 +3,21 @@ import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import ProductsList from "~/components/ProductsList/ProductsList";
-import { getProductsByCategory } from "~/services/product.server";
 import categoryPage from "../styles/categoryPage.css";
+import { getDbProductsByCategory } from "~/services/product.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: categoryPage },
 ];
 
 export async function loader({ params }: LoaderFunctionArgs) {
-
-
   const category = params.category;
-
   invariant(category, "Missing contactId param");
-  const products = await getProductsByCategory(category);
-  if (products.total === 0) {
+  const products = await getDbProductsByCategory(category);
+  if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
-  return json({ products, category });
+  return json({ products,category });
 }
 
 export default function () {
@@ -35,7 +32,7 @@ export default function () {
   return (
     <div className="categoryContainer">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <ProductsList data={data} />
+      <ProductsList data={data.products} />
     </div>
   );
 }

@@ -1,12 +1,9 @@
-import Header from "../../components/Header/Header";
 import Sidebar from "../../components/SideBar/Sidebar";
-import { Outlet, useRouteLoaderData } from "@remix-run/react";
+import { useRouteLoaderData } from "@remix-run/react";
 import style from "./style.module.css";
 import { FC } from "react";
-import GlobalLoader from "../../components/GlobalLoading/GlobalLoader";
 import ProductsList from "~/components/ProductsList/ProductsList";
-import Pagination from "~/components/Pagination/pagination";
-import { Product, ProductResponse } from "~/types/types";
+import { Category, Product } from "@prisma/client";
 
 export interface StorePageProps {
   data: {
@@ -14,14 +11,14 @@ export interface StorePageProps {
       productId: string;
       quantity: number;
     }[];
-    categories: string[];
-    products: ProductResponse
-    page: number
+    categories:Category[]
+    products: Product[];
+    page: number;
   };
 }
 
 const ProductsListRoute: FC<StorePageProps> = ({ data }) => {
-  const totalPages = Math.ceil(data.products.total / data.products.limit);
+  // const totalPages = Math.ceil(data.products.total / data.products.limit);
 
   const toggleSideBarVisible = !!useRouteLoaderData(
     "routes/$productId"
@@ -29,21 +26,18 @@ const ProductsListRoute: FC<StorePageProps> = ({ data }) => {
 
   return (
     <>
-    
       <div className={style.container}>
         {!toggleSideBarVisible && (
           <aside className={style.sidebar}>
             <Sidebar categories={data.categories} />
           </aside>
         )}
-
-    
-          <main className={style.main}>
-            <ProductsList data={data} />
-            {/* <div className="paginationContainer">
+        <main className={style.main}>
+          <ProductsList data={data} />
+          {/* <div className="paginationContainer">
               <Pagination currentPage={data.page} totalPages={totalPages} />
             </div> */}
-          </main>
+        </main>
       </div>
     </>
   );

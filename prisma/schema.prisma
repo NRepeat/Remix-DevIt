@@ -23,9 +23,8 @@ model Product{
    categoryId Int
    thumbnail String
    images String[]
-   message String
    createdAt DateTime @default(now())
-   bupdatedAt DateTime @updatedAt
+   updatedAt DateTime @updatedAt
    category Category @relation(fields: [categoryId],references: [id])
 
 }

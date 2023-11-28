@@ -1,7 +1,7 @@
-import { DummyProduct, ProductCategoriesResponse, ProductResponse } from "~/types/types";
+import { DummyProduct, ProductResponse } from "~/types/types";
 
 export const getProducts = async (): Promise<ProductResponse> => {
-  return fetch("https://dummyjson.com/products").then((res) => res.json());
+  return fetch("https://dummyjson.com/products?limit=0").then((res) => res.json());
 };
 
 export const getProduct = async (productId: string): Promise<DummyProduct> => {

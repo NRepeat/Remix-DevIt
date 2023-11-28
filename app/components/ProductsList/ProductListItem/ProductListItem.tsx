@@ -1,14 +1,11 @@
 import {
   Link,
-  useMatches,
-  useRouteError,
-  useRouteLoaderData,
 } from "@remix-run/react";
 import { FC } from "react";
-import { Product } from "~/types/types";
 import styles from "./styles.module.css";
 import { AddToCart } from "~/components/AddToCart/AddToCart";
 import ProductInformation from "~/components/ProductInformation/ProductInformation";
+import { Product } from "@prisma/client";
 
 const ProductListItem: FC<{
   product: Product;

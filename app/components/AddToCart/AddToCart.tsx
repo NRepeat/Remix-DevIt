@@ -1,10 +1,9 @@
 import {  useFetcher, useRouteLoaderData } from "@remix-run/react";
 import styles from "./styles.module.css";
-import { Product } from "~/types/types";
 import { FC } from "react";
 import invariant from "tiny-invariant";
 import { loader } from "~/root";
-
+import { Product } from "@prisma/client";
 
 export interface AddToCartProps {
   product: Product;

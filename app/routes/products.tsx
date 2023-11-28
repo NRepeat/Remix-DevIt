@@ -3,7 +3,6 @@ import {
   Outlet,
 } from "@remix-run/react";
 import rootStylesHref from "../styles/rootIndex.css";
-import GlobalLoader from "~/components/GlobalLoading/GlobalLoader";
 import Header from "~/components/Header/Header";
 
 export const links: LinksFunction = () => [
@@ -13,11 +12,8 @@ export const links: LinksFunction = () => [
 
 
 function Home() {
-
-
   return (
     < >
-
       <Header />
       <Outlet />
     </>

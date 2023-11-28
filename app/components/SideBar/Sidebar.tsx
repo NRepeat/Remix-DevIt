@@ -1,18 +1,15 @@
 import { FC } from "react";
 import invariant from "tiny-invariant";
 import CategoriesList from "../CategoriesList/CategoriesList";
+import { Category } from "@prisma/client";
 
 
 export interface SidebarProps {
-  categories: string[];
+  categories: Category[];
 }
 
-const Sidebar:FC<SidebarProps> = ({ categories }) => {
-  
-  invariant(categories, "missing data");
-  return (
-      <CategoriesList categories={categories} />
-  );
+const Sidebar: FC<SidebarProps> = ({ categories }) => {
+  return <CategoriesList categories={categories} />
 };
 
 export default Sidebar;

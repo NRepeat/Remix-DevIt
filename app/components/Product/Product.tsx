@@ -1,13 +1,13 @@
 import { FC } from "react";
-import { Product } from "~/types/types";
 import { AddToCart } from "../AddToCart/AddToCart";
 import ProductInformation from "../ProductInformation/ProductInformation";
 import styles from "./styles.module.css";
+import { Category, Product } from "@prisma/client";
 
 
 export interface SingleProduct {
   data: {
-    product: Product;
+    product: Product & { category: Category };
     cart: {
       productId: string;
       quantity: number;
