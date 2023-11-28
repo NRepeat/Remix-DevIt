@@ -54,7 +54,8 @@ export default function App() {
         <Links />
       </head>
       <body className="body">
-        <GlobalLoader />
+      <GlobalLoader />
+
         <Outlet />
         <ScrollRestoration />
         <Scripts />

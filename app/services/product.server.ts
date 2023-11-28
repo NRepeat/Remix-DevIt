@@ -1,6 +1,6 @@
 import { Product, ProductCategoriesResponse, ProductResponse } from "~/types/types";
 
-export const getProducts = async (): Promise<ProductResponse> => {
+export const getProducts = async (): Promise<Product> => {
   return fetch("https://dummyjson.com/products").then((res) => res.json());
 };
 

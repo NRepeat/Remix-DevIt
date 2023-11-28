@@ -3,8 +3,18 @@
   width: 100%;
   justify-content: center;
   background-color: black;
+position: relative;
+z-index: 0
+;
 }
-
+.header::after{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: var(--gradientColor);
+  bottom:  0;
+}
 .topBar {
   display: flex;
   width: 100%;

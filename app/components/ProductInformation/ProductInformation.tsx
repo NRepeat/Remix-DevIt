@@ -13,7 +13,7 @@ const ProductInformation: FC<SingleProduct> = ({ product }) => {
     <div className={styles.container}>
       <h2 className={styles.title}>{product.title}</h2>
       <p className={styles.description}> {product.description}</p>
-      <p>${product.price}</p>
+      <p className={styles.price}>${product.price}</p>
     </div>
   );
 };
