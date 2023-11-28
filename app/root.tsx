@@ -13,6 +13,7 @@ import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
 import { createCart } from "./services/cart.server";
 import { getSession } from "./services/session.server";
+import GlobalLoader from "./components/GlobalLoading/GlobalLoader";
 
 
 export const links: LinksFunction = () => [
@@ -21,14 +22,13 @@ export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
 
-export async function loader({request}: LoaderFunctionArgs) {
+export async function loader({ request }: LoaderFunctionArgs) {
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
-  return json({cart:cart.items()})
+  return json({ cart: cart.items() });
 }
 
 export function ErrorBoundary() {
-
   return (
     <html>
       <head>
@@ -37,6 +37,7 @@ export function ErrorBoundary() {
         <Links />
       </head>
       <body className="bodyError">
+        <GlobalLoader />
         <NotFoundPageError />
       </body>
     </html>
@@ -53,6 +54,7 @@ export default function App() {
         <Links />
       </head>
       <body className="body">
+        <GlobalLoader />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

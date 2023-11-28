@@ -17,7 +17,6 @@ function Home() {
 
   return (
     <div className="container">
-      <GlobalLoader />
       <Header />
       <Outlet />
     </div>

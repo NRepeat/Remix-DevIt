@@ -2,14 +2,14 @@ import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
 import {
   useLoaderData,
 } from "@remix-run/react";
-import rootStylesHref from "../styles/rootIndex.css";
+import productIndexStylesHref from "../styles/productIndex.css";
 import { getAllProductCategories, getLimitProducts } from "~/services/product.server";
 import { getSession } from "~/services/session.server";
 import { createCart } from "~/services/cart.server";
 import ProductsListRoute from "~/pages/StorePage/StorePage";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: rootStylesHref },
+  { rel: "stylesheet", href: productIndexStylesHref},
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
