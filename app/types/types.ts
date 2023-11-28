@@ -1,10 +1,10 @@
-export type Product = {
+export type DummyProduct = {
   id: number;
   title: string;
   description: string;
   price: number;
   discountPercentage: number;
-  reting: number;
+  rating: number;
   stock: number;
   brand: string;
   category: string;
@@ -17,7 +17,7 @@ export type ProductResponse = {
   limit: number;
   skip: number;
   total: number;
-  products: Product[];
+  products: DummyProduct[];
 };
 
 export type ProductCategoriesResponse = string[];

@@ -12,6 +12,28 @@ datasource db {
 
 
 model Product{
- id        Int      @id @default(autoincrement())
+   id Int @id @default(autoincrement())
+   title String 
+   description String
+   price Float
+   discountPercentage Float
+   rating Float
+   stock Int
+   brand String
+   categoryId Int
+   thumbnail String
+   images String[]
+   message String
+   createdAt DateTime @default(now())
+   bupdatedAt DateTime @updatedAt
+   category Category @relation(fields: [categoryId],references: [id])
 
+}
+
+model Category {
+   id Int @id @default(autoincrement())
+   slug String @unique
+   products Product[]
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
 }
