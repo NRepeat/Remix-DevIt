@@ -4,7 +4,7 @@ import invariant from "tiny-invariant";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import categoryPage from "../styles/categoryPage.css";
-import { getDbProductsByCategory } from "~/services/product.server";
+import { getProductsByCategory } from "~/services/product.server";
 
 
 export const links: LinksFunction = () => [
@@ -14,7 +14,7 @@ export const links: LinksFunction = () => [
 export async function loader({ params }: LoaderFunctionArgs) {
   const category = params.category;
   invariant(category, "Missing contactId param");
-  const products = await getDbProductsByCategory(category);
+  const products = await getProductsByCategory(category);
   if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }

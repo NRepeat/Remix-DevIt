@@ -1,3 +1,4 @@
+import { formatString } from "~/utils/formatting";
 import { fetchLimitedData } from "./dummy.server";
 
 
@@ -18,7 +19,6 @@ export async function importDummyData() {
         if (!existedProduct) {
           const createdProduct = await prisma.product.create({
             data: {
-              externalId: product.id,
               brand: product.brand,
               description: product.description,
               discountPercentage: product.discountPercentage,
@@ -31,7 +31,7 @@ export async function importDummyData() {
               category: {
                 connectOrCreate: {
                   where: { slug: product.category },
-                  create: { slug: product.category },
+                  create: { slug: product.category ,name:formatString(product.category)},
                 },
               },
             },

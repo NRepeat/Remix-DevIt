@@ -1,33 +1,33 @@
-import { Category, Prisma, Product } from "@prisma/client";
+import { Category, Product } from "@prisma/client";
 import { prisma } from "~/utils/prisma.server";
 
 export interface ProductData {
-  products: Product[];
+  products?: Product[];
+  category?: Category 
   totalPages: number;
 }
-export interface SortField{
+export interface SortField {
   rating: string;
   cheap: string;
   expensive: string;
   novelty: string;
-
 }
+const sortFieldMap: SortField = {
+  rating: "rating",
+  cheap: "price",
+  expensive: "price",
+  novelty: "createdAt",
+};
+const sortTypeMap: SortField = {
+  rating: "desc",
+  cheap: "asc",
+  expensive: "desc",
+  novelty: "asc",
+};
 export const getAllProducts = async (
   page: number,
-  sortName: string,
+  sortName: string
 ): Promise<ProductData> => {
-  const sortFieldMap:SortField = {
-    rating: "rating",
-    cheap: "price",
-    expensive: "price",
-    novelty: "createdAt",
-  };
-  const sortTypeMap:SortField = {
-    rating: "desc",
-    cheap: "asc",
-    expensive: "desc",
-    novelty: "asc",
-  };
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   const pageSize: number = 10;
@@ -47,45 +47,62 @@ export const getAllProducts = async (
     const totalPages = Math.ceil(totalProductsCount / pageSize);
     return { products, totalPages };
   } catch (error) {
-    throw new Error(`Error during get all products ${error}`)
+    throw new Error(`Error during get all products ${error}`);
   }
-
- 
 };
 
-export const getDbProduct = async (
+export const getProduct = async (
   productId: number
 ): Promise<Product & { category: Category }> => {
-  const product = await prisma.product.findFirst({
-    where: { id: productId },
-    include: { category: true },
-  });
-  return product!;
+  try {
+    const product = await prisma.product.findFirst({
+      where: { id: productId },
+      include: { category: true },
+    });
+    return product!;
+  } catch (error) {
+    throw new Error(`Error during get product: ${error}`);
+  }
 };
 
 export const searchProduct = async (q: string): Promise<Product[]> => {
-  const products = await prisma.product.findMany({
-    where: {
-      OR: [
-        { title: { contains: q, mode: "insensitive" } },
-        { description: { contains: q, mode: "insensitive" } },
-      ],
-    },
-  });
-
-  return products;
+  try {
+    const products = await prisma.product.findMany({
+      where: {
+        OR: [
+          { title: { contains: q, mode: "insensitive" } },
+          { description: { contains: q, mode: "insensitive" } },
+        ],
+      },
+    });
+  
+    return products;
+  } catch (error) {
+    throw new Error(`Error during product search: ${error}`);
+  }
 };
 
-export const getAllDbProductCategories = async (): Promise<Category[]> => {
+
+export const getAllProductCategories = async (): Promise<Category[]> => {
+  try {
   return prisma.category.findMany();
+    
+  } catch (error) {
+    throw new Error(`Error during categories search: ${error}`);
+  }
 };
 
-export const getDbProductsByCategory = async (
+export const getProductsByCategory = async (
   c: string
 ): Promise<Category & { products: Product[] }> => {
-  const products = await prisma.category.findUnique({
-    where: { slug: c },
-    include: { products: true },
-  });
-  return products!;
+  try {
+    const products = await prisma.category.findUnique({
+      where: { slug: c },
+      include: { products: true },
+    });
+    return products!;
+  } catch (error) {
+    throw new Error(`Error during products by category search: ${error}`);
+  }
+
 };

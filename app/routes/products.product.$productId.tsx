@@ -5,16 +5,14 @@ import {
   MetaFunction,
   json,
 } from "@remix-run/node";
-import {
-  useLoaderData,
-} from "@remix-run/react";
+import {useLoaderData} from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import Product from "~/components/Product/Product";
 import { createCart } from "~/services/cart.server";
 import { commitSession, getSession } from "~/services/session.server";
 import productPage from "../styles/productPage.css";
-import { getDbProduct } from "~/services/product.server";
+import { getProduct } from "~/services/product.server";
 
 
 
@@ -25,7 +23,7 @@ export const links: LinksFunction = () => [
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   invariant(params.productId, "Missing contactId param");
   const productId = Number(params.productId);
-  const product = await getDbProduct(productId);
+  const product = await getProduct(productId);
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
   if (!product) {

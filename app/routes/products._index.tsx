@@ -1,18 +1,20 @@
-import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { LinksFunction, LoaderFunctionArgs, defer, json } from "@remix-run/node";
+import { Await, useLoaderData } from "@remix-run/react";
 import productIndexStylesHref from "../styles/productIndex.css";
 import { getSession } from "~/services/session.server";
 import { createCart } from "~/services/cart.server";
-import {getAllDbProductCategories, getAllProducts,} from "~/services/product.server";
+import { getAllProductCategories, getAllProducts, } from "~/services/product.server";
 import ProductsListRoute from "~/pages/StorePage/StorePage";
 import { importDummyData } from "~/services/import.server";
+import { Suspense } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: productIndexStylesHref },
 ];
-
 let isImported = false;
+
 export const loader = async ({ request }: LoaderFunctionArgs) => {
+
   if (!isImported) {
     await importDummyData();
     isImported = true;
@@ -23,20 +25,24 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const pageQuery = url.searchParams.get("page");
   const sort = url.searchParams.get("sort");
   const page = pageQuery ? parseInt(pageQuery) : 1;
-  const { products, totalPages} = await getAllProducts(page, sort!);
- 
-  const categories = await getAllDbProductCategories();
+  const { products, totalPages } = await getAllProducts(page, sort!);
   if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
-  return json({ products,totalPages, page, cart: cart.items(), categories });
+  const categories = await getAllProductCategories();
+ 
+  return defer({ products, totalPages, page, cart: cart.items(), categories });
 };
 
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
     <div className="bg-pd-index">
-      <ProductsListRoute data={data} />
+      <Suspense>
+        <Await resolve={data}>
+          {(data) => <ProductsListRoute data={data} /> }
+        </Await>
+      </Suspense>
     </div>
   );
 }
