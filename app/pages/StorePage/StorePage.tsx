@@ -1,9 +1,11 @@
 import Sidebar from "../../components/SideBar/Sidebar";
-import { useRouteLoaderData } from "@remix-run/react";
+import { useLocation, useNavigation, useRouteLoaderData } from "@remix-run/react";
 import style from "./style.module.css";
 import { FC } from "react";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { Category, Product } from "@prisma/client";
+import Pagination from "~/components/Pagination/pagination";
+
 
 export interface StorePageProps {
   data: {
@@ -11,18 +13,16 @@ export interface StorePageProps {
       productId: string;
       quantity: number;
     }[];
-    categories:Category[]
+    categories: Category[];
     products: Product[];
+    totalPages: number;
     page: number;
   };
 }
 
 const ProductsListRoute: FC<StorePageProps> = ({ data }) => {
-  // const totalPages = Math.ceil(data.products.total / data.products.limit);
 
-  const toggleSideBarVisible = !!useRouteLoaderData(
-    "routes/$productId"
-  );
+  const toggleSideBarVisible = !!useRouteLoaderData("routes/products/$productId");
 
   return (
     <>
@@ -34,9 +34,9 @@ const ProductsListRoute: FC<StorePageProps> = ({ data }) => {
         )}
         <main className={style.main}>
           <ProductsList data={data} />
-          {/* <div className="paginationContainer">
-              <Pagination currentPage={data.page} totalPages={totalPages} />
-            </div> */}
+          <div className="paginationContainer">
+            <Pagination currentPage={data.page} totalPages={data.totalPages} />
+          </div>
         </main>
       </div>
     </>

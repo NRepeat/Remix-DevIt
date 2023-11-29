@@ -6,6 +6,7 @@ import ProductsList from "~/components/ProductsList/ProductsList";
 import categoryPage from "../styles/categoryPage.css";
 import { getDbProductsByCategory } from "~/services/product.server";
 
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: categoryPage },
 ];

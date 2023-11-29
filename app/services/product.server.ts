@@ -1,51 +1,56 @@
-import { Category, Product } from "@prisma/client";
+import { Category, Prisma, Product } from "@prisma/client";
 import { prisma } from "~/utils/prisma.server";
-import { getProducts } from "./dummy.server";
 
-export const postProductsData = async (): Promise<Product[] | undefined> => {
+export interface ProductData {
+  products: Product[];
+  totalPages: number;
+}
+export interface SortField{
+  rating: string;
+  cheap: string;
+  expensive: string;
+  novelty: string;
+
+}
+export const getAllProducts = async (
+  page: number,
+  sortName: string,
+): Promise<ProductData> => {
+  const sortFieldMap:SortField = {
+    rating: "rating",
+    cheap: "price",
+    expensive: "price",
+    novelty: "createdAt",
+  };
+  const sortTypeMap:SortField = {
+    rating: "desc",
+    cheap: "asc",
+    expensive: "desc",
+    novelty: "asc",
+  };
+  const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
+  const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
+  const pageSize: number = 10;
+  const skip = (page - 1) * pageSize;
   try {
-    const dummyData = await getProducts();
-    const createdProducts = await Promise.all(
-      dummyData.products.map(async (product) => {
-        const productdb = await prisma.product.findFirst({
-          where: { title: product.title },
-        });
-
-        if (!productdb) {
-          const createdProduct = await prisma.product.create({
-            data: {
-              brand: product.brand,
-              description: product.description,
-              discountPercentage: product.discountPercentage,
-              price: product.price,
-              rating: product.rating,
-              stock: product.stock,
-              thumbnail: product.thumbnail,
-              title: product.title,
-              images: product.images,
-              category: {
-                connectOrCreate: {
-                  where: { slug: product.category },
-                  create: { slug: product.category },
-                },
-              },
-            },
-          });
-
-          return createdProduct;
-        }
-      })
-    );
-    return createdProducts as Product[];
+    const [products, totalProductsCount] = await Promise.all([
+      prisma.product.findMany({
+        include: { category: true },
+        orderBy: {
+          [sortField]: sortType,
+        },
+        skip,
+        take: pageSize,
+      }),
+      prisma.product.count(),
+    ]);
+    const totalPages = Math.ceil(totalProductsCount / pageSize);
+    return { products, totalPages };
   } catch (error) {
-    console.error("Error posting products data:", error);
-  } finally {
-    await prisma.$disconnect();
+    throw new Error(`Error during get all products ${error}`)
   }
-};
 
-export const getAllDbProducts = async (): Promise<Product[]> => {
-  return prisma.product.findMany({ include: { category: true } });
+ 
 };
 
 export const getDbProduct = async (
@@ -58,11 +63,19 @@ export const getDbProduct = async (
   return product!;
 };
 
-export const searchProduct = async (q: string | null): Promise<Product> => {
-  return fetch(`https://dummyjson.com/products/search?q=${q}`).then((res) =>
-    res.json()
-  );
+export const searchProduct = async (q: string): Promise<Product[]> => {
+  const products = await prisma.product.findMany({
+    where: {
+      OR: [
+        { title: { contains: q, mode: "insensitive" } },
+        { description: { contains: q, mode: "insensitive" } },
+      ],
+    },
+  });
+
+  return products;
 };
+
 export const getAllDbProductCategories = async (): Promise<Category[]> => {
   return prisma.category.findMany();
 };
@@ -75,16 +88,4 @@ export const getDbProductsByCategory = async (
     include: { products: true },
   });
   return products!;
-};
-
-export const getLimitProducts = async (
-  limit: number | null,
-  skip: number | null,
-  ...params: [string]
-): Promise<Product> => {
-  return fetch(
-    `https://dummyjson.com/products?limit=${limit}&skip=${skip}&select${params.join(
-      ","
-    )}`
-  ).then((res) => res.json());
 };
