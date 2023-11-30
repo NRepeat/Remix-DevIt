@@ -16,6 +16,7 @@
     "@remix-run/node": "^2",
     "@remix-run/react": "^2",
     "@remix-run/serve": "^2",
+    "bcrypt": "^5.1.1",
     "clsx": "^2.0.0",
     "isbot": "^3.6.13",
     "match-sorter": "^6.3.1",
@@ -28,6 +29,7 @@
   "devDependencies": {
     "@remix-run/dev": "^2",
     "@remix-run/eslint-config": "^2",
+    "@types/bcrypt": "^5.0.2",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "concurrently": "^8.2.2",

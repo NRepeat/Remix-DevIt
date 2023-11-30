@@ -11,7 +11,7 @@ import resetStylesHref from "./styles/reset.css";
 import globalStylesHref from "./styles/global.css";
 import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
-import { createCart } from "./services/cart.server";
+import { createCart } from "./services/cartSession.server";
 import { getSession } from "./services/session.server";
 import GlobalLoader from "./components/GlobalLoading/GlobalLoader";
 

@@ -2,7 +2,7 @@ import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import productIndexStylesHref from "../styles/productIndex.css";
 import { getSession } from "~/services/session.server";
-import { createCart } from "~/services/cart.server";
+import { createCart } from "~/services/cartSession.server";
 import {
   getAllProductCategories,
   getAllProducts,

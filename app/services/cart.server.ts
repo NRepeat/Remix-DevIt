@@ -1,46 +1,90 @@
-import { Session } from "@remix-run/node";
+import { Cart } from "@prisma/client";
 
-
-export const SESSION_KEY = "cart";
-
-export type SessionCart = {
-  [key: string | number]: number;
+export const createCart = async (customerId: number): Promise<Cart> => {
+  const newCart = await prisma.cart.create({
+    data: {
+      customerId,
+    },
+  });
+  return newCart;
 };
-
-export class Cart {
-  constructor(private session: Session) {}
-
-  loadCart() {
-    const cart: SessionCart = this.session.get(SESSION_KEY) ?? {};
-
-    return cart;
-  }
-
-  saveCart(cart: SessionCart) {
-    this.session.set(SESSION_KEY, cart);
-  }
- 
-  addProduct(productId: string | number) {
-    const cart = this.loadCart();
-    cart[productId] = (cart[productId] ?? 0) + 1;
-
-    this.saveCart(cart);
-  }
-
-  removeProduct(productId: string | number) {
-    const cart = this.loadCart();
-    delete cart[productId];
-    this.saveCart(cart);
-  }
-
-  items() {
-    Object.entries(this.loadCart());
- 
-    return Object.entries(this.loadCart()).map(([productId, quantity]) => ({
-      productId,
-      quantity,
-    }));
-  }
+export interface CartItemArgs {
+  cartId: number;
+  productId: number;
+  quantity: number;
 }
 
-export const createCart = (session: Session) => new Cart(session);
+export const getCartById = async (cartId: number) => {
+  const cart = await prisma.cart.findUnique({
+    where: { id: cartId },
+    include: {
+      customer: true,
+      cartItems: {
+        include: {
+          product: true,
+        },
+      },
+    },
+  });
+  return cart;
+};
+export const updateCart = async (cartId: number, newData: any) => {
+  const updatedCart = await prisma.cart.update({
+    where: { id: cartId },
+    data: newData,
+  });
+  return updatedCart;
+};
+
+export const deleteCart = async (cartId: number) => {
+  const deletedCart = await prisma.cart.delete({
+    where: { id: cartId },
+  });
+  return deletedCart;
+};
+export const createCartItem = async ({
+  cartId,
+  productId,
+  quantity,
+}: CartItemArgs) => {
+  const existCartItem =  await prisma.cartItem.findFirst({
+    where: { productId },
+  });
+
+  if (!existCartItem) {
+    const newCartItem = await prisma.cartItem.create({
+      data: {
+        cartId,
+        productId,
+        quantity,
+      },
+    });
+    return newCartItem;
+  }
+  const updatedCartItem = updateCartItem(existCartItem.id,quantity)
+};
+
+export const getCartItemById = async (cartItemId: number) => {
+  const cartItem = await prisma.cartItem.findUnique({
+    where: { id: cartItemId },
+    include: {
+      cart: true,
+      product: true,
+    },
+  });
+  return cartItem;
+};
+export const updateCartItem = async (cartItemId: number, newData: any) => {
+  const updatedCartItem = await prisma.cartItem.update({
+    where: { id: cartItemId },
+    data: {quantity:newData},
+  });
+  return updatedCartItem;
+};
+
+export const deleteCartItem = async (cartItemId: number) => {
+  const deletedCartItem = await prisma.cartItem.delete({
+    where: { id: cartItemId },
+  });
+  return deletedCartItem;
+};
