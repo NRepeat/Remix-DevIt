@@ -20,7 +20,7 @@ const CategoriesList: FC<SerializeFrom<CategoriesListProps>> = ({ categories }) 
                 className={styles.link}
                 to={`/products/category/${category.slug}`}
               >
-                {category.slug}
+                {category.name}
               </Link>
             </li>
           );

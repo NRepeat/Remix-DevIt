@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Product" ALTER COLUMN "externalId" DROP NOT NULL,
-ALTER COLUMN "externalId" DROP DEFAULT;

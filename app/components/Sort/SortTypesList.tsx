@@ -1,33 +1,35 @@
-import { Form, useLocation, useSearchParams, useSubmit } from "@remix-run/react";
+import {
+  Form,
+  useLocation,
+  useSearchParams,
+  useSubmit,
+} from "@remix-run/react";
 import styles from "./styles.module.css";
 
 function SortTypesList() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation()
+  const location = useLocation();
   const search = searchParams.get("search");
   const page = searchParams.get("page");
- 
 
-  const HandleSubmit = (e: any) => {
-    if (search!) {
-      submit({
-        sort: e.target.value,
-        search: search,
-      });
-    } else if (search === null && location.pathname === '/products/search') {
-      submit({
-        sort: e.target.value,
-      });
-    } else if (page!) {
-      submit({
-        sort: e.target.value,
-        page:page,
-      });
-    } else if (search === null) {
-      submit({
-        sort: e.target.value,
-      });
+  const HandleSubmit = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const hasSearch =
+      search !== null && location.pathname === "/products/search";
+    const hasPage = page !== null;
+
+    const formData: Record<string, any> = {
+      sort: e.target.value,
+    };
+
+    if (hasSearch) {
+      formData.search = search;
     }
+
+    if (hasPage) {
+      formData.page = page;
+    }
+
+    submit(formData);
   };
 
   const submit = useSubmit();
@@ -37,7 +39,7 @@ function SortTypesList() {
     "Price:Low to High",
     "Price:High to Low",
   ];
-  const sortField = ["rating", "cheap", "expensive", "novelty"];
+  const sortField = ["novelty", "rating",  "cheap","expensive"];
   return (
     <Form>
       <select

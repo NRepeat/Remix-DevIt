@@ -99,6 +99,8 @@ export const getProductsByCategory = async (
   c: string,
   sortName: string
 ): Promise<Product[]> => {
+
+
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   try {
