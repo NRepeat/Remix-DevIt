@@ -2,9 +2,9 @@ import { Category, Product } from "@prisma/client";
 import { prisma } from "~/utils/prisma.server";
 
 export interface ProductData {
-  products?: Product[];
-  category?: Category 
-  totalPages: number;
+  products: Product[];
+  category?: Category;
+  totalPages?: number;
 }
 export interface SortField {
   rating: string;
@@ -65,7 +65,9 @@ export const getProduct = async (
   }
 };
 
-export const searchProduct = async (q: string): Promise<Product[]> => {
+export const searchProduct = async (q: string, sortName: string): Promise<Product[]> => {
+  const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
+  const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   try {
     const products = await prisma.product.findMany({
       where: {
@@ -74,35 +76,40 @@ export const searchProduct = async (q: string): Promise<Product[]> => {
           { description: { contains: q, mode: "insensitive" } },
         ],
       },
+      orderBy: {
+        [sortField]: sortType,
+      },
     });
-  
+
     return products;
   } catch (error) {
     throw new Error(`Error during product search: ${error}`);
   }
 };
 
-
 export const getAllProductCategories = async (): Promise<Category[]> => {
   try {
-  return prisma.category.findMany();
-    
+    return prisma.category.findMany();
   } catch (error) {
     throw new Error(`Error during categories search: ${error}`);
   }
 };
 
 export const getProductsByCategory = async (
-  c: string
-): Promise<Category & { products: Product[] }> => {
+  c: string,
+  sortName: string
+): Promise<Product[]> => {
+  const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
+  const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   try {
-    const products = await prisma.category.findUnique({
-      where: { slug: c },
-      include: { products: true },
+    const products = await prisma.product.findMany({
+      where: { category: { slug: c } },
+      orderBy: {
+        [sortField]: sortType,
+      },
     });
-    return products!;
+    return products;
   } catch (error) {
     throw new Error(`Error during products by category search: ${error}`);
   }
-
 };

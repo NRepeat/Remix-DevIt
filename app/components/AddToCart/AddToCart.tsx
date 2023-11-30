@@ -4,12 +4,13 @@ import { FC } from "react";
 import invariant from "tiny-invariant";
 import { loader } from "~/root";
 import { Product } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 
 export interface AddToCartProps {
   product: Product;
 }
 
-export const AddToCart: FC<AddToCartProps> = ({ product }) => {
+export const AddToCart: FC<SerializeFrom<AddToCartProps>> = ({ product }) => {
   const fetch = useFetcher()
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");

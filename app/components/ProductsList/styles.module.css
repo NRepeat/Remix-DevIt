@@ -13,10 +13,19 @@
   width: inherit;
   text-decoration: none;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .wrapper{
   width: 90%;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.sort{
+  display: flex;
+  width: 94%;
+  padding-top: 20px;
+justify-content: flex-end;
 }

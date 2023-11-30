@@ -19,6 +19,7 @@ export async function importDummyData() {
         if (!existedProduct) {
           const createdProduct = await prisma.product.create({
             data: {
+              externalId: product.id,
               brand: product.brand,
               description: product.description,
               discountPercentage: product.discountPercentage,

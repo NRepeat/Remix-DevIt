@@ -3,6 +3,7 @@ import { AddToCart } from "../AddToCart/AddToCart";
 import ProductInformation from "../ProductInformation/ProductInformation";
 import styles from "./styles.module.css";
 import { Category, Product } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 
 
 export interface SingleProduct {
@@ -15,7 +16,7 @@ export interface SingleProduct {
   }
 }
 
-const SingleProduct: FC<SingleProduct> = ({ data }) => {
+const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>

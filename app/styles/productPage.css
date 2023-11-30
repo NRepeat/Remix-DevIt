@@ -1,0 +1,9 @@
+.productContainer{
+width: 100%;
+display: flex;
+justify-content: center;
+flex-direction: column;
+}
+.breadcrumbs{
+  padding-left:220px;
+}

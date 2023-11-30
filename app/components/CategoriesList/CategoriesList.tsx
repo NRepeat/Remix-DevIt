@@ -2,13 +2,14 @@ import { Link } from "@remix-run/react";
 import styles from "./styles.module.css";
 import { FC } from "react";
 import { Category } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 
 
 export interface CategoriesListProps {
   categories: Category[];
 }
 
-const CategoriesList: FC<CategoriesListProps> = ({ categories }) => {
+const CategoriesList: FC<SerializeFrom<CategoriesListProps>> = ({ categories }) => {
   return (
     <nav className={styles.list}>
       <ul className={styles.ul}>

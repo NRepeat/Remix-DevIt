@@ -5,6 +5,7 @@ import { FC } from "react";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { Category, Product } from "@prisma/client";
 import Pagination from "~/components/Pagination/pagination";
+import { SerializeFrom } from "@remix-run/node";
 
 
 export interface StorePageProps {
@@ -15,12 +16,12 @@ export interface StorePageProps {
     }[];
     categories: Category[];
     products: Product[];
-    totalPages: number;
+    totalPages: number |undefined;
     page: number;
   };
 }
 
-const ProductsListRoute: FC<StorePageProps> = ({ data }) => {
+const ProductsListRoute: FC<SerializeFrom<StorePageProps> > = ({ data }) => {
 
   const toggleSideBarVisible = !!useRouteLoaderData("routes/products/$productId");
 

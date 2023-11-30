@@ -1,18 +1,33 @@
-import { Link, useSubmit } from "@remix-run/react";
+import { Form, Link, useSearchParams, useSubmit } from "@remix-run/react";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-
+import { SerializeFrom } from "@remix-run/node";
+import { clsx } from "clsx";
 interface PaginationProps {
   currentPage: number;
-  totalPages: number;
+  totalPages: number | undefined;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
+const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
+  currentPage,
+  totalPages,
+}) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const sort = searchParams.get("sort");
   const [pages, setPages] = useState<number[]>([]);
   const submit = useSubmit();
+
+  const handleSubmit = (page: number) => {
+    if (sort!) {
+      submit({page,sort});
+    } else {
+      submit({page});
+    }
+  };
+
   useEffect(() => {
     const tempPages = [];
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 1; i <= totalPages!; i++) {
       tempPages.push(i);
     }
     setPages(tempPages);
@@ -21,18 +36,14 @@ const Pagination: React.FC<PaginationProps> = ({ currentPage, totalPages }) => {
   return (
     <div className={styles.pag}>
       {pages.map((page) => (
-        <Link
-          className={styles.button}
-          onClick={() => {
-            submit({
-              page: page || 1,
-              sort: "asc",
-            });
-          }}
-          to={`/products?page=${page}`}
+        <button
+          className={clsx(styles.button, {
+            [styles.currentPage]: currentPage === page,
+          })}
+          onClick={() => handleSubmit(page)}
         >
           {page}
-        </Link>
+        </button>
       ))}
     </div>
   );

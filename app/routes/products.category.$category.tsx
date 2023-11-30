@@ -11,10 +11,12 @@ export const links: LinksFunction = () => [
   { rel: "stylesheet", href: categoryPage },
 ];
 
-export async function loader({ params }: LoaderFunctionArgs) {
+export async function loader({ request,params }: LoaderFunctionArgs) {
   const category = params.category;
+  const url = new URL(request.url);
   invariant(category, "Missing contactId param");
-  const products = await getProductsByCategory(category);
+  const sort = url.searchParams.get("sort");
+  const products = await getProductsByCategory(category,sort!);
   if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
@@ -33,7 +35,7 @@ export default function () {
   return (
     <div className="categoryContainer">
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <ProductsList data={data.products} />
+      <ProductsList data={data} />
     </div>
   );
 }

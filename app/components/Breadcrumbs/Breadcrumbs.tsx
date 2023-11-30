@@ -14,7 +14,7 @@ function Breadcrumbs({ breadcrumbs }: BreadcrumbsProps) {
           {breadcrumb.link && index+1 < breadcrumbs.length? (
             <Link className={styles.link} to={breadcrumb.link}>{breadcrumb.label}</Link>
           ) : (
-            <span>{breadcrumb.label}</span>
+            <span className={styles.last}>{breadcrumb.label}</span>
           )}
         </span>
       ))}

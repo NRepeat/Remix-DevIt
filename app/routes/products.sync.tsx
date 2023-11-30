@@ -1,8 +1,11 @@
-import { json } from "@remix-run/node";
-import { importDummyData} from "~/services/import.server";
-
+import { json, redirect } from "@remix-run/node";
+import { importDummyData } from "~/services/import.server";
 
 export async function action() {
-  // await importDummyData()
-  return json({ success: true });
+  try {
+    await importDummyData();
+    return  redirect("/products/")
+  } catch (error) {
+    return json({ success: false, error });
+  }
 }

@@ -26,6 +26,7 @@
   background-color: black;
   border-radius: 5px;
   transition: background-color 0.1s;
+  border: 0;
 }
 .link:hover {
   background-color: white;

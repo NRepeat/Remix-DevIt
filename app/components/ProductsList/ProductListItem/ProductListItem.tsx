@@ -6,9 +6,10 @@ import styles from "./styles.module.css";
 import { AddToCart } from "~/components/AddToCart/AddToCart";
 import ProductInformation from "~/components/ProductInformation/ProductInformation";
 import { Product } from "@prisma/client";
+import { SerializeFrom } from "@remix-run/node";
 
 const ProductListItem: FC<{
-  product: Product;
+  product:  SerializeFrom<Product> ;
 }> = ({ product }) => {
   return (
     <>

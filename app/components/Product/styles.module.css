@@ -1,5 +1,8 @@
 .container {
   padding-top: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .poster {
   max-width: 100%;

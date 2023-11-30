@@ -3,6 +3,8 @@ import styles from "./styles.module.css";
 import ProductListItem from "./ProductListItem/ProductListItem";
 import { Product } from "@prisma/client";
 import SortTypesList from "../Sort/SortTypesList";
+import { SerializeFrom } from "@remix-run/node";
+
 
 export type ProductListProps = {
   data: {
@@ -10,16 +12,18 @@ export type ProductListProps = {
   };
 };
 
-const ProductsList: FC<ProductListProps> = ({ data }) => {
+const ProductsList: FC<SerializeFrom<ProductListProps>> = ({ data }) => {
+
   return (
     <div className={styles.wrapper}>
       <nav className={styles.nav}>
-      <SortTypesList/>
-
+        <div className={styles.sort}>
+          <SortTypesList />
+        </div>
         {data.products.length ? (
           <ul className={styles.list}>
-            {data.products.map((product: Product) => {
-              return  (
+            {data.products.map((product: SerializeFrom<Product>) => {
+              return (
                 <li className={styles.li} key={product.id}>
                   <ProductListItem product={product} />
                 </li>
