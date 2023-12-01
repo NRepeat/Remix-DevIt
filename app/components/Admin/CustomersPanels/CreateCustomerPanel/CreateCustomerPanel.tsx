@@ -1,4 +1,4 @@
-import { Form } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
 
 const CreateCustomerPanel = () => {
   return (
@@ -11,6 +11,7 @@ const CreateCustomerPanel = () => {
         <input type="password" name="password" required />
         <button type="submit">Submit</button>
       </Form>
+      <Link to={'/admin/customers/'}>Close</Link>
     </>
   );
 };

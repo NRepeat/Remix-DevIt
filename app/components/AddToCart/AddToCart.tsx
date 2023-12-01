@@ -5,6 +5,8 @@ import invariant from "tiny-invariant";
 import { loader } from "~/root";
 import { Product } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
+import { createCart } from "~/services/cart.server";
+import { createCartItem } from "~/services/cartItem.server";
 
 export interface AddToCartProps {
   product: Product;

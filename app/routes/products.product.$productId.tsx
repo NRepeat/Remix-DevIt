@@ -43,7 +43,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   invariant(typeof productId === "string", "Missing product id");
   const session = await getSession(request.headers.get("Cookie"));
   const sessionCart = createSessionCart(session);
-  const cart = await createCart(10)
+  const cart = await createCart(18)
+  console.log("🚀 ~ file: products.product.$productId.tsx:47 ~ action ~  cart:",  cart)
   sessionCart.addProduct(productId);
 
   const cartItems = await Promise.all(

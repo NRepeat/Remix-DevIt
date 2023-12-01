@@ -1,7 +1,7 @@
 import { Customer } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
-import { Form } from "@remix-run/react";
-import { FC, useState } from "react";
+import { Form, Link } from "@remix-run/react";
+import { FC, useEffect, useState } from "react";
 import { CustomerWithoutPassword } from "~/services/customer.server";
 
 export interface EditCustomerPanelProps {
@@ -17,7 +17,14 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
     email: customer.email,
     id: customer.id,
   });
-
+  useEffect(() => {
+    setFormData({
+      name: customer.name,
+      secondName: customer.secondName,
+      email: customer.email,
+      id: customer.id,
+    });
+  }, [customer]);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -26,43 +33,43 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
     }));
   };
 
-
   return (
     <>
-       <Form action="/admin/customer/action/update" method="post" >
-      Name
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        required
-        value={formData.name}
-        onChange={handleChange}
-      />
-      Second Name
-      <input
-        type="text"
-        name="secondName"
-        placeholder="Second Name"
-        required
-        value={formData.secondName}
-        onChange={handleChange}
-      />
-      Email
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        required
-        value={formData.email}
-        onChange={handleChange}
-      />
-      <input type="hidden" name="id" value={formData.id} />
-      <button type="submit">Submit</button>
-    </Form>
+      <Form action="/admin/customer/action/update" method="post">
+        Name
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          required
+          value={formData.name}
+          onChange={handleChange}
+        />
+        Second Name
+        <input
+          type="text"
+          name="secondName"
+          placeholder="Second Name"
+          required
+          value={formData.secondName}
+          onChange={handleChange}
+        />
+        Email
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          value={formData.email}
+          onChange={handleChange}
+        />
+        <input type="hidden" name="id" value={formData.id} />
+        <button type="submit">Submit</button>
+      </Form>
       <Form action="/admin/customer/action/delete " method="post">
         <input type="hidden" name="id" value={customer.id} />
         <button type="submit">Delete</button>
+        <Link to={'/admin/customers'}>Close </Link>
       </Form>
     </>
   );

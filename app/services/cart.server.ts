@@ -1,14 +1,16 @@
 import { Cart } from "@prisma/client";
 
-export const createCart = async (customerId: number): Promise<Cart> => {
+export const createCart = async (id: number): Promise<Cart> => {
+
   try {
-    const existCart = await getCartById(customerId);
+    const existCart = await prisma.cart.findFirst({ where: { id } });
+ 
     if (existCart) {
-      throw new Error(`Cart with this ${customerId} exist`);
+      throw new Error(`Cart with this ${id} exist`);
     }
     const newCart = await prisma.cart.create({
       data: {
-        customerId,
+        id,
       },
     });
     return newCart;
@@ -17,9 +19,31 @@ export const createCart = async (customerId: number): Promise<Cart> => {
   }
 };
 
+export const getCartByCustomerId = async (id: number) => {
+  try {
+    if (!id) {
+      throw new Error("Missing cart id");
+    }
+    const cart = await prisma.cart.findUnique({
+      where: { customerId:id },
+      include: {
+        customer: true,
+        cartItems: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
+    return cart;
+  } catch (error) {
+    throw new Error("Error while attempting to find cart by id");
+  }
+};
+
 export const getCartById = async (cartId: number) => {
   try {
-    if (cartId!) {
+    if (!cartId) {
       throw new Error("Missing cart id");
     }
     const cart = await prisma.cart.findUnique({

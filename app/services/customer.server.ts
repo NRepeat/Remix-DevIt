@@ -59,9 +59,13 @@ export const getAllCustomers = async (): Promise<CustomerWithoutPassword[]> => {
         secondName: true,
         createdAt: true,
         updatedAt: true,
+        cart: {
+          include: { cartItems: true },
+        },
       },
+      
     });
-    console.log("🚀 ~ file: customer.server.ts:59 ~ getAllCustomers ~  customers :",  customers )
+  
     return customers;
   } catch (error) {
     throw new Error("Error while attempting to get all customers");
