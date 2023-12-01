@@ -1,5 +1,6 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import ItemsList from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 import { getCartByCustomerId} from "~/services/cart.server";
 
 
@@ -14,10 +15,7 @@ export default function () {
   const data = useLoaderData<typeof loader>()
   return (
     <div>
-      <ul>
-        {data.cart?.cartItems.map((item)=> <li>{item.product.title } {item.quantity} <Link to={"edit"}>Edit</Link> <Link to={"delete"}>Delete</Link> </li>)}
-      </ul>
-      <Link to={"/admin/customers/"}>Close</Link>
+   <ItemsList  cart={data.cart}/>
     </div>
   );
 }

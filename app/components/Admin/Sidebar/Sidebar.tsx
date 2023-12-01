@@ -11,9 +11,6 @@ const Sidebar = () => {
           <Link to={"customers"}>Customers</Link>
         </li>
         <li>
-          <Link to={"carts"}> Carts</Link>
-        </li>
-        <li>
           <Link to={"products"}> Products</Link>
         </li>
       </ul>
