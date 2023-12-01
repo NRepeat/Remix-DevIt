@@ -1,90 +1,70 @@
 import { Cart } from "@prisma/client";
 
 export const createCart = async (customerId: number): Promise<Cart> => {
-  const newCart = await prisma.cart.create({
-    data: {
-      customerId,
-    },
-  });
-  return newCart;
+  try {
+    const existCart = await getCartById(customerId);
+    if (existCart) {
+      throw new Error(`Cart with this ${customerId} exist`);
+    }
+    const newCart = await prisma.cart.create({
+      data: {
+        customerId,
+      },
+    });
+    return newCart;
+  } catch (error) {
+    throw new Error("Error while attempting to create new cart");
+  }
 };
-export interface CartItemArgs {
-  cartId: number;
-  productId: number;
-  quantity: number;
-}
 
 export const getCartById = async (cartId: number) => {
-  const cart = await prisma.cart.findUnique({
-    where: { id: cartId },
-    include: {
-      customer: true,
-      cartItems: {
-        include: {
-          product: true,
+  try {
+    if (cartId!) {
+      throw new Error("Missing cart id");
+    }
+    const cart = await prisma.cart.findUnique({
+      where: { id: cartId },
+      include: {
+        customer: true,
+        cartItems: {
+          include: {
+            product: true,
+          },
         },
       },
-    },
-  });
-  return cart;
+    });
+    return cart;
+  } catch (error) {
+    throw new Error("Error while attempting to find cart by id");
+  }
 };
 export const updateCart = async (cartId: number, newData: any) => {
-  const updatedCart = await prisma.cart.update({
-    where: { id: cartId },
-    data: newData,
-  });
-  return updatedCart;
+  try {
+    const existCart = await getCartById(cartId);
+    if (!existCart) {
+      throw new Error(`Cart with ID ${cartId} not found for update`);
+    }
+    const updatedCart = await prisma.cart.update({
+      where: { id: cartId },
+      data: newData,
+    });
+    return updatedCart;
+  } catch (error) {
+    throw new Error(`Error while attempting to update cart: ${error}`);
+  }
 };
 
 export const deleteCart = async (cartId: number) => {
-  const deletedCart = await prisma.cart.delete({
-    where: { id: cartId },
-  });
-  return deletedCart;
-};
-export const createCartItem = async ({
-  cartId,
-  productId,
-  quantity,
-}: CartItemArgs) => {
-  const existCartItem =  await prisma.cartItem.findFirst({
-    where: { productId },
-  });
-
-  if (!existCartItem) {
-    const newCartItem = await prisma.cartItem.create({
-      data: {
-        cartId,
-        productId,
-        quantity,
-      },
+  try {
+    const existCart = await getCartById(cartId);
+    if (!existCart) {
+      throw new Error(`Cart with ID ${cartId} not found for deletion`);
+    }
+    const deletedCart = await prisma.cart.delete({
+      where: { id: cartId },
     });
-    return newCartItem;
+    return deletedCart;
+  } catch (error) {
+    throw new Error(`Error while attempting to delete cart: ${error}`);
   }
-  const updatedCartItem = updateCartItem(existCartItem.id,quantity)
-};
-
-export const getCartItemById = async (cartItemId: number) => {
-  const cartItem = await prisma.cartItem.findUnique({
-    where: { id: cartItemId },
-    include: {
-      cart: true,
-      product: true,
-    },
-  });
-  return cartItem;
-};
-export const updateCartItem = async (cartItemId: number, newData: any) => {
-  const updatedCartItem = await prisma.cartItem.update({
-    where: { id: cartItemId },
-    data: {quantity:newData},
-  });
-  return updatedCartItem;
-};
-
-export const deleteCartItem = async (cartItemId: number) => {
-  const deletedCartItem = await prisma.cartItem.delete({
-    where: { id: cartItemId },
-  });
-  return deletedCartItem;
 };

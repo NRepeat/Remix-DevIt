@@ -13,7 +13,8 @@ import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { commitSession, getSession } from "~/services/session.server";
 import productPage from "../styles/productPage.css";
 import { getProduct } from "~/services/product.server";
-import { createCart, createCartItem } from "~/services/cart.server";
+import { createCart} from "~/services/cart.server";
+import { createCartItem } from "~/services/cartItem.server";
 
 
 export const links: LinksFunction = () => [
@@ -42,7 +43,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   invariant(typeof productId === "string", "Missing product id");
   const session = await getSession(request.headers.get("Cookie"));
   const sessionCart = createSessionCart(session);
-  const cart = await createCart(2)
+  const cart = await createCart(10)
   sessionCart.addProduct(productId);
 
   const cartItems = await Promise.all(
