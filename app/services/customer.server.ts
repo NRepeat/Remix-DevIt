@@ -171,6 +171,10 @@ export const deleteCustomer = async (
 
 export const searchCustomer = async (q: string) => {
   try {
+    if(q===null){
+      const customers =await getAllCustomers()
+      return customers
+    }
     const customers = await prisma.customer.findMany({
       where: {
         OR: [

@@ -3,6 +3,7 @@ import { AdminPanelProps } from "../../AdminPanel/AdminPanel";
 import { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import CustomerList from "./CustomerList/CustomerList";
+import { CustomerSearch } from "./CustomerSearch/CustomerSearch";
 
 const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({ customers }) => {
   return (
@@ -11,9 +12,8 @@ const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({ customers }) => {
       {customers && (
         <>
           <Link to={"/admin/customers/customer/create"}>Add Customers</Link>
-          Search
-          <input type="search" name="search" />
-          <CustomerList customers={customers}/>
+          <CustomerSearch />
+          <CustomerList customers={customers} />
           <div>Pagination</div>
         </>
       )}
