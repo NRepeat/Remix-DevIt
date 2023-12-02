@@ -9,12 +9,15 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   return json({ customers });
 }
 
+
+
+
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
     <>
       <CustomersPanel customers={data.customers} />
-      <Outlet/>
+      <Outlet />
     </>
   );
 }

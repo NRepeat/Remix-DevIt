@@ -17,7 +17,7 @@ export const createCustomer = async ({
   name,
   secondName,
   password,
-}: CreateCustomerArgs ): Promise<CustomerWithoutPassword> => {
+}: CreateCustomerArgs): Promise<CustomerWithoutPassword> => {
   try {
     const existCustomer = await prisma.customer.findFirst({ where: { email } });
     if (existCustomer) {
@@ -63,9 +63,8 @@ export const getAllCustomers = async (): Promise<CustomerWithoutPassword[]> => {
           include: { cartItems: true },
         },
       },
-      
     });
-  
+
     return customers;
   } catch (error) {
     throw new Error("Error while attempting to get all customers");
@@ -167,5 +166,21 @@ export const deleteCustomer = async (
     return deletedCustomer;
   } catch (error) {
     throw new Error(`Error while attempting to delete customer: ${error}`);
+  }
+};
+
+export const searchCustomer = async (q: string) => {
+  try {
+    const customers = await prisma.customer.findMany({
+      where: {
+        OR: [
+          { name: { contains: q, mode: "insensitive" } },
+          { secondName: { contains: q, mode: "insensitive" } },
+        ],
+      },
+    });
+    return customers;
+  } catch (error) {
+    throw new Error(`Error during customer search: ${error}`);
   }
 };

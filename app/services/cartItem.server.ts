@@ -1,16 +1,17 @@
+import { getProduct } from "./product.server";
+
 export interface CartItemArgs {
   cartId: number;
   productId: number;
   quantity: number;
 }
 
-
 export const createCartItem = async ({
   cartId,
   productId,
   quantity,
 }: CartItemArgs) => {
-  const existCartItem =  await prisma.cartItem.findFirst({
+  const existCartItem = await prisma.cartItem.findFirst({
     where: { productId },
   });
 
@@ -24,7 +25,8 @@ export const createCartItem = async ({
     });
     return newCartItem;
   }
-  const updatedCartItem = updateCartItem(existCartItem.id,quantity)
+  const updatedCartItem = updateCartItem(existCartItem.id, quantity);
+  return updatedCartItem;
 };
 
 export const getCartItemById = async (cartItemId: number) => {
@@ -37,17 +39,30 @@ export const getCartItemById = async (cartItemId: number) => {
   });
   return cartItem;
 };
-export const updateCartItem = async (cartItemId: number, newData: any) => {
-  const updatedCartItem = await prisma.cartItem.update({
-    where: { id: cartItemId },
-    data: {quantity:newData},
-  });
-  return updatedCartItem;
+export const updateCartItem = async (id: number, newData: any) => {
+  try {
+    const cartItem = await getCartItemById(id);
+    const product = await getProduct(cartItem?.productId!);
+    if (product.stock <= newData) {
+      throw new Error(`Out of stock `);
+    }
+    const updatedCartItem = await prisma.cartItem.update({
+      where: { id },
+      data: { quantity: newData },
+    });
+    return updatedCartItem;
+  } catch (error) {
+    throw new Error(`Error while updating cart item ${error}`);
+  }
 };
 
-export const deleteCartItem = async (cartItemId: number) => {
-  const deletedCartItem = await prisma.cartItem.delete({
-    where: { id: cartItemId },
-  });
-  return deletedCartItem;
+export const deleteCartItem = async (id: number) => {
+  try {
+    const deletedCartItem = await prisma.cartItem.delete({
+      where: { id },
+    });
+    return deletedCartItem;
+  } catch (error) {
+    throw new Error(`Error while deleting cart item ${error}`);
+  }
 };

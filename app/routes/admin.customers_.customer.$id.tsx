@@ -1,8 +1,8 @@
 import { LoaderFunctionArgs, json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import EditCustomerPanel from "~/components/Admin/CustomersPanels/EditCustomerPanel/EditCustomerPanel";
-
 import { getCustomerById } from "~/services/customer.server";
+
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const customer = await getCustomerById(parseInt(params.id!));
@@ -14,7 +14,6 @@ export default function () {
   return (
     <div>
       <h2>Update Customer Data</h2>
-
       {data.customer?.name}
       <EditCustomerPanel customer={data.customer!} />
     </div>

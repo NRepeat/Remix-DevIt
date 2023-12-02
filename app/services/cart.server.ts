@@ -3,14 +3,14 @@ import { Cart } from "@prisma/client";
 export const createCart = async (id: number): Promise<Cart> => {
 
   try {
-    const existCart = await prisma.cart.findFirst({ where: { id } });
+    const existCart = await prisma.cart.findFirst({ where: {customerId:id } });
  
     if (existCart) {
-      throw new Error(`Cart with this ${id} exist`);
+      return existCart
     }
     const newCart = await prisma.cart.create({
       data: {
-        id,
+        customerId:id
       },
     });
     return newCart;

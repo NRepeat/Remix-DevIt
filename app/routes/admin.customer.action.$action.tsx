@@ -1,4 +1,4 @@
-import { ActionFunctionArgs,  json } from "@remix-run/node";
+import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
 import {
   createCustomer,
   deleteCustomer,
@@ -15,7 +15,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const password = formData.get("password") as string;
   const id = formData.get("id") as string
   const customerFormData = { name, secondName, email, password };
-  const updatedCustomerFormData = {name, secondName, email}
+  const updatedCustomerFormData = { name, secondName, email }
 
   if (
     params.action === "create" &&
@@ -24,11 +24,15 @@ export async function action({ request, params }: ActionFunctionArgs) {
     email! &&
     password!
   ) {
-    const createdCustomer = await createCustomer(customerFormData);
+    await createCustomer(customerFormData);
+    return redirect('/admin/customers');
   } else if (params.action === "update") {
-    const updatedCustomer = await updateCustomer(parseInt(id), updatedCustomerFormData);
+    await updateCustomer(parseInt(id),
+      updatedCustomerFormData);
+    return redirect('/admin/customers');
   } else if (params.action === "delete") {
-    const deletedCustomer = await deleteCustomer(parseInt(id));
+    await deleteCustomer(parseInt(id));
+    return redirect('/admin/customers');
   }
   return json({ success: true });
 }

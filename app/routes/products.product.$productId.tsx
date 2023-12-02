@@ -15,6 +15,7 @@ import productPage from "../styles/productPage.css";
 import { getProduct } from "~/services/product.server";
 import { createCart} from "~/services/cart.server";
 import { createCartItem } from "~/services/cartItem.server";
+import { getCustomerById } from "~/services/customer.server";
 
 
 export const links: LinksFunction = () => [
@@ -43,8 +44,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   invariant(typeof productId === "string", "Missing product id");
   const session = await getSession(request.headers.get("Cookie"));
   const sessionCart = createSessionCart(session);
-  const cart = await createCart(18)
-  console.log("🚀 ~ file: products.product.$productId.tsx:47 ~ action ~  cart:",  cart)
+  const customer = await getCustomerById(5) 
+  const cart = await createCart(customer?.id!)
+
   sessionCart.addProduct(productId);
 
   const cartItems = await Promise.all(

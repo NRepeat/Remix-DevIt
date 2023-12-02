@@ -1,8 +1,9 @@
 import { Customer } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
-import { Form, Link } from "@remix-run/react";
+import { Form, Link, useFetcher } from "@remix-run/react";
 import { FC, useEffect, useState } from "react";
 import { CustomerWithoutPassword } from "~/services/customer.server";
+
 
 export interface EditCustomerPanelProps {
   customer: CustomerWithoutPassword;
@@ -11,6 +12,7 @@ export interface EditCustomerPanelProps {
 const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
   customer,
 }) => {
+  const fetcher = useFetcher()
   const [formData, setFormData] = useState({
     name: customer.name,
     secondName: customer.secondName,
@@ -35,7 +37,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
 
   return (
     <>
-      <Form action="/admin/customer/action/update" method="post">
+      <fetcher.Form action="/admin/customer/action/update" method="post">
         Name
         <input
           type="text"
@@ -65,7 +67,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
         />
         <input type="hidden" name="id" value={formData.id} />
         <button type="submit">Submit</button>
-      </Form>
+      </fetcher.Form>
       <Form action="/admin/customer/action/delete " method="post">
         <input type="hidden" name="id" value={customer.id} />
         <button type="submit">Delete</button>

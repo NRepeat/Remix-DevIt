@@ -1,23 +1,31 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { Links, Meta, Outlet } from "@remix-run/react";
 import Sidebar from "~/components/Admin/Sidebar/Sidebar";
-import AdminPage from "~/pages/AdminPage/AdminPage";
-import { getAllCustomers } from "~/services/customer.server";
+import NotFoundPageError from "~/components/Errors/NotFoundPage/NotFoundPageError";
+import GlobalLoader from "~/components/GlobalLoading/GlobalLoader";
 
 
-export async function loader({request,params}: LoaderFunctionArgs) {
-  const customers = await getAllCustomers();
-  return json({ customers })
+
+export function ErrorBoundary() {
+  return (
+    <html>
+      <head>
+        <title>Oh no!</title>
+        <Meta />
+        <Links />
+      </head>
+      <body className="bodyError">
+        <GlobalLoader />
+        <NotFoundPageError />
+      </body>
+    </html>
+  );
 }
 
-
 export default function () {
-  const data = useLoaderData<typeof loader>()
   return (
     <div>
       <Sidebar />
-      <AdminPage customers={data.customers}/>
-      <Outlet/>
+      <Outlet />
     </div>
   );
 }
