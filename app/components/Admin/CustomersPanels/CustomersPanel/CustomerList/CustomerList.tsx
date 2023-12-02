@@ -3,7 +3,7 @@ import { Link, useSubmit } from "@remix-run/react";
 import React, { FC } from "react";
 import { AdminPanelProps } from "~/components/Admin/AdminPanel/AdminPanel";
 
-const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ customers }) => {
+const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
   const submit = useSubmit();
   const handleSubmit = (id: number) => {
     submit({}, { action: `customer/${id}` });
@@ -13,7 +13,7 @@ const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ customers }) => {
     <ul>
       <div>Name Email Role Type Status</div>
 
-      {customers.map((customer) => (
+      {data.customers.customers.map((customer) => (
         <>
           <li>
             {customer.id} {customer.name} {customer.secondName} {customer.email}

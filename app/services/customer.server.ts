@@ -49,23 +49,33 @@ export const createCustomer = async ({
   }
 };
 
-export const getAllCustomers = async (): Promise<CustomerWithoutPassword[]> => {
+export const getAllCustomers = async (
+  page: number
+): Promise<{ customers: CustomerWithoutPassword[]; totalPages: number }> => {
+  const pageSize: number = 10;
+  const skip = (page - 1) * pageSize;
   try {
-    const customers = await prisma.customer.findMany({
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        secondName: true,
-        createdAt: true,
-        updatedAt: true,
-        cart: {
-          include: { cartItems: true },
+    const [customers, totalCustomers] = await Promise.all([
+      prisma.customer.findMany({
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          secondName: true,
+          createdAt: true,
+          updatedAt: true,
+          cart: {
+            include: { cartItems: true },
+          },
         },
-      },
-    });
+        skip,
+        take: pageSize,
+      }),
+      prisma.customer.count(),
+    ]);
 
-    return customers;
+    const totalPages = Math.ceil(totalCustomers / pageSize);
+    return { customers, totalPages };
   } catch (error) {
     throw new Error("Error while attempting to get all customers");
   }
@@ -169,12 +179,12 @@ export const deleteCustomer = async (
   }
 };
 
-export const searchCustomer = async (q: string) => {
+export const searchCustomer = async (q: string | null, page: number) => {
   try {
-    if(q===null){
-      const customers =await getAllCustomers()
-      return customers
+    if (q === null) {
+      return await getAllCustomers(page);
     }
+
     const customers = await prisma.customer.findMany({
       where: {
         OR: [
@@ -183,7 +193,8 @@ export const searchCustomer = async (q: string) => {
         ],
       },
     });
-    return customers;
+
+    return { customers, totalPages: 0 };
   } catch (error) {
     throw new Error(`Error during customer search: ${error}`);
   }

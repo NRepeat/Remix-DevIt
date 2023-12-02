@@ -4,17 +4,18 @@ import { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import CustomerList from "./CustomerList/CustomerList";
 import { CustomerSearch } from "./CustomerSearch/CustomerSearch";
+import Pagination from "./Pagination/Pagination";
 
-const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({ customers }) => {
+const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
   return (
     <>
       <div>Customers</div>
-      {customers && (
+      {data.customers.customers && (
         <>
           <Link to={"/admin/customers/customer/create"}>Add Customers</Link>
           <CustomerSearch />
-          <CustomerList customers={customers} />
-          <div>Pagination</div>
+          <CustomerList data={data} />
+          <Pagination currentPage={1} totalPages={data.customers.totalPages}/>
         </>
       )}
     </>
