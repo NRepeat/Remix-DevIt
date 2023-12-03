@@ -1,9 +1,15 @@
 import { Form, Link } from "@remix-run/react";
-
-const CreateCustomerPanel = () => {
+import styles from "./styles.module.css";
+import  { FC } from "react";
+import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+const CreateCustomerPanel: FC = () => {
+  const breadcrumbs = [
+    { label: "Customers", link: "/admin/customers" },
+    { label: "Create customer", link: "/admin/customers/customer/create" },
+  ];
   return (
-    <>
-      Add user
+    <div className={styles.customerPanel}>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
       <Form action={`/admin/customer/action/create`} method="post">
         <input type="text" name="name" required />
         <input type="text" name="secondName" required />
@@ -12,7 +18,7 @@ const CreateCustomerPanel = () => {
         <button type="submit">Submit</button>
       </Form>
       <Link to={'/admin/customers/'}>Close</Link>
-    </>
+    </div>
   );
 };
 

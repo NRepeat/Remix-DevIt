@@ -1,0 +1,38 @@
+.adminPage{
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+.adminMain{
+  display: flex;
+  height: 100%;
+}
+
+.customersPanelContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+.createCustomerPanel{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+.customerEditContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+.cartContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}

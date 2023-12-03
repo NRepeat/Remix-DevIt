@@ -1,9 +1,9 @@
-import { Customer } from "@prisma/client";
 import { SerializeFrom } from "@remix-run/node";
 import { Form, Link, useFetcher } from "@remix-run/react";
 import { FC, useEffect, useState } from "react";
 import { CustomerWithoutPassword } from "~/services/customer.server";
-
+import styles from "./styles.module.css";
+import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 
 export interface EditCustomerPanelProps {
   customer: CustomerWithoutPassword;
@@ -34,9 +34,14 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
       [name]: value,
     }));
   };
-
+  const breadcrumbs = [
+    { label: "Customers", link: "/admin/customers" },
+    { label: `Edit customer ${customer.name}`, link: `/admin/customers/customer/${customer.id}/edit` },
+  ];
   return (
-    <>
+    <div className={styles.editCustomerPanel}>
+      <Breadcrumbs breadcrumbs={breadcrumbs}/>
+     
       <fetcher.Form action="/admin/customer/action/update" method="post">
         Name
         <input
@@ -73,7 +78,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
         <button type="submit">Delete</button>
         <Link to={'/admin/customers'}>Close </Link>
       </Form>
-    </>
+    </div>
   );
 };
 

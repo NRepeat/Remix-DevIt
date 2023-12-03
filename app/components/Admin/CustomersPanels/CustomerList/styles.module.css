@@ -1,0 +1,96 @@
+.list {
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.customer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table {
+  border-collapse: separate;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 190px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.action {
+  text-align: center;
+
+}
+
+.edit {
+  background-color: rgb(113, 113, 255);
+  border-radius: 5px;
+  display: inline-block;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart {
+  background-color: rgb(168, 238, 2);
+  border-radius: 5px;
+  display: inline-block;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.delete {
+  background-color: red;
+  border-radius: 5px;
+  border: 0;
+  display: inline-block;
+  padding: 6px 12px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  width: 190px;
+  padding: 10px;
+}
+
+tr {
+  height: 70px;
+
+}
+
+tbody {
+  width: 100%;
+}
+
+.edit:hover {
+  background-color: rgba(113, 113, 255, 0.752);
+}
+
+.cart:hover {
+  background-color: rgba(167, 238, 2, 0.802);
+}
+
+.delete:hover {
+  background-color: rgba(255, 0, 0, 0.813);
+}

@@ -3,7 +3,6 @@
   align-items: center;
   font-size: 1.2rem;
   width: 75%;
-  padding-top: 50px;
   font-weight: bold;
 }
 .link{
@@ -14,4 +13,4 @@
   margin: 0 5px;
   color: rgb(209, 2, 209);
 }
-.last{color: white;}
+.last{color: rgb(4, 4, 4);}

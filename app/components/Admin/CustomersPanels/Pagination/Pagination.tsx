@@ -10,7 +10,6 @@ const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
   currentPage,
   totalPages,
 }) => {
-  console.log("🚀 ~ file: Pagination.tsx:13 ~ totalPages:", totalPages)
   const [searchParams, setSearchParams] = useSearchParams();
   const sort = searchParams.get("sort");
   const [pages, setPages] = useState<number[]>([]);

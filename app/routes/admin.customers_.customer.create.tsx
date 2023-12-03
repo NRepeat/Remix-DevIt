@@ -2,7 +2,5 @@ import CreateCustomerPanel from "~/components/Admin/CustomersPanels/CreateCustom
 
 
 export default function () {
-  return (
-    <CreateCustomerPanel />
-  );
+  return <div className="createCustomerPanel"> <CreateCustomerPanel/></div>  
 }

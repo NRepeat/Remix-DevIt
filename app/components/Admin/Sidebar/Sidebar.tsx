@@ -1,11 +1,13 @@
 import { Link } from "@remix-run/react";
+import {FC} from "react"
+import styles from "./styles.module.css";
 
-const Sidebar = () => {
+const Sidebar:FC = () => {
   return (
-    <nav>
-      <ul>
+    <nav className={styles.sidebar}>
+      <ul className={styles.list}>
         <li>
-          <Link to={"customers"}>Customers</Link>
+          <Link  to={"customers"}>Customers</Link>
         </li>
         <li>
           <Link to={"products"}> Products</Link>

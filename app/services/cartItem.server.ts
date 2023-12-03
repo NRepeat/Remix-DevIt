@@ -11,33 +11,44 @@ export const createCartItem = async ({
   productId,
   quantity,
 }: CartItemArgs) => {
-  const existCartItem = await prisma.cartItem.findFirst({
-    where: { productId },
-  });
-
-  if (!existCartItem) {
-    const newCartItem = await prisma.cartItem.create({
-      data: {
-        cartId,
-        productId,
-        quantity,
-      },
+  try {
+    const existCartItem = await prisma.cartItem.findFirst({
+      where: { productId },
     });
-    return newCartItem;
+
+    if (!existCartItem) {
+      const newCartItem = await prisma.cartItem.create({
+        data: {
+          cartId,
+          productId,
+          quantity,
+        },
+      });
+      return newCartItem;
+    }
+
+    const updatedCartItem = await updateCartItem(existCartItem.id, quantity);
+    return updatedCartItem;
+  } catch (error) {
+    console.error("Error creating/updating cart item:", error);
+    throw new Error("Failed to create/update cart item");
   }
-  const updatedCartItem = updateCartItem(existCartItem.id, quantity);
-  return updatedCartItem;
 };
 
 export const getCartItemById = async (cartItemId: number) => {
-  const cartItem = await prisma.cartItem.findUnique({
-    where: { id: cartItemId },
-    include: {
-      cart: true,
-      product: true,
-    },
-  });
-  return cartItem;
+  try {
+    const cartItem = await prisma.cartItem.findUnique({
+      where: { id: cartItemId },
+      include: {
+        cart: true,
+        product: true,
+      },
+    });
+    return cartItem;
+  } catch (error) {
+    console.error("Error fetching cart item by ID:", error);
+    throw new Error("Failed to fetch cart item by ID");
+  }
 };
 export const updateCartItem = async (id: number, newData: any) => {
   try {
