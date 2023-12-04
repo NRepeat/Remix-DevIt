@@ -17,6 +17,7 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
   const [quantities, setQuantities] = useState<Quantities>({});
   const [toggleEdit, setToggleEdit] = useState(false);
   const [toggleAdd, setToggleAdd] = useState(false);
+
   const handleChange = (
     itemId: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -29,35 +30,23 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
   };
 
   const handleDelete = (title: string, id: number, customerId: number) => {
-    const confirmDelete = confirm(
-      `Are you sure  ,you want to delete ${title} in cart ? `
-    );
-
+    const confirmDelete = confirm( `Are you sure  ,you want to delete ${title} in cart ? `)
     confirmDelete
-      ? submit(
-          { id },
-          {
-            action: `/admin/customers/customer/${customerId}/cart/delete`,
-            method: "post",
-          }
-        )
-      : null;
-  };
+      ? submit({ id },{action: `/admin/customers/customer/${customerId}/cart/delete`,method: "post"})
+      : null};
+
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
-    {
-      label: `Customer ${customerId} `,
-      link: `/admin/customers/customer/${customerId}/edit`,
-    },
+    { label: `Customer ${customerId} `,link: `/admin/customers/customer/${customerId}/edit`,},
     { label: `Cart `, link: `/admin/customers/customer/${customerId}/cart` },
   ];
+
   return (
     <div className={styles.cart}>
       <div className={styles.head}>
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
         <Link to={"/admin/customers/"}>Close</Link>
       </div>
-
       {!toggleAdd ? (
         <>
           <ul className={styles.list}>
@@ -80,14 +69,11 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
                 ) : (
                   <span className={styles.quantityW}>
                     <p>Quantity :{item.quantity}</p>
-                    <p>Stock:{products.products[item.productId].stock}</p>
+                    <p>Stock:{item.product.stock}</p>
                   </span>
                 )}
                 <button
-                  onClick={() =>
-                    handleDelete(item.product.title, item.id, customerId)
-                  }
-                >
+                  onClick={() => handleDelete(item.product.title, item.id, customerId) }>
                   Delete
                 </button>
               </li>
@@ -99,7 +85,7 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
           <button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
             {toggleAdd ? "Close add tab" : "Open add tab"}
           </button>
-          <AddProducts data={products} cart={cart} />
+          <AddProducts data={products} cart={cart}  customerId ={customerId}/>
         </>
       )}
     </div>

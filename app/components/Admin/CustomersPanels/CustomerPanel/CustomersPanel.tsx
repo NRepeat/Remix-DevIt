@@ -2,11 +2,11 @@ import { FC } from "react";
 import { AdminPanelProps } from "../../AdminPanel/AdminPanel";
 import { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
-import { CustomerSearch } from "../CustomerSearch/CustomerSearch";
-import Pagination from "../Pagination/Pagination";
 import styles from "./styles.module.css";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import CustomerList from "../CustomerList/CustomerList";
+import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
+import Pagination from "~/components/Pagination/Pagination";
 
 const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({
   data,
@@ -19,7 +19,7 @@ const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({
       {data.customers.customers && (
         <div className={styles.customerListContainer}>
           <div className={styles.searchContainer}>
-            <CustomerSearch />
+           <SearchBar action="/admin/customers/"/>
             <Link to={"/admin/customers/customer/create"}>Add Customer</Link>
           </div>
           <div className={styles.customerList}>
@@ -27,6 +27,7 @@ const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({
           </div>
 
           <Pagination
+          admin={true}
             currentPage={currentPage!}
             totalPages={data.customers.totalPages}
           />

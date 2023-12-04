@@ -6,12 +6,14 @@ import { clsx } from "clsx";
 interface PaginationProps {
   currentPage: number;
   totalPages: number | undefined;
+  admin:boolean
 }
 
 
 const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
   currentPage,
   totalPages,
+  admin
 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const sort = searchParams.get("sort");
@@ -40,6 +42,8 @@ const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
         <button
         key={page}
           className={clsx(styles.button, {
+            [styles.adminCurrentPage]:admin,
+            [styles.adminButton]:admin,
             [styles.currentPage]: currentPage === page,
           })}
           onClick={() => handleSubmit(page)}

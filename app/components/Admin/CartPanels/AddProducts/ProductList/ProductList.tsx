@@ -1,7 +1,6 @@
 import { SerializeFrom } from "@remix-run/node";
 import { FC, useState } from "react";
 import styles from "./styles.module.css";
-import Pagination from "~/components/Admin/CustomersPanels/Pagination/Pagination";
 import { AddProductProps } from "../AddProducts";
 import { Quantities } from "../../ItemsList/ItemsList";
 import {
@@ -9,6 +8,7 @@ import {
   useSubmit,
 } from "@remix-run/react";
 import { loader } from "~/routes/admin.customers_.customer.$id.cart";
+import Pagination from "~/components/Pagination/Pagination";
 
 const ProductList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {
   const routeData = useRouteLoaderData<typeof loader>(
@@ -69,7 +69,7 @@ const ProductList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {
           </li>
         ))}
       </ul>
-      <Pagination currentPage={data.page!} totalPages={data.totalPages!} />
+      <Pagination admin={true} currentPage={data.page!} totalPages={data.totalPages!} />
     </>
   );
 };

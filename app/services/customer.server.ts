@@ -52,7 +52,7 @@ export const createCustomer = async ({
 export const getAllCustomers = async (
   page: number
 ): Promise<{ customers: CustomerWithoutPassword[]; totalPages: number }> => {
-  const pageSize: number = 7;
+  const pageSize: number = 5;
   const skip = (page - 1) * pageSize;
   try {
     const [customers, totalCustomers] = await Promise.all([

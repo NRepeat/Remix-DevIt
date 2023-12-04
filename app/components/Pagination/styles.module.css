@@ -8,9 +8,9 @@ overflow-y:hidden;
 }
 
 .button {
-  border-radius: 10px;
-  height: 50px;
- min-width: 50px;
+  border-radius: 5px;
+  height: 35px;
+ min-width: 35px;
   border: 0;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -35,4 +35,30 @@ overflow-y:hidden;
 }
 .currentPage{
   background-color: rgb(204, 0, 204);
+}
+.adminCurrentPage{
+  background-color: rgb(2, 117, 96);
+}
+.adminButton {
+  border-radius: 5px;
+  height: 35px;
+ min-width: 35px;
+  border: 0;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+.adminButton:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(2, 117, 96);
+}
+
+
+.adminCurrentPage{
+  background-color: rgb(2, 117, 96);
 }

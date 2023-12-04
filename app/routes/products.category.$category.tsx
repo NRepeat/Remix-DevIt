@@ -25,6 +25,7 @@ export async function loader({ request,params }: LoaderFunctionArgs) {
 
 export default function () {
   const data = useLoaderData<typeof loader>();
+  const productsData = data.products
   const breadcrumbs = [
     { label: "Home", link: "/products" },
     {
@@ -35,7 +36,7 @@ export default function () {
   return (
     <div className="categoryContainer">
       <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
-      <ProductsList data={data} />
+      <ProductsList productsData={productsData} />
     </div>
   );
 }

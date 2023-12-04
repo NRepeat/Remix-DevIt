@@ -16,12 +16,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (searchQuery === '') {
     return redirect('/products');
   }
-  const products = await searchProduct(searchQuery!,sort!,1);
+  const productsData = await searchProduct(searchQuery!,sort!,1);
   
-  return json({ products });
+  return json({ productsData });
 }
 
 export default function () {
   const data = useLoaderData<typeof loader>();
-  return <div className="searchContainer"><ProductsList data={data} /></div>;
+  return <div className="searchContainer"><ProductsList productsData={data.productsData} /></div>;
 }

@@ -10,10 +10,11 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   const searchQuery = url.searchParams.get("search");
   const pageQuery = url.searchParams.get("page");
   const page = pageQuery ? parseInt(pageQuery) : 1;
-  if(searchQuery===""){
-    return redirect ('/admin/customers/customer/15/cart')
-  }
   const customerId = parseInt(params.id!);
+
+  if(searchQuery===""){
+    return redirect (`/admin/customers/customer/${customerId}/cart`)
+  }
   const cart = await getCartByCustomerId(customerId);
   const products  = await searchProduct(searchQuery! ,"novelty",page)
   

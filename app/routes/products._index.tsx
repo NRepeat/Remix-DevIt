@@ -21,13 +21,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const pageQuery = url.searchParams.get("page");
   const sort = url.searchParams.get("sort");
   const page = pageQuery ? parseInt(pageQuery) : 1;
-  const { products, totalPages } = await getAllProducts(page, sort!);
+  const products = await getAllProducts(page, sort!);
   if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
   const categories = await getAllProductCategories();
 
-  return json({ products, totalPages, page, cart: cart.items(), categories });
+  return json({products, page, cart: cart.items(), categories });
 };
 
 export default function () {
