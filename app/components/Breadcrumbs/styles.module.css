@@ -5,12 +5,23 @@
   width: 75%;
   font-weight: bold;
 }
-.link{
+.link {
   color: rgb(209, 2, 209);
-  
+}
+.adminLink {
+  color: rgb(2, 117, 96);
 }
 .separator {
   margin: 0 5px;
   color: rgb(209, 2, 209);
 }
-.last{color: rgb(4, 4, 4);}
+.adminSeparator {
+  margin: 0 5px;
+  color: rgb(2, 117, 96);
+}
+.last {
+  color: rgb(255, 255, 255);
+}
+.adminLast {
+  color: rgb(0, 0, 0);
+}

@@ -5,6 +5,9 @@ interface PaginationProps {
   currentPage: number;
   totalPages: number ;
 }
+import { clsx } from "clsx";
+import styles from "./styles.module.css";
+
 
 const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
   currentPage,
@@ -32,11 +35,13 @@ const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
   }, [totalPages]);
 
   return (
-    <div >
+    <div className={styles.pag}>
       {pages.map((page) => (
         <button
           key={page}
-
+          className={clsx(styles.button, {
+            [styles.currentPage]: currentPage === page,
+          })}
           onClick={() => handleSubmit(page)}
         >
           {page}

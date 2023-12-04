@@ -13,23 +13,22 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
   const id = formData.get("id") as string;
+  const parsedId = parseInt(id);
 
   if (params.action === "create" && name && secondName && email && password) {
     await createCustomer({ name, secondName, email, password });
-    return redirect('/admin/customers');
-  } else if (params.action === "update" && id && name && secondName && email) {
-    const parsedId = parseInt(id);
+    return redirect("/admin/customers");
+  } else if (params.action === "update" && parsedId && name && secondName && email) {
     if (!isNaN(parsedId)) {
       await updateCustomer(parsedId, { name, secondName, email });
-      return redirect('/admin/customers');
+      return redirect("/admin/customers");
     } else {
       return json({ error: "Invalid customer ID for update" });
     }
-  } else if (params.action === "delete" && id) {
-    const parsedId = parseInt(id);
+  } else if (params.action === "delete" && parsedId) {
     if (!isNaN(parsedId)) {
       await deleteCustomer(parsedId);
-      return redirect('/admin/customers');
+      return redirect("/admin/customers");
     } else {
       return json({ error: "Invalid customer ID for delete" });
     }

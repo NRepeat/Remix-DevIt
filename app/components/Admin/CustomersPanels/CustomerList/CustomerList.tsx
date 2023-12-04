@@ -12,7 +12,9 @@ const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
     confirm(`Confirm delete customer ${id}`) ? submit({ id }, { method: "post", action: `/admin/customer/action/delete` }) : null
 
   }
-
+const handleCartCreate = (id:number)=>{
+submit({},{action:`/admin/customers/customer/${id}/cart/action/create`,method: "post"})
+}
   return (
     <table className={styles.table}>
       <thead className={styles.table}>
@@ -33,7 +35,7 @@ const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
             <td>{customer.email}</td>
             <td className={styles.buttonContainer}>
               <Link className={styles.edit} to={`customer/${customer.id}/edit`}>Edit</Link>
-              {customer.cart?.id ?   <Link className={styles.cart} to={`/admin/customers/customer/${customer.id}/cart`}>Cart</Link> : <Link className={styles.cart} to={''}>Create cart</Link> }
+              {customer.cart?.id ?   <Link className={styles.cart} to={`/admin/customers/customer/${customer.id}/cart`}>Cart</Link> : <button className={styles.cart} onClick={()=>handleCartCreate(customer.id)} >Create cart</button> }
               <button className={styles.delete} onClick={()=>handleSubmit(customer.id) }>Delete</button>
             </td>
           </tr>

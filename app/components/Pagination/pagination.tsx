@@ -8,6 +8,7 @@ interface PaginationProps {
   totalPages: number | undefined;
 }
 
+
 const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
   currentPage,
   totalPages,

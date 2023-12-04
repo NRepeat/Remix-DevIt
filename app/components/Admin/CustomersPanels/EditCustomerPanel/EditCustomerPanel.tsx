@@ -12,7 +12,7 @@ export interface EditCustomerPanelProps {
 const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
   customer,
 }) => {
-  const fetcher = useFetcher()
+  const fetcher = useFetcher();
   const [formData, setFormData] = useState({
     name: customer.name,
     secondName: customer.secondName,
@@ -36,48 +36,60 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
   };
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
-    { label: `Edit customer ${customer.name}`, link: `/admin/customers/customer/${customer.id}/edit` },
+    {
+      label: `Edit customer ${customer.name}`,
+      link: `/admin/customers/customer/${customer.id}/edit`,
+    },
   ];
   return (
     <div className={styles.editCustomerPanel}>
-      <Breadcrumbs breadcrumbs={breadcrumbs}/>
-     
-      <fetcher.Form action="/admin/customer/action/update" method="post">
-        Name
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          required
-          value={formData.name}
-          onChange={handleChange}
-        />
-        Second Name
-        <input
-          type="text"
-          name="secondName"
-          placeholder="Second Name"
-          required
-          value={formData.secondName}
-          onChange={handleChange}
-        />
-        Email
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          required
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <input type="hidden" name="id" value={formData.id} />
-        <button type="submit">Submit</button>
+      <div className={styles.head}>
+        <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
+        <Link to={"/admin/customers/"}>Close</Link>
+      </div>
+
+      <fetcher.Form
+        className={styles.form}
+        action="/admin/customer/action/update"
+        method="post"
+      >
+        <div className={styles.inputs}>
+          <p>Customer's Name</p>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+          <p>Customer's Second Name</p>
+          <input
+            type="text"
+            name="secondName"
+            placeholder="Second name"
+            value={formData.secondName}
+            onChange={handleChange}
+            required
+          />
+
+          <p>Customer's email</p>
+
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+          />
+          <input type="hidden" name="id" value={formData.id} />
+        </div>
+
+        <div className={styles.buttons}>
+          <button type="submit">Submit</button>
+        </div>
       </fetcher.Form>
-      <Form action="/admin/customer/action/delete " method="post">
-        <input type="hidden" name="id" value={customer.id} />
-        <button type="submit">Delete</button>
-        <Link to={'/admin/customers'}>Close </Link>
-      </Form>
     </div>
   );
 };

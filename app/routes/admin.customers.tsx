@@ -16,14 +16,14 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   if (!customers) {
     throw new Response("Customers Not Found", { status: 404 });
   }
-  return json({ customers });
+  return json({ customers ,page });
 }
 
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="customersPanelContainer">
-      <CustomersPanel data={data} />
+    <div className="containerBase">
+      <CustomersPanel data={data} currentPage = {data.page} />
       <Outlet />
     </div>
   );

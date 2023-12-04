@@ -6,15 +6,18 @@ import { CustomerWithoutPassword } from "~/services/customer.server";
 import CustomersPanel from "../CustomersPanels/CustomerPanel/CustomersPanel";
 
 export interface AdminPanelProps {
-  data: {customers: {  customers: CustomerWithoutPassword[] & {cart:Cart}; totalPages: number; }}
+  data: {
+    customers: {
+      customers: CustomerWithoutPassword[] & { cart: Cart };
+      totalPages: number;
+    };
+  
+  };
+  currentPage?: number;
 }
 
 const AdminPanel: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
-  return (
-    <>
-
-    </>
-  );
+  return <></>;
 };
 
 export default AdminPanel;

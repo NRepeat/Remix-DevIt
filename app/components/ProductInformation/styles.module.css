@@ -24,3 +24,12 @@ height: 100%;
   color: rgb(212, 2, 212);
 font-weight: bold;
 }
+.priceWrapper{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+}
+.rating{
+  color: rgb(212, 2, 212);
+}

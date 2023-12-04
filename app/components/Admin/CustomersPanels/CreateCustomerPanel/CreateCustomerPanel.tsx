@@ -1,23 +1,58 @@
 import { Form, Link } from "@remix-run/react";
 import styles from "./styles.module.css";
-import  { FC } from "react";
+import { FC, useRef } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 const CreateCustomerPanel: FC = () => {
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const handleReset = () => {
+    if (formRef.current) {
+      formRef.current.reset();
+    }
+  };
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
     { label: "Create customer", link: "/admin/customers/customer/create" },
   ];
   return (
-    <div className={styles.customerPanel}>
-      <Breadcrumbs breadcrumbs={breadcrumbs}/>
-      <Form action={`/admin/customer/action/create`} method="post">
-        <input type="text" name="name" required />
-        <input type="text" name="secondName" required />
-        <input type="text" name="email" required />
-        <input type="password" name="password" required />
-        <button type="submit">Submit</button>
+    <div className={styles.addPanel}>
+      <div className={styles.head}>
+        <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
+        <Link to={"/admin/customers/"}>Close</Link>
+      </div>
+
+      <Form
+      ref={formRef}
+        className={styles.form}
+        action={`/admin/customer/action/create`}
+        method="post"
+      >
+        <div className={styles.inputs}>
+          <p>Customer's Name</p>
+          <input type="text" name="name" placeholder="Name" required />
+          <p>Customer's Second Name</p>
+          <input
+            type="text"
+            name="secondName"
+            placeholder="Second name"
+            required
+          />
+          <p>Customer's email</p>
+
+          <input type="text" name="email" placeholder="Email" required />
+          <p>Customer's password</p>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
+        </div>
+
+        <div className={styles.buttons}>
+          <button type="submit">Submit</button>
+          <button type="button" onClick={handleReset}>Reset</button>
+        </div>
       </Form>
-      <Link to={'/admin/customers/'}>Close</Link>
     </div>
   );
 };

@@ -88,7 +88,7 @@ function ProductRoute() {
   return (
     <div className="productContainer">
       <div className="breadcrumbs">
-        <Breadcrumbs breadcrumbs={breadcrumbs} />
+        <Breadcrumbs breadcrumbs={breadcrumbs}  admin={false}/>
       </div>
       <Product data={data} />
     </div>

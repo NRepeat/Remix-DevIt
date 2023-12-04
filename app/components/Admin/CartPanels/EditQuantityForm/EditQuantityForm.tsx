@@ -23,7 +23,9 @@ export interface  EditQuantityFormProps{
 const EditQuantityForm: React.FC<EditQuantityFormProps>= ({item,quantities,customerId,handleChange}) => {
   return (
     <>
+    
       <p>Edit quantity</p>
+      
       <input
         onChange={(e) => handleChange(item.id, e)}
         type="text"

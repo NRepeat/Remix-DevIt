@@ -8,6 +8,12 @@ export const createCart = async (id: number): Promise<Cart> => {
     if (existCart) {
       return existCart
     }
+    if(!id){
+      const newCart = await prisma.cart.create({
+        data: {},
+      });
+      return newCart;
+    }
     const newCart = await prisma.cart.create({
       data: {
         customerId:id

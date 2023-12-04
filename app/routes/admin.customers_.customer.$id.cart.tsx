@@ -1,23 +1,34 @@
-import { LoaderFunctionArgs, json } from "@remix-run/node";
+import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import ItemsList from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 import { getCartByCustomerId } from "~/services/cart.server";
+import { searchProduct } from "~/services/product.server";
 
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  const customerId = parseInt(params.id!)
-  const cart = await getCartByCustomerId(customerId)
+  const url = new URL(request.url);
+  const searchQuery = url.searchParams.get("search");
+  const pageQuery = url.searchParams.get("page");
+  const page = pageQuery ? parseInt(pageQuery) : 1;
+  if(searchQuery===""){
+    return redirect ('/admin/customers/customer/15/cart')
+  }
+  const customerId = parseInt(params.id!);
+  const cart = await getCartByCustomerId(customerId);
+  const products  = await searchProduct(searchQuery! ,"novelty",page)
+  
   if (!cart) {
     throw new Response("Cart Not Found", { status: 404 });
   }
-  return json({ cart, customerId })
-}
+  return json({ cart, customerId ,products });
+};
 
 export default function () {
-  const data = useLoaderData<typeof loader>()
-  return <div className="cartContainer">
-
-<ItemsList cart={data.cart} customerId={data.customerId} />
-  </div>  
-
+  const data = useLoaderData<typeof loader>();
+  
+  return (
+    <div className="containerBase">
+      <ItemsList cart={data.cart} customerId={data.customerId}  products={data.products}/>
+    </div>
+  );
 }

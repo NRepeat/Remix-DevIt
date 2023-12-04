@@ -1,8 +1,9 @@
 import { ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import { createCart } from "~/services/cart.server";
 import { deleteCartItem, updateCartItem } from "~/services/cartItem.server";
 
-export async function action({ request, params }: ActionFunctionArgs) {
 
+export async function action({ request, params }: ActionFunctionArgs) {
   const formData = await request.formData();
   const quantity = formData.get("quantity") as string;
   const productCartId = formData.get("id") as string;
@@ -26,6 +27,9 @@ export async function action({ request, params }: ActionFunctionArgs) {
     } else {
       return json({ error: "Invalid productCartId" });
     }
+  } else if (params.action === "create" ) {
+      await createCart(parseInt(params.id!));
+      return redirect(`/admin/customers`);
   }
 
   return json({ success: true });

@@ -15,8 +15,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
-    <div className="customerEditContainer">
-    
+    <div className="containerBase">
       <EditCustomerPanel customer={data.customer!} />
     </div>
   );

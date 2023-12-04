@@ -5,6 +5,7 @@ export interface ProductData {
   products: Product[];
   category?: Category;
   totalPages?: number;
+  page?:number
 }
 export interface SortField {
   rating: string;
@@ -45,7 +46,7 @@ export const getAllProducts = async (
       prisma.product.count(),
     ]);
     const totalPages = Math.ceil(totalProductsCount / pageSize);
-    return { products, totalPages };
+    return { products, totalPages ,page};
   } catch (error) {
     throw new Error(`Error during get all products ${error}`);
   }
@@ -65,9 +66,14 @@ export const getProduct = async (
   }
 };
 
-export const searchProduct = async (q: string, sortName: string): Promise<Product[]> => {
+export const searchProduct = async (q: string, sortName: string,page:number): Promise<ProductData > => {
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
+  if(q === null){
+    const products = await getAllProducts(page,"novelty")
+    
+    return products
+  }
   try {
     const products = await prisma.product.findMany({
       where: {
@@ -81,7 +87,7 @@ export const searchProduct = async (q: string, sortName: string): Promise<Produc
       },
     });
 
-    return products;
+    return{ products};
   } catch (error) {
     throw new Error(`Error during product search: ${error}`);
   }

@@ -16,7 +16,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (searchQuery === '') {
     return redirect('/products');
   }
-  const products = await searchProduct(searchQuery!,sort!);
+  const products = await searchProduct(searchQuery!,sort!,1);
   
   return json({ products });
 }

@@ -34,7 +34,7 @@ export default function () {
   ];
   return (
     <div className="categoryContainer">
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
       <ProductsList data={data} />
     </div>
   );

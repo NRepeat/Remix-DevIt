@@ -5,10 +5,11 @@ import Sidebar from "~/components/Admin/Sidebar/Sidebar";
 import NotFoundPageError from "~/components/Errors/NotFoundPage/NotFoundPageError";
 import GlobalLoader from "~/components/GlobalLoading/GlobalLoader";
 import adminStylesHref from "../styles/admin.css";
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: adminStylesHref},
-];
 
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: adminStylesHref },
+];
 
 export function ErrorBoundary() {
   return (
@@ -29,13 +30,11 @@ export function ErrorBoundary() {
 export default function () {
   return (
     <div className="adminPage">
-      <Header/>
+      <Header />
       <main className="adminMain">
-      <Sidebar />
-      <Outlet />
-
+        <Sidebar />
+        <Outlet />
       </main>
-   
     </div>
   );
 }

@@ -7,3 +7,56 @@
   padding: 10px;
   min-height: 750px;
 }
+.head{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.addPanel{
+  border: 1px solid gainsboro;
+width: 1500px;
+max-width: 60%;
+min-width:870px ;
+padding: 10px;
+min-height: 750px;
+
+}
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 95%;
+}
+.inputs{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 95%;
+  padding-bottom: 20px;
+
+}
+.inputs>p{
+  width: 100%;
+  text-align: left;
+  padding-left: 110px;
+}
+.inputs>input{
+  height: 35px;
+  width: 80%;
+  line-height: 1.5rem;
+  font-size: 1.3rem; 
+}
+.head{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.buttons{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
