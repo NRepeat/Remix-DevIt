@@ -9,18 +9,14 @@ import AddProducts from "../AddProducts/AddProducts";
 
 export interface ItemsListProps extends SerializeFrom<typeof loader> {}
 export type Quantities = {
-  [key: string]: string;
+  [key: string]: number;
 };
 
-const ItemsList: FC<ItemsListProps> = ({
-  cart,
-  customerId,
-  products,
-}) => {
+const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
   const submit = useSubmit();
   const [quantities, setQuantities] = useState<Quantities>({});
   const [toggleEdit, setToggleEdit] = useState(false);
-
+  const [toggleAdd, setToggleAdd] = useState(false);
   const handleChange = (
     itemId: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -41,7 +37,7 @@ const ItemsList: FC<ItemsListProps> = ({
       ? submit(
           { id },
           {
-            action: `/admin/customers/customer/${customerId}/cart/action/delete`,
+            action: `/admin/customers/customer/${customerId}/cart/delete`,
             method: "post",
           }
         )
@@ -62,11 +58,14 @@ const ItemsList: FC<ItemsListProps> = ({
         <Link to={"/admin/customers/"}>Close</Link>
       </div>
 
-      {cart.cartItems.length > 1 ? (
+      {!toggleAdd ? (
         <>
           <ul className={styles.list}>
             <button onClick={() => setToggleEdit((prevToggle) => !prevToggle)}>
-              {toggleEdit ? "Close  edit fields" : "Open edit fields"}
+              {toggleEdit ? "Close edit fields" : "Open edit fields"}
+            </button>
+            <button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
+              {toggleAdd ? "Close add tab" : "Open add tab"}
             </button>
             {cart?.cartItems.map((item) => (
               <li key={item.id}>
@@ -80,7 +79,8 @@ const ItemsList: FC<ItemsListProps> = ({
                   />
                 ) : (
                   <span className={styles.quantityW}>
-                    <p>Quantity</p>:{item.quantity}
+                    <p>Quantity :{item.quantity}</p>
+                    <p>Stock:{products.products[item.productId].stock}</p>
                   </span>
                 )}
                 <button
@@ -95,7 +95,12 @@ const ItemsList: FC<ItemsListProps> = ({
           </ul>
         </>
       ) : (
-        <AddProducts data={products} />
+        <>
+          <button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
+            {toggleAdd ? "Close add tab" : "Open add tab"}
+          </button>
+          <AddProducts data={products} cart={cart} />
+        </>
       )}
     </div>
   );

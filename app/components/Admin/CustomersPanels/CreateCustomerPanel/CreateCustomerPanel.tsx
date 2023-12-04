@@ -23,7 +23,7 @@ const CreateCustomerPanel: FC = () => {
       <Form
       ref={formRef}
         className={styles.form}
-        action={`/admin/customer/action/create`}
+        action={`/admin/customer/create`}
         method="post"
       >
         <div className={styles.inputs}>

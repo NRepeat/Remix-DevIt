@@ -50,7 +50,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
 
       <fetcher.Form
         className={styles.form}
-        action="/admin/customer/action/update"
+        action="/admin/customer/update"
         method="post"
       >
         <div className={styles.inputs}>

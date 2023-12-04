@@ -9,11 +9,11 @@ const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
   const submit = useSubmit();
   const handleSubmit = (id:number) => {
 
-    confirm(`Confirm delete customer ${id}`) ? submit({ id }, { method: "post", action: `/admin/customer/action/delete` }) : null
+    confirm(`Confirm delete customer ${id}`) ? submit({ id }, { method: "post", action: `/admin/customer/delete` }) : null
 
   }
 const handleCartCreate = (id:number)=>{
-submit({},{action:`/admin/customers/customer/${id}/cart/action/create`,method: "post"})
+submit({},{action:`/admin/customers/customer/${id}/cart/create`,method: "post"})
 }
   return (
     <table className={styles.table}>

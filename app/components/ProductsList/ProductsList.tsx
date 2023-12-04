@@ -6,15 +6,11 @@ import SortTypesList from "../Sort/SortTypesList";
 import { SerializeFrom } from "@remix-run/node";
 import { ProductData } from "~/services/product.server";
 
-
 export type ProductListProps = {
-  data: {
-    products: ProductData;
-  };
+  data: ProductData;
 };
 
 const ProductsList: FC<SerializeFrom<ProductListProps>> = ({ data }) => {
-
   return (
     <div className={styles.wrapper}>
       <nav className={styles.nav}>

@@ -17,20 +17,23 @@ export const createCartItem = async ({
     });
 
     if (!existCartItem) {
-      const newCartItem = await prisma.cartItem.create({
-        data: {
-          cartId,
-          productId,
-          quantity,
-        },
-      });
-      return newCartItem;
+      const product =await getProduct(productId)
+      if(product.stock>= quantity){
+        const newCartItem = await prisma.cartItem.create({
+          data: {
+            cartId,
+            productId,
+            quantity,
+          },
+        });
+        return newCartItem;
+      }   
+      
     }
-
-    const updatedCartItem = await updateCartItem(existCartItem.id, quantity);
+    const updatedCartItem = await updateCartItem(existCartItem!.id, quantity);
     return updatedCartItem;
+  
   } catch (error) {
-    console.error("Error creating/updating cart item:", error);
     throw new Error("Failed to create/update cart item");
   }
 };
@@ -46,7 +49,6 @@ export const getCartItemById = async (cartItemId: number) => {
     });
     return cartItem;
   } catch (error) {
-    console.error("Error fetching cart item by ID:", error);
     throw new Error("Failed to fetch cart item by ID");
   }
 };

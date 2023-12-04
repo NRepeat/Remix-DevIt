@@ -21,7 +21,7 @@ export function ErrorBoundary() {
       </head>
       <body className="bodyError">
         <GlobalLoader />
-        <NotFoundPageError />
+       asd
       </body>
     </html>
   );

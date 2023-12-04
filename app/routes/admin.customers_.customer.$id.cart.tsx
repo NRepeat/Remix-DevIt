@@ -1,5 +1,5 @@
 import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import ItemsList from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 import { getCartByCustomerId } from "~/services/cart.server";
 import { searchProduct } from "~/services/product.server";
@@ -23,12 +23,15 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   return json({ cart, customerId ,products });
 };
 
+
+
 export default function () {
   const data = useLoaderData<typeof loader>();
   
   return (
     <div className="containerBase">
       <ItemsList cart={data.cart} customerId={data.customerId}  products={data.products}/>
+      <Outlet/>
     </div>
   );
 }
