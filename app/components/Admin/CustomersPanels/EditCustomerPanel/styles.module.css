@@ -1,11 +1,10 @@
 
 .editCustomerPanel{
   border: 1px solid gainsboro;
-  width: 1500px;
   max-width: 60%;
-  min-width:870px ;
   padding: 10px;
-  min-height: 750px;
+  min-width: 60%;
+  width: 60%;
 }
 .head{
   display: flex;
@@ -14,11 +13,9 @@
 }
 .addPanel{
   border: 1px solid gainsboro;
-width: 1500px;
 max-width: 60%;
 min-width:870px ;
 padding: 10px;
-min-height: 750px;
 
 }
 .form{

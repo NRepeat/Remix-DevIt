@@ -1,25 +1,26 @@
 import { FC } from "react";
 import styles from "./styles.module.css";
 import ProductListItem from "./ProductListItem/ProductListItem";
-import { Product } from "@prisma/client";
+import { Category, Product } from "@prisma/client";
 import SortTypesList from "../Sort/SortTypesList";
 import { SerializeFrom } from "@remix-run/node";
 import { ProductData } from "~/services/product.server";
 
 export type ProductListProps = {
-  data: ProductData;
+  productsData: ProductData 
+
 };
 
-const ProductsList: FC<SerializeFrom<ProductListProps>> = ({ data }) => {
+const ProductsList: FC<SerializeFrom<ProductListProps>> = ({ productsData }) => {
   return (
     <div className={styles.wrapper}>
       <nav className={styles.nav}>
         <div className={styles.sort}>
           <SortTypesList />
         </div>
-        {data.products.length ? (
+        {productsData.products.length ? (
           <ul className={styles.list}>
-            {data.products.map((product: SerializeFrom<Product>) => {
+            {productsData.products.map((product: SerializeFrom<Product>) => {
               return (
                 <li className={styles.li} key={product.id}>
                   <ProductListItem product={product} />

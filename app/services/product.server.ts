@@ -104,7 +104,7 @@ export const getAllProductCategories = async (): Promise<Category[]> => {
 export const getProductsByCategory = async (
   c: string,
   sortName: string
-): Promise<Product[]> => {
+): Promise<ProductData > => {
 
 
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
@@ -116,7 +116,7 @@ export const getProductsByCategory = async (
         [sortField]: sortType,
       },
     });
-    return products;
+    return {products};
   } catch (error) {
     throw new Error(`Error during products by category search: ${error}`);
   }

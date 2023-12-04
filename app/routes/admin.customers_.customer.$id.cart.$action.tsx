@@ -22,18 +22,14 @@ export async function action({ request, params }: ActionFunctionArgs) {
     case "editQuantity":
       if (quantity !== null && productCartId !== null) {
         const cartProduct = await getCartItemById(productCartId)
-       if(cartProduct?.product.stock!>=quantity ){
-        await updateCartItem(productCartId, quantity);
-        return redirect(`/admin/customers/customer/${params.id}/cart`);
-       }else{
-
-        throw new Response("out of stock");
-        
-        
-    }
-    
+        if (cartProduct?.product.stock! >= quantity) {
+          await updateCartItem(productCartId, quantity);
+          return redirect(`/admin/customers/customer/${params.id}/cart`);
+        } else {
+          throw new Response("Out of stock")
+        }
       } else {
-        throw new Error("Invalid quantity or productCartId" )
+        throw new Response("Invalid quantity or productCartId")
       }
 
     case "delete":
@@ -41,7 +37,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         await deleteCartItem(productCartId);
         return redirect(`/admin/customers/customer/${params.id}/cart`);
       } else {
-        return json({ error: "Invalid productCartId" });
+        throw new Response("Invalid productCartId");
       }
 
     case "create":
@@ -50,11 +46,18 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
     case "addItem":
       if (cartId !== null && productId !== null && quantity !== null) {
-        await createCartItem({ cartId, productId, quantity });
-        return redirect(`/admin/customers/customer/${params.id}/cart`);
+        const product = await getProduct(productId)
+        if (product?.stock! >= quantity) {
+          await createCartItem({ cartId, productId, quantity });
+          return redirect(`/admin/customers/customer/${params.id}/cart`);
+        }else {
+          throw new Response("Out of stock")
+        }
+
       } else {
-        return json({ error: "Invalid cartId, productId, or quantity" });
+        throw new Response("Out of stock")
       }
+
 
     default:
       return json({ success: true });
@@ -62,12 +65,11 @@ export async function action({ request, params }: ActionFunctionArgs) {
 }
 
 export function ErrorBoundary() {
+
   const error = useRouteError();
 
- 
   if (isRouteErrorResponse(error)) {
-
-    return <AdminError error={error}/>
+    return <AdminError error={error} />
   }
 }
 

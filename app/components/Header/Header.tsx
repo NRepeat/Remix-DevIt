@@ -11,7 +11,7 @@ const Header: FC = () => {
         <Link className={styles.title} to={"/products"}>
           Store
         </Link>
-        <SearchBar />
+        <SearchBar action="/products/search" />
         <CartIcon />
       </div>
     </div>

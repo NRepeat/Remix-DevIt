@@ -1,10 +1,7 @@
 .cart{
   border: 1px solid gainsboro;
-width: 1500px;
 max-width: 60%;
-min-width:870px ;
 padding: 10px;
-min-height: 750px;
 max-height: 750px;
 overflow-y: hidden;
 }

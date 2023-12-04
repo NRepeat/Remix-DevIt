@@ -26,7 +26,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         await createCustomer({ name, secondName, email, password });
         return redirect("/admin/customers");
       } else {
-        return json({ error: "Invalid input for creating a customer" });
+        throw new Response ("Invalid input for creating a customer" ) 
       }
 
     case "update":
@@ -34,7 +34,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         await updateCustomer(parsedId, { name, secondName, email });
         return redirect("/admin/customers");
       } else {
-        return json({ error: "Invalid input for updating a customer" });
+        throw new Response ( "Invalid input for updating a customer" );
       }
 
     case "delete":
@@ -42,7 +42,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         await deleteCustomer(parsedId);
         return redirect("/admin/customers");
       } else {
-        return json({ error: "Invalid customer ID for delete" });
+        throw new Response ("Invalid customer ID for delete" );
       }
 
     default:
