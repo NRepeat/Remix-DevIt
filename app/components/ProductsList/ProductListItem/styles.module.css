@@ -6,27 +6,16 @@
   border: 1px solid rgb(215, 0, 215);
   padding: 10px;
   transition: all 0.2s ease-in-out;
-  
 }
-
 .card:hover {
   background: var(--gradientColor);
-
 }
-
-
-
-
-
-
-
 .avatar {
   width: 250px;
   height: auto;
   overflow: hidden;
   border-radius: 5px;
 }
-
 .avatar img {
   width: 100%;
   height: 100%;

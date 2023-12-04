@@ -19,18 +19,24 @@ const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({
       {data.customers.customers && (
         <div className={styles.customerListContainer}>
           <div className={styles.searchContainer}>
-           <SearchBar action="/admin/customers/"/>
+            <SearchBar action="/admin/customers/" />
             <Link to={"/admin/customers/customer/create"}>Add Customer</Link>
           </div>
-          <div className={styles.customerList}>
+          <div className={styles.listContainer}>
             <CustomerList data={data} />
+
+            <div>
+              <Pagination
+                admin={true}
+                currentPage={currentPage!}
+                totalPages={data.customers.totalPages}
+              />
+
+            </div>
           </div>
 
-          <Pagination
-          admin={true}
-            currentPage={currentPage!}
-            totalPages={data.customers.totalPages}
-          />
+
+
         </div>
       )}
     </div>
