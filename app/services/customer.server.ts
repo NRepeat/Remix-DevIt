@@ -1,5 +1,4 @@
 import type { Cart, Customer } from "@prisma/client";
-import { CartItem } from "@prisma/client";
 export interface CustomerArgs {
   email: string;
   name: string;
@@ -11,7 +10,9 @@ export interface CreateCustomerArgs {
   secondName: string;
   password: string;
 }
-export type CustomerWithoutPassword = Omit<Customer, "password"> & { cart?: Cart | null };
+export type CustomerWithoutPassword = Omit<Customer, "password"> & {
+  cart?: Cart | null;
+};
 
 export const createCustomer = async ({
   email,
@@ -180,7 +181,10 @@ export const deleteCustomer = async (
   }
 };
 
-export const searchCustomer = async (q: string | null, page: number):Promise<{ customers: CustomerWithoutPassword[]  ; totalPages: number } > => {
+export const searchCustomer = async (
+  q: string | null,
+  page: number
+): Promise<{ customers: CustomerWithoutPassword[]; totalPages: number }> => {
   try {
     if (q === null) {
       return await getAllCustomers(page);

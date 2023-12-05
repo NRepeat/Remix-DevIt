@@ -12,7 +12,12 @@
 .bar {
   height: 5px;
   z-index: 50;
-  background: linear-gradient(45deg, rgba(0,0,0,1) 20%, rgb(236, 173, 242) 69%, rgba(235,0,255,1) 97%);
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 1) 20%,
+    rgb(236, 173, 242) 69%,
+    rgba(235, 0, 255, 1) 97%
+  );
   transition: all 500ms ease-in-out;
 }
 .idle {

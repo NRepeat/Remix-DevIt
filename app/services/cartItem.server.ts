@@ -59,7 +59,10 @@ export const getCartItemById = async (cartItemId: number) => {
 export const updateCartItem = async (id: number, newData: any) => {
   try {
     const cartItem = await getCartItemById(id);
-    const product = await getProduct(cartItem?.productId!);
+    if (!cartItem) {
+      throw new Error(`Item didn't exist`);
+    }
+    const product = await getProduct(cartItem.productId);
     if (product.stock <= newData) {
       throw new Error(`Out of stock `);
     }

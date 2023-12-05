@@ -2,10 +2,9 @@ import type {
   ActionFunctionArgs,
   LinksFunction,
   LoaderFunctionArgs,
-  MetaFunction} from "@remix-run/node";
-import {
-  json,
+  MetaFunction,
 } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
@@ -14,10 +13,6 @@ import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { commitSession, getSession } from "~/services/session.server";
 import productPage from "../styles/productPage.css";
 import { getProduct } from "~/services/product.server";
-import { createCart} from "~/services/cart.server";
-import { createCartItem } from "~/services/cartItem.server";
-import { getCustomerById } from "~/services/customer.server";
-
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: productPage },
@@ -45,20 +40,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   invariant(typeof productId === "string", "Missing product id");
   const session = await getSession(request.headers.get("Cookie"));
   const sessionCart = createSessionCart(session);
-  const customer = await getCustomerById(5) 
-  const cart = await createCart(customer?.id!)
 
   sessionCart.addProduct(productId);
 
-  const cartItems = await Promise.all(
-    sessionCart.items().map(async (data) => {
-      return await createCartItem({
-        cartId: cart.id,
-        productId: parseInt(data.productId),
-        quantity: data.quantity,
-      });
-    })
-  );
   return json(
     { success: true },
     { headers: { "Set-Cookie": await commitSession(session) } }
@@ -84,12 +68,12 @@ function ProductRoute() {
       label: `${data.product.category.slug}`,
       link: `/products/category/${data.product.category.slug}`,
     },
-    { label: `${data.product.title}`, link: "" }
+    { label: `${data.product.title}`, link: "" },
   ];
   return (
     <div className="productContainer">
       <div className="breadcrumbs">
-        <Breadcrumbs breadcrumbs={breadcrumbs}  admin={false}/>
+        <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
       </div>
       <Product data={data} />
     </div>

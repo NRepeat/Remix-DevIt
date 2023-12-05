@@ -1,20 +1,20 @@
-.customersPanel{
-border: 1px solid gainsboro;
-width:70%;
-height: 600px;
-max-height: 600px;
-min-width: 650px;
+.customersPanel {
+  border: 1px solid gainsboro;
+  width: 70%;
+  height: 600px;
+  max-height: 600px;
+  min-width: 650px;
 
-display: flex;
-justify-content: center;
-flex-direction: column;
-align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-.head{
-padding-top: 20px;
+.head {
+  padding-top: 20px;
   width: 100%;
 }
-.customerListContainer{
+.customerListContainer {
   display: flex;
   width: 85%;
   height: 85%;
@@ -22,12 +22,12 @@ padding-top: 20px;
   padding: 20px;
   flex-direction: column;
 }
-.searchContainer{
+.searchContainer {
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
-.listContainer{
+.listContainer {
   display: flex;
   flex-direction: column;
   justify-content: space-between;

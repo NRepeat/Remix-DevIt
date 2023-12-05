@@ -5,7 +5,7 @@ export const handleAddItemToCart = async (
   productId: number,
   quantity: number,
   customerId: number,
-  submit:SubmitFunction
+  submit: SubmitFunction
 ) => {
   submit(
     { cartId, productId, quantity },

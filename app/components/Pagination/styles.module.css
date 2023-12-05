@@ -1,16 +1,16 @@
 .pag {
   display: flex;
-flex-direction: row;
-max-width: 100%;
-gap: 5px;
-overflow-x: auto;
-overflow-y:hidden;
+  flex-direction: row;
+  max-width: 100%;
+  gap: 5px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .button {
   border-radius: 5px;
   height: 35px;
- min-width: 35px;
+  min-width: 35px;
   border: 0;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -33,16 +33,16 @@ overflow-y:hidden;
   height: 100%;
   text-decoration: none;
 }
-.currentPage{
+.currentPage {
   background-color: rgb(204, 0, 204);
 }
-.adminCurrentPage{
+.adminCurrentPage {
   background-color: rgb(2, 117, 96);
 }
 .adminButton {
   border-radius: 5px;
   height: 35px;
- min-width: 35px;
+  min-width: 35px;
   border: 0;
   background-color: rgb(255, 255, 255);
   display: flex;
@@ -58,7 +58,6 @@ overflow-y:hidden;
   border: 1px solid rgb(2, 117, 96);
 }
 
-
-.adminCurrentPage{
+.adminCurrentPage {
   background-color: rgb(2, 117, 96);
 }

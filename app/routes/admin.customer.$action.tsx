@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs} from "@remix-run/node";
+import type { ActionFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import {
   createCustomer,
@@ -6,7 +6,9 @@ import {
   updateCustomer,
 } from "~/services/customer.server";
 
-const parseAndValidateInt = (value: FormDataEntryValue | null | undefined): number | null => {
+const parseAndValidateInt = (
+  value: FormDataEntryValue | null | undefined
+): number | null => {
   const parsedValue = parseInt(String(value));
   return !isNaN(parsedValue) ? parsedValue : null;
 };
@@ -27,7 +29,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         await createCustomer({ name, secondName, email, password });
         return redirect("/admin/customers");
       } else {
-        throw new Response ("Invalid input for creating a customer" ) 
+        throw new Response("Invalid input for creating a customer");
       }
 
     case "update":
@@ -35,7 +37,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         await updateCustomer(parsedId, { name, secondName, email });
         return redirect("/admin/customers");
       } else {
-        throw new Response ( "Invalid input for updating a customer" );
+        throw new Response("Invalid input for updating a customer");
       }
 
     case "delete":
@@ -43,7 +45,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
         await deleteCustomer(parsedId);
         return redirect("/admin/customers");
       } else {
-        throw new Response ("Invalid customer ID for delete" );
+        throw new Response("Invalid customer ID for delete");
       }
 
     default:

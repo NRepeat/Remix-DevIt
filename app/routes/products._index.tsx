@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderFunctionArgs} from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import productIndexStylesHref from "../styles/productIndex.css";
@@ -9,7 +9,6 @@ import {
   getAllProducts,
 } from "~/services/product.server";
 import ProductsListRoute from "~/pages/StorePage/StorePage";
-
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: productIndexStylesHref },
@@ -28,12 +27,12 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   }
   const categories = await getAllProductCategories();
 
-  return json({products, page, cart: cart.items(), categories });
+  return json({ products, page, cart: cart.items(), categories });
 };
 
 export default function () {
-  const data = useLoaderData  <typeof  loader>();
-  
+  const data = useLoaderData<typeof loader>();
+
   return (
     <div className="bg-pd-index">
       <ProductsListRoute data={data} />

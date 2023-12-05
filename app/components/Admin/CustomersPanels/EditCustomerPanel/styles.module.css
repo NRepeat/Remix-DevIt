@@ -1,29 +1,27 @@
-
-.editCustomerPanel{
+.editCustomerPanel {
   border: 1px solid gainsboro;
-  width:70%;
+  width: 70%;
   height: 600px;
   max-height: 600px;
   min-width: 650px;
-  
+
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
-.head{
+.head {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-.addPanel{
+.addPanel {
   border: 1px solid gainsboro;
-max-width: 60%;
-min-width:870px ;
-padding: 10px;
-
+  max-width: 60%;
+  min-width: 870px;
+  padding: 10px;
 }
-.form{
+.form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,7 +29,7 @@ padding: 10px;
   width: 70%;
   height: 95%;
 }
-.inputs{
+.inputs {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,30 +37,29 @@ padding: 10px;
   width: 70%;
   height: 95%;
   padding-bottom: 20px;
-
 }
-.inputs>p{
+.inputs > p {
   width: 100%;
   text-align: left;
   padding-left: 110px;
 }
-.inputs>input{
+.inputs > input {
   height: 35px;
   width: 80%;
   line-height: 1.5rem;
-  font-size: 1.3rem; 
+  font-size: 1.3rem;
 }
-.head{
+.head {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-.buttons{
+.buttons {
   display: flex;
   justify-content: flex-start;
   width: 100%;
 }
-.link{
+.link {
   padding-top: 20px;
   padding-right: 10px;
   display: flex;

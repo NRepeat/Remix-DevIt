@@ -1,6 +1,5 @@
 import type { Session } from "@remix-run/node";
 
-
 export const SESSION_KEY = "cart";
 
 export type SessionCart = {
@@ -8,6 +7,7 @@ export type SessionCart = {
 };
 
 export class Cart {
+  // eslint-disable-next-line no-useless-constructor
   constructor(private session: Session) {}
 
   loadCart() {
@@ -18,7 +18,7 @@ export class Cart {
   saveCart(cart: SessionCart) {
     this.session.set(SESSION_KEY, cart);
   }
- 
+
   addProduct(productId: string | number) {
     const cart = this.loadCart();
     cart[productId] = (cart[productId] ?? 0) + 1;
@@ -34,7 +34,7 @@ export class Cart {
 
   items() {
     Object.entries(this.loadCart());
- 
+
     return Object.entries(this.loadCart()).map(([productId, quantity]) => ({
       productId,
       quantity,
@@ -43,4 +43,3 @@ export class Cart {
 }
 
 export const createCart = (session: Session) => new Cart(session);
-

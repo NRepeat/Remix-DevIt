@@ -1,10 +1,10 @@
 import type { SerializeFrom } from "@remix-run/node";
-import { Form, Link, useFetcher } from "@remix-run/react";
-import type { FC} from "react";
+import { Link, useFetcher } from "@remix-run/react";
+import type { FC } from "react";
 import { useEffect, useState } from "react";
+import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import styles from "./styles.module.css";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 
 export interface EditCustomerPanelProps {
   customer: CustomerWithoutPassword;
@@ -46,7 +46,9 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
     <div className={styles.editCustomerPanel}>
       <div className={styles.head}>
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
-        <Link className={styles.link} to={"/admin/customers/"}>Close</Link>
+        <Link className={styles.link} to={"/admin/customers/"}>
+          Close
+        </Link>
       </div>
 
       <fetcher.Form

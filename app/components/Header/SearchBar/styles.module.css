@@ -1,11 +1,9 @@
-
-.search{
+.search {
   width: 50%;
 }
-.search>input{
+.search > input {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid gainsboro;
 }
-

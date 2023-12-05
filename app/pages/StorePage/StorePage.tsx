@@ -1,36 +1,34 @@
 import Sidebar from "../../components/SideBar/Sidebar";
-import { useLocation, useNavigation, useRouteLoaderData } from "@remix-run/react";
+import { useRouteLoaderData } from "@remix-run/react";
 import style from "./style.module.css";
 import type { FC } from "react";
 import ProductsList from "~/components/ProductsList/ProductsList";
-import { Cart, Category, Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import type { ProductData } from "~/services/product.server";
 import Pagination from "~/components/Pagination/Pagination";
 
-
 export interface StorePageProps {
-  data:{
-products: ProductData;
+  data: {
+    products: ProductData;
     page: number;
     cart: {
-        productId: string;
-        quantity: number;
+      productId: string;
+      quantity: number;
     }[];
     categories: {
-        id: number;
-        slug: string;
-        name: string;
-        createdAt: Date;
-        updatedAt: Date;
+      id: number;
+      slug: string;
+      name: string;
+      createdAt: Date;
+      updatedAt: Date;
     }[];
-  }
-
+  };
 }
 
 const ProductsListRoute: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
-
-  const toggleSideBarVisible = !!useRouteLoaderData("routes/products/$productId");
+  const toggleSideBarVisible = !!useRouteLoaderData(
+    "routes/products/$productId"
+  );
 
   return (
     <>
@@ -43,7 +41,11 @@ const ProductsListRoute: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
         <main className={style.main}>
           <ProductsList productsData={data.products} />
           <div className="paginationContainer">
-            <Pagination admin={false} currentPage={data.page} totalPages={data.products.totalPages} />
+            <Pagination
+              admin={false}
+              currentPage={data.page}
+              totalPages={data.products.totalPages}
+            />
           </div>
         </main>
       </div>

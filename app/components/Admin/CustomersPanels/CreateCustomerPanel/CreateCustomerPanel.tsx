@@ -1,6 +1,6 @@
 import { Form, Link } from "@remix-run/react";
 import styles from "./styles.module.css";
-import type { FC} from "react";
+import type { FC } from "react";
 import { useRef } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 const CreateCustomerPanel: FC = () => {
@@ -18,11 +18,13 @@ const CreateCustomerPanel: FC = () => {
     <div className={styles.addPanel}>
       <div className={styles.head}>
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
-        <Link className={styles.link} to={"/admin/customers/"}>Close</Link>
+        <Link className={styles.link} to={"/admin/customers/"}>
+          Close
+        </Link>
       </div>
 
       <Form
-      ref={formRef}
+        ref={formRef}
         className={styles.form}
         action={`/admin/customer/create`}
         method="post"
@@ -51,7 +53,9 @@ const CreateCustomerPanel: FC = () => {
 
         <div className={styles.buttons}>
           <button type="submit">Submit</button>
-          <button type="button" onClick={handleReset}>Reset</button>
+          <button type="button" onClick={handleReset}>
+            Reset
+          </button>
         </div>
       </Form>
     </div>

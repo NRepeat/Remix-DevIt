@@ -6,7 +6,7 @@
   height: 100vh;
   gap: 20px;
 
-  background: var(--gradientColor)
+  background: var(--gradientColor);
 }
 .rootIndexContainer > p {
   padding-bottom: 130px;

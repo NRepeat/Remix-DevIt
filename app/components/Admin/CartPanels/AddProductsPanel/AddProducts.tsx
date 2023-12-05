@@ -9,11 +9,15 @@ import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
 
 export interface AddProductProps {
   data: ProductData;
-  cart: Cart,
-  customerId?: number
+  cart: Cart;
+  customerId?: number;
 }
 
-const AddProducts: FC<SerializeFrom<AddProductProps>> = ({ data, cart, customerId }) => {
+const AddProducts: FC<SerializeFrom<AddProductProps>> = ({
+  data,
+  cart,
+  customerId,
+}) => {
   return (
     <>
       <div>

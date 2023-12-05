@@ -7,10 +7,10 @@ export default function NotFoundPageError() {
   if (isRouteErrorResponse(error)) {
     return (
       <div className={styles.errorNotFound}>
-        <h1 className={styles.heading}>
-          {error.status}
-        </h1>
-        {error.statusText && <p className={styles.status}>{error.statusText}</p>}
+        <h1 className={styles.heading}>{error.status}</h1>
+        {error.statusText && (
+          <p className={styles.status}>{error.statusText}</p>
+        )}
         {error.data && <p className={styles.data}>{error.data}</p>}
         <HomeButton />
       </div>

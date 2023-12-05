@@ -1,11 +1,6 @@
-import type { LoaderFunctionArgs} from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import {
-  Outlet,
-  isRouteErrorResponse,
-  useLoaderData,
-  useRouteError,
-} from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
 import { searchCustomer } from "~/services/customer.server";
 
@@ -23,8 +18,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   }
   return json({ customers, page });
 }
-
-
 
 export default function () {
   const data = useLoaderData<typeof loader>();

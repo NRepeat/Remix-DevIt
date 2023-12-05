@@ -10,14 +10,13 @@
   justify-content: center;
   align-self: center;
 }
-.poster >img{
+.poster > img {
   width: 100%;
   height: auto;
   object-fit: cover;
   aspect-ratio: 1.1;
 }
 .wrapper {
-
   display: flex;
   justify-content: center;
   flex-direction: column;

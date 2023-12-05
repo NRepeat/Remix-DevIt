@@ -6,11 +6,15 @@
     "build": "remix build",
     "dev": "remix dev ",
     "start": "remix-serve ./build/index.js",
-    "typecheck": "tsc",
     "db:migrate": "prisma migrate dev",
     "db:generate": "prisma generate",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx .",
-    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx ."
+    "check-types": "tsc --pretty --noEmit",
+    "check-format": "prettier --check .",
+    "check-lint": "eslint --ext .js,.jsx,.ts,.tsx .",
+    "format": "prettier --write .",
+    "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx .",
+    "test-all": "npm run check-format && npm run check-lint && npm run check-types && npm run build",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@prisma/client": "^5.6.0",
@@ -36,9 +40,12 @@
     "@types/react-dom": "^18.2.7",
     "concurrently": "^8.2.2",
     "eslint": "^8.47.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.1.0",
     "prisma": "^5.6.0",
     "sass": "^1.69.5",
-    "typescript": "^5.1.6"
+    "typescript": "^5.1.6",
+    "husky": "^8.0.0"
   },
   "engines": {
     "node": ">=18.0.0"

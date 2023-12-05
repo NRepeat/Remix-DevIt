@@ -7,7 +7,7 @@ import {
 import styles from "./styles.module.css";
 
 function SortTypesList() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const location = useLocation();
   const search = searchParams.get("search");
   const page = searchParams.get("page");
@@ -39,7 +39,7 @@ function SortTypesList() {
     "Price:Low to High",
     "Price:High to Low",
   ];
-  const sortField = ["novelty", "rating",  "cheap","expensive"];
+  const sortField = ["novelty", "rating", "cheap", "expensive"];
   return (
     <Form>
       <select

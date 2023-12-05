@@ -1,7 +1,6 @@
 import { formatString } from "~/utils/formatting.server";
 import { fetchLimitedData } from "./dummy.server";
 
-
 export async function importDummyData() {
   const limit = 10;
   let skip = 0;
@@ -17,7 +16,7 @@ export async function importDummyData() {
           where: { externalId: product.id },
         });
         if (!existedProduct) {
-          const createdProduct = await prisma.product.create({
+          await prisma.product.create({
             data: {
               externalId: product.id,
               brand: product.brand,
@@ -32,7 +31,10 @@ export async function importDummyData() {
               category: {
                 connectOrCreate: {
                   where: { slug: product.category },
-                  create: { slug: product.category ,name:formatString(product.category)},
+                  create: {
+                    slug: product.category,
+                    name: formatString(product.category),
+                  },
                 },
               },
             },
@@ -44,4 +46,3 @@ export async function importDummyData() {
     }
   }
 }
-

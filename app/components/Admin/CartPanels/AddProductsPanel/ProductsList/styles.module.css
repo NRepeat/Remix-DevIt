@@ -1,21 +1,21 @@
-.list{
-overflow-y: scroll;
-text-decoration: none;
-margin: 0;
-padding: 0;
-max-height: 710px;
-display: flex;
-flex-direction: column;
-width: 100%;
-gap: 10px;
+.list {
+  overflow-y: scroll;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  max-height: 710px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
 }
-.product{
-display: flex;
-width: 100%;
-justify-content: space-between;
-align-items: center;
+.product {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
-.title{
+.title {
   max-width: 150px;
   width: 150px;
   margin: 0;
@@ -24,11 +24,11 @@ align-items: center;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.id{
+.id {
   max-width: 80px;
   width: 80px;
 }
-.stock{
+.stock {
   max-width: 80px;
   width: 80px;
 }

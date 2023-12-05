@@ -1,4 +1,4 @@
-import type { ActionFunctionArgs} from "@remix-run/node";
+import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 import CartItemErrors from "~/components/Errors/AdminError/CartItemErrors/CartItemErrors";
@@ -10,9 +10,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
   try {
     const formData = await request.formData();
     const quantity = parseAndValidateFormData(formData.get("quantity"));
-    const productCartId = parseAndValidateFormData(
-      formData.get("cartItemId")
-    );
+    const productCartId = parseAndValidateFormData(formData.get("cartItemId"));
     if (quantity && productCartId) {
       const productCart = await getCartItemById(productCartId);
       if (productCart) {

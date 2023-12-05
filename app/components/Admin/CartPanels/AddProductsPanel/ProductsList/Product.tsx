@@ -1,8 +1,5 @@
-import type { FC } from "react";
-import React from "react";
-import styles from "./styles.module.css";
-import { Product } from "@prisma/client";
 import { useRouteLoaderData } from "@remix-run/react";
+import type { FC } from "react";
 import type { loader } from "~/routes/admin.customers_.customer.$id.cart";
 import type {
   AddItemToCartButtonProps,
@@ -10,6 +7,7 @@ import type {
   ProductProps,
   QuantityInputProps,
 } from "~/types/types";
+import styles from "./styles.module.css";
 
 const ProductRow: FC<ProductProps> = ({
   product,
@@ -39,6 +37,10 @@ const ProductRow: FC<ProductProps> = ({
     submit,
     handleAddItemToCart,
   }) => {
+    const customerId = routeData?.customerId;
+    if (!customerId) {
+      throw new Response("Customer id not found");
+    }
     return (
       <button
         onClick={() =>
@@ -46,7 +48,7 @@ const ProductRow: FC<ProductProps> = ({
             cart.id,
             product.id,
             quantities[product.id],
-            routeData?.customerId!,
+            customerId,
             submit
           )
         }
@@ -62,7 +64,7 @@ const ProductRow: FC<ProductProps> = ({
   }) => {
     return (
       <input
-        onChange={(e) => handleQuantityChange(setQuantities,productId, e)}
+        onChange={(e) => handleQuantityChange(setQuantities, productId, e)}
         type="number"
         placeholder="Quantity"
         value={quantities[productId] || 0}

@@ -1,15 +1,13 @@
-import type { FC} from "react";
+import type { FC } from "react";
 import { useEffect } from "react";
 import { Form, useNavigation, useSubmit } from "@remix-run/react";
 import styles from "./styles.module.css";
 
-export interface SearchBarProps{
-action:string
-
+export interface SearchBarProps {
+  action: string;
 }
 
-
-export const SearchBar: FC<SearchBarProps> = ({action}) => {
+export const SearchBar: FC<SearchBarProps> = ({ action }) => {
   const nav = useNavigation();
   const submit = useSubmit();
   const urlParams = new URLSearchParams(nav.location?.search);
@@ -26,7 +24,7 @@ export const SearchBar: FC<SearchBarProps> = ({action}) => {
   return (
     <Form
       onChange={(event) => submit(event.currentTarget)}
-      className={styles.search }
+      className={styles.search}
       action={action}
       role="search"
     >

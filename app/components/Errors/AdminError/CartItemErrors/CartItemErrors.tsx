@@ -1,8 +1,7 @@
 import { type ErrorResponse } from "@remix-run/node";
 import type { FC } from "react";
 import React from "react";
-import styles from "./styles.module.css"
-
+import styles from "./styles.module.css";
 
 export interface CartItemErrorsProps {
   error: ErrorResponse;

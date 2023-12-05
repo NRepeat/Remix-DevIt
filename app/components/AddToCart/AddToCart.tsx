@@ -12,7 +12,7 @@ export interface AddToCartProps {
 }
 
 export const AddToCart: FC<SerializeFrom<AddToCartProps>> = ({ product }) => {
-  const fetch = useFetcher()
+  const fetch = useFetcher();
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");
 
@@ -34,7 +34,9 @@ export const AddToCart: FC<SerializeFrom<AddToCartProps>> = ({ product }) => {
       <input name="productStock" type="hidden" value={product.stock} />
 
       <button className={styles.button} type="submit">
-        {cartItem?.quantity ?? 0 < 0 ? "Add More" : "Add to cart"}
+        {cartItem?.quantity && cartItem?.quantity < 0
+          ? "Add More"
+          : "Add to cart"}
       </button>
     </fetch.Form>
   );

@@ -8,7 +8,6 @@ import CustomerList from "../CustomerList/CustomerList";
 import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
 import Pagination from "~/components/Pagination/Pagination";
 
-
 const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({
   data,
   currentPage,
@@ -16,9 +15,8 @@ const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({
   const breadcrumbs = [{ label: "Customers", link: "/admin/customers" }];
   return (
     <div className={styles.customersPanel}>
-        <div className={styles.head}>
+      <div className={styles.head}>
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
-   
       </div>
       {data.customers.customers && (
         <div className={styles.customerListContainer}>

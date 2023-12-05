@@ -1,5 +1,4 @@
 .errorNotFound {
-
   display: flex;
   gap: 20px;
   justify-content: center;
@@ -28,7 +27,7 @@
 }
 
 .backB:hover {
-  background-color: rgba(2, 252, 2, 0.210);
+  background-color: rgba(2, 252, 2, 0.21);
 }
 
 .link {
@@ -46,7 +45,7 @@
 }
 
 .link:hover {
-  background-color: rgba(128, 0, 128, 0.210);
+  background-color: rgba(128, 0, 128, 0.21);
 }
 
 .heading {

@@ -3,17 +3,16 @@
   width: 100%;
   justify-content: center;
   background-color: black;
-position: relative;
-z-index: 0
-;
+  position: relative;
+  z-index: 0;
 }
-.header::after{
+.header::after {
   content: "";
   position: absolute;
   width: 100%;
   height: 1px;
   background: var(--gradientColor);
-  bottom:  0;
+  bottom: 0;
 }
 .topBar {
   display: flex;
@@ -24,8 +23,6 @@ z-index: 0
   align-items: center;
 }
 
-
-
 .title {
   font-weight: bold;
   font-size: 2rem;
@@ -34,6 +31,6 @@ z-index: 0
   text-decoration: none;
   cursor: pointer;
 }
-.title:hover{
-  color:  rgb(182, 2, 182);
+.title:hover {
+  color: rgb(182, 2, 182);
 }

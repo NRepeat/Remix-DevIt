@@ -5,7 +5,6 @@ import styles from "./styles.module.css";
 import type { Category, Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 
-
 export interface SingleProduct {
   data: {
     product: Product & { category: Category };
@@ -13,7 +12,7 @@ export interface SingleProduct {
       productId: string;
       quantity: number;
     };
-  }
+  };
 }
 
 const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {

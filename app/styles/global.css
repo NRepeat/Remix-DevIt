@@ -5,7 +5,7 @@
     rgba(235, 0, 255, 0.8743872549019608) 69%,
     rgba(235, 0, 255, 0.5830707282913166) 97%
   );
-  --adminPanelBg:  rgb(2, 117, 96);
+  --adminPanelBg: rgb(2, 117, 96);
 }
 
 .body {
@@ -21,5 +21,5 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background:var(--gradientColor)
+  background: var(--gradientColor);
 }

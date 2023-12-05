@@ -1,14 +1,13 @@
-.adminPage{
+.adminPage {
   display: flex;
   height: 100vh;
   flex-direction: column;
   background-color: white;
 }
-.adminMain{
+.adminMain {
   display: flex;
   height: 100%;
 }
-
 
 .containerBase {
   display: flex;

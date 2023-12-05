@@ -1,9 +1,8 @@
-import type { LoaderFunctionArgs} from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import {  useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import EditCustomerPanel from "~/components/Admin/CustomersPanels/EditCustomerPanel/EditCustomerPanel";
 import { getCustomerById } from "~/services/customer.server";
-
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const customer = await getCustomerById(parseInt(params.id!));

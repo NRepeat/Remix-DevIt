@@ -1,12 +1,12 @@
 import type { SerializeFrom } from "@remix-run/node";
 import { Link, useSubmit } from "@remix-run/react";
-import type { FC} from "react";
+import type { FC } from "react";
 import React, { useState } from "react";
+import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import type { loader } from "~/routes/admin.customers_.customer.$id.cart";
+import AddProducts from "../AddProductsPanel/AddProducts";
 import EditQuantityForm from "../EditQuantityForm/EditQuantityForm";
 import styles from "./styles.module.css";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
-import AddProducts from "../AddProductsPanel/AddProducts";
 
 export interface ItemsListProps extends SerializeFrom<typeof loader> {}
 export type Quantities = {
@@ -31,14 +31,27 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
   };
 
   const handleDelete = (title: string, id: number, customerId: number) => {
-    const confirmDelete = confirm( `Are you sure  ,you want to delete ${title} in cart ? `)
-    confirmDelete
-      ? submit({ cartItemId:id },{action: `/admin/customers/customer/${customerId}/cart/item/delete`,method: "post"})
-      : null};
+    const confirmDelete = confirm(
+      `Are you sure  ,you want to delete ${title} in cart ? `
+    );
+    if (!confirmDelete) {
+      return null;
+    }
+    submit(
+      { cartItemId: id },
+      {
+        action: `/admin/customers/customer/${customerId}/cart/item/delete`,
+        method: "post",
+      }
+    );
+  };
 
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
-    { label: `Customer ${customerId} `,link: `/admin/customers/customer/${customerId}/edit`,},
+    {
+      label: `Customer ${customerId} `,
+      link: `/admin/customers/customer/${customerId}/edit`,
+    },
     { label: `Cart `, link: `/admin/customers/customer/${customerId}/cart` },
   ];
 
@@ -74,7 +87,10 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
                   </span>
                 )}
                 <button
-                  onClick={() => handleDelete(item.product.title, item.id, customerId) }>
+                  onClick={() =>
+                    handleDelete(item.product.title, item.id, customerId)
+                  }
+                >
                   Delete
                 </button>
               </li>
@@ -86,7 +102,7 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
           <button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
             {toggleAdd ? "Close add tab" : "Open add tab"}
           </button>
-          <AddProducts data={products} cart={cart}  customerId ={customerId}/>
+          <AddProducts data={products} cart={cart} customerId={customerId} />
         </>
       )}
     </div>

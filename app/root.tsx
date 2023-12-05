@@ -9,13 +9,12 @@ import {
 import { cssBundleHref } from "@remix-run/css-bundle";
 import resetStylesHref from "./styles/reset.css";
 import globalStylesHref from "./styles/global.css";
-import type { LinksFunction, LoaderFunctionArgs} from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
 import { createCart } from "./services/cartSession.server";
 import { getSession } from "./services/session.server";
 import GlobalLoader from "./components/GlobalLoading/GlobalLoader";
-
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: resetStylesHref },
