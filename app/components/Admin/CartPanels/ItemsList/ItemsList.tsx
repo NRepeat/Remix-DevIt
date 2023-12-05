@@ -13,6 +13,7 @@ export type Quantities = {
 };
 
 const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
+  console.log("🚀 ~ file: ItemsList.tsx:16 ~ cart:", cart)
   const submit = useSubmit();
   const [quantities, setQuantities] = useState<Quantities>({});
   const [toggleEdit, setToggleEdit] = useState(false);

@@ -45,7 +45,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
     <div className={styles.editCustomerPanel}>
       <div className={styles.head}>
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
-        <Link to={"/admin/customers/"}>Close</Link>
+        <Link className={styles.link} to={"/admin/customers/"}>Close</Link>
       </div>
 
       <fetcher.Form

@@ -23,12 +23,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   return json({ customers, page });
 }
 
-export function ErrorBoundary() {
-  const error = useRouteError();
-  if (isRouteErrorResponse(error)) {
-    return <div>{error.data}</div>;
-  }
-}
+
 
 export default function () {
   const data = useLoaderData<typeof loader>();

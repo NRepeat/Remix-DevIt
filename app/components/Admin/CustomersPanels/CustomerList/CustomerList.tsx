@@ -19,7 +19,7 @@ const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
       </div>
       <div  className={styles.body}>
         {data.customers.customers.map((customer) => (
-          <div className={styles.info}>
+          <div key={customer.id} className={styles.info}>
             <p>{customer.id}</p>
             <p>{customer.name}</p>
             <p>{customer.secondName}</p>

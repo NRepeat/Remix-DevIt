@@ -4,9 +4,9 @@ import style from "./style.module.css";
 import { FC } from "react";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { Cart, Category, Product } from "@prisma/client";
-import Pagination from "~/components/Pagination/Pagination";
 import { SerializeFrom } from "@remix-run/node";
 import { ProductData } from "~/services/product.server";
+import Pagination from "~/components/Pagination/Pagination";
 
 
 export interface StorePageProps {

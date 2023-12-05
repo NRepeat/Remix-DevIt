@@ -47,9 +47,11 @@ export const getCartItemById = async (cartItemId: number) => {
         product: true,
       },
     });
-    return cartItem;
+    if(cartItem){
+      return cartItem;
+    }
   } catch (error) {
-    throw new Error("Failed to fetch cart item by ID");
+    throw new Error("Failed to get cart item by ID");
   }
 };
 export const updateCartItem = async (id: number, newData: any) => {

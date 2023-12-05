@@ -11,6 +11,7 @@ import { loader } from "~/routes/admin.customers_.customer.$id.cart";
 import Pagination from "~/components/Pagination/Pagination";
 
 const ProductList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {
+  console.log("🚀 ~ file: ProductList.tsx:14 ~ cart:", cart)
   const routeData = useRouteLoaderData<typeof loader>(
     "routes/admin.customers_.customer.$id.cart"
   );
@@ -41,7 +42,7 @@ const ProductList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {
     }));
   };
   return (
-    <>
+    <div className={styles.container}>
       <ul className={styles.list}>
         {data.products.map((product) => (
           <li key={product.id} className={styles.product}>
@@ -52,7 +53,7 @@ const ProductList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {
               onChange={(e) => handleChange(product.id, e)}
               type="number"
               placeholder="Quantity"
-              value={quantities[product.id]}
+              value={quantities[product.id] || 0}
             />
             <button
               onClick={() =>
@@ -70,7 +71,7 @@ const ProductList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {
         ))}
       </ul>
       <Pagination admin={true} currentPage={data.page!} totalPages={data.totalPages!} />
-    </>
+    </div>
   );
 };
 

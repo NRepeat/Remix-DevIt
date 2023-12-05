@@ -17,7 +17,7 @@ const CreateCustomerPanel: FC = () => {
     <div className={styles.addPanel}>
       <div className={styles.head}>
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
-        <Link to={"/admin/customers/"}>Close</Link>
+        <Link className={styles.link} to={"/admin/customers/"}>Close</Link>
       </div>
 
       <Form
