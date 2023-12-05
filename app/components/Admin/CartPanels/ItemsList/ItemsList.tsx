@@ -5,7 +5,7 @@ import { loader } from "~/routes/admin.customers_.customer.$id.cart";
 import EditQuantityForm from "../EditQuantityForm/EditQuantityForm";
 import styles from "./styles.module.css";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
-import AddProducts from "../AddProducts/AddProducts";
+import AddProducts from "../AddProductsPanel/AddProducts";
 
 export interface ItemsListProps extends SerializeFrom<typeof loader> {}
 export type Quantities = {
@@ -13,7 +13,6 @@ export type Quantities = {
 };
 
 const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
-  console.log("🚀 ~ file: ItemsList.tsx:16 ~ cart:", cart)
   const submit = useSubmit();
   const [quantities, setQuantities] = useState<Quantities>({});
   const [toggleEdit, setToggleEdit] = useState(false);
@@ -33,7 +32,7 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
   const handleDelete = (title: string, id: number, customerId: number) => {
     const confirmDelete = confirm( `Are you sure  ,you want to delete ${title} in cart ? `)
     confirmDelete
-      ? submit({ id },{action: `/admin/customers/customer/${customerId}/cart/delete`,method: "post"})
+      ? submit({ cartItemId:id },{action: `/admin/customers/customer/${customerId}/cart/item/delete`,method: "post"})
       : null};
 
   const breadcrumbs = [

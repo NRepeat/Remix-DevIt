@@ -1,9 +1,9 @@
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import CartItemErrors from "~/components/Errors/AdminError/AddItem/CartItemErrors";
+import CartItemErrors from "~/components/Errors/AdminError/CartItemErrors/CartItemErrors";
 import { createCartItem } from "~/services/cartItem.server";
 import { parseAndValidateFormData } from "~/utils/formatting.server";
-import { checkProductStock } from "~/utils/validation.server";
+import { isProductInStock } from "~/utils/validation.server";
 
 
 export async function action({ request, params }: ActionFunctionArgs) {
@@ -14,9 +14,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
     const cartId = parseAndValidateFormData(formData.get("cartId"));
 
     if (cartId && productId && quantity) {
-      const isProductInStock = await checkProductStock(productId, quantity);
 
-      if (isProductInStock) {
+      if (await isProductInStock(productId, quantity)) {
         await createCartItem({ cartId, productId, quantity });
         return redirect(`/admin/customers/customer/${params.id}/cart`);
       } else {

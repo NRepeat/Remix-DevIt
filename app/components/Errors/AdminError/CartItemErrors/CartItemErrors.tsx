@@ -12,7 +12,7 @@ const CartItemErrors: FC<CartItemErrorsProps> = ({ error }) => {
     <div className={styles.error}>
       <h1>Error status</h1>
       <p>{error.status}</p>
-      <h2>Error stack trace</h2>
+      <h2>Error:</h2>
       <p>{error.statusText}</p>
     </div>
   );

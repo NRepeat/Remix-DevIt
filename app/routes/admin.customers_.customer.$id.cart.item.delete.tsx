@@ -1,16 +1,17 @@
 import { ActionFunctionArgs, redirect } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import CartItemErrors from "~/components/Errors/AdminError/AddItem/CartItemErrors";
+import CartItemErrors from "~/components/Errors/AdminError/CartItemErrors/CartItemErrors";
 import { deleteCartItem } from "~/services/cartItem.server";
 import { parseAndValidateFormData } from "~/utils/formatting.server";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   try {
     const formData = await request.formData();
+    console.log("🚀 ~ file: admin.customers_.customer.$id.cart.item.delete.tsx:10 ~ action ~ formData:", formData)
     const productCartId = parseAndValidateFormData(
-      formData.get("productCartId")
+      formData.get("cartItemId")
     );
-
+   
     if (productCartId) {
       await deleteCartItem(productCartId);
       return redirect(`/admin/customers/customer/${params.id}/cart`);

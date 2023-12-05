@@ -16,7 +16,6 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     return redirect (`/admin/customers/customer/${customerId}/cart`)
   }
   const cart = await getCartByCustomerId(customerId);
-  console.log("🚀 ~ file: admin.customers_.customer.$id.cart.tsx:19 ~ loader ~ cart:", cart)
   const products  = await searchProduct(searchQuery! ,"novelty",page)
   
   if (!cart) {

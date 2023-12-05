@@ -1,3 +1,4 @@
+import { isProductInStock } from "~/utils/validation.server";
 import { getProduct } from "./product.server";
 
 export interface CartItemArgs {
@@ -13,26 +14,27 @@ export const createCartItem = async ({
 }: CartItemArgs) => {
   try {
     const existCartItem = await prisma.cartItem.findFirst({
-      where: { productId },
+      where: { cartId, productId },
     });
-
-    if (!existCartItem) {
-      const product =await getProduct(productId)
-      if(product.stock>= quantity){
-        const newCartItem = await prisma.cartItem.create({
-          data: {
-            cartId,
-            productId,
-            quantity,
-          },
-        });
-        return newCartItem;
-      }   
-      
+    if (existCartItem) {
+      const updatedCartItem = await updateCartItem(existCartItem.id, quantity);
+      return updatedCartItem;
     }
-    const updatedCartItem = await updateCartItem(existCartItem!.id, quantity);
-    return updatedCartItem;
-  
+    if (await isProductInStock(productId, quantity)) {
+      const newCartItem = await prisma.cartItem.create({
+        data: {
+          cartId,
+          productId,
+          quantity,
+        },
+      });
+
+      if (newCartItem) {
+        return newCartItem;
+      }
+    } else {
+      throw new Error("Product is out of stock");
+    }
   } catch (error) {
     throw new Error("Failed to create/update cart item");
   }
@@ -47,7 +49,7 @@ export const getCartItemById = async (cartItemId: number) => {
         product: true,
       },
     });
-    if(cartItem){
+    if (cartItem) {
       return cartItem;
     }
   } catch (error) {

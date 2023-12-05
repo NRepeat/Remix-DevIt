@@ -1,4 +1,4 @@
-import { formatString } from "~/utils/formatting";
+import { formatString } from "~/utils/formatting.server";
 import { fetchLimitedData } from "./dummy.server";
 
 

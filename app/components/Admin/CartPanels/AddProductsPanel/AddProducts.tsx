@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import ProductList from "./ProductList/ProductList";
+import ProductList from "./ProductsList/ProductsList";
 import { SerializeFrom } from "@remix-run/node";
 import { ProductData } from "~/services/product.server";
 import styles from "./styles.module.css";

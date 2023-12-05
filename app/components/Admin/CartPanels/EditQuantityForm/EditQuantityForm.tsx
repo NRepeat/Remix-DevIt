@@ -35,10 +35,10 @@ const EditQuantityForm: React.FC<EditQuantityFormProps> = ({
         value={quantities[item.id] || item.quantity.toString()}
       />
       <Form
-        action={`/admin/customers/customer/${customerId}/cart/editQuantity`}
+        action={`/admin/customers/customer/${customerId}/cart/item/edit/quantity`}
         method="post"
       >
-        <input type="hidden" name="id" value={item.id} />
+        <input type="hidden" name="cartItemId" value={item.id} />
         <input
           type="hidden"
           name="quantity"
