@@ -1,6 +1,6 @@
 import { Cart} from "@prisma/client";
-import { SubmitFunction } from "@remix-run/react";
-import { Quantities } from "~/components/Admin/CartPanels/ItemsList/ItemsList";
+import type { SubmitFunction } from "@remix-run/react";
+import type { Quantities } from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 
 export type DummyProduct = {
   id: number;

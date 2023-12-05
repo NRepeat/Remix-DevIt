@@ -1,5 +1,5 @@
 import { Form } from "@remix-run/react";
-import { Quantities } from "../ItemsList/ItemsList";
+import type { Quantities } from "../ItemsList/ItemsList";
 import React from "react";
 
 export interface EditQuantityFormProps {

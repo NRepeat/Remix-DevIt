@@ -1,9 +1,9 @@
-import { FC } from "react";
+import type { FC } from "react";
 import { AddToCart } from "../AddToCart/AddToCart";
 import ProductInformation from "../ProductInformation/ProductInformation";
 import styles from "./styles.module.css";
-import { Category, Product } from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
+import type { Category, Product } from "@prisma/client";
+import type { SerializeFrom } from "@remix-run/node";
 
 
 export interface SingleProduct {

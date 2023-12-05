@@ -1,4 +1,4 @@
-import { FC } from "react";
+import type { FC } from "react";
 import styles from "./styles.module.css";
 import { CartIcon } from "../CartInfo/CartInfo";
 import { Link } from "@remix-run/react";

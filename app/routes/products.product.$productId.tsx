@@ -1,8 +1,9 @@
-import {
+import type {
   ActionFunctionArgs,
   LinksFunction,
   LoaderFunctionArgs,
-  MetaFunction,
+  MetaFunction} from "@remix-run/node";
+import {
   json,
 } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";

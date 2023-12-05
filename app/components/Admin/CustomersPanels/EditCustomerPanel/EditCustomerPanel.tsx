@@ -1,7 +1,8 @@
-import { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "@remix-run/node";
 import { Form, Link, useFetcher } from "@remix-run/react";
-import { FC, useEffect, useState } from "react";
-import { CustomerWithoutPassword } from "~/services/customer.server";
+import type { FC} from "react";
+import { useEffect, useState } from "react";
+import type { CustomerWithoutPassword } from "~/services/customer.server";
 import styles from "./styles.module.css";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 

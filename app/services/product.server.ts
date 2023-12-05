@@ -1,4 +1,4 @@
-import { Category, Product } from "@prisma/client";
+import type { Category, Product } from "@prisma/client";
 import { prisma } from "~/utils/prisma.server";
 
 export interface ProductData {

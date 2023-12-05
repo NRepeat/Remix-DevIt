@@ -1,9 +1,10 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 import { Product } from "@prisma/client";
 import { useRouteLoaderData } from "@remix-run/react";
-import { loader } from "~/routes/admin.customers_.customer.$id.cart";
-import {
+import type { loader } from "~/routes/admin.customers_.customer.$id.cart";
+import type {
   AddItemToCartButtonProps,
   CartProduct,
   ProductProps,

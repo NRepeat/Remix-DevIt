@@ -1,4 +1,5 @@
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import type { LoaderFunctionArgs} from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import {
   Outlet,
   isRouteErrorResponse,

@@ -1,4 +1,4 @@
-import { LinksFunction } from "@remix-run/node";
+import type { LinksFunction } from "@remix-run/node";
 import { Links, Meta, Outlet, isRouteErrorResponse, useRouteError } from "@remix-run/react";
 import Header from "~/components/Admin/Header/Header";
 import Sidebar from "~/components/Admin/Sidebar/Sidebar";

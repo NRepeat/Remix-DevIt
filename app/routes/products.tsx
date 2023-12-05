@@ -1,4 +1,4 @@
-import { LinksFunction} from "@remix-run/node";
+import type { LinksFunction} from "@remix-run/node";
 import {Outlet,} from "@remix-run/react";
 import rootStylesHref from "../styles/rootIndex.css";
 import Header from "~/components/Header/Header";

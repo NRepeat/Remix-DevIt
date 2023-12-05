@@ -1,4 +1,5 @@
-import { Cart, CartItem, Customer } from "@prisma/client";
+import type { Cart, Customer } from "@prisma/client";
+import { CartItem } from "@prisma/client";
 export interface CustomerArgs {
   email: string;
   name: string;

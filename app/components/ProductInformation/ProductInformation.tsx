@@ -1,7 +1,7 @@
-import { FC } from "react";
+import type { FC } from "react";
 import styles from "./styles.module.css";
-import { Product } from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
+import type { Product } from "@prisma/client";
+import type { SerializeFrom } from "@remix-run/node";
 
 export interface SingleProduct { 
   product:Product

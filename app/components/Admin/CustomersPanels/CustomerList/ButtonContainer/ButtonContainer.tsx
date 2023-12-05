@@ -1,8 +1,8 @@
 import React from 'react'
 import styles from "../styles.module.css";
 import { Link, useSubmit } from '@remix-run/react';
-import { CustomerWithoutPassword } from '~/services/customer.server';
-import { SerializeFrom } from '@remix-run/node';
+import type { CustomerWithoutPassword } from '~/services/customer.server';
+import type { SerializeFrom } from '@remix-run/node';
 import clsx from 'clsx';
 
 

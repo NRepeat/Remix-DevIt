@@ -1,4 +1,5 @@
-import { LinksFunction, LoaderFunctionArgs, json } from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";

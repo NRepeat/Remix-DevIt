@@ -9,4 +9,4 @@ export function formatString(inputString: string): string {
 export function parseAndValidateFormData (value: FormDataEntryValue | null | undefined): number | null{
   const parsedValue = parseInt(String(value));
   return !isNaN(parsedValue) ? parsedValue : null;
-};
+}

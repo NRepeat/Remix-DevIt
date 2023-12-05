@@ -1,4 +1,4 @@
-import { Session } from "@remix-run/node";
+import type { Session } from "@remix-run/node";
 
 
 export const SESSION_KEY = "cart";

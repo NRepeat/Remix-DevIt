@@ -1,7 +1,7 @@
 import { Form, Link, useSearchParams, useSubmit } from "@remix-run/react";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
-import { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "@remix-run/node";
 import { clsx } from "clsx";
 interface PaginationProps {
   currentPage: number;

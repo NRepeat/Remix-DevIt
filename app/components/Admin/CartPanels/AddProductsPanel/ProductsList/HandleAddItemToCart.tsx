@@ -1,4 +1,4 @@
-import { SubmitFunction } from "@remix-run/react";
+import type { SubmitFunction } from "@remix-run/react";
 
 export const handleAddItemToCart = async (
   cartId: number,

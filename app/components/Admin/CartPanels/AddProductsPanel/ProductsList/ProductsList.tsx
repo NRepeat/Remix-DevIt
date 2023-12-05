@@ -1,8 +1,9 @@
-import { SerializeFrom } from "@remix-run/node";
-import { FC, useState } from "react";
+import type { SerializeFrom } from "@remix-run/node";
+import type { FC} from "react";
+import { useState } from "react";
 import styles from "./styles.module.css";
-import { AddProductProps } from "../AddProducts";
-import { Quantities } from "../../ItemsList/ItemsList";
+import type { AddProductProps } from "../AddProducts";
+import type { Quantities } from "../../ItemsList/ItemsList";
 import {
   useSubmit,
 } from "@remix-run/react";

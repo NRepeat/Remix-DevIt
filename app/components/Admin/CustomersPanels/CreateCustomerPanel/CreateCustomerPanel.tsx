@@ -1,6 +1,7 @@
 import { Form, Link } from "@remix-run/react";
 import styles from "./styles.module.css";
-import { FC, useRef } from "react";
+import type { FC} from "react";
+import { useRef } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 const CreateCustomerPanel: FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);

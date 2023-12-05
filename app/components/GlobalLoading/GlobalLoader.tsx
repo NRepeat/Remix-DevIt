@@ -1,7 +1,8 @@
 import { clsx } from "clsx";
 import styles from "./styles.module.css";
 import { useNavigation } from "@remix-run/react";
-import { FC, useEffect, useRef, useState } from "react";
+import type { FC} from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 const GlobalLoader: FC = () => {

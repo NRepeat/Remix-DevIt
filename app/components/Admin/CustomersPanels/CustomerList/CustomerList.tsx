@@ -1,7 +1,7 @@
-import { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "@remix-run/node";
 import { Link, useSubmit } from "@remix-run/react";
-import { FC } from "react";
-import { AdminPanelProps } from "~/components/Admin/AdminPanel/AdminPanel";
+import type { FC } from "react";
+import type { AdminPanelProps } from "~/components/Admin/AdminPanel/AdminPanel";
 import styles from "./styles.module.css";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 

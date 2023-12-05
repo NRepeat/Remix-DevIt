@@ -1,4 +1,5 @@
-import { LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import type { LoaderFunctionArgs} from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import ItemsList from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 import { getCartByCustomerId } from "~/services/cart.server";

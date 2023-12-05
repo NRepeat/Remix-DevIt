@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { AdminPanelProps } from "../../AdminPanel/AdminPanel";
-import { SerializeFrom } from "@remix-run/node";
+import type { FC } from "react";
+import type { AdminPanelProps } from "../../AdminPanel/AdminPanel";
+import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import styles from "./styles.module.css";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";

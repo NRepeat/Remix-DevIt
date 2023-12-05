@@ -1,7 +1,7 @@
-import { Cart} from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
-import { FC } from "react";
-import { CustomerWithoutPassword } from "~/services/customer.server";
+import type { Cart} from "@prisma/client";
+import type { SerializeFrom } from "@remix-run/node";
+import type { FC } from "react";
+import type { CustomerWithoutPassword } from "~/services/customer.server";
 
 export interface AdminPanelProps {
   data: {

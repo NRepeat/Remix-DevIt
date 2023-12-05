@@ -1,11 +1,11 @@
-import { SerializeFrom } from "@remix-run/node"
-import { FC } from "react"
-import AdminPanel, { AdminPanelProps } from "~/components/Admin/AdminPanel/AdminPanel"
+import AdminPanel from "~/components/Admin/AdminPanel/AdminPanel";
 
-const AdminPage: FC<SerializeFrom<AdminPanelProps>> = ({customers}) => {
-  return (
-    <AdminPanel customers = {customers}/>
-  )
-}
+import type { SerializeFrom } from "@remix-run/node";
+import type { FC } from "react";
+import type { AdminPanelProps } from "~/components/Admin/AdminPanel/AdminPanel";
 
-export default AdminPage
+const AdminPage: FC<SerializeFrom<AdminPanelProps>> = ({ customers }) => {
+  return <AdminPanel customers={customers} />;
+};
+
+export default AdminPage;

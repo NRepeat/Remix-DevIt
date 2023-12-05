@@ -1,6 +1,6 @@
 import { Form} from "@remix-run/react";
 import rootStylesHref from "../styles/rootIndex.css";
-import { LinksFunction} from "@remix-run/node";
+import type { LinksFunction} from "@remix-run/node";
 
 
 export const links: LinksFunction = () => [

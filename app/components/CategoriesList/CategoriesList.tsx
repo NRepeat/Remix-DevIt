@@ -1,8 +1,8 @@
 import { Link } from "@remix-run/react";
 import styles from "./styles.module.css";
-import { FC } from "react";
-import { Category } from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
+import type { FC } from "react";
+import type { Category } from "@prisma/client";
+import type { SerializeFrom } from "@remix-run/node";
 
 
 export interface CategoriesListProps {

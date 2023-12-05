@@ -1,7 +1,8 @@
-import { SerializeFrom } from "@remix-run/node";
+import type { SerializeFrom } from "@remix-run/node";
 import { Link, useSubmit } from "@remix-run/react";
-import React, { FC, useState } from "react";
-import { loader } from "~/routes/admin.customers_.customer.$id.cart";
+import type { FC} from "react";
+import React, { useState } from "react";
+import type { loader } from "~/routes/admin.customers_.customer.$id.cart";
 import EditQuantityForm from "../EditQuantityForm/EditQuantityForm";
 import styles from "./styles.module.css";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";

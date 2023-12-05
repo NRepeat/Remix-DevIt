@@ -1,9 +1,10 @@
-import React, { FC } from "react";
+import type { FC } from "react";
+import React from "react";
 import ProductList from "./ProductsList/ProductsList";
-import { SerializeFrom } from "@remix-run/node";
-import { ProductData } from "~/services/product.server";
+import type { SerializeFrom } from "@remix-run/node";
+import type { ProductData } from "~/services/product.server";
 import styles from "./styles.module.css";
-import { Cart } from "@prisma/client";
+import type { Cart } from "@prisma/client";
 import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
 
 export interface AddProductProps {

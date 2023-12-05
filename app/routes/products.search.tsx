@@ -1,4 +1,5 @@
-import { LinksFunction, LoaderFunctionArgs, json, redirect } from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs} from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { searchProduct } from "~/services/product.server";

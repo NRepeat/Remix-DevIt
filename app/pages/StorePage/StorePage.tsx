@@ -1,11 +1,11 @@
 import Sidebar from "../../components/SideBar/Sidebar";
 import { useLocation, useNavigation, useRouteLoaderData } from "@remix-run/react";
 import style from "./style.module.css";
-import { FC } from "react";
+import type { FC } from "react";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import { Cart, Category, Product } from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
-import { ProductData } from "~/services/product.server";
+import type { SerializeFrom } from "@remix-run/node";
+import type { ProductData } from "~/services/product.server";
 import Pagination from "~/components/Pagination/Pagination";
 
 

@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import {FC} from "react"
+import type {FC} from "react"
 import styles from "./styles.module.css";
 
 const Sidebar:FC = () => {

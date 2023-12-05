@@ -1,4 +1,4 @@
-import { Cart } from "@prisma/client";
+import type { Cart } from "@prisma/client";
 
 export const createCart = async (id: number): Promise<Cart> => {
 

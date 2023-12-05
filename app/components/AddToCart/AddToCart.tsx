@@ -1,12 +1,11 @@
-import {  useFetcher, useRouteLoaderData } from "@remix-run/react";
-import styles from "./styles.module.css";
-import { FC } from "react";
+import { useFetcher, useRouteLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import { loader } from "~/root";
-import { Product } from "@prisma/client";
-import { SerializeFrom } from "@remix-run/node";
-import { createCart } from "~/services/cart.server";
-import { createCartItem } from "~/services/cartItem.server";
+
+import type { SerializeFrom } from "@remix-run/node";
+import type { Product } from "@prisma/client";
+import type { FC } from "react";
+import type { loader } from "~/root";
+import styles from "./styles.module.css";
 
 export interface AddToCartProps {
   product: Product;

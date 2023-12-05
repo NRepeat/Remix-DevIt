@@ -1,10 +1,11 @@
-import { FC } from "react";
+import type { FC } from "react";
 import styles from "./styles.module.css";
 import ProductListItem from "./ProductListItem/ProductListItem";
-import { Category, Product } from "@prisma/client";
+import type { Product } from "@prisma/client";
+import { Category } from "@prisma/client";
 import SortTypesList from "../Sort/SortTypesList";
-import { SerializeFrom } from "@remix-run/node";
-import { ProductData } from "~/services/product.server";
+import type { SerializeFrom } from "@remix-run/node";
+import type { ProductData } from "~/services/product.server";
 
 export type ProductListProps = {
   productsData: ProductData 
