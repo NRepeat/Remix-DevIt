@@ -1,17 +1,27 @@
-import { Link } from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
+import clsx from "clsx";
 import type { FC } from "react";
 import styles from "./styles.module.css";
 
 const Sidebar: FC = () => {
+  const navigation = useLocation();
+  const links = [
+    { label: "Customers", url: "/admin/customers" },
+    { label: "Products", url: "/admin/products" },
+  ];
   return (
-    <nav className={styles.sidebar}>
+    <nav className={styles.gridSidebar}>
       <ul className={styles.list}>
-        <li>
-          <Link to={"customers"}>Customers</Link>
-        </li>
-        <li>
-          <Link to={"products"}> Products</Link>
-        </li>
+        {links.map((link, i) => (
+          <li
+            key={i}
+            className={clsx(styles.link, {
+              [styles.active]: navigation.pathname.includes(`${link.url}`),
+            })}
+          >
+            <Link to={link.url}>{link.label}</Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );

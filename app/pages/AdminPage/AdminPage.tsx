@@ -1,11 +1,8 @@
-import AdminPanel from "~/components/Admin/AdminPanel/AdminPanel";
-
-import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
-import type { AdminPanelProps } from "~/components/Admin/AdminPanel/AdminPanel";
+import styles from "./styles.module.css";
 
-const AdminPage: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
-  return <AdminPanel data={data} />;
+const AdminPage: FC = () => {
+  return <div className={styles.gridMain}>Main</div>;
 };
 
 export default AdminPage;

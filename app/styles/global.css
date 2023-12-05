@@ -8,11 +8,11 @@
   --adminPanelBg: rgb(2, 117, 96);
 }
 
-.body {
+/* .body {
   width: 100vw;
   overflow-x: hidden;
   background-color: rgb(0, 0, 0);
-}
+} */
 
 .bodyError {
   height: 100vh;

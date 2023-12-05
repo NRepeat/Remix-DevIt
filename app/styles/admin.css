@@ -1,12 +1,14 @@
-.adminPage {
+/* .adminPage {
   display: flex;
   height: 100vh;
   flex-direction: column;
   background-color: white;
 }
+
 .adminMain {
   display: flex;
   height: 100%;
+  position: relative;
 }
 
 .containerBase {
@@ -17,3 +19,7 @@
   align-items: center;
   position: relative;
 }
+
+.productModal {
+  position: absolute;
+} */

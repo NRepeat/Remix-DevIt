@@ -6,7 +6,6 @@ export const handleQuantityChange = (
   e: React.ChangeEvent<HTMLInputElement>
 ) => {
   const { value } = e.target;
-  console.log("🚀 ~ file: HandleQuantityChange.tsx:12 ~ value :", value);
   setQuantities((prevQuantities) => ({
     ...prevQuantities,
     [itemId]: value,
