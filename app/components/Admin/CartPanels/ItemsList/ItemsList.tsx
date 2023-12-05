@@ -4,7 +4,7 @@ import type { FC } from "react";
 import React, { useState } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import type { loader } from "~/routes/admin.customers_.customer.$id.cart";
-import AddProducts from "../AddProductsPanel/AddProducts";
+import AddProducts from "../AddProductsPanel/AddProductsPanel";
 import EditQuantityForm from "../EditQuantityForm/EditQuantityForm";
 import styles from "./styles.module.css";
 

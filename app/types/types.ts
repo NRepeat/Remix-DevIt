@@ -26,7 +26,7 @@ export type ProductResponse = {
 type HandleAddItemToCartFunction = (
   cartId: number,
   productId: number,
-  quantity: number,
+  quantities: Quantities,
   customerId: number,
   submit: SubmitFunction
 ) => void;
@@ -72,11 +72,14 @@ export interface AddItemToCartButtonProps {
   quantities: Quantities;
   submit: SubmitFunction;
   handleAddItemToCart: HandleAddItemToCartFunction;
+  customerId: number;
 }
 export interface QuantityInputProps {
   productId: number;
+  productStock: number;
   quantities: Quantities;
   handleQuantityChange: HandleQuantityChangeFunction;
+  setQuantities: React.Dispatch<React.SetStateAction<Quantities>>;
 }
 export interface ProductProps {
   setQuantities: React.Dispatch<React.SetStateAction<Quantities>>;

@@ -1,14 +1,14 @@
 import type { SerializeFrom } from "@remix-run/node";
+import { useSubmit } from "@remix-run/react";
 import type { FC } from "react";
 import { useState } from "react";
-import styles from "./styles.module.css";
-import type { AddProductProps } from "../AddProducts";
-import type { Quantities } from "../../ItemsList/ItemsList";
-import { useSubmit } from "@remix-run/react";
 import Pagination from "~/components/Pagination/Pagination";
-import ProductRow from "./Product";
-import { handleQuantityChange } from "./HandleQuantityChange";
+import type { Quantities } from "../../ItemsList/ItemsList";
+import type { AddProductProps } from "../AddProductsPanel";
 import { handleAddItemToCart } from "./HandleAddItemToCart";
+import { handleQuantityChange } from "./HandleQuantityChange";
+import ProductRow from "./Product/Product";
+import styles from "./styles.module.css";
 
 const ProductsList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {
   const [quantities, setQuantities] = useState<Quantities>({});
