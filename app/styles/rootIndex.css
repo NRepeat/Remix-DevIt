@@ -8,13 +8,16 @@
 
   background: var(--gradientColor);
 }
+
 .rootIndexContainer > p {
   padding-bottom: 130px;
   font-size: 1.2rem;
 }
+
 .rootIndexContainer > h1 {
   font-size: 3.5rem;
 }
+
 .link {
   color: white;
   text-decoration: none;
@@ -28,6 +31,7 @@
   transition: background-color 0.1s;
   border: 0;
 }
+
 .link:hover {
   background-color: white;
   color: black;

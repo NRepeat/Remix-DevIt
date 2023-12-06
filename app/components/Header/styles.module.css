@@ -1,36 +1,47 @@
 .header {
   display: flex;
-  width: 100%;
-  justify-content: center;
-  background-color: black;
+  grid-area: header;
+  justify-content: space-between;
   position: relative;
-  z-index: 0;
 }
+
 .header::after {
   content: "";
   position: absolute;
   width: 100%;
-  height: 1px;
   background: var(--gradientColor);
+  left: 0;
   bottom: 0;
+  height: 1px;
 }
-.topBar {
-  display: flex;
+
+.searchBarCartWrapper {
+  display: inline-flex;
+  justify-content: flex-end;
   width: 100%;
-  justify-content: space-between;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  align-items: center;
+  max-width: 50%;
+  gap: 30px;
+}
+
+.titleWrapper {
+  display: inline-block;
 }
 
 .title {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.title > h1 {
   font-weight: bold;
   font-size: 2rem;
   color: white;
-  padding-left: 30px;
   text-decoration: none;
   cursor: pointer;
+  padding-bottom: 9px;
 }
+
 .title:hover {
   color: rgb(182, 2, 182);
 }

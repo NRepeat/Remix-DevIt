@@ -5,14 +5,9 @@
     rgba(235, 0, 255, 0.8743872549019608) 69%,
     rgba(235, 0, 255, 0.5830707282913166) 97%
   );
-  --adminPanelBg: rgb(2, 117, 96);
+  --adminPanelBgColor: rgb(2, 117, 96);
+  --storePageBgColor: rgb(16, 16, 16);
 }
-
-/* .body {
-  width: 100vw;
-  overflow-x: hidden;
-  background-color: rgb(0, 0, 0);
-} */
 
 .bodyError {
   height: 100vh;

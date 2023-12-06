@@ -1,9 +1,15 @@
-import { Link, useLocation } from "@remix-run/react";
-import clsx from "clsx";
+import { useClickOutside } from "@reactuses/core";
+import { useLocation } from "@remix-run/react";
+import Hamburger from "hamburger-react";
 import type { FC } from "react";
+import { useRef, useState } from "react";
+import List from "./List";
 import styles from "./styles.module.css";
-
 const Sidebar: FC = () => {
+  const [isOpen, setOpen] = useState(false);
+  const ref = useRef(null);
+
+  useClickOutside(ref, () => setOpen(false));
   const navigation = useLocation();
   const links = [
     { label: "Customers", url: "/admin/customers" },
@@ -11,18 +17,28 @@ const Sidebar: FC = () => {
   ];
   return (
     <nav className={styles.gridSidebar}>
-      <ul className={styles.list}>
-        {links.map((link, i) => (
-          <li
-            key={i}
-            className={clsx(styles.link, {
-              [styles.active]: navigation.pathname.includes(`${link.url}`),
-            })}
-          >
-            <Link to={link.url}>{link.label}</Link>
-          </li>
-        ))}
-      </ul>
+      <div className={styles.hidden}>
+        <Hamburger
+          color="#ffffff"
+          toggled={isOpen}
+          size={20}
+          toggle={setOpen}
+        />
+      </div>
+      {isOpen && (
+        <List
+          links={links}
+          navigation={navigation}
+          isHamburger={true}
+          isOpen={isOpen}
+        />
+      )}
+      <List
+        links={links}
+        navigation={navigation}
+        isHamburger={false}
+        isOpen={true}
+      />
     </nav>
   );
 };

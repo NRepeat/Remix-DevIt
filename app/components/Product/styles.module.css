@@ -1,21 +1,23 @@
 .container {
-  padding-top: 15px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
+
 .poster {
   max-width: 100%;
   display: flex;
   justify-content: center;
   align-self: center;
 }
+
 .poster > img {
   width: 100%;
   height: auto;
   object-fit: cover;
   aspect-ratio: 1.1;
 }
+
 .wrapper {
   display: flex;
   justify-content: center;
@@ -23,9 +25,6 @@
   border-radius: 10px;
   padding: 15px;
   border: 2px solid purple;
-  box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.366);
-  -webkit-box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.267);
-  -moz-box-shadow: 1px 1px 21px 0px rgba(0, 0, 0, 0.385);
 }
 
 .information {

@@ -1,56 +1,55 @@
-import Sidebar from "../../components/SideBar/Sidebar";
-import { useRouteLoaderData } from "@remix-run/react";
-import style from "./style.module.css";
-import type { FC } from "react";
-import ProductsList from "~/components/ProductsList/ProductsList";
 import type { SerializeFrom } from "@remix-run/node";
-import type { ProductData } from "~/services/product.server";
+import { useLocation } from "@remix-run/react";
+import type { FC } from "react";
+import PageLayout from "~/Layout/PageLayout/PageLayout";
+import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import Header from "~/components/Header/Header";
 import Pagination from "~/components/Pagination/Pagination";
+import ProductsList from "~/components/ProductsList/ProductsList";
+import SortTypesList from "~/components/Sort/SortTypesList";
+import type { StorePageProps } from "~/types/types";
+import Sidebar from "../../components/SideBar/Sidebar";
+import styles from "./styles.module.css";
 
-export interface StorePageProps {
-  data: {
-    products: ProductData;
-    page: number;
-    cart: {
-      productId: string;
-      quantity: number;
-    }[];
-    categories: {
-      id: number;
-      slug: string;
-      name: string;
-      createdAt: Date;
-      updatedAt: Date;
-    }[];
-  };
-}
+const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
+  const location = useLocation();
 
-const ProductsListRoute: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
-  const toggleSideBarVisible = !!useRouteLoaderData(
-    "routes/products/$productId"
-  );
+  const breadcrumbs = [
+    { label: "Home", link: "/products" },
+    {
+      label: `${location.search.slice(10)}`,
+      link: `/products/?category=${location.search.slice(10)}`,
+    },
+  ];
 
   return (
     <>
-      <div className={style.container}>
-        {!toggleSideBarVisible && (
-          <aside className={style.sidebar}>
-            <Sidebar categories={data.categories} />
-          </aside>
-        )}
-        <main className={style.main}>
-          <ProductsList productsData={data.products} />
-          <div className="paginationContainer">
-            <Pagination
-              admin={false}
-              currentPage={data.page}
-              totalPages={data.products.totalPages}
-            />
+      <PageLayout>
+        <Header />
+        <aside className={styles.sidebar}>
+          <Sidebar categories={data.categories} />
+        </aside>
+        <main className={styles.main}>
+          <div className={styles.mainWrapper}>
+            <div className={styles.sort}>
+              <SortTypesList />
+            </div>
+            <div>
+              <Breadcrumbs admin={false} breadcrumbs={breadcrumbs} />
+            </div>
+            <ProductsList productsData={data.products} />
+            <div className="paginationContainer">
+              <Pagination
+                admin={false}
+                currentPage={data.page}
+                totalPages={data.products.totalPages}
+              />
+            </div>
           </div>
         </main>
-      </div>
+      </PageLayout>
     </>
   );
 };
 
-export default ProductsListRoute;
+export default StorePage;

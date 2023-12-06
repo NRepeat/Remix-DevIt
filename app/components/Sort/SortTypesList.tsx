@@ -1,22 +1,15 @@
-import {
-  Form,
-  useLocation,
-  useSearchParams,
-  useSubmit,
-} from "@remix-run/react";
+import { Form, useSearchParams, useSubmit } from "@remix-run/react";
 import styles from "./styles.module.css";
 
 function SortTypesList() {
   const [searchParams] = useSearchParams();
-  const location = useLocation();
   const search = searchParams.get("search");
   const page = searchParams.get("page");
-
+  const category = searchParams.get("category");
   const HandleSubmit = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const hasSearch =
-      search !== null && location.pathname === "/products/search";
+    const hasSearch = search !== null;
     const hasPage = page !== null;
-
+    const hasCategory = category !== null;
     const formData: Record<string, any> = {
       sort: e.target.value,
     };
@@ -28,7 +21,9 @@ function SortTypesList() {
     if (hasPage) {
       formData.page = page;
     }
-
+    if (hasCategory) {
+      formData.category = category;
+    }
     submit(formData);
   };
 

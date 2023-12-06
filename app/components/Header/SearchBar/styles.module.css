@@ -1,9 +1,14 @@
 .search {
-  width: 50%;
+  display: inline-flex;
+  align-items: center;
 }
+
 .search > input {
   width: 100%;
+  min-width: 140px;
+  height: 35px;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 2px;
+  font-size: 1.1rem;
   border: 1px solid gainsboro;
 }

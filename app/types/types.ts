@@ -1,5 +1,6 @@
 import type { SubmitFunction } from "@remix-run/react";
 import type { Quantities } from "~/components/Admin/CartPanels/ItemsList/ItemsList";
+import type { ProductData } from "~/services/product.server";
 
 export type DummyProduct = {
   id: number;
@@ -22,7 +23,23 @@ export type ProductResponse = {
   total: number;
   products: DummyProduct[];
 };
-
+export interface StorePageProps {
+  data: {
+    products: ProductData;
+    page: number;
+    cart: {
+      productId: string;
+      quantity: number;
+    }[];
+    categories: {
+      id: number;
+      slug: string;
+      name: string;
+      createdAt: Date;
+      updatedAt: Date;
+    }[];
+  };
+}
 type HandleAddItemToCartFunction = (
   cartId: number,
   productId: number,

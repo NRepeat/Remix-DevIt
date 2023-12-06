@@ -68,13 +68,14 @@ export const getProduct = async (
 
 export const searchProduct = async (
   q: string,
-  sortName: string,
-  page: number
+  page: number,
+
+  sortName: string
 ): Promise<ProductData> => {
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
-  if (q === null) {
-    const products = await getAllProducts(page, "novelty");
+  if (q === "" || q === null) {
+    const products = await getAllProducts(page, sortName);
 
     return products;
   }

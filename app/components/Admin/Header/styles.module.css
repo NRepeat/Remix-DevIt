@@ -1,3 +1,5 @@
 .gridHeader {
   grid-area: header;
+  background-color: var(--adminPanelBgColor);
+  border: 2px solid gray;
 }

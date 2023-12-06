@@ -1,4 +1,4 @@
-import type { LinksFunction } from "@remix-run/node";
+import { type LinksFunction } from "@remix-run/node";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
 import Footer from "~/components/Admin/Footer/Footer";
 import Header from "~/components/Admin/Header/Header";

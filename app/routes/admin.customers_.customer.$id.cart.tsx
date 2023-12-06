@@ -16,7 +16,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     return redirect(`/admin/customers/customer/${customerId}/cart`);
   }
   const cart = await getCartByCustomerId(customerId);
-  const products = await searchProduct(searchQuery!, "novelty", page);
+  const products = await searchProduct(searchQuery!, page, "novelty");
 
   if (!cart) {
     throw new Response("Cart Not Found", { status: 404 });

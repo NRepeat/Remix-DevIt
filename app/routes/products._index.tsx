@@ -1,14 +1,15 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import productIndexStylesHref from "../styles/productIndex.css";
-import { getSession } from "~/services/session.server";
+import StorePage from "~/pages/StorePage/StorePage";
 import { createCart } from "~/services/cartSession.server";
 import {
   getAllProductCategories,
-  getAllProducts,
+  getProductsByCategory,
+  searchProduct,
 } from "~/services/product.server";
-import ProductsListRoute from "~/pages/StorePage/StorePage";
+import { getSession } from "~/services/session.server";
+import productIndexStylesHref from "../styles/productIndex.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: productIndexStylesHref },
@@ -18,15 +19,28 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createCart(session);
   const url = new URL(request.url);
+  const searchQuery = url.searchParams.get("search");
+  const categoryQuery = url.searchParams.get("category");
   const pageQuery = url.searchParams.get("page");
   const sort = url.searchParams.get("sort");
   const page = pageQuery ? parseInt(pageQuery) : 1;
-  const products = await getAllProducts(page, sort!);
+  const categories = await getAllProductCategories();
+
+  if (categoryQuery !== "" && !!categoryQuery) {
+    const products = await getProductsByCategory(categoryQuery!, sort!);
+    return json({ products, page, cart: cart.items(), categories });
+  }
+  if (categoryQuery === "") {
+    return redirect("/products");
+  }
+  if (searchQuery === "") {
+    return redirect("/products");
+  }
+
+  const products = await searchProduct(searchQuery!, page, sort!);
   if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
-  const categories = await getAllProductCategories();
-
   return json({ products, page, cart: cart.items(), categories });
 };
 
@@ -35,7 +49,7 @@ export default function () {
 
   return (
     <div className="bg-pd-index">
-      <ProductsListRoute data={data} />
+      <StorePage data={data} />
     </div>
   );
 }

@@ -3,20 +3,20 @@
   display: grid;
   grid-template-rows: 70px 100% 100px;
   grid-template-columns: 250px auto auto;
-  gap: 1rem;
   padding: 1.5rem 1rem 1.5rem 1rem;
   grid-template-areas:
     "header header header"
     "sidebar main main"
     "footer footer footer";
+  overflow: hidden;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 999px) {
   .gridLayout {
-    grid-template-columns: minmax(auto, 100px) minmax(250px, 2fr);
+    grid-template-columns: minmax(100px, 100px) minmax(250px, 2fr);
     grid-template-rows: min-content min-content min-content;
     grid-template-areas:
-      "header sidebar sidebar"
+      "sidebar header header"
       "main main main"
       "footer footer footer";
   }

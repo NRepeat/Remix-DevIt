@@ -1,17 +1,20 @@
-import type { FC } from "react";
-import styles from "./styles.module.css";
-import { CartIcon } from "../CartInfo/CartInfo";
 import { Link } from "@remix-run/react";
+import type { FC } from "react";
+import { CartIcon } from "../CartInfo/CartInfo";
 import { SearchBar } from "./SearchBar/SearchBar";
+import styles from "./styles.module.css";
 
 const Header: FC = () => {
   return (
     <div className={styles.header}>
-      <div className={styles.topBar}>
+      <div className={styles.titleWrapper}>
         <Link className={styles.title} to={"/products"}>
-          Store
+          <h1>Store</h1>
         </Link>
-        <SearchBar action="/products/search" />
+      </div>
+
+      <div className={styles.searchBarCartWrapper}>
+        <SearchBar action="/products/" />
         <CartIcon />
       </div>
     </div>
