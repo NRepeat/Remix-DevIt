@@ -1,5 +1,5 @@
 export const svgAdminPanelIcons = [
-  <svg
+  (<svg
     key="svg1"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -7,14 +7,15 @@ export const svgAdminPanelIcons = [
     strokeWidth={1.5}
     stroke="currentColor"
     className="w-6 h-6"
+    width="24" height="24"
   >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184"
     />
-  </svg>,
-  <svg
+  </svg>),
+  (<svg
     key="svg2"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -22,15 +23,16 @@ export const svgAdminPanelIcons = [
     strokeWidth={1.5}
     stroke="currentColor"
     className="w-6 h-6"
+    width="24" height="24"
   >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
     />
-  </svg>,
+  </svg>),
 
-  <svg
+  (<svg
     key="svg4"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
@@ -38,20 +40,22 @@ export const svgAdminPanelIcons = [
     strokeWidth={1.5}
     stroke="currentColor"
     className="w-6 h-6"
+    width="24" height="24"
   >
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75"
     />
-  </svg>,
-  <svg
+  </svg>),
+  (<svg
     key="svg5"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
+    width="24" height="24"
     className="w-6 h-6"
   >
     <path
@@ -59,10 +63,11 @@ export const svgAdminPanelIcons = [
       strokeLinejoin="round"
       d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
     />
-  </svg>,
-  <svg
+  </svg>),
+  (<svg
     key="svg3"
     xmlns="http://www.w3.org/2000/svg"
+    width="24" height="24"
     fill="none"
     viewBox="0 0 24 24"
     strokeWidth={1.5}
@@ -79,5 +84,5 @@ export const svgAdminPanelIcons = [
       strokeLinejoin="round"
       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
     />
-  </svg>,
+  </svg>),
 ];
