@@ -3,6 +3,7 @@ import { Link, useSubmit } from "@remix-run/react";
 import type { FC } from "react";
 import React, { useState } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import { Button } from "~/components/Button/Button";
 import type { loader } from "~/routes/admin.customers_.customer.$id.cart";
 import AddProducts from "../AddProductsPanel/AddProductsPanel";
 import EditQuantityForm from "../EditQuantityForm/EditQuantityForm";
@@ -64,12 +65,16 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
       {!toggleAdd ? (
         <>
           <ul className={styles.list}>
-            <button onClick={() => setToggleEdit((prevToggle) => !prevToggle)}>
+            <Button
+              onClick={() => setToggleEdit((prevToggle) => !prevToggle)}
+              type="button"
+            >
               {toggleEdit ? "Close edit fields" : "Open edit fields"}
-            </button>
-            <button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
+            </Button>
+
+            <Button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
               {toggleAdd ? "Close add tab" : "Open add tab"}
-            </button>
+            </Button>
             {cart?.cartItems.map((item) => (
               <li key={item.id}>
                 <p>Product: {item.product.title}</p>
@@ -86,22 +91,22 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
                     <p>Stock:{item.product.stock}</p>
                   </span>
                 )}
-                <button
+                <Button
                   onClick={() =>
                     handleDelete(item.product.title, item.id, customerId)
                   }
                 >
                   Delete
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
         </>
       ) : (
         <>
-          <button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
+          <Button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
             {toggleAdd ? "Close add tab" : "Open add tab"}
-          </button>
+          </Button>
           <AddProducts data={products} cart={cart} customerId={customerId} />
         </>
       )}
