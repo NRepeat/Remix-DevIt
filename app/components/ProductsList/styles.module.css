@@ -6,7 +6,7 @@
   flex-flow: row wrap;
   justify-content: flex-start;
   gap: 30px;
-  max-height: 73vh;
+  max-height: 75vh;
 }
 
 .wrapper {

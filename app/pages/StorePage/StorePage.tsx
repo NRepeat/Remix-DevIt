@@ -25,9 +25,9 @@ const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
     <>
       <PageLayout>
         <Header />
-        <aside className={styles.sidebar}>
+        <div className={styles.sidebar}>
           <Sidebar categories={data.categories} />
-        </aside>
+        </div>
         <main className={styles.main}>
           <div className={styles.mainWrapper}>
             <div className={styles.sort}>
