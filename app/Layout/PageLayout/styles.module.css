@@ -1,13 +1,14 @@
 .gridLayout {
+  height: 100vh;
   display: grid;
-  grid-template-rows: 70px auto auto;
+  grid-template-rows: 70px 1fr auto;
   grid-template-columns: 250px auto auto;
-  padding: 1.5rem 1rem 1.5rem 1rem;
   grid-template-areas:
     "header header header"
     "sidebar main main"
     "footer footer footer";
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 @media (max-width: 999px) {
@@ -19,4 +20,8 @@
       "main main main"
       "footer footer footer";
   }
+}
+
+.admin {
+  background-color: var(--adminPanelBgColor);
 }

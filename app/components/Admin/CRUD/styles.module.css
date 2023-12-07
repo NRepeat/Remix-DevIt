@@ -1,0 +1,10 @@
+.panel {
+  grid-area: main;
+  padding: 15px 5px 10px 5px;
+  background-color: aliceblue;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-rows: 500px;
+  grid-template-columns: minmax(0, 600px);
+  grid-template-areas: "crud-main";
+}

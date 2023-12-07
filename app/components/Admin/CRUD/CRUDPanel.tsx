@@ -1,9 +1,9 @@
 import type { Cart } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
+import styles from "./styles.module.css";
 
-export interface AdminPanelProps {
+export interface CRUDPanelProps {
   data: {
     customers: {
       customers: CustomerWithoutPassword[] & { cart: Cart };
@@ -13,8 +13,13 @@ export interface AdminPanelProps {
   currentPage?: number;
 }
 
-const AdminPanel: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
-  return <></>;
+type Props = {
+  children: React.ReactNode;
+  data?: {};
 };
 
-export default AdminPanel;
+const CRUDPanel: FC<Props> = ({ children, data }) => {
+  return <div className={styles.panel}> {children}</div>;
+};
+
+export default CRUDPanel;

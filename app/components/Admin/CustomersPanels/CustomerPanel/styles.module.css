@@ -1,36 +1,15 @@
 .customersPanel {
-  border: 1px solid gainsboro;
-  width: 70%;
-  height: 600px;
-  max-height: 600px;
-  min-width: 650px;
+  grid-area: crud-main;
+}
 
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
 .head {
-  padding-top: 20px;
-  width: 100%;
 }
+
 .customerListContainer {
-  display: flex;
-  width: 85%;
-  height: 85%;
-  min-height: 90%;
-  padding: 20px;
-  flex-direction: column;
 }
+
 .searchContainer {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
 }
+
 .listContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 95%;
-  height: 95%;
 }

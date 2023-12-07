@@ -6,15 +6,22 @@ import styles from "./styles.module.css";
 
 export interface ListProps {
   links: {
-    label: string;
     url: string;
+    label: string;
   }[];
+  svgArray: JSX.Element[];
   navigation: Location;
   isHamburger: boolean;
   isOpen: boolean;
 }
 
-const List: FC<ListProps> = ({ links, navigation, isHamburger, isOpen }) => {
+const List: FC<ListProps> = ({
+  links,
+  navigation,
+  isHamburger,
+  isOpen,
+  svgArray,
+}) => {
   return (
     <>
       {isOpen && (
@@ -28,7 +35,9 @@ const List: FC<ListProps> = ({ links, navigation, isHamburger, isOpen }) => {
                 [styles.active]: navigation.pathname.includes(`${link.url}`),
               })}
             >
-              <Link to={link.url}>{link.label}</Link>
+              <Link to={link.url}>
+                {svgArray[i]} <p>{link.label}</p>
+              </Link>
             </li>
           ))}
         </ul>

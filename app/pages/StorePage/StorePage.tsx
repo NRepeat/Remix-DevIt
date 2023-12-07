@@ -7,7 +7,7 @@ import Pagination from "~/components/Pagination/Pagination";
 import ProductsList from "~/components/ProductsList/ProductsList";
 import SortTypesList from "~/components/Sort/SortTypesList";
 import type { StorePageProps } from "~/types/types";
-import Sidebar from "../../components/SideBar/Sidebar";
+import Sidebar from "../../components/SideBar/SideBar";
 import styles from "./styles.module.css";
 
 const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
@@ -23,10 +23,10 @@ const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
 
   return (
     <>
-      <PageLayout>
+      <PageLayout isAdmin={false}>
         <Header />
         <div className={styles.sidebar}>
-          <Sidebar categories={data.categories} />
+          <Sidebar links={data.categories} />
         </div>
         <main className={styles.main}>
           <div className={styles.mainWrapper}>

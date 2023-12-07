@@ -1,7 +1,7 @@
-import React, { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
 import clsx from "clsx";
+import React from "react";
 
-import type { FC } from "react";
+import type { ButtonHTMLAttributes, DetailedHTMLProps, FC } from "react";
 import styles from "./styles.module.css";
 
 export interface ButtonProps

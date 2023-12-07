@@ -1,4 +1,3 @@
-import type { Category } from "@prisma/client";
 import { useClickOutside, useToggle } from "@reactuses/core";
 import type { SerializeFrom } from "@remix-run/node";
 import Hamburger from "hamburger-react";
@@ -9,41 +8,46 @@ import { useLocation } from "@remix-run/react";
 import List from "./List";
 import styles from "./styles.module.css";
 export interface SidebarProps {
-  categories: Category[];
+  links: {
+    slug: string;
+    name: string;
+  }[];
 }
 
-const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ categories }) => {
+const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ links }) => {
   const navigation = useLocation();
   const [on, toggle] = useToggle(true);
   const refM = useRef(null);
   useClickOutside(refM, () => toggle(false));
-  const links = categories.map((category) => ({
-    slug: category.slug,
-    label: category.name,
+  const linksData = links.map((link) => ({
+    slug: link.slug,
+    label: link.name,
     url: `/products/`,
   }));
   return (
-    <nav ref={refM} className={styles.gridSidebar}>
+    <div ref={refM}>
       <div className={styles.hidden}>
         <Hamburger color="#ffffff" toggled={on} size={20} toggle={toggle} />
       </div>
-      {on && (
+      <nav className={styles.gridSidebar}>
+        {on && (
+          <List
+            links={linksData}
+            navigation={navigation}
+            isHamburger={true}
+            isOpen={on}
+            toggle={toggle}
+          />
+        )}
         <List
-          links={links}
+          links={linksData}
           navigation={navigation}
-          isHamburger={true}
-          isOpen={on}
+          isHamburger={false}
+          isOpen={true}
           toggle={toggle}
         />
-      )}
-      <List
-        links={links}
-        navigation={navigation}
-        isHamburger={false}
-        isOpen={true}
-        toggle={toggle}
-      />
-    </nav>
+      </nav>
+    </div>
   );
 };
 

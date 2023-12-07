@@ -1,6 +1,6 @@
 .gridSidebar {
   background-color: var(--adminPanelBgColor);
-  border: 2px solid gray;
+  border: 1px solid rgb(196, 196, 196);
   overflow: hidden;
   position: relative;
 }
@@ -10,19 +10,15 @@
 }
 
 .active {
-  background-color: rgb(255, 255, 255);
-  color: rgb(2, 117, 96);
-  -webkit-box-shadow: inset 0px 0px 0px 2.5px var(--adminPanelBgColor);
-  -moz-box-shadow: inset 0px 0px 0px 2.5px var(--adminPanelBgColor);
-  box-shadow: inset 0px 0px 0px 2.5px var(--adminPanelBgColor);
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.158);
 }
 
 .active > a {
-  color: var(--adminPanelBgColor);
+  color: rgba(255, 255, 255, 0.911);
 }
 
 .link {
-  border: 1px solid gainsboro;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.1rem;
@@ -30,23 +26,28 @@
 }
 
 .link:hover {
-  border: 1px solid rgb(82, 87, 86);
-  background-color: rgba(255, 255, 255, 0.123);
-}
-
-.active:hover {
-  border: 1px solid rgb(82, 87, 86);
-  background-color: rgba(255, 255, 255, 0.842);
+  background-color: rgba(255, 255, 255, 0.158);
 }
 
 .list > li > a {
-  min-height: 30px;
-  min-width: 110px;
+  max-height: 50px;
+  height: 50px;
+  width: 90%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 15px;
   text-decoration: none;
   padding: 2.5px 10px 2.5px 10px;
+}
+
+.list > li > a > p {
+  padding-top: 5px;
+}
+
+.list > li > a > svg {
+  max-width: 24px;
+  max-height: 24px;
 }
 
 .hidden {

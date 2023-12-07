@@ -5,7 +5,7 @@
     rgba(235, 0, 255, 0.8743872549019608) 69%,
     rgba(235, 0, 255, 0.5830707282913166) 97%
   );
-  --adminPanelBgColor: rgb(2, 117, 96);
+  --adminPanelBgColor: #23462b;
   --storePageBgColor: rgb(16, 16, 16);
   --accentColor: rgba(218, 2, 218, 0.219);
 }

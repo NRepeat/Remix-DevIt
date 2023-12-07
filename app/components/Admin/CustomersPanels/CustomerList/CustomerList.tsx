@@ -1,10 +1,10 @@
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
-import type { AdminPanelProps } from "~/components/Admin/AdminPanel/AdminPanel";
+import type { CRUDPanelProps } from "../../CRUD/CRUDPanel";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import styles from "./styles.module.css";
 
-const CustomerList: FC<SerializeFrom<AdminPanelProps>> = ({ data }) => {
+const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
   return (
     <div>
       <div className={styles.head}>

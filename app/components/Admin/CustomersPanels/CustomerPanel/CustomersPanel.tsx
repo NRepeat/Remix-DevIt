@@ -1,14 +1,14 @@
-import type { FC } from "react";
-import type { AdminPanelProps } from "../../AdminPanel/AdminPanel";
 import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
-import styles from "./styles.module.css";
+import type { FC } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
-import CustomerList from "../CustomerList/CustomerList";
 import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
 import Pagination from "~/components/Pagination/Pagination";
+import type { CRUDPanelProps } from "../../CRUD/CRUDPanel";
+import CustomerList from "../CustomerList/CustomerList";
+import styles from "./styles.module.css";
 
-const CustomersPanel: FC<SerializeFrom<AdminPanelProps>> = ({
+const CustomersPanel: FC<SerializeFrom<CRUDPanelProps>> = ({
   data,
   currentPage,
 }) => {

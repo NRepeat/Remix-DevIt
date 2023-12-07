@@ -1,8 +1,12 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-const Header: React.FC = () => {
-  return <div className={styles.gridHeader}>Header Content</div>;
+export type Header = {
+  children: React.ReactNode;
+};
+
+const Header: React.FC<Header> = ({ children }) => {
+  return <div className={styles.gridHeader}>{children}</div>;
 };
 
 export default Header;
