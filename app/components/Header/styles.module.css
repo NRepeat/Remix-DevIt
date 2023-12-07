@@ -3,6 +3,7 @@
   grid-area: header;
   justify-content: space-between;
   position: relative;
+  min-width: 290px;
 }
 
 .header::after {

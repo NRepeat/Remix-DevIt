@@ -8,7 +8,7 @@
 }
 
 .button {
-  border-radius: 5px;
+  border-radius: 2px;
   height: 35px;
   min-width: 35px;
   border: 0;
@@ -33,12 +33,16 @@
   height: 100%;
   text-decoration: none;
 }
+
 .currentPage {
-  background-color: rgb(204, 0, 204);
+  background-color: rgba(204, 0, 204, 0.425);
+  color: white;
 }
+
 .adminCurrentPage {
   background-color: rgb(2, 117, 96);
 }
+
 .adminButton {
   border-radius: 5px;
   height: 35px;

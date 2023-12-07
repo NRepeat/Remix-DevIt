@@ -2,11 +2,23 @@
   background-color: var(--storePageBgColor);
   overflow: hidden;
   height: 100%;
-  overflow-y: hidden;
 }
 
 .list {
   display: none;
+}
+
+.list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.219);
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--accentColor);
+  border-radius: 20px;
 }
 
 .active {
@@ -20,13 +32,14 @@
   font-weight: lighter;
   transition: all 0.2s;
   position: relative;
+  width: 100%;
 }
 
 .link::after {
   content: "";
   position: absolute;
   width: 100%;
-  background: var(--gradientColor);
+  background: var(--accentColor);
   left: 0;
   bottom: 0;
   height: 1px;
@@ -72,7 +85,7 @@
 
 .isHamburger {
   position: absolute;
-  left: 0;
+  left: 15px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -102,7 +115,7 @@
   }
 
   .isHamburger {
-    width: 100%;
+    width: 95%;
   }
 }
 
@@ -115,8 +128,12 @@
     max-width: 250px;
     flex-direction: column;
     justify-content: space-between;
-    border: 1px solid rgb(218, 2, 218);
+    border: 1px solid var(--accentColor);
     z-index: 100;
+    margin-top: 83px;
+    overflow-y: scroll;
+
+    max-height: 80vh;
   }
 
   .isHamburger {

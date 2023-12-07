@@ -13,9 +13,16 @@ export interface ListProps {
   navigation: Location;
   isHamburger: boolean;
   isOpen: boolean;
+  toggle: (nextValue?: any) => void;
 }
 
-const List: FC<ListProps> = ({ links, navigation, isHamburger, isOpen }) => {
+const List: FC<ListProps> = ({
+  links,
+  navigation,
+  isHamburger,
+  isOpen,
+  toggle,
+}) => {
   const submit = useSubmit();
   return (
     <>
@@ -32,15 +39,12 @@ const List: FC<ListProps> = ({ links, navigation, isHamburger, isOpen }) => {
                 ),
               })}
             >
-              {/* <Link to={link.url}><p className={styles.label}>{link.label} </p></Link> */}
               <button
                 className={styles.button}
-                onClick={() =>
-                  submit(
-                    { category: link.slug },
-                    { action: link.url, preventScrollReset: true }
-                  )
-                }
+                onClick={() => {
+                  toggle(false);
+                  submit({ category: link.slug }, { action: link.url });
+                }}
               >
                 <p className={styles.label}>{link.label} </p>
               </button>

@@ -12,7 +12,6 @@ export interface MapListProps {
 const MapList: FC<SerializeFrom<MapListProps>> = ({ productsData }) => {
   return (
     <>
-      {" "}
       {productsData.products.length ? (
         <ul className={styles.list}>
           {productsData.products.map((product: SerializeFrom<Product>) => {

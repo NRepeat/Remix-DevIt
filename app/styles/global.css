@@ -7,6 +7,20 @@
   );
   --adminPanelBgColor: rgb(2, 117, 96);
   --storePageBgColor: rgb(16, 16, 16);
+  --accentColor: rgba(218, 2, 218, 0.219);
+}
+
+.body::-webkit-scrollbar {
+  width: 12px;
+}
+
+.body::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0);
+}
+
+.body::-webkit-scrollbar-thumb {
+  background-color: var(--accentColor);
+  border-radius: 20px;
 }
 
 .bodyError {

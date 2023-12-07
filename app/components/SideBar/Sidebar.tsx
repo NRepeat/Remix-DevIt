@@ -1,9 +1,9 @@
 import type { Category } from "@prisma/client";
-import { useClickOutside } from "@reactuses/core";
+import { useClickOutside, useToggle } from "@reactuses/core";
 import type { SerializeFrom } from "@remix-run/node";
 import Hamburger from "hamburger-react";
 import type { FC } from "react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
 import { useLocation } from "@remix-run/react";
 import List from "./List";
@@ -13,31 +13,27 @@ export interface SidebarProps {
 }
 
 const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ categories }) => {
-  const [isOpen, setOpen] = useState(false);
   const navigation = useLocation();
+  const [on, toggle] = useToggle(true);
   const refM = useRef(null);
-  useClickOutside(refM, () => setOpen((prev) => !prev));
+  useClickOutside(refM, () => toggle(false));
   const links = categories.map((category) => ({
     slug: category.slug,
     label: category.name,
     url: `/products/`,
   }));
   return (
-    <nav className={styles.gridSidebar}>
+    <nav ref={refM} className={styles.gridSidebar}>
       <div className={styles.hidden}>
-        <Hamburger
-          color="#ffffff"
-          toggled={isOpen}
-          size={20}
-          toggle={setOpen}
-        />
+        <Hamburger color="#ffffff" toggled={on} size={20} toggle={toggle} />
       </div>
-      {isOpen && (
+      {on && (
         <List
           links={links}
           navigation={navigation}
           isHamburger={true}
-          isOpen={isOpen}
+          isOpen={on}
+          toggle={toggle}
         />
       )}
       <List
@@ -45,6 +41,7 @@ const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ categories }) => {
         navigation={navigation}
         isHamburger={false}
         isOpen={true}
+        toggle={toggle}
       />
     </nav>
   );

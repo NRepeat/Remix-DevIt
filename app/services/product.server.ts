@@ -31,7 +31,7 @@ export const getAllProducts = async (
 ): Promise<ProductData> => {
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
-  const pageSize: number = 10;
+  const pageSize: number = 12;
   const skip = (page - 1) * pageSize;
   try {
     const [products, totalProductsCount] = await Promise.all([

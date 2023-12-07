@@ -1,8 +1,7 @@
 import type { SerializeFrom } from "@remix-run/node";
-import { useLocation } from "@remix-run/react";
 import type { FC } from "react";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import Footer from "~/components/Footer/Footer";
 import Header from "~/components/Header/Header";
 import Pagination from "~/components/Pagination/Pagination";
 import ProductsList from "~/components/ProductsList/ProductsList";
@@ -12,15 +11,15 @@ import Sidebar from "../../components/SideBar/Sidebar";
 import styles from "./styles.module.css";
 
 const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
-  const location = useLocation();
+  // const location = useLocation();
 
-  const breadcrumbs = [
-    { label: "Home", link: "/products" },
-    {
-      label: `${location.search.slice(10)}`,
-      link: `/products/?category=${location.search.slice(10)}`,
-    },
-  ];
+  // const breadcrumbs = [
+  //   { label: "Home", link: "/products" },
+  //   {
+  //     label: `${location.search.slice(10)}`,
+  //     link: `/products/?category=${location.search.slice(10)}`,
+  //   },
+  // ];
 
   return (
     <>
@@ -34,11 +33,11 @@ const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
             <div className={styles.sort}>
               <SortTypesList />
             </div>
-            <div>
-              <Breadcrumbs admin={false} breadcrumbs={breadcrumbs} />
+            <div className={styles.productsListContainer}>
+              {/* <Breadcrumbs admin={false} breadcrumbs={breadcrumbs} /> */}
+              <ProductsList productsData={data.products} />
             </div>
-            <ProductsList productsData={data.products} />
-            <div className="paginationContainer">
+            <div className={styles.paginationContainer}>
               <Pagination
                 admin={false}
                 currentPage={data.page}
@@ -47,6 +46,9 @@ const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
             </div>
           </div>
         </main>
+        <div className={styles.footer}>
+          <Footer />
+        </div>
       </PageLayout>
     </>
   );
