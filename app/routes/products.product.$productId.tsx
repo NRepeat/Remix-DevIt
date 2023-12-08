@@ -11,6 +11,7 @@ import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductL
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import Header from "~/components/Header/Header";
 import Product from "~/components/Store/Product/Product";
+import ProductImages from "~/components/Store/Product/ProductImages/ProductImages";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { getProduct } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
@@ -79,6 +80,7 @@ function ProductRoute() {
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
       </div>
       <Product data={data} />
+      <ProductImages product={data.product} />
     </SingleProductLayout>
   );
 }

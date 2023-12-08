@@ -1,0 +1,21 @@
+.container {
+  grid-area: main;
+  grid-column: 2/4;
+  display: flex;
+  gap: 10px;
+  border: 2px solid purple;
+  border-radius: 10px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  padding: 15px;
+  margin-left: 10px;
+  height: min-content;
+  min-width: 250px;
+}
+
+.img {
+  max-width: 250px;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 1.1;
+}

@@ -24,9 +24,11 @@ const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {
         </div>
         <div className={styles.information}>
           <ProductInformation product={data.product} />
+
           <AddToCart product={data.product} />
         </div>
       </div>
+
     </div>
   );
 };
