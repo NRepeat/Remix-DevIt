@@ -1,9 +1,7 @@
 .productContainer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  background-color: black;
 }
+
 .breadcrumbs {
-  padding-left: 220px;
+  grid-area: bread;
 }

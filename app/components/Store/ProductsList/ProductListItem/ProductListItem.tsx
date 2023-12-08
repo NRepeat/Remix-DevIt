@@ -2,8 +2,8 @@ import type { Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import { AddToCart } from "~/components/AddToCart/AddToCart";
-import ProductInformation from "~/components/ProductInformation/ProductInformation";
+import { AddToCart } from "~/components/Store/AddToCart/AddToCart";
+import ProductInformation from "~/components/Store/Product/ProductInformation/ProductInformation";
 import styles from "./styles.module.css";
 
 const ProductListItem: FC<{

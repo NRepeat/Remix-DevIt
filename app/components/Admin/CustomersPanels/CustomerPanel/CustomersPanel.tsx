@@ -3,7 +3,7 @@ import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
-import Pagination from "~/components/Pagination/Pagination";
+import Pagination from "~/components/Store/Pagination/Pagination";
 import type { CRUDPanelProps } from "../../CRUD/CRUDPanel";
 import CustomerList from "../CustomerList/CustomerList";
 import styles from "./styles.module.css";

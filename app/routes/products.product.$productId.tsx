@@ -7,12 +7,14 @@ import type {
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductLayout";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
-import Product from "~/components/Product/Product";
+import Header from "~/components/Header/Header";
+import Product from "~/components/Store/Product/Product";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
+import { getProduct } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
 import productPage from "../styles/productPage.css";
-import { getProduct } from "~/services/product.server";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: productPage },
@@ -66,17 +68,18 @@ function ProductRoute() {
     { label: "Home", link: "/products" },
     {
       label: `${data.product.category.slug}`,
-      link: `/products/category/${data.product.category.slug}`,
+      link: `/products/?category=${data.product.category.slug}`,
     },
     { label: `${data.product.title}`, link: "" },
   ];
   return (
-    <div className="productContainer">
+    <SingleProductLayout>
+      <Header />
       <div className="breadcrumbs">
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
       </div>
       <Product data={data} />
-    </div>
+    </SingleProductLayout>
   );
 }
 

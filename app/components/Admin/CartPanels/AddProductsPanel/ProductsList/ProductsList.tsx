@@ -2,7 +2,7 @@ import type { SerializeFrom } from "@remix-run/node";
 import { useSubmit } from "@remix-run/react";
 import type { FC } from "react";
 import { useState } from "react";
-import Pagination from "~/components/Pagination/Pagination";
+import Pagination from "~/components/Store/Pagination/Pagination";
 import type { Quantities } from "../../ItemsList/ItemsList";
 import type { AddProductProps } from "../AddProductsPanel";
 import { handleAddItemToCart } from "./HandleAddItemToCart";
