@@ -17,11 +17,12 @@ const CustomersPanel: FC<SerializeFrom<CRUDPanelProps>> = ({
         <div className={styles.container}>
           <div className={styles.searchContainer}>
             <SearchBar action="/admin/crud/customers/" />
-            <Link to={"/admin/crud/customers/customer/create"}>Create customer</Link>
+            <Link to={"/admin/crud/customers/customer/create"}>
+              Create customer
+            </Link>
           </div>
           <div className={styles.listContainer}>
             <CustomerList data={data} />
-
           </div>
           <Pagination
             admin={true}

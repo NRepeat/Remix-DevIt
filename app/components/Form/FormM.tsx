@@ -10,16 +10,28 @@ export interface FormMProps
   isFetcher: boolean;
 }
 
-const FormM: FC<FormMProps> = ({ children, isFetcher, className, ...props }) => {
+const FormM: FC<FormMProps> = ({
+  children,
+  isFetcher,
+  className,
+  ...props
+}) => {
   const fetcher = useFetcher();
   return isFetcher ? (
-    <fetcher.Form className={clsx(styles.form, className)} action={props.action} method={props.method}>
+    <fetcher.Form
+      className={clsx(styles.form, className)}
+      action={props.action}
+      method={props.method}
+    >
       {children}
     </fetcher.Form>
   ) : (
-    <Form action={props.action} className={clsx(styles.form, className)} method={props.method}>
+    <Form
+      action={props.action}
+      className={clsx(styles.form, className)}
+      method={props.method}
+    >
       {children}
-
     </Form>
   );
 };

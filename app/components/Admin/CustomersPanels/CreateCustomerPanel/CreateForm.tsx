@@ -45,7 +45,9 @@ const CreateForm: FC<FormProps> = () => {
         </div>
       </div>
 
-      <Button className={styles.button} type="submit">Submit</Button>
+      <Button className={styles.button} type="submit">
+        Submit
+      </Button>
     </FormM>
   );
 };

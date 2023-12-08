@@ -1,9 +1,6 @@
 .customersPanel {
   grid-area: crud-main;
-
 }
-
-
 
 .searchContainer {
   display: inline-flex;
@@ -11,7 +8,7 @@
   justify-content: space-between;
 }
 
-.searchContainer>a {
+.searchContainer > a {
   color: rgb(255, 255, 255);
   display: inline-flex;
   align-items: center;
@@ -22,6 +19,8 @@
   cursor: pointer;
 }
 
-.searchContainer {}
+.searchContainer {
+}
 
-.listContainer {}
+.listContainer {
+}

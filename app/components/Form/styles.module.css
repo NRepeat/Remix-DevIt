@@ -14,12 +14,12 @@
   padding: 10px;
 }
 
-.field>p {
+.field > p {
   padding-bottom: 5px;
   color: white;
 }
 
-.field>input {
+.field > input {
   padding-left: 5px;
   padding-top: 7px;
   padding-bottom: 7px;
