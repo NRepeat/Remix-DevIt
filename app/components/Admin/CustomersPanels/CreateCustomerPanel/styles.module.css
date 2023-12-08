@@ -1,58 +1,69 @@
 .addPanel {
   border: 1px solid gainsboro;
-  width: 70%;
-  height: 600px;
-  max-height: 600px;
-  min-width: 650px;
+  width: min-content;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.5s ease;
+  z-index: 10;
+  padding: 20px;
+  background-color: rgba(32, 94, 32);
+}
 
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-}
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 70%;
-  height: 95%;
-}
-.inputs {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 70%;
-  height: 95%;
-  padding-bottom: 20px;
-}
-.inputs > p {
-  width: 100%;
-  text-align: left;
-  padding-left: 110px;
-}
-.inputs > input {
-  height: 35px;
-  width: 80%;
-  line-height: 1.5rem;
-  font-size: 1.3rem;
-}
 .head {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  position: relative;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+  padding-bottom: 10px;
 }
 
-.buttons {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
+.head>a {
+  text-decoration: none;
+  color: white;
 }
-.link {
-  padding-top: 20px;
-  padding-right: 10px;
+
+.head::after {
+  content: "";
+  position: absolute;
+  height: 1px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  background-color: gainsboro;
+}
+
+.form {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.field {
+  padding: 10px;
+}
+
+.field>p {
+  padding-bottom: 5px;
+  color: white;
+}
+
+
+
+.button {
+  margin-top: 10px;
+  padding: 10px;
+  color: white;
+  background-color: cadetblue;
+  width: 35%;
 }

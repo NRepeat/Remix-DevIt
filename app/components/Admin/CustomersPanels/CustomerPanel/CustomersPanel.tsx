@@ -14,21 +14,20 @@ const CustomersPanel: FC<SerializeFrom<CRUDPanelProps>> = ({
   return (
     <div className={styles.customersPanel}>
       {data.customers.customers && (
-        <div className={styles.customerListContainer}>
+        <div className={styles.container}>
           <div className={styles.searchContainer}>
-            <SearchBar action="/admin/customers/" />
-            <Link to={"/admin/customers/customer/create"}>Add Customer</Link>
+            <SearchBar action="/admin/crud/customers/" />
+            <Link to={"/admin/crud/customers/customer/create"}>Create customer</Link>
           </div>
           <div className={styles.listContainer}>
             <CustomerList data={data} />
-            <div>
-              <Pagination
-                admin={true}
-                currentPage={currentPage!}
-                totalPages={data.customers.totalPages}
-              />
-            </div>
+
           </div>
+          <Pagination
+            admin={true}
+            currentPage={currentPage!}
+            totalPages={data.customers.totalPages}
+          />
         </div>
       )}
     </div>

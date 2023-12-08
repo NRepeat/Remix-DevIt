@@ -2,9 +2,10 @@ import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
+import Modal from "~/components/Modal/Modal";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
-import EditForm from "./EditForm/EditForm";
-import { handleChange } from "./HeandelChange";
+import EditForm from "./EditForm";
+import { handleChange } from "./HandelChange";
 import styles from "./styles.module.css";
 
 export interface EditCustomerPanelProps {
@@ -30,7 +31,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
   }, [customer]);
 
   return (
-    <div className={styles.md}>
+    <Modal>
       <div className={styles.editCustomerPanel}>
         <div className={styles.head}>
           <h2>Edit {customer.name}</h2>
@@ -44,7 +45,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
           handleChange={handleChange}
         />
       </div>
-    </div>
+    </Modal>
   );
 };
 

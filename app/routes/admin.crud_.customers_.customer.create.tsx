@@ -2,8 +2,6 @@ import CreateCustomerPanel from "~/components/Admin/CustomersPanels/CreateCustom
 
 export default function () {
   return (
-    <div className="containerBase">
-      <CreateCustomerPanel />
-    </div>
+    <CreateCustomerPanel />
   );
 }

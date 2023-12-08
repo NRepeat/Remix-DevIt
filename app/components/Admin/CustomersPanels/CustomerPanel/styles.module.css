@@ -1,15 +1,27 @@
 .customersPanel {
   grid-area: crud-main;
+
 }
 
-.head {
-}
 
-.customerListContainer {
-}
 
 .searchContainer {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
-.listContainer {
+.searchContainer>a {
+  color: rgb(255, 255, 255);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-color: rgb(8, 3, 77);
+  cursor: pointer;
 }
+
+.searchContainer {}
+
+.listContainer {}

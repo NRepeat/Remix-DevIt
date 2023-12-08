@@ -11,5 +11,5 @@ export interface InputProps
 }
 
 export const Input: FC<InputProps> = ({ children, className, ...props }) => (
-  <Input className={clsx(styles.input, className)} {...props} />
+  <input className={clsx(styles.input, className)} {...props} />
 );
