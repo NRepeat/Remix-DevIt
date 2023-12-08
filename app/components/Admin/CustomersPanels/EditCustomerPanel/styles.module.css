@@ -4,23 +4,29 @@
   height: 600px;
   max-height: 600px;
   min-width: 650px;
-
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
+  z-index: 10;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
+
 .head {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
+
 .addPanel {
   border: 1px solid gainsboro;
   max-width: 60%;
   min-width: 870px;
   padding: 10px;
 }
+
 .form {
   display: flex;
   flex-direction: column;
@@ -29,6 +35,7 @@
   width: 70%;
   height: 95%;
 }
+
 .inputs {
   display: flex;
   flex-direction: column;
@@ -38,27 +45,32 @@
   height: 95%;
   padding-bottom: 20px;
 }
+
 .inputs > p {
   width: 100%;
   text-align: left;
   padding-left: 110px;
 }
+
 .inputs > input {
   height: 35px;
   width: 80%;
   line-height: 1.5rem;
   font-size: 1.3rem;
 }
+
 .head {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
+
 .buttons {
   display: flex;
   justify-content: flex-start;
   width: 100%;
 }
+
 .link {
   padding-top: 20px;
   padding-right: 10px;

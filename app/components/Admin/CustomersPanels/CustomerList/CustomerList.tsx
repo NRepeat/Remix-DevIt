@@ -1,31 +1,45 @@
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
+import { Input } from "~/components/Input/Input";
 import type { CRUDPanelProps } from "../../CRUD/CRUDPanel";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import styles from "./styles.module.css";
 
 const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
   return (
-    <div>
-      <div className={styles.head}>
-        <p>ID</p>
-        <p>Name</p>
-        <p>Second Name</p>
-        <p>Email</p>
-        <p className={styles.action}>Action</p>
-      </div>
-      <div className={styles.body}>
+    <table className={styles.table}>
+      <thead>
+        <tr className={styles.head}>
+          <td className={styles.checkbox}>
+            <Input type="checkbox" name="id" id="selectAll" />
+          </td>
+          <td>Name</td>
+          <td>Created at</td>
+          <td>Cart</td>
+          <td>Action</td>
+        </tr>
+      </thead>
+      <tbody>
         {data.customers.customers.map((customer) => (
-          <div key={customer.id} className={styles.info}>
-            <p>{customer.id}</p>
-            <p>{customer.name}</p>
-            <p>{customer.secondName}</p>
-            <p>{customer.email}</p>
-            <ButtonContainer customer={customer} />
-          </div>
+          <tr key={customer.id} className={styles.info}>
+            <td>
+              <Input type="checkbox" name="id" id={`checkbox-${customer.id}`} />
+            </td>
+            <td>
+              <p className={styles.bold}>
+                {customer.name} {customer.secondName}
+              </p>
+              {customer.email}
+            </td>
+            <td>{new Date(customer.createdAt).toLocaleDateString()}</td>
+            <td>{customer.cart?.id}</td>
+            <td>
+              <ButtonContainer customer={customer} />
+            </td>
+          </tr>
         ))}
-      </div>
-    </div>
+      </tbody>
+    </table>
   );
 };
 

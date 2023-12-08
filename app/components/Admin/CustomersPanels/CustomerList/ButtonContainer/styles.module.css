@@ -1,0 +1,23 @@
+.buttonContainer {
+  gap: 20px;
+  display: inline-flex;
+  width: 100%;
+}
+
+.button {
+  padding: 5px;
+  text-decoration: none;
+  min-width: 60px;
+  width: 100%;
+  cursor: pointer;
+  color: white;
+  text-align: center;
+}
+
+.edit {
+  background-color: rgb(188, 199, 42);
+}
+
+.delete {
+  background-color: red;
+}

@@ -10,7 +10,7 @@
   align-self: center;
 }
 
-.poster>img {
+.poster > img {
   width: 100%;
   height: auto;
   object-fit: cover;

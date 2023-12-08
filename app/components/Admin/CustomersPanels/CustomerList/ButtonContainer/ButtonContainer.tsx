@@ -1,9 +1,11 @@
-import React from "react";
-import styles from "../styles.module.css";
-import { Link, useSubmit } from "@remix-run/react";
-import type { CustomerWithoutPassword } from "~/services/customer.server";
 import type { SerializeFrom } from "@remix-run/node";
+import { Link, useSubmit } from "@remix-run/react";
 import clsx from "clsx";
+import React from "react";
+import { Button } from "~/components/Button/Button";
+import type { CustomerWithoutPassword } from "~/services/customer.server";
+import { handleSubmit } from "./Handle";
+import styles from "./styles.module.css";
 
 export interface ButtonContainerProps {
   customer: CustomerWithoutPassword;
@@ -13,19 +15,7 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
   customer,
 }) => {
   const submit = useSubmit();
-  const handleSubmit = (id: number) => {
-    const isConfirmDeleteCustomer = confirm(`Confirm delete customer ${id}`);
-    if (!isConfirmDeleteCustomer) {
-      return null;
-    }
-    submit({ id }, { method: "post", action: `/admin/customer/delete` });
-  };
-  const handleCartCreate = (id: number) => {
-    submit(
-      {},
-      { action: `/admin/customers/customer/${id}/cart/create`, method: "post" }
-    );
-  };
+
   return (
     <div className={styles.buttonContainer}>
       <Link
@@ -35,27 +25,12 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
         Edit
       </Link>
 
-      {customer.cart?.id ? (
-        <Link
-          className={clsx(styles.button, styles.cart)}
-          to={`/admin/customers/customer/${customer.id}/cart`}
-        >
-          Cart
-        </Link>
-      ) : (
-        <button
-          className={clsx(styles.button, styles.cart)}
-          onClick={() => handleCartCreate(customer.id)}
-        >
-          Create cart
-        </button>
-      )}
-      <button
+      <Button
         className={clsx(styles.button, styles.delete)}
-        onClick={() => handleSubmit(customer.id)}
+        onClick={() => handleSubmit({ id: customer.id, submit })}
       >
         Delete
-      </button>
+      </Button>
     </div>
   );
 };

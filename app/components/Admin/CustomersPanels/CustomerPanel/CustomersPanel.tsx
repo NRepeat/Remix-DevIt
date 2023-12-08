@@ -1,7 +1,6 @@
 import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import type { CRUDPanelProps } from "../../CRUD/CRUDPanel";
@@ -12,12 +11,8 @@ const CustomersPanel: FC<SerializeFrom<CRUDPanelProps>> = ({
   data,
   currentPage,
 }) => {
-  const breadcrumbs = [{ label: "Customers", link: "/admin/customers" }];
   return (
     <div className={styles.customersPanel}>
-      <div className={styles.head}>
-        <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
-      </div>
       {data.customers.customers && (
         <div className={styles.customerListContainer}>
           <div className={styles.searchContainer}>

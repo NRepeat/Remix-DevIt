@@ -18,8 +18,10 @@ type Props = {
   data?: {};
 };
 
+// const cards = [{ title: "Customers", link: "/admin/crud/customers/" }, { title: "Carts", link: "/admin/crud/carts/" }, { title: "Products", link: "/admin/crud/products/" }]
+
 const CRUDPanel: FC<Props> = ({ children, data }) => {
-  return <div className={styles.panel}> {children}</div>;
+  return <div className={styles.panel}>{children}</div>;
 };
 
 export default CRUDPanel;

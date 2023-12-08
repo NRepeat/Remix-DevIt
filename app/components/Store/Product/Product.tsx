@@ -28,7 +28,6 @@ const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {
           <AddToCart product={data.product} />
         </div>
       </div>
-
     </div>
   );
 };

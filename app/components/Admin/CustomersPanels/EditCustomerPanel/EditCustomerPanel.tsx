@@ -1,9 +1,11 @@
 import type { SerializeFrom } from "@remix-run/node";
-import { Link, useFetcher } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
+import EditForm from "./EditForm/EditForm";
+import { handleChange } from "./HeandelChange";
 import styles from "./styles.module.css";
 
 export interface EditCustomerPanelProps {
@@ -13,7 +15,6 @@ export interface EditCustomerPanelProps {
 const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
   customer,
 }) => {
-  const fetcher = useFetcher();
   const [formData, setFormData] = useState({
     name: customer.name,
     secondName: customer.secondName,
@@ -28,13 +29,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
       id: customer.id,
     });
   }, [customer]);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
     {
@@ -42,6 +37,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
       link: `/admin/customers/customer/${customer.id}/edit`,
     },
   ];
+
   return (
     <div className={styles.editCustomerPanel}>
       <div className={styles.head}>
@@ -50,49 +46,11 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
           Close
         </Link>
       </div>
-
-      <fetcher.Form
-        className={styles.form}
-        action="/admin/customer/update"
-        method="post"
-      >
-        <div className={styles.inputs}>
-          <p>Customer's Name</p>
-          <input
-            type="text"
-            name="name"
-            placeholder="Name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          <p>Customer's Second Name</p>
-          <input
-            type="text"
-            name="secondName"
-            placeholder="Second name"
-            value={formData.secondName}
-            onChange={handleChange}
-            required
-          />
-
-          <p>Customer's email</p>
-
-          <input
-            type="text"
-            name="email"
-            placeholder="Email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <input type="hidden" name="id" value={formData.id} />
-        </div>
-
-        <div className={styles.buttons}>
-          <button type="submit">Submit</button>
-        </div>
-      </fetcher.Form>
+      <EditForm
+        formData={formData}
+        setFormData={setFormData}
+        handleChange={handleChange}
+      />
     </div>
   );
 };
