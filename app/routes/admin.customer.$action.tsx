@@ -35,7 +35,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
     case "update":
       if (parsedId !== null && name && secondName && email) {
         await updateCustomer(parsedId, { name, secondName, email });
-        return redirect("/admin/customers");
+        return redirect("/admin/crud/customers");
       } else {
         throw new Response("Invalid input for updating a customer");
       }

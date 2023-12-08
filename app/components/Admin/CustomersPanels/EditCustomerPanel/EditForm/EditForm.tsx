@@ -1,7 +1,6 @@
-import { Form } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 import type { FC } from "react";
 import { Button } from "~/components/Button/Button";
-import { Input } from "~/components/Input/Input";
 import type { HandleArgs } from "../HeandelChange";
 import styles from "../styles.module.css";
 
@@ -24,45 +23,56 @@ type FormProps = {
 };
 
 const EditForm: FC<FormProps> = ({ formData, setFormData, handleChange }) => {
+  const fetcher = useFetcher();
   return (
-    <Form className={styles.form} action="/admin/customer/update" method="post">
+    <fetcher.Form
+      className={styles.form}
+      action="/admin/customer/update"
+      method="post"
+    >
       <div className={styles.inputs}>
-        <p>Customer's Name</p>
-        <Input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={(e) => handleChange({ e, setFormData })}
-          required
-        />
-        <p>Customer's Second Name</p>
-        <Input
-          type="text"
-          name="secondName"
-          placeholder="Second name"
-          value={formData.secondName}
-          onChange={(e) => handleChange({ e, setFormData })}
-          required
-        />
+        <div className={styles.field}>
+          <p> Name</p>
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            value={formData.name}
+            onChange={(e) => handleChange({ e, setFormData })}
+            required
+          />
+        </div>
+        <div className={styles.field}>
+          <p>Last Name</p>
+          <input
+            type="text"
+            name="secondName"
+            placeholder="Last Name"
+            value={formData.secondName}
+            onChange={(e) => handleChange({ e, setFormData })}
+            required
+          />
+        </div>
+        <div className={styles.field}>
+          <p>Email</p>
 
-        <p>Customer's email</p>
+          <input
+            type="text"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) => handleChange({ e, setFormData })}
+            required
+          />
+        </div>
 
-        <Input
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={(e) => handleChange({ e, setFormData })}
-          required
-        />
-        <Input type="hidden" name="id" value={formData.id} />
+        <input type="hidden" name="id" value={formData.id} />
       </div>
 
-      <div className={styles.buttons}>
-        <Button type="submit">Submit</Button>
-      </div>
-    </Form>
+      <Button className={styles.button} type="submit">
+        Submit
+      </Button>
+    </fetcher.Form>
   );
 };
 

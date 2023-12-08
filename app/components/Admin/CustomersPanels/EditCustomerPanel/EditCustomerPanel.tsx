@@ -2,7 +2,6 @@ import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import EditForm from "./EditForm/EditForm";
 import { handleChange } from "./HeandelChange";
@@ -30,27 +29,21 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
     });
   }, [customer]);
 
-  const breadcrumbs = [
-    { label: "Customers", link: "/admin/customers" },
-    {
-      label: `Edit customer ${customer.name}`,
-      link: `/admin/customers/customer/${customer.id}/edit`,
-    },
-  ];
-
   return (
-    <div className={styles.editCustomerPanel}>
-      <div className={styles.head}>
-        <Breadcrumbs breadcrumbs={breadcrumbs} admin={true} />
-        <Link className={styles.link} to={"/admin/customers/"}>
-          Close
-        </Link>
+    <div className={styles.md}>
+      <div className={styles.editCustomerPanel}>
+        <div className={styles.head}>
+          <h2>Edit {customer.name}</h2>
+          <Link className={styles.link} to={"/admin/crud/customers/"}>
+            x
+          </Link>
+        </div>
+        <EditForm
+          formData={formData}
+          setFormData={setFormData}
+          handleChange={handleChange}
+        />
       </div>
-      <EditForm
-        formData={formData}
-        setFormData={setFormData}
-        handleChange={handleChange}
-      />
     </div>
   );
 };
