@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import ItemsList from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 import { getCartByCustomerId } from "~/services/cart.server";
@@ -30,13 +30,10 @@ export default function () {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="containerBase">
-      <ItemsList
-        cart={data.cart}
-        customerId={data.customerId}
-        products={data.products}
-      />
-      <Outlet />
-    </div>
+    <ItemsList
+      cart={data.cart}
+      customerId={data.customerId}
+      products={data.products}
+    />
   );
 }

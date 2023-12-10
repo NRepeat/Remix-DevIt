@@ -25,7 +25,11 @@ type FormProps = {
 
 const EditForm: FC<FormProps> = ({ formData, setFormData, handleChange }) => {
   return (
-    <FormM action="/admin/customer/update" method="post" isFetcher={false}>
+    <FormM
+      action="/admin/customers/customer/update"
+      method="post"
+      isFetcher={true}
+    >
       <div className={styles.field}>
         <p> Name</p>
         <Input

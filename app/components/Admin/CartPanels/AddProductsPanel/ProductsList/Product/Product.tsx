@@ -1,4 +1,4 @@
-import { Link, useRouteLoaderData } from "@remix-run/react";
+import { useRouteLoaderData } from "@remix-run/react";
 import type { FC } from "react";
 import type { loader } from "~/routes/admin.customers_.customer.$id.cart";
 import type { ProductProps } from "~/types/types";
@@ -26,24 +26,22 @@ const ProductRow: FC<ProductProps> = ({
 
   return (
     <li className={styles.product}>
-      <Link to={`/admin/customers/customer/${product.id}/cart/products/`}>
-        <ProductInformation product={product} />
-        <QuantityCounter
-          handleQuantityChange={handleQuantityChange}
-          productId={product.id}
-          productStock={product.stock}
-          quantities={quantities}
-          setQuantities={setQuantities}
-        />
-        <AddToCartButton
-          cart={cart}
-          handleAddItemToCart={handleAddItemToCart}
-          product={product}
-          quantities={quantities}
-          submit={submit}
-          customerId={customerId}
-        />
-      </Link>
+      <ProductInformation product={product} />
+      <QuantityCounter
+        handleQuantityChange={handleQuantityChange}
+        productId={product.id}
+        productStock={product.stock}
+        quantities={quantities}
+        setQuantities={setQuantities}
+      />
+      <AddToCartButton
+        cart={cart}
+        handleAddItemToCart={handleAddItemToCart}
+        product={product}
+        quantities={quantities}
+        submit={submit}
+        customerId={customerId}
+      />
     </li>
   );
 };

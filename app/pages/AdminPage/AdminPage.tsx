@@ -1,7 +1,7 @@
 import { Outlet } from "@remix-run/react";
 import type { FC } from "react";
+import Header from "~/Header/Header";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
-import Header from "~/components/Admin/Header/Header";
 import Sidebar from "~/components/Admin/Sidebar/Sidebar";
 import Footer from "~/components/Footer/Footer";
 

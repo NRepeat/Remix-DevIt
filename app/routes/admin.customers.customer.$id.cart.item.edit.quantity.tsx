@@ -1,18 +1,20 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import invariant from "tiny-invariant";
 import CartItemErrors from "~/components/Errors/AdminError/CartItemErrors/CartItemErrors";
 import { getCartItemById, updateCartItem } from "~/services/cartItem.server";
-import { parseAndValidateFormData } from "~/utils/formatting.server";
-import { isProductInStock } from "~/utils/validation.server";
+import {
+  isProductInStock,
+  validateNumberTypeInFormData,
+} from "~/utils/validation.server";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   try {
-    invariant(await request.formData());
     const formData = await request.formData();
-    const quantity = parseAndValidateFormData(formData.get("quantity"));
-    const productCartId = parseAndValidateFormData(formData.get("cartItemId"));
+    const quantity = validateNumberTypeInFormData(formData.get("quantity"));
+    const productCartId = validateNumberTypeInFormData(
+      formData.get("cartItemId")
+    );
     if (quantity && productCartId) {
       const productCart = await getCartItemById(productCartId);
       if (productCart) {

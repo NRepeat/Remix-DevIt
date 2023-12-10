@@ -12,37 +12,35 @@ const CreateForm: FC<FormProps> = () => {
     <FormM
       isFetcher={false}
       className={styles.form}
-      action={`/admin/customer/create`}
+      action={`/admin/customers/customer/create`}
       method="post"
     >
-      <div className={styles.inputs}>
-        <div className={styles.field}>
-          <p>Customer's Name</p>
-          <Input type="text" name="name" placeholder="Name" required />
-        </div>
-        <div className={styles.field}>
-          <p>Customer's Second Name</p>
-          <Input
-            type="text"
-            name="secondName"
-            placeholder="Second name"
-            required
-          />
-        </div>
-        <div className={styles.field}>
-          <p>Customer's email</p>
+      <div className={styles.field}>
+        <p>Customer's Name</p>
+        <Input type="text" name="name" placeholder="Name" required />
+      </div>
+      <div className={styles.field}>
+        <p>Customer's Second Name</p>
+        <Input
+          type="text"
+          name="secondName"
+          placeholder="Second name"
+          required
+        />
+      </div>
+      <div className={styles.field}>
+        <p>Customer's email</p>
 
-          <Input type="text" name="email" placeholder="Email" required />
-        </div>
-        <div className={styles.field}>
-          <p>Customer's password</p>
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-        </div>
+        <Input type="text" name="email" placeholder="Email" required />
+      </div>
+      <div className={styles.field}>
+        <p>Customer's password</p>
+        <Input
+          type="password"
+          name="password"
+          placeholder="Password"
+          required
+        />
       </div>
 
       <Button className={styles.button} type="submit">

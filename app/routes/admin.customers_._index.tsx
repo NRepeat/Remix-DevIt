@@ -1,7 +1,6 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Outlet, useLoaderData } from "@remix-run/react";
-import CRUDPanel from "~/components/Admin/CRUD/CRUDPanel";
+import { useLoaderData } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
 import { searchCustomer } from "~/services/customer.server";
 
@@ -24,10 +23,7 @@ export default function () {
   const data = useLoaderData<typeof loader>();
   return (
     <>
-      <CRUDPanel data={data}>
-        <CustomersPanel data={data} currentPage={data.page} />
-        <Outlet />
-      </CRUDPanel>
+      <CustomersPanel data={data} currentPage={data.page} />
     </>
   );
 }

@@ -9,7 +9,7 @@ export const handleAddItemToCart = async (
   submit: SubmitFunction
 ) => {
   submit(
-    { cartId, productId, quantities },
+    { cartId, productId, quantity: quantities[productId] },
     {
       action: `/admin/customers/customer/${customerId}/cart/item/add`,
       method: "post",

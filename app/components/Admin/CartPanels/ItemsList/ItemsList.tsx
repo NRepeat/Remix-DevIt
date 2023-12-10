@@ -50,8 +50,8 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
     {
-      label: `Customer ${customerId} `,
-      link: `/admin/customers/customer/${customerId}/edit`,
+      label: `Customer ${cart.customer?.name} `,
+      link: `/admin/customers`,
     },
     { label: `Cart `, link: `/admin/customers/customer/${customerId}/cart` },
   ];
@@ -64,40 +64,47 @@ const ItemsList: FC<ItemsListProps> = ({ cart, customerId, products }) => {
       </div>
       {!toggleAdd ? (
         <>
-          <ul className={styles.list}>
-            <Button
-              onClick={() => setToggleEdit((prevToggle) => !prevToggle)}
-              type="button"
-            >
-              {toggleEdit ? "Close edit fields" : "Open edit fields"}
-            </Button>
+          <Button
+            onClick={() => setToggleEdit((prevToggle) => !prevToggle)}
+            type="button"
+          >
+            {toggleEdit ? "Close edit fields" : "Open edit fields"}
+          </Button>
 
-            <Button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
-              {toggleAdd ? "Close add tab" : "Open add tab"}
-            </Button>
+          <Button onClick={() => setToggleAdd((prevToggle) => !prevToggle)}>
+            {toggleAdd ? "Close add tab" : "Open add tab"}
+          </Button>
+          <ul className={styles.list}>
             {cart?.cartItems.map((item) => (
-              <li key={item.id}>
-                <p>Product: {item.product.title}</p>
-                {toggleEdit ? (
-                  <EditQuantityForm
-                    customerId={customerId}
-                    item={item}
-                    quantities={quantities}
-                    handleChange={handleChange}
-                  />
-                ) : (
-                  <span className={styles.quantityW}>
-                    <p>Quantity :{item.quantity}</p>
-                    <p>Stock:{item.product.stock}</p>
-                  </span>
-                )}
-                <Button
-                  onClick={() =>
-                    handleDelete(item.product.title, item.id, customerId)
-                  }
-                >
-                  Delete
-                </Button>
+              <li className={styles.card} key={item.id}>
+                <img
+                  className={styles.thumbnail}
+                  src={item.product.thumbnail}
+                  alt={item.product.title}
+                />
+                <div>
+                  <p>Product: {item.product.title}</p>
+                  {toggleEdit ? (
+                    <EditQuantityForm
+                      customerId={customerId}
+                      item={item}
+                      quantities={quantities}
+                      handleChange={handleChange}
+                    />
+                  ) : (
+                    <span className={styles.quantityW}>
+                      <p>Quantity :{item.quantity}</p>
+                      <p>Stock:{item.product.stock}</p>
+                    </span>
+                  )}
+                  <Button
+                    onClick={() =>
+                      handleDelete(item.product.title, item.id, customerId)
+                    }
+                  >
+                    Delete
+                  </Button>
+                </div>
               </li>
             ))}
           </ul>

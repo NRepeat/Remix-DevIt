@@ -10,12 +10,23 @@ export const handleSubmit = ({ id, submit }: HandleArgs) => {
   if (!isConfirmDeleteCustomer) {
     return;
   }
-  submit({ id }, { method: "post", action: `/admin/customer/delete` });
+  submit(
+    { id },
+    {
+      method: "post",
+      action: `/admin/customers/customer/delete`,
+      navigate: false,
+    }
+  );
 };
 
 export const handleCartCreate = ({ id, submit }: HandleArgs) => {
   submit(
     {},
-    { action: `/admin/customers/customer/${id}/cart/create`, method: "post" }
+    {
+      action: `/admin/customers/customer/${id}/cart/create`,
+      method: "post",
+      navigate: false,
+    }
   );
 };

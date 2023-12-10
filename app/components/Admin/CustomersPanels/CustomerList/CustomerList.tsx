@@ -1,10 +1,12 @@
 import type { SerializeFrom } from "@remix-run/node";
+import { Link, useSubmit } from "@remix-run/react";
 import type { FC } from "react";
 import type { CRUDPanelProps } from "../../CRUD/CRUDPanel";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import styles from "./styles.module.css";
 
 const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
+  const submit = useSubmit();
   return (
     <table className={styles.table}>
       <thead>
@@ -30,8 +32,34 @@ const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
               </p>
               {customer.email}
             </td>
-            <td>{new Date(customer.createdAt).toLocaleDateString()}</td>
-            <td>{customer.cart?.id}</td>
+            <td>{new Date(customer.createdAt).toLocaleDateString("en-GB")}</td>
+            {customer.cart?.id ? (
+              <td className={styles.cartLink}>
+                {" "}
+                <Link to={`/admin/customers/customer/${customer.id}/cart`}>
+                  {" "}
+                  <p>View cart</p>{" "}
+                </Link>{" "}
+              </td>
+            ) : (
+              <td className={styles.cartLink}>
+                {" "}
+                <button
+                  onClick={() =>
+                    submit(
+                      {},
+                      {
+                        action: `/admin/customers/customer/${customer.id}/cart/create`,
+                        method: "post",
+                      }
+                    )
+                  }
+                >
+                  {" "}
+                  <p> Create cart</p>
+                </button>{" "}
+              </td>
+            )}
             <td>
               <ButtonContainer customer={customer} />
             </td>

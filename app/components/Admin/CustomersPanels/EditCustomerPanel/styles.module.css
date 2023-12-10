@@ -1,24 +1,7 @@
 .editCustomerPanel {
-  border: 1px solid gainsboro;
-  width: min-content;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: left 0.5s ease;
-  z-index: 10;
+  grid-area: crud-main;
   padding: 20px;
   background-color: rgba(32, 94, 32);
-}
-
-.md {
-  width: 100vw;
-  height: 100vh;
-  z-index: 3;
-  background-color: rgba(220, 220, 220, 0.637);
-  position: fixed;
-  bottom: 0;
-  left: 0;
 }
 
 .head {
@@ -55,20 +38,23 @@
 .form {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
 }
 
 .inputs {
   display: flex;
-  flex-wrap: wrap;
   gap: 10px;
+  width: 100%;
 }
 
 .field {
   padding: 10px;
+  width: 50%;
 }
 
 .field > p {
+  width: 100%;
   padding-bottom: 5px;
   color: white;
 }

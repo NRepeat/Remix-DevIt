@@ -7,10 +7,3 @@ export function formatString(inputString: string): string {
 
   return formattedString;
 }
-
-export function parseAndValidateFormData(
-  value: FormDataEntryValue | null | undefined
-): number | null {
-  const parsedValue = parseInt(String(value));
-  return !isNaN(parsedValue) ? parsedValue : null;
-}

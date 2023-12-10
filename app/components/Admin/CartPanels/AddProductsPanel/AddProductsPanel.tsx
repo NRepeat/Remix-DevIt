@@ -1,7 +1,7 @@
 import type { Cart } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
-import { SearchBar } from "~/components/Header/SearchBar/SearchBar";
+import { SearchBar } from "~/components/StoreHeader/SearchBar/SearchBar";
 import type { ProductData } from "~/services/product.server";
 import ProductList from "./ProductsList/ProductsList";
 

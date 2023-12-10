@@ -1,12 +1,12 @@
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
+import Header from "~/Header/Header";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
-import Header from "~/components/Admin/Header/Header";
 import Footer from "~/components/Footer/Footer";
-import StoreHeader from "~/components/Header/Header";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import SortTypesList from "~/components/Store/Sort/SortTypesList";
+import StoreHeader from "~/components/StoreHeader/Header";
 import type { StorePageProps } from "~/types/types";
 import Sidebar from "../../components/SideBar/SideBar";
 import styles from "./styles.module.css";

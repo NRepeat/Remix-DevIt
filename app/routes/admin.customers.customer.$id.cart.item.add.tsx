@@ -1,21 +1,27 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import invariant from "tiny-invariant";
 import CartItemErrors from "~/components/Errors/AdminError/CartItemErrors/CartItemErrors";
-import { deleteCartItem } from "~/services/cartItem.server";
-import { parseAndValidateFormData } from "~/utils/formatting.server";
+import { createCartItem } from "~/services/cartItem.server";
+import {
+  isProductInStock,
+  validateNumberTypeInFormData,
+} from "~/utils/validation.server";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   try {
-    invariant(await request.formData());
     const formData = await request.formData();
+    const quantity = validateNumberTypeInFormData(formData.get("quantity"));
+    const productId = validateNumberTypeInFormData(formData.get("productId"));
+    const cartId = validateNumberTypeInFormData(formData.get("cartId"));
 
-    const productCartId = parseAndValidateFormData(formData.get("cartItemId"));
-
-    if (productCartId) {
-      await deleteCartItem(productCartId);
-      return redirect(`/admin/customers/customer/${params.id}/cart`);
+    if (cartId && productId && quantity) {
+      if (await isProductInStock(productId, quantity)) {
+        await createCartItem({ cartId, productId, quantity });
+        return redirect(`/admin/customers/customer/${params.id}/cart`);
+      } else {
+        throw new Response("Out of stock");
+      }
     } else {
       throw new Response("Missing required parameters");
     }

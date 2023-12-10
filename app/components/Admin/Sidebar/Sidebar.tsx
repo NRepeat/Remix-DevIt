@@ -15,10 +15,9 @@ const Sidebar: FC = () => {
   const navigation = useLocation();
   const links = [
     { label: "Dashboard", url: "/admin/dashboard" },
-    { label: "CRUD", url: "/admin/crud/customers" },
-    { label: "Pages", url: "/admin/p" },
-    { label: "Authentication", url: "/admin/a" },
-    { label: "Settings", url: "/admin/s" },
+    { label: "Customers", url: "/admin/customers" },
+    { label: "Products", url: "/admin/products" },
+    { label: "Settings", url: "/admin/settings" },
   ];
   return (
     <nav className={styles.gridSidebar}>
