@@ -1,17 +1,16 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import invariant from "tiny-invariant";
 import CartItemErrors from "~/components/Errors/AdminError/CartItemErrors/CartItemErrors";
 import { deleteCartItem } from "~/services/cartItem.server";
 import { parseAndValidateFormData } from "~/utils/formatting.server";
 
 export async function action({ request, params }: ActionFunctionArgs) {
   try {
+    invariant(await request.formData());
     const formData = await request.formData();
-    console.log(
-      "🚀 ~ file: admin.customers_.customer.$id.cart.item.delete.tsx:10 ~ action ~ formData:",
-      formData
-    );
+
     const productCartId = parseAndValidateFormData(formData.get("cartItemId"));
 
     if (productCartId) {

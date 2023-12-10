@@ -7,11 +7,7 @@ export const links: LinksFunction = () => [
 ];
 
 function Home() {
-  return (
-    <>
-      <Outlet />
-    </>
-  );
+  return <Outlet />;
 }
 
 export default Home;

@@ -1,8 +1,9 @@
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
+import Header from "~/components/Admin/Header/Header";
 import Footer from "~/components/Footer/Footer";
-import Header from "~/components/Header/Header";
+import StoreHeader from "~/components/Header/Header";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import SortTypesList from "~/components/Store/Sort/SortTypesList";
@@ -24,7 +25,9 @@ const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
   return (
     <>
       <PageLayout isAdmin={false}>
-        <Header />
+        <Header>
+          <StoreHeader />
+        </Header>
         <div className={styles.sidebar}>
           <Sidebar links={data.categories} />
         </div>

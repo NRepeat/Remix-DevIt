@@ -1,16 +1,18 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
+import invariant from "tiny-invariant";
 import ItemsList from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 import { getCartByCustomerId } from "~/services/cart.server";
 import { searchProduct } from "~/services/product.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
+  invariant(params.id);
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("search");
   const pageQuery = url.searchParams.get("page");
   const page = pageQuery ? parseInt(pageQuery) : 1;
-  const customerId = parseInt(params.id!);
+  const customerId = parseInt(params.id);
 
   if (searchQuery === "") {
     return redirect(`/admin/customers/customer/${customerId}/cart`);

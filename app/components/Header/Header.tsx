@@ -4,7 +4,7 @@ import { CartIcon } from "../Store/CartInfo/CartInfo";
 import { SearchBar } from "./SearchBar/SearchBar";
 import styles from "./styles.module.css";
 
-const Header: FC = () => {
+const StoreHeader: FC = () => {
   return (
     <div className={styles.header}>
       <div className={styles.titleWrapper}>
@@ -21,4 +21,4 @@ const Header: FC = () => {
   );
 };
 
-export default Header;
+export default StoreHeader;

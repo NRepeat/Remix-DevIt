@@ -28,6 +28,9 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   if (categoryQuery !== "" && !!categoryQuery) {
     const products = await getProductsByCategory(categoryQuery!, sort!);
+    if (!products) {
+      throw new Response("Page Not Found", { status: 404 });
+    }
     return json({ products, page, cart: cart.items(), categories });
   }
   if (categoryQuery === "") {
