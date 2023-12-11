@@ -21,9 +21,5 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
 export default function () {
   const data = useLoaderData<typeof loader>();
-  return (
-    <>
-      <CustomersPanel data={data} currentPage={data.page} />
-    </>
-  );
+  return <CustomersPanel data={data} currentPage={data.page} />;
 }

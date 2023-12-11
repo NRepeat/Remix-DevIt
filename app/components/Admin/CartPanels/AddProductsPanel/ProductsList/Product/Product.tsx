@@ -27,21 +27,23 @@ const ProductRow: FC<ProductProps> = ({
   return (
     <li className={styles.product}>
       <ProductInformation product={product} />
-      <QuantityCounter
-        handleQuantityChange={handleQuantityChange}
-        productId={product.id}
-        productStock={product.stock}
-        quantities={quantities}
-        setQuantities={setQuantities}
-      />
-      <AddToCartButton
-        cart={cart}
-        handleAddItemToCart={handleAddItemToCart}
-        product={product}
-        quantities={quantities}
-        submit={submit}
-        customerId={customerId}
-      />
+      <div className={styles.inputContainer}>
+        <QuantityCounter
+          handleQuantityChange={handleQuantityChange}
+          productId={product.id}
+          productStock={product.stock}
+          quantities={quantities}
+          setQuantities={setQuantities}
+        />
+        <AddToCartButton
+          cart={cart}
+          handleAddItemToCart={handleAddItemToCart}
+          product={product}
+          quantities={quantities}
+          submit={submit}
+          customerId={customerId}
+        />
+      </div>
     </li>
   );
 };

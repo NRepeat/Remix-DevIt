@@ -7,10 +7,18 @@ export const ProductInformation: FC<{ product: CartProduct }> = ({
 }) => {
   return (
     <>
-      <img src={product.thumbnail} alt={product.title} />
-      <p className={styles.id}>ID: {product.id}</p>
-      <p className={styles.title}>{product.title}</p>
-      <p className={styles.stock}>Stock:{product.stock}</p>
+      <div>
+        <img
+          className={styles.thumbnail}
+          src={product.thumbnail}
+          alt={product.title}
+        />
+      </div>
+      <div>
+        <p className={styles.id}>ID: {product.id}</p>
+        <p className={styles.title}>{product.title}</p>
+        <p className={styles.stock}>Stock:{product.stock}</p>
+      </div>
     </>
   );
 };

@@ -35,15 +35,12 @@ const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
             <td>{new Date(customer.createdAt).toLocaleDateString("en-GB")}</td>
             {customer.cart?.id ? (
               <td className={styles.cartLink}>
-                {" "}
                 <Link to={`/admin/customers/customer/${customer.id}/cart`}>
-                  {" "}
-                  <p>View cart</p>{" "}
-                </Link>{" "}
+                  <p>View cart</p>
+                </Link>
               </td>
             ) : (
               <td className={styles.cartLink}>
-                {" "}
                 <button
                   onClick={() =>
                     submit(
@@ -55,9 +52,8 @@ const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
                     )
                   }
                 >
-                  {" "}
-                  <p> Create cart</p>
-                </button>{" "}
+                  <p className={styles.create}> Create cart</p>
+                </button>
               </td>
             )}
             <td>

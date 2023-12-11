@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div className="footer-content">
+      <div>
         <div className="footer-logo">Footer</div>
         <div className="footer-links">
           <Link to={"/products"}>Home</Link>

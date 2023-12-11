@@ -1,6 +1,6 @@
 import type { LinksFunction } from "@remix-run/node";
 import AdminPage from "~/pages/AdminPage/AdminPage";
-import adminStylesHref from "../styles/admin.css";
+import adminStylesHref from "../styles/adminStylesHref.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: adminStylesHref },
@@ -9,5 +9,9 @@ export const links: LinksFunction = () => [
 export function ErrorBoundary() {}
 
 export default function () {
-  return <AdminPage />;
+  return (
+    <div className="bg-admin-index">
+      <AdminPage />
+    </div>
+  );
 }

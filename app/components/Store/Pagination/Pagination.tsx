@@ -41,9 +41,9 @@ const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
         <button
           key={page}
           className={clsx(styles.button, {
-            [styles.adminCurrentPage]: admin,
-            [styles.adminButton]: admin,
             [styles.currentPage]: currentPage === page,
+            [styles.adminButton]: admin,
+            [styles.adminCurrentPage]: currentPage === page && admin,
           })}
           onClick={() => handleSubmit(page)}
         >

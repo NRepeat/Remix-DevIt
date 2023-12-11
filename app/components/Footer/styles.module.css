@@ -1,5 +1,7 @@
 .footer {
   grid-area: footer;
-  display: inline-flex;
+  display: grid;
   justify-content: space-between;
+  background-color: black;
+  color: white;
 }

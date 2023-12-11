@@ -1,7 +1,8 @@
-import { Form } from "@remix-run/react";
-import type { Quantities } from "../ItemsList/ItemsList";
 import React from "react";
-
+import FormM from "~/components/Form/FormM";
+import { Input } from "~/components/Input/Input";
+import type { Quantities } from "../ItemsList/ItemsList";
+import styles from "./styles.module.css";
 export interface EditQuantityFormProps {
   item: {
     id: number;
@@ -15,8 +16,10 @@ export interface EditQuantityFormProps {
   customerId: number;
   handleChange: (
     itemId: number,
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
+    setQuantities: React.Dispatch<React.SetStateAction<Quantities>>
   ) => void;
+  setQuantities: React.Dispatch<React.SetStateAction<Quantities>>;
 }
 
 const EditQuantityForm: React.FC<EditQuantityFormProps> = ({
@@ -24,28 +27,33 @@ const EditQuantityForm: React.FC<EditQuantityFormProps> = ({
   quantities,
   customerId,
   handleChange,
+  setQuantities,
 }) => {
   return (
     <>
-      <p>Edit quantity</p>
+      <p className={styles.quantity}>Edit quantity</p>
 
-      <input
-        onChange={(e) => handleChange(item.id, e)}
+      <Input
+        onChange={(e) => handleChange(item.id, e, setQuantities)}
         type="text"
         value={quantities[item.id] || item.quantity.toString()}
       />
-      <Form
+      <FormM
+        isFetcher={false}
         action={`/admin/customers/customer/${customerId}/cart/item/edit/quantity`}
         method="post"
+        className={styles.form}
       >
-        <input type="hidden" name="cartItemId" value={item.id} />
-        <input
+        <Input type="hidden" name="cartItemId" value={item.id} />
+        <Input
           type="hidden"
           name="quantity"
           value={quantities[item.id] || item.quantity}
         />
-        <button type="submit">Save</button>
-      </Form>
+        <button className={styles.save} type="submit">
+          Save
+        </button>
+      </FormM>
     </>
   );
 };

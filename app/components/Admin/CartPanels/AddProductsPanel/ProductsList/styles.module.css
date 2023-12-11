@@ -3,26 +3,34 @@
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
-.product {
-  display: flex;
+.thumbnail {
   width: 100%;
-  justify-content: space-between;
-  align-items: center;
+  height: 250px;
+  object-fit: cover;
 }
 
-.title {
-  max-width: 150px;
-  width: 150px;
-  margin: 0;
-  font-weight: bold;
+.product {
+  width: 250px;
+
+  border: 1px solid gainsboro;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  background-color: var(--adminAccentColor);
+}
+
+.container {
+  padding-top: 5px;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
 }
 
 .id {

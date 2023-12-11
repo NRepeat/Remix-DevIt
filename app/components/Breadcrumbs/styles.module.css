@@ -3,7 +3,6 @@
   grid-area: bread;
   align-items: center;
   font-size: 1.2rem;
-  padding-top: 30px;
   font-weight: bold;
 }
 
@@ -12,7 +11,7 @@
 }
 
 .adminLink {
-  color: rgb(2, 117, 96);
+  color: rgb(255, 255, 255);
 }
 
 .separator {
@@ -30,5 +29,5 @@
 }
 
 .adminLast {
-  color: rgb(0, 0, 0);
+  color: rgb(102, 102, 102);
 }

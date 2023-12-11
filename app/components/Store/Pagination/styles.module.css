@@ -39,10 +39,6 @@
   color: white;
 }
 
-.adminCurrentPage {
-  background-color: rgb(2, 117, 96);
-}
-
 .adminButton {
   border-radius: 5px;
   height: 35px;
@@ -62,6 +58,13 @@
   border: 1px solid rgb(2, 117, 96);
 }
 
+.adminButton {
+  background-color: var(--adminPanelBgColor);
+  color: white;
+}
+
 .adminCurrentPage {
-  background-color: rgb(2, 117, 96);
+  background-color: rgb(247, 247, 247);
+  border: 1px solid rgb(2, 117, 96);
+  color: black;
 }

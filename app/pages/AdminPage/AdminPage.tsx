@@ -4,7 +4,7 @@ import Header from "~/Header/Header";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
 import Sidebar from "~/components/Admin/Sidebar/Sidebar";
 import Footer from "~/components/Footer/Footer";
-
+import styles from "./styles.module.css";
 // const links = [{ slug: "dashboard", name: "Dashboard" }, { slug: "crud", name: "CRUD" }]
 
 const AdminPage: FC = () => {
@@ -12,15 +12,7 @@ const AdminPage: FC = () => {
     <>
       <PageLayout isAdmin={true}>
         <Header>
-          <div style={{ minWidth: "200px", display: "flex", gap: "30px" }}>
-            <div>svg </div>
-            <h1> Label</h1>
-          </div>
-
-          <section>
-            {" "}
-            <div>svg </div> <div>svg </div> Profile section
-          </section>
+          <h1 className={styles.headerInfo}>Admin penal</h1>
         </Header>
         <Outlet />
 
