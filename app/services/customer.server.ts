@@ -1,4 +1,5 @@
 import type { Cart, Customer } from "@prisma/client";
+import type { SuccessResult } from "remix-validated-form";
 export interface CustomerArgs {
   email: string;
   name: string;
@@ -14,6 +15,14 @@ export type CustomerWithoutPassword = Omit<Customer, "password"> & {
   cart?: Cart | null;
 };
 
+export type LoginProps = {
+  email: string;
+  password: string;
+};
+export type ServerError = {
+  error: string;
+  code: string;
+};
 export const createCustomer = async ({
   email,
   name,
@@ -48,6 +57,34 @@ export const createCustomer = async ({
     }
   } catch (error) {
     throw new Error(`Error while attempting to create customer: ${error}`);
+  }
+};
+
+export const login = async ({
+  data,
+}: SuccessResult<LoginProps>): Promise<
+  CustomerWithoutPassword | ServerError
+> => {
+  try {
+    const existCustomer = await prisma.customer.findFirst({
+      where: { email: data.email, password: data.password },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        secondName: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    if (!existCustomer) {
+      return { error: "Not found", code: "404" };
+    }
+
+    return existCustomer;
+  } catch (error) {
+    throw new Error("An error occurred during login");
   }
 };
 
