@@ -1,3 +1,6 @@
+import { cssBundleHref } from "@remix-run/css-bundle";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -5,16 +8,14 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
-import { cssBundleHref } from "@remix-run/css-bundle";
-import resetStylesHref from "./styles/reset.css";
-import globalStylesHref from "./styles/global.css";
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
+import GlobalLoader from "./components/GlobalLoading/GlobalLoader";
 import { createCart } from "./services/cartSession.server";
 import { getSession } from "./services/session.server";
-import GlobalLoader from "./components/GlobalLoading/GlobalLoader";
+import globalStylesHref from "./styles/global.css";
+import resetStylesHref from "./styles/reset.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: resetStylesHref },
@@ -37,7 +38,7 @@ export function ErrorBoundary() {
         <Links />
       </head>
       <body className="bodyError">
-        <GlobalLoader />
+        <GlobalLoader isAdmin={false} />
         <NotFoundPageError />
       </body>
     </html>
@@ -45,6 +46,10 @@ export function ErrorBoundary() {
 }
 
 export default function App() {
+  const nav = useLocation();
+  let isAdmin = true;
+  nav.pathname.includes("/admin") ? (isAdmin = true) : (isAdmin = false);
+
   return (
     <html lang="en">
       <head>
@@ -54,7 +59,7 @@ export default function App() {
         <Links />
       </head>
       <body className="body">
-        <GlobalLoader />
+        <GlobalLoader isAdmin={isAdmin} />
         <Outlet />
         <ScrollRestoration />
         <Scripts />

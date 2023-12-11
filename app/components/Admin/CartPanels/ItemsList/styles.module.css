@@ -46,6 +46,9 @@
 .title {
   background-color: var(--adminPanelBgColor);
   color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  min-height: 40px;
 }
 
 .buttonContainer {
@@ -60,16 +63,6 @@
   align-items: center;
   padding: 5px;
   background-color: cadetblue;
-}
-
-.quantity {
-  color: white;
-  background-color: var(--adminAccentColor);
-}
-
-.stock {
-  background-color: var(--adminPanelBgColor);
-  color: white;
 }
 
 .delete {

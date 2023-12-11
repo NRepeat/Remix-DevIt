@@ -14,10 +14,10 @@ const Sidebar: FC = () => {
   useClickOutside(ref, () => setOpen(false));
   const navigation = useLocation();
   const links = [
-    { label: "Dashboard", url: "/admin/dashboard" },
+    { label: "Dashboard", url: "/admin/" },
     { label: "Customers", url: "/admin/customers" },
-    { label: "Products", url: "/admin/products" },
-    { label: "Settings", url: "/admin/settings" },
+    { label: "Products", url: "/admin/" },
+    { label: "Settings", url: "/admin/" },
   ];
   return (
     <nav className={styles.gridSidebar}>

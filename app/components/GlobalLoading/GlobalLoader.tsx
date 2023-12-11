@@ -1,10 +1,14 @@
-import { clsx } from "clsx";
-import styles from "./styles.module.css";
 import { useNavigation } from "@remix-run/react";
+import { clsx } from "clsx";
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
+import styles from "./styles.module.css";
 
-const GlobalLoader: FC = () => {
+type GlobalLoaderProps = {
+  isAdmin: boolean;
+};
+
+const GlobalLoader: FC<GlobalLoaderProps> = ({ isAdmin }) => {
   const transition = useNavigation();
   const active = transition.state !== "idle";
   const ref = useRef<HTMLDivElement>(null);
@@ -29,6 +33,7 @@ const GlobalLoader: FC = () => {
         className={clsx(
           styles.bar,
           {
+            [styles.barAdmin]: isAdmin,
             [styles.animationComplete]:
               transition.state === "idle" && animationComplete,
           },

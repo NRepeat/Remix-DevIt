@@ -1,6 +1,7 @@
 import type { FC } from "react";
+import { Button } from "~/components/Button/Button";
 import type { AddItemToCartButtonProps } from "~/types/types";
-
+import styles from "../styles.module.css";
 export const AddToCartButton: FC<AddItemToCartButtonProps> = ({
   cart,
   product,
@@ -13,12 +14,13 @@ export const AddToCartButton: FC<AddItemToCartButtonProps> = ({
     throw new Response("Customer id not found");
   }
   return (
-    <button
+    <Button
+      className={styles.add}
       onClick={() =>
         handleAddItemToCart(cart.id, product.id, quantities, customerId, submit)
       }
     >
       Add to cart
-    </button>
+    </Button>
   );
 };

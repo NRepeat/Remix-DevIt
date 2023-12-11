@@ -8,7 +8,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("search");
   if (searchQuery === "") {
-    return redirect("/admin/crud/customers");
+    return redirect("/admin/customers");
   }
   const pageQuery = url.searchParams.get("page");
   const page = pageQuery ? parseInt(pageQuery) : 1;

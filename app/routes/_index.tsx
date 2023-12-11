@@ -1,6 +1,6 @@
-import { Form } from "@remix-run/react";
-import rootStylesHref from "../styles/rootIndex.css";
 import type { LinksFunction } from "@remix-run/node";
+import { Form, Link } from "@remix-run/react";
+import rootStylesHref from "../styles/rootIndex.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: rootStylesHref },
@@ -11,6 +11,11 @@ export default function () {
     <div className="rootIndexContainer">
       <h1>Welcome to Store</h1>
       <p>Find everything you need in our e-commerce store</p>
+      <div className="link-container">
+        <Link to={"/login"}>Sign up </Link>
+        <Link to={"/registration"}>Registration </Link>
+      </div>
+
       <Form action="/products/sync" method="post">
         <button className="link" type="submit">
           SHOP NOW
