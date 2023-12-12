@@ -1,4 +1,6 @@
+import { validationError } from "remix-validated-form";
 import { formatString } from "~/utils/formatting.server";
+import { dummyProductDataSchema } from "~/utils/productValidation";
 import { fetchLimitedData } from "./dummy.server";
 
 export async function importDummyData() {
@@ -12,28 +14,33 @@ export async function importDummyData() {
     skip += limit;
     for (const product of dummyProductsData.products) {
       try {
+        const validatedProduct = await dummyProductDataSchema.validate(product);
+
+        if (validatedProduct.error) {
+          return validationError(validatedProduct.error);
+        }
         const existedProduct = await prisma.product.findFirst({
-          where: { externalId: product.id },
+          where: { externalId: validatedProduct.data.id },
         });
         if (!existedProduct) {
           await prisma.product.create({
             data: {
-              externalId: product.id,
-              brand: product.brand,
-              description: product.description,
-              discountPercentage: product.discountPercentage,
-              price: product.price,
-              rating: product.rating,
-              stock: product.stock,
-              thumbnail: product.thumbnail,
-              title: product.title,
-              images: product.images,
+              externalId: validatedProduct.data.id,
+              brand: validatedProduct.data.brand,
+              description: validatedProduct.data.description,
+              discountPercentage: validatedProduct.data.discountPercentage,
+              price: validatedProduct.data.price,
+              rating: validatedProduct.data.rating,
+              stock: validatedProduct.data.stock,
+              thumbnail: validatedProduct.data.thumbnail,
+              title: validatedProduct.data.title,
+              images: validatedProduct.data.images,
               category: {
                 connectOrCreate: {
-                  where: { slug: product.category },
+                  where: { slug: validatedProduct.data.category },
                   create: {
-                    slug: product.category,
-                    name: formatString(product.category),
+                    slug: validatedProduct.data.category,
+                    name: formatString(validatedProduct.data.category),
                   },
                 },
               },

@@ -14,7 +14,6 @@ export type DummyProduct = {
   category: string;
   thumbnail: string;
   images: string[];
-  message: string;
 };
 
 export type ProductResponse = {
