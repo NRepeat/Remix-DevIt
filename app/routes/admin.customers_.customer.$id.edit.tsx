@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useActionData, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { validationError } from "remix-validated-form";
 import invariant from "tiny-invariant";
 import EditCustomerPanel from "~/components/Admin/CustomersPanels/EditCustomerPanel/EditCustomerPanel";
@@ -50,6 +50,5 @@ export async function action({ params, request }: ActionFunctionArgs) {
 }
 export default function () {
   const data = useLoaderData<typeof loader>();
-  const actionData = useActionData<typeof action>();
-  return <EditCustomerPanel customer={data.customer} actionData={actionData} />;
+  return <EditCustomerPanel customer={data.customer} />;
 }

@@ -1,15 +1,14 @@
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import CreateCustomerForm from "~/components/Forms/CreateCustomerForm/CreateCustomerForm";
-import type { RegistrationPageProps } from "~/pages/RegistrationPage/RegistrationPage";
 import styles from "./styles.module.css";
 
-const RegistrationForm: FC<RegistrationPageProps> = ({ actionData }) => {
+const RegistrationForm: FC = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Create account</h2>
 
-      <CreateCustomerForm actionData={actionData} />
+      <CreateCustomerForm />
       <div className={styles.reg}>
         Already registered? <Link to={"/login"}>Sign in</Link>{" "}
       </div>

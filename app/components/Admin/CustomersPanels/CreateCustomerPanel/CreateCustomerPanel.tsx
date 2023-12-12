@@ -1,9 +1,8 @@
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import CreateCustomerForm from "~/components/Forms/CreateCustomerForm/CreateCustomerForm";
-import type { RegistrationPageProps } from "~/pages/RegistrationPage/RegistrationPage";
 import styles from "./styles.module.css";
-const CreateCustomerPanel: FC<RegistrationPageProps> = ({ actionData }) => {
+const CreateCustomerPanel: FC = () => {
   return (
     <div className={styles.addPanel}>
       <div className={styles.head}>
@@ -13,7 +12,7 @@ const CreateCustomerPanel: FC<RegistrationPageProps> = ({ actionData }) => {
         </Link>
       </div>
       <div className={styles.container}>
-        <CreateCustomerForm actionData={actionData} />
+        <CreateCustomerForm />
       </div>
     </div>
   );

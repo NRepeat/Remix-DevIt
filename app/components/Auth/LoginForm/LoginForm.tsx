@@ -3,11 +3,10 @@ import { type FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
-import type { LoginPageProps } from "~/pages/LoginPage/LoginPage";
 import { loginSchema } from "~/utils/formValidation";
 import styles from "./styles.module.css";
 
-const LoginForm: FC<LoginPageProps> = ({ actionData }) => {
+const LoginForm: FC = () => {
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>Sign in </h2>
@@ -18,9 +17,7 @@ const LoginForm: FC<LoginPageProps> = ({ actionData }) => {
       >
         <FormInput name="email" label="email" />
         <FormInput name="password" label="password" />
-        {actionData && "error" in actionData && (
-          <span> {actionData.error}</span>
-        )}
+
         <Link to={"/"} className={styles.forgot}>
           Forgot password?
         </Link>

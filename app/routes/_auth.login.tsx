@@ -1,5 +1,4 @@
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
-import { useActionData } from "@remix-run/react";
 import { validationError } from "remix-validated-form";
 import LoginPage from "~/pages/LoginPage/LoginPage";
 import { existCustomer, login } from "~/services/customer.server";
@@ -40,6 +39,5 @@ export async function action({ params, request }: ActionFunctionArgs) {
 }
 
 export default function () {
-  const actionData = useActionData<typeof action>();
-  return <LoginPage actionData={actionData} />;
+  return <LoginPage />;
 }

@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import type { ValidationErrorResponseData } from "remix-validated-form";
 import { ValidatedForm } from "remix-validated-form";
 import { Button } from "~/components/Button/Button";
 import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
@@ -12,16 +11,11 @@ type FormProps = {
     email: string;
     id: number;
   };
-  actionData:
-    | ValidationErrorResponseData
-    | {
-        error: string;
-      }
-    | undefined;
+
   classNames?: string;
 };
 
-const CreateCustomerForm: FC<FormProps> = ({ formData, actionData }) => {
+const CreateCustomerForm: FC<FormProps> = ({ formData }) => {
   return (
     <ValidatedForm
       method="post"
@@ -31,7 +25,6 @@ const CreateCustomerForm: FC<FormProps> = ({ formData, actionData }) => {
       <FormInput label="Name" name="name" />
       <FormInput label="Last Name" name="lastName" />
       <FormInput label="Email" name="email" />
-      {actionData && "error" in actionData && <span> {actionData.error}</span>}
       <FormInput label="Password" name="password" />
 
       <Button className={styles.loginButton} type="submit">
