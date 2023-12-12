@@ -1,26 +1,33 @@
 import { json, redirect, type ActionFunctionArgs } from "@remix-run/node";
+import { useActionData } from "@remix-run/react";
+import { validationError } from "remix-validated-form";
 import CreateCustomerPanel from "~/components/Admin/CustomersPanels/CreateCustomerPanel/CreateCustomerPanel";
-import { createCustomer } from "~/services/customer.server";
-import { validateStringTypeInFormData } from "~/utils/validation.server";
+import { createCustomer, existCustomer } from "~/services/customer.server";
+import { registrationSchema } from "~/utils/formValidation";
 
-export async function action({ request, params }: ActionFunctionArgs) {
-  const formData = await request.formData();
+export async function action({ params, request }: ActionFunctionArgs) {
+  try {
+    const formData = Object.fromEntries(await request.formData());
 
-  const name = validateStringTypeInFormData(formData.get("name"));
-  const secondName = validateStringTypeInFormData(formData.get("secondName"));
-  const email = validateStringTypeInFormData(formData.get("email"));
-  const password = validateStringTypeInFormData(formData.get("password"));
-  if (name && secondName && email && password) {
-    try {
-      await createCustomer({ name, secondName, email, password });
-      return redirect("/admin/customers");
-    } catch (error) {
-      throw new Response("Invalid input for creating a customer");
+    const validatedCustomerData = await registrationSchema.validate(formData);
+    if (validatedCustomerData.error) {
+      return validationError(validatedCustomerData.error);
     }
+    const isExistCustomer = await existCustomer(
+      validatedCustomerData.data.email
+    );
+    if (isExistCustomer) {
+      return json({ error: "Customer with this email already exist" });
+    }
+    await createCustomer(validatedCustomerData);
+
+    return redirect("/products");
+  } catch (error) {
+    throw new Response(`Error while registration customer${error}`);
   }
-  return json({ success: false });
 }
 
 export default function () {
-  return <CreateCustomerPanel />;
+  const actionData = useActionData<typeof action>();
+  return <CreateCustomerPanel actionData={actionData} />;
 }

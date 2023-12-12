@@ -1,13 +1,13 @@
 :root {
   --gradientColor: linear-gradient(
     45deg,
-    rgba(140, 21, 221, 1) 20%,
-    rgba(235, 0, 255, 0.8743872549019608) 69%,
-    rgba(235, 0, 255, 0.5830707282913166) 97%
+    rgb(47, 44, 221) 20%,
+    rgba(132, 105, 228, 0.874) 69%,
+    rgba(147, 162, 248, 0.774) 97%
   );
   --adminPanelBgColor: #23462b;
   --storePageBgColor: rgb(16, 16, 16);
-  --accentColor: rgba(218, 2, 218, 0.219);
+  --accentColor: rgb(53, 51, 180);
   --adminAccentColor: rgba(32, 94, 32, 0.767);
 }
 

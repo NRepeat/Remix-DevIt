@@ -3,7 +3,7 @@
   grid-column: 2/4;
   display: flex;
   gap: 10px;
-  border: 2px solid purple;
+  border: 2px solid var(--accentColor);
   border-radius: 10px;
   overflow-x: auto;
   overflow-y: auto;

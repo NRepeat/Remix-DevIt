@@ -27,7 +27,7 @@
 }
 
 .price {
-  color: rgb(212, 2, 212);
+  color: blue;
   font-weight: bold;
   font-size: larger;
 }
@@ -39,5 +39,5 @@
 }
 
 .rating {
-  color: rgb(212, 2, 212);
+  color: blue;
 }

@@ -1,9 +1,15 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { useActionData, useLoaderData } from "@remix-run/react";
+import { validationError } from "remix-validated-form";
 import invariant from "tiny-invariant";
 import EditCustomerPanel from "~/components/Admin/CustomersPanels/EditCustomerPanel/EditCustomerPanel";
-import { getCustomerById } from "~/services/customer.server";
+import {
+  existCustomer,
+  getCustomerById,
+  updateCustomer,
+} from "~/services/customer.server";
+import { editSchema } from "~/utils/formValidation";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   invariant(params.id);
@@ -13,8 +19,28 @@ export async function loader({ params }: LoaderFunctionArgs) {
   }
   return json({ customer });
 }
+export async function action({ params, request }: ActionFunctionArgs) {
+  try {
+    const formData = Object.fromEntries(await request.formData());
 
+    const validatedCustomerData = await editSchema.validate(formData);
+    if (validatedCustomerData.error) {
+      return validationError(validatedCustomerData.error);
+    }
+    const isExistCustomer = await existCustomer(
+      validatedCustomerData.data.email
+    );
+    if (isExistCustomer) {
+      await updateCustomer(isExistCustomer.id, validatedCustomerData);
+      return redirect("/admin/customers");
+    }
+    return json({ error: "Updating error" });
+  } catch (error) {
+    throw new Response(`Error while updating customer${error}`);
+  }
+}
 export default function () {
   const data = useLoaderData<typeof loader>();
-  return <EditCustomerPanel customer={data.customer!} />;
+  const actionData = useActionData<typeof action>();
+  return <EditCustomerPanel customer={data.customer} actionData={actionData} />;
 }

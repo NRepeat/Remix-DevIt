@@ -8,65 +8,75 @@ export interface CustomerArgs {
 export interface CreateCustomerArgs {
   email: string;
   name: string;
-  secondName: string;
+  lastName: string;
   password: string;
+}
+export interface UpdateCustomerArgs {
+  email: string;
+  name: string;
+  lastName: string;
 }
 export type CustomerWithoutPassword = Omit<Customer, "password"> & {
   cart?: Cart | null;
 };
 
-export type LoginProps = {
+export type LoginArgs = {
   email: string;
   password: string;
 };
-export type ServerError = {
-  error: string;
-  code: string;
+
+export const existCustomer = async (
+  email: string
+): Promise<CustomerWithoutPassword | null> => {
+  try {
+    const existCustomer = await prisma.customer.findFirst({
+      where: { email: email },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        secondName: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+    return existCustomer;
+  } catch (error) {
+    throw new Error(`An error occurred during find exist customer ${error}`);
+  }
 };
 export const createCustomer = async ({
-  email,
-  name,
-  secondName,
-  password,
-}: CreateCustomerArgs): Promise<CustomerWithoutPassword> => {
+  data,
+}: SuccessResult<CreateCustomerArgs>): Promise<CustomerWithoutPassword> => {
   try {
-    const existCustomer = await prisma.customer.findFirst({ where: { email } });
-    if (existCustomer) {
-      throw new Error(`Customer with email ${email} already exists`);
-    }
-    try {
-      const customer = await prisma.customer.create({
-        data: {
-          email,
-          name,
-          secondName,
-          password,
-        },
-        select: {
-          id: true,
-          email: true,
-          name: true,
-          secondName: true,
-          createdAt: true,
-          updatedAt: true,
-        },
-      });
-      return customer;
-    } catch (error) {
-      throw new Error(`Error creating customer: ${error}`);
-    }
+    const customer = await prisma.customer.create({
+      data: {
+        email: data.email,
+        name: data.name,
+        secondName: data.lastName,
+        password: data.password,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        secondName: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    return customer;
   } catch (error) {
-    throw new Error(`Error while attempting to create customer: ${error}`);
+    throw new Error(`Failed to create customer`);
   }
 };
 
 export const login = async ({
   data,
-}: SuccessResult<LoginProps>): Promise<
-  CustomerWithoutPassword | ServerError
-> => {
+}: SuccessResult<LoginArgs>): Promise<CustomerWithoutPassword | null> => {
   try {
-    const existCustomer = await prisma.customer.findFirst({
+    const customer = await prisma.customer.findUnique({
       where: { email: data.email, password: data.password },
       select: {
         id: true,
@@ -78,13 +88,9 @@ export const login = async ({
       },
     });
 
-    if (!existCustomer) {
-      return { error: "Not found", code: "404" };
-    }
-
-    return existCustomer;
+    return customer;
   } catch (error) {
-    throw new Error("An error occurred during login");
+    throw new Error(`${error}`);
   }
 };
 
@@ -149,18 +155,16 @@ export const getCustomerById = async (
 };
 export const updateCustomer = async (
   customerId: number,
-  newData: CustomerArgs
+  data: SuccessResult<UpdateCustomerArgs>
 ): Promise<CustomerWithoutPassword> => {
   try {
-    const existingCustomer = await getCustomerById(customerId);
-
-    if (!existingCustomer) {
-      throw new Error(`Customer with ID ${customerId} not found`);
-    }
-
     const updatedCustomer = await prisma.customer.update({
       where: { id: customerId },
-      data: newData,
+      data: {
+        name: data.data.name,
+        secondName: data.data.lastName,
+        email: data.data.email,
+      },
       select: {
         id: true,
         email: true,

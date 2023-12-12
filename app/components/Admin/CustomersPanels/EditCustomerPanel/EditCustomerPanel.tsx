@@ -2,17 +2,24 @@ import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
+import type { ValidationErrorResponseData } from "remix-validated-form";
+import EditCustomerForm from "~/components/Forms/EditCustomerForm/EditCustomerForm";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
-import EditForm from "./EditForm";
-import { handleChange } from "./HandelChange";
 import styles from "./styles.module.css";
 
 export interface EditCustomerPanelProps {
   customer: CustomerWithoutPassword;
+  actionData:
+    | ValidationErrorResponseData
+    | {
+        error: string;
+      }
+    | undefined;
 }
 
 const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
   customer,
+  actionData,
 }) => {
   const [formData, setFormData] = useState({
     name: customer.name,
@@ -37,11 +44,9 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
           x
         </Link>
       </div>
-      <EditForm
-        formData={formData}
-        setFormData={setFormData}
-        handleChange={handleChange}
-      />
+      <div className={styles.container}>
+        <EditCustomerForm formData={formData} actionData={actionData} />
+      </div>
     </div>
   );
 };
