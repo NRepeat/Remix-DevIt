@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { validationError } from "remix-validated-form";
 import RegistrationPage from "~/pages/RegistrationPage/RegistrationPage";
@@ -18,7 +18,11 @@ export async function action({ params, request }: ActionFunctionArgs) {
       validatedCustomerData.data.email
     );
     if (isExistCustomer) {
-      return json({ error: "Customer with this email already exist" });
+      return validationError({
+        fieldErrors: {
+          email: "This email already exist",
+        },
+      });
     }
     await createCustomer(validatedCustomerData);
 

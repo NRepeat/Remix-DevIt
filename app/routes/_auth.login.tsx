@@ -1,4 +1,4 @@
-import { json, redirect, type ActionFunctionArgs } from "@remix-run/node";
+import { redirect, type ActionFunctionArgs } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { validationError } from "remix-validated-form";
 import LoginPage from "~/pages/LoginPage/LoginPage";
@@ -21,9 +21,19 @@ export async function action({ params, request }: ActionFunctionArgs) {
       if (isCustomerLogged) {
         return redirect("/products");
       }
-      return json({ error: "Email or password incorrect" });
+      return validationError({
+        fieldErrors: {
+          email: "Email or password incorrect",
+          password: "Email or password incorrect",
+        },
+      });
     }
-    return json({ error: "Email or password incorrect" });
+    return validationError({
+      fieldErrors: {
+        email: "Email or password incorrect",
+        password: "Email or password incorrect",
+      },
+    });
   } catch (error) {
     throw new Response(`Error while login customer${error}`);
   }

@@ -1,4 +1,3 @@
-import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import type { ValidationErrorResponseData } from "remix-validated-form";
 import { ValidatedForm } from "remix-validated-form";
@@ -34,9 +33,7 @@ const CreateCustomerForm: FC<FormProps> = ({ formData, actionData }) => {
       <FormInput label="Email" name="email" />
       {actionData && "error" in actionData && <span> {actionData.error}</span>}
       <FormInput label="Password" name="password" />
-      <Link to={"/"} className={styles.forgot}>
-        Forgot password?
-      </Link>
+
       <Button className={styles.loginButton} type="submit">
         Sign up
       </Button>

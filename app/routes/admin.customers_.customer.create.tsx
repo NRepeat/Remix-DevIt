@@ -1,4 +1,4 @@
-import { json, redirect, type ActionFunctionArgs } from "@remix-run/node";
+import { redirect, type ActionFunctionArgs } from "@remix-run/node";
 import { useActionData } from "@remix-run/react";
 import { validationError } from "remix-validated-form";
 import CreateCustomerPanel from "~/components/Admin/CustomersPanels/CreateCustomerPanel/CreateCustomerPanel";
@@ -17,11 +17,13 @@ export async function action({ params, request }: ActionFunctionArgs) {
       validatedCustomerData.data.email
     );
     if (isExistCustomer) {
-      return json({ error: "Customer with this email already exist" });
+      return validationError({
+        fieldErrors: { email: "Email or password incorrect" },
+      });
     }
     await createCustomer(validatedCustomerData);
 
-    return redirect("/products");
+    return redirect("/admin/customers");
   } catch (error) {
     throw new Response(`Error while registration customer${error}`);
   }

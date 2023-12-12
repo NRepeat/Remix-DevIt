@@ -20,6 +20,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   return json({ customer });
 }
 export async function action({ params, request }: ActionFunctionArgs) {
+  invariant(params.id);
   try {
     const formData = Object.fromEntries(await request.formData());
 
@@ -27,14 +28,22 @@ export async function action({ params, request }: ActionFunctionArgs) {
     if (validatedCustomerData.error) {
       return validationError(validatedCustomerData.error);
     }
-    const isExistCustomer = await existCustomer(
-      validatedCustomerData.data.email
-    );
-    if (isExistCustomer) {
-      await updateCustomer(isExistCustomer.id, validatedCustomerData);
-      return redirect("/admin/customers");
+    const updatableCustomer = await getCustomerById(parseInt(params.id));
+    if (updatableCustomer) {
+      const isExistCustomer = await existCustomer(
+        validatedCustomerData.data.email
+      );
+      if (!isExistCustomer) {
+        await updateCustomer(updatableCustomer.id, validatedCustomerData);
+        return redirect("/admin/customers");
+      }
+      return validationError({
+        fieldErrors: {
+          email: "This email already exist",
+        },
+      });
     }
-    return json({ error: "Updating error" });
+    return validationError({ fieldErrors: { password: "Updating error" } });
   } catch (error) {
     throw new Response(`Error while updating customer${error}`);
   }
