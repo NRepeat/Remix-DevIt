@@ -32,6 +32,10 @@
   font-size: larger;
 }
 
+.price:hover {
+  color: white;
+}
+
 .priceWrapper {
   display: flex;
   width: 100%;
