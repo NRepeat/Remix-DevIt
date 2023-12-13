@@ -1,5 +1,4 @@
 import type { SubmitFunction } from "@remix-run/react";
-import type { Quantities } from "~/components/Admin/CartPanels/ItemsList/ItemsList";
 import type { ProductData } from "~/services/product.server";
 
 export type DummyProduct = {
@@ -39,20 +38,6 @@ export interface StorePageProps {
     }[];
   };
 }
-type HandleAddItemToCartFunction = (
-  cartId: number,
-  productId: number,
-  externalId: number,
-  quantities: Quantities,
-  customerId: number,
-  submit: SubmitFunction
-) => void;
-
-type HandleQuantityChangeFunction = (
-  setQuantities: React.Dispatch<React.SetStateAction<Quantities>>,
-  productId: number,
-  e: React.ChangeEvent<HTMLInputElement>
-) => void;
 
 export interface handleAddToCartProps {
   cartId: number;
@@ -86,24 +71,10 @@ export type CartT = {
 export interface AddItemToCartButtonProps {
   cart: CartT;
   product: CartProduct;
-  quantities: Quantities;
-  submit: SubmitFunction;
-  handleAddItemToCart: HandleAddItemToCartFunction;
   customerId: number;
 }
-export interface QuantityInputProps {
-  productId: number;
-  productStock: number;
-  quantities: Quantities;
-  handleQuantityChange: HandleQuantityChangeFunction;
-  setQuantities: React.Dispatch<React.SetStateAction<Quantities>>;
-}
+
 export interface ProductProps {
-  setQuantities: React.Dispatch<React.SetStateAction<Quantities>>;
   product: CartProduct;
   cart: CartT;
-  quantities: Quantities;
-  submit: SubmitFunction;
-  handleAddItemToCart: HandleAddItemToCartFunction;
-  handleQuantityChange: HandleQuantityChangeFunction;
 }

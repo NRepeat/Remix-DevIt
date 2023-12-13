@@ -5,17 +5,8 @@ import type { ProductProps } from "~/types/types";
 import styles from "../styles.module.css";
 import { AddToCartButton } from "./AddToCartButton";
 import { ProductInformation } from "./ProductInformation";
-import { QuantityCounter } from "./QuantityInput";
 
-const ProductRow: FC<ProductProps> = ({
-  product,
-  cart,
-  quantities,
-  setQuantities,
-  submit,
-  handleAddItemToCart,
-  handleQuantityChange,
-}) => {
+const ProductRow: FC<ProductProps> = ({ product, cart }) => {
   const AdminCustomerRouteData = useRouteLoaderData<typeof loader>(
     "routes/admin.customers_.customer.$id.cart"
   );
@@ -28,19 +19,9 @@ const ProductRow: FC<ProductProps> = ({
     <li className={styles.product}>
       <ProductInformation product={product} />
       <div className={styles.inputContainer}>
-        <QuantityCounter
-          handleQuantityChange={handleQuantityChange}
-          productId={product.id}
-          productStock={product.stock}
-          quantities={quantities}
-          setQuantities={setQuantities}
-        />
         <AddToCartButton
           cart={cart}
-          handleAddItemToCart={handleAddItemToCart}
           product={product}
-          quantities={quantities}
-          submit={submit}
           customerId={customerId}
         />
       </div>

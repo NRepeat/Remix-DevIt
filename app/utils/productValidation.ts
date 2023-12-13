@@ -13,3 +13,5 @@ export const dummyProductDataSchema = z.object({
   thumbnail: z.string(),
   images: z.array(z.string()),
 });
+
+export const quantitySchema = z.number().positive();
