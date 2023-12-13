@@ -17,7 +17,7 @@ export const AddToCartButton: FC<AddItemToCartButtonProps> = ({
     <Button
       className={styles.add}
       onClick={() =>
-        handleAddItemToCart(cart.id, product.id, quantities, customerId, submit)
+        handleAddItemToCart(cart.id, product.externalId!, product.id, quantities, customerId, submit)
       }
     >
       Add to cart

@@ -35,7 +35,7 @@
 }
 
 .currentPage {
-  background-color: rgba(204, 0, 204, 0.425);
+  background-color: var(--accentColor);
   color: white;
 }
 

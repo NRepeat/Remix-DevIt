@@ -5,12 +5,14 @@ export interface CartItemArgs {
   cartId: number;
   productId: number;
   quantity: number;
+  externalId: number;
 }
 
 export const createCartItem = async ({
   cartId,
   productId,
   quantity,
+  externalId,
 }: CartItemArgs) => {
   try {
     const existCartItem = await prisma.cartItem.findFirst({
@@ -24,7 +26,7 @@ export const createCartItem = async ({
       const newCartItem = await prisma.cartItem.create({
         data: {
           cartId,
-          productId,
+          productId: externalId,
           quantity,
         },
       });
@@ -36,7 +38,7 @@ export const createCartItem = async ({
       throw new Error("Product is out of stock");
     }
   } catch (error) {
-    throw new Error("Failed to create/update cart item");
+    throw new Error(`Failed to create/update cart item ${error}`);
   }
 };
 

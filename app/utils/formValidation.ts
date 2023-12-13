@@ -7,7 +7,7 @@ export const loginSchema = withZod(
       .string()
       .min(1, { message: "Email is required" })
       .email("Must be a valid email"),
-    password: z.string().min(10).min(1, { message: "Password is required" }),
+    password: z.string().min(8).min(1, { message: "Password is required" }),
   })
 );
 
