@@ -1,0 +1,32 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 10px;
+  align-self: center;
+  padding: 15px;
+  align-items: center;
+}
+
+.form > button {
+  height: 30px;
+  align-items: center;
+  background-color: var(--adminPanelBgColor);
+  color: white;
+  width: 60%;
+}
+
+.form > button:hover {
+  border: 1px solid var(--adminPanelBgColor);
+  color: black;
+  background-color: white;
+}
+
+.form > div > input {
+  min-width: 100%;
+  outline: 1px solid var(--adminPanelBgColor);
+}
+
+.form > div {
+  min-width: 100%;
+}

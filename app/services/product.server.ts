@@ -1,4 +1,5 @@
 import type { Category, Product } from "@prisma/client";
+import { formatString } from "~/utils/formatting.server";
 import { prisma } from "~/utils/prisma.server";
 
 export interface ProductData {
@@ -25,6 +26,50 @@ const sortTypeMap: SortField = {
   expensive: "desc",
   novelty: "asc",
 };
+type ProductCreateData = {
+  category: string;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: string;
+  rating: string;
+  stock: string;
+  brand: string;
+  thumbnail: string;
+  images: string;
+};
+
+export type CreateProductArgs = {
+  data: ProductCreateData;
+};
+
+export const createProduct = async ({ data }: CreateProductArgs) => {
+  try {
+    await prisma.product.create({
+      data: {
+        brand: data.brand,
+        description: data.description,
+        discountPercentage: parseInt(data.discountPercentage),
+        price: data.price,
+        rating: parseInt(data.rating),
+        stock: parseInt(data.stock),
+        thumbnail: data.thumbnail,
+        title: data.title,
+        images: data.images.split(","),
+        category: {
+          connectOrCreate: {
+            where: { slug: data.category },
+            create: {
+              slug: data.category,
+              name: formatString(data.category),
+            },
+          },
+        },
+      },
+    });
+  } catch (error) {}
+};
+
 export const getAllProducts = async (
   page: number,
   sortName: string

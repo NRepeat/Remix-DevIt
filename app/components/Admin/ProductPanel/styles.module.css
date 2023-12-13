@@ -1,0 +1,5 @@
+.panel {
+  grid-area: crud-main;
+  display: flex;
+  justify-content: center;
+}

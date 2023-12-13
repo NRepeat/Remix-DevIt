@@ -16,7 +16,7 @@ const Sidebar: FC = () => {
   const links = [
     { label: "Dashboard", url: "/admin/" },
     { label: "Customers", url: "/admin/customers" },
-    { label: "Products", url: "/admin/" },
+    { label: "Products", url: "/admin/products" },
     { label: "Settings", url: "/admin/" },
   ];
   return (
