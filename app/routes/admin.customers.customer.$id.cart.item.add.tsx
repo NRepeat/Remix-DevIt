@@ -1,7 +1,5 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
-import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import CartItemErrors from "~/components/Errors/AdminError/CartItemErrors/CartItemErrors";
 import { createCartItem } from "~/services/cartItem.server";
 import {
   isProductInStock,
@@ -14,10 +12,10 @@ export async function action({ request, params }: ActionFunctionArgs) {
     const quantity = validateNumberTypeInFormData(formData.get("quantity"));
     const productId = validateNumberTypeInFormData(formData.get("productId"));
     const cartId = validateNumberTypeInFormData(formData.get("cartId"));
-
-    if (cartId && productId && quantity) {
+    const externalId = validateNumberTypeInFormData(formData.get("externalId"));
+    if (cartId && productId && quantity && externalId) {
       if (await isProductInStock(productId, quantity)) {
-        await createCartItem({ cartId, productId, quantity });
+        await createCartItem({ cartId, productId, quantity, externalId });
         return redirect(`/admin/customers/customer/${params.id}/cart`);
       } else {
         throw new Response("Out of stock");
@@ -26,14 +24,6 @@ export async function action({ request, params }: ActionFunctionArgs) {
       throw new Response("Missing required parameters");
     }
   } catch (error) {
-    throw new Response("Internal Server Error", { status: 500 });
+    throw new Response(`Internal Server Error ${error}`, { status: 500 });
   }
-}
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-  if (isRouteErrorResponse(error)) {
-    return <CartItemErrors error={error} />;
-  }
-  return null;
 }

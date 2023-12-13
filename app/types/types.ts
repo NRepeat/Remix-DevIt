@@ -42,6 +42,7 @@ export interface StorePageProps {
 type HandleAddItemToCartFunction = (
   cartId: number,
   productId: number,
+  externalId: number,
   quantities: Quantities,
   customerId: number,
   submit: SubmitFunction
