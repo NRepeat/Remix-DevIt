@@ -31,9 +31,9 @@ type ProductCreateData = {
   title: string;
   description: string;
   price: number;
-  discountPercentage: string;
-  rating: string;
-  stock: string;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
   brand: string;
   thumbnail: string;
   images: string;
@@ -49,10 +49,10 @@ export const createProduct = async ({ data }: CreateProductArgs) => {
       data: {
         brand: data.brand,
         description: data.description,
-        discountPercentage: parseInt(data.discountPercentage),
+        discountPercentage: data.discountPercentage,
         price: data.price,
-        rating: parseInt(data.rating),
-        stock: parseInt(data.stock),
+        rating: data.rating,
+        stock: data.stock,
         thumbnail: data.thumbnail,
         title: data.title,
         images: data.images.split(","),

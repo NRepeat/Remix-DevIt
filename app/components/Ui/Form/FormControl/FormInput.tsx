@@ -6,15 +6,24 @@ type MyInputProps = {
   label: string;
   type?: React.HTMLInputTypeAttribute | undefined;
   placeholder?: string;
+  value?: number | string;
 };
 
-export const FormInput = ({ name, label, type, placeholder }: MyInputProps) => {
+export const FormInput = ({
+  name,
+  label,
+  type,
+  placeholder,
+  value,
+}: MyInputProps) => {
   const { error, getInputProps } = useField(name);
 
   return (
     <div>
       <label htmlFor={name}>{label}</label>
-      <Input {...getInputProps({ type, id: name, placeholder, min: 0 })} />
+      <Input
+        {...getInputProps({ value, type, id: name, placeholder, min: 0 })}
+      />
       {error && <span className="my-error-class">{error}</span>}
     </div>
   );

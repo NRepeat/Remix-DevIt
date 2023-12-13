@@ -6,9 +6,9 @@ import { CreateProductDataSchema } from "~/utils/productValidation";
 import styles from "./styles.module.css";
 const CreateProduct: FC = () => {
   const defaultValues = {
-    stock: "0",
-    discountPercentage: "0",
-    rating: "0",
+    stock: 0,
+    discountPercentage: 0,
+    rating: 0,
     price: 0,
   };
 

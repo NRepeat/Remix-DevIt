@@ -8,13 +8,13 @@ import { CreateProductDataSchema } from "~/utils/productValidation";
 
 export async function action({ params, request }: ActionFunctionArgs) {
   const validatedFormData = await request.formData();
+  console.log(
+    "🚀 ~ file: admin.products_.tsx:11 ~ action ~ validatedFormData :",
+    validatedFormData
+  );
 
   const validationResult =
     await CreateProductDataSchema.validate(validatedFormData);
-  console.log(
-    "🚀 ~ file: admin.products_.tsx:13 ~ action ~ validationResult:",
-    validationResult
-  );
 
   if (validationResult.data) {
     try {
