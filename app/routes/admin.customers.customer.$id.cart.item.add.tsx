@@ -27,6 +27,3 @@ export async function action({ request, params }: ActionFunctionArgs) {
     throw new Response(`Internal Server Error ${error}`, { status: 500 });
   }
 }
-
-
-

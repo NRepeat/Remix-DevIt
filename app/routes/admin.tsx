@@ -12,17 +12,14 @@ export function ErrorBoundary() {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     return (
-      <div >
-        <h1 >{error.status}</h1>
-        {error.statusText && (
-          <p >{error.statusText}</p>
-        )}
-        {error.data && <p >{error.data}</p>}
+      <div>
+        <h1>{error.status}</h1>
+        {error.statusText && <p>{error.statusText}</p>}
+        {error.data && <p>{error.data}</p>}
         <HomeButton />
       </div>
     );
   }
-
 }
 
 export default function () {
