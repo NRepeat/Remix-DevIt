@@ -1,6 +1,5 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { getCartByCustomerId } from "~/services/cart.server";
 import { searchProduct } from "~/services/product.server";
@@ -26,7 +25,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 };
 
 export default function () {
-  const data = useLoaderData<typeof loader>();
+  // const data = useLoaderData<typeof loader>();
 
   return <></>;
 }

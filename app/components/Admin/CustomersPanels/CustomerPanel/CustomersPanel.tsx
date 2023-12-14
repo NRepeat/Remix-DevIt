@@ -21,21 +21,21 @@ const CustomersPanel: FC<SerializeFrom<CustomersPanelProp>> = ({
 }) => {
   return (
     <div className={styles.container}>
-
       <div className={styles.wrapper}>
         <div className={styles.search}>
           <SearchBar action="/admin/customers/" />
-          <Link
-            className={styles.link}
-            to={"/admin/customers/customer/create"}
-          >
+          <Link className={styles.link} to={"/admin/customers/customer/create"}>
             Create customer
           </Link>
         </div>
 
-        {customers.length > 0 ? <div className={styles.table}>
-          <CustomersTable customers={customers} />
-        </div> : <p className={styles.notFound}>Customers not found</p>}
+        {customers.length > 0 ? (
+          <div className={styles.table}>
+            <CustomersTable customers={customers} />
+          </div>
+        ) : (
+          <p className={styles.notFound}>Customers not found</p>
+        )}
       </div>
       <div className={styles.pagination}>
         <Pagination
@@ -45,8 +45,6 @@ const CustomersPanel: FC<SerializeFrom<CustomersPanelProp>> = ({
         />
       </div>
     </div>
-
-
   );
 };
 

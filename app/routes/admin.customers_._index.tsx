@@ -10,7 +10,6 @@ import { searchCustomer } from "~/services/customer.server";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
-
     const url = new URL(request.url);
     const searchQuery = url.searchParams.get("search");
     if (searchQuery === "") {
@@ -36,10 +35,12 @@ export function ErrorBoundary() {
       <p>We are already working on fixing it</p>
     </div>;
   }
-  return <div>
-    <h1>Error</h1>
-    <p>We are already working on fixing it</p>
-  </div>
+  return (
+    <div>
+      <h1>Error</h1>
+      <p>We are already working on fixing it</p>
+    </div>
+  );
 }
 export default function () {
   const data = useLoaderData<typeof loader>();

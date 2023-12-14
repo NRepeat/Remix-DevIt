@@ -1,6 +1,5 @@
 import { Outlet } from "@remix-run/react";
 
-
 function Home() {
   return <Outlet />;
 }

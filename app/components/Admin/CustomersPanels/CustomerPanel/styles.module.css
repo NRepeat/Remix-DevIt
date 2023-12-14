@@ -18,7 +18,7 @@
   color: rgb(215, 151, 32);
   font-weight: bold;
   letter-spacing: 5px;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
 }
 
 .link {
@@ -31,7 +31,6 @@
   background-color: rgb(8, 3, 77);
   cursor: pointer;
 }
-
 
 .wrapper {
   display: flex;

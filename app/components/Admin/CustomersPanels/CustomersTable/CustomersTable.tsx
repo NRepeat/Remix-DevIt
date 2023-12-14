@@ -14,7 +14,6 @@ const CustomersTable: FC<SerializeFrom<CustomersTableProps>> = ({
 }) => {
   const submit = useSubmit();
   return (
-
     <table className={styles.table}>
       <thead>
         <tr className={styles.head}>
