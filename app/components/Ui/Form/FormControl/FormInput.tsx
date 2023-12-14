@@ -24,7 +24,9 @@ export const FormInput = ({
       <Input
         {...getInputProps({ value, type, id: name, placeholder, min: "0" })}
       />
-      {error && <span className="my-error-class">{error}</span>}
+      {error && (
+        <span style={{ paddingBottom: "5px", paddingTop: "5px" }}>{error}</span>
+      )}
     </div>
   );
 };

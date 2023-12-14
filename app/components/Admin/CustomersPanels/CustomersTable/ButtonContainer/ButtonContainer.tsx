@@ -17,19 +17,19 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
   const submit = useSubmit();
 
   return (
-    <div className={styles.buttonContainer}>
+    <div className={styles.container}>
       <Link
         className={clsx(styles.button, styles.edit)}
         to={`customer/${customer.id}/edit`}
       >
-        Edit
+        <p>Edit</p>
       </Link>
 
       <Button
         className={clsx(styles.button, styles.delete)}
         onClick={() => handleSubmit({ id: customer.id, submit })}
       >
-        Delete
+        <p>Delete</p>
       </Button>
     </div>
   );

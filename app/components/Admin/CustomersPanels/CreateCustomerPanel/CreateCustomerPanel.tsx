@@ -1,20 +1,26 @@
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import CreateCustomerForm from "~/components/Forms/CreateCustomerForm/CreateCustomerForm";
+import CreateCustomerForm from "~/components/Admin/CustomersPanels/CreateCustomerPanel/CreateCustomerForm/CreateCustomerForm";
+import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import styles from "./styles.module.css";
 const CreateCustomerPanel: FC = () => {
+  const breadcrumbs = [
+    { label: "Customers", link: "/admin/customers" },
+    { label: `Create`, link: "" },
+  ];
   return (
-    <div className={styles.addPanel}>
-      <div className={styles.head}>
-        <h2>Create customer </h2>
+    <>
+      <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
+      <div className={styles.title}>
+        Create form
         <Link className={styles.link} to={"/admin/customers/"}>
-          x
+          Close create form
         </Link>
       </div>
-      <div className={styles.container}>
+      <div className={styles.wrapper}>
         <CreateCustomerForm />
       </div>
-    </div>
+    </>
   );
 };
 

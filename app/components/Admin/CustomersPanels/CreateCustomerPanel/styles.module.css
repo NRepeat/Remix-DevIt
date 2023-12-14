@@ -1,64 +1,33 @@
-.addPanel {
+.container {
   grid-area: crud-main;
   padding: 20px;
   background-color: rgba(32, 94, 32);
 }
 
-.container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  height: 100%;
+.wrapper {
+  padding-top: 40px;
+  grid-area: main-container;
+  border-top: 1px solid gainsboro;
 }
 
-.head {
+.title {
+  border-top: 1px solid gainsboro;
+  grid-area: main-search;
   display: inline-flex;
-  grid-area: navigation;
-  justify-content: space-between;
-  position: relative;
-  color: white;
-  font-size: large;
-  font-weight: bold;
-  width: 100%;
-  padding-bottom: 10px;
-}
-
-.head > a {
-  text-decoration: none;
-  color: white;
-}
-
-.head::after {
-  content: "";
-  position: absolute;
-  height: 1px;
-  width: 100%;
-  left: 0;
-  bottom: 0;
-  background-color: gainsboro;
-}
-
-.form {
-  display: flex;
   align-items: center;
-  flex-direction: column;
-}
-
-.field {
-  padding: 10px;
-  width: 45%;
-}
-
-.field > p {
-  padding-bottom: 5px;
   color: white;
+  font-size: 1.2rem;
+  justify-content: space-between;
 }
 
-.button {
-  margin-top: 10px;
-  padding: 10px;
-  color: white;
-  background-color: cadetblue;
-  width: 35%;
+.link {
+  height: 40px;
+  align-items: center;
+  display: inline-flex;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.link:hover {
+  background-color: var(--acrylColorBg);
 }

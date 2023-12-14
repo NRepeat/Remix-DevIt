@@ -1,6 +1,6 @@
 .gridSidebar {
   background-color: var(--adminPanelBgColor);
-  border: 1px solid rgb(196, 196, 196);
+  border-right: 1px solid rgb(196, 196, 196);
   overflow: hidden;
   position: relative;
 }
@@ -11,22 +11,22 @@
 
 .active {
   color: rgb(255, 255, 255);
-  background-color: rgba(255, 255, 255, 0.158);
+  background-color: var(--acrylColorBg);
 }
 
 .active > a {
-  color: rgba(255, 255, 255, 0.911);
+  color: rgba(255, 255, 255);
 }
 
 .link {
   font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--fontFamily);
   font-size: 1.1rem;
   color: white;
 }
 
 .link:hover {
-  background-color: rgba(255, 255, 255, 0.158);
+  background-color: var(--acrylColorBg);
 }
 
 .list > li > a {

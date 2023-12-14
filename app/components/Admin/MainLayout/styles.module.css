@@ -2,7 +2,6 @@
   grid-area: main;
   background-color: var(--adminPanelBgColor);
   padding: 1.2rem 1.4rem 1.4rem 1.2rem;
-  border: 1px solid gainsboro;
   display: grid;
 
   grid-template-rows: 55px 55px auto 40px;

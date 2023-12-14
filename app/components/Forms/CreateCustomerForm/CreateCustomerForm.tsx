@@ -17,20 +17,21 @@ type FormProps = {
 
 const CreateCustomerForm: FC<FormProps> = ({ formData }) => {
   return (
-    <ValidatedForm
-      method="post"
-      validator={registrationSchema}
-      className={styles.form}
-    >
-      <FormInput label="Name" name="name" />
-      <FormInput label="Last Name" name="lastName" />
-      <FormInput label="Email" name="email" />
-      <FormInput label="Password" name="password" />
-
-      <Button className={styles.loginButton} type="submit">
-        Sign up
-      </Button>
-    </ValidatedForm>
+    <div className={styles.container}>
+      <ValidatedForm
+        method="post"
+        validator={registrationSchema}
+        className={styles.form}
+      >
+        <FormInput label="Name" name="name" />
+        <FormInput label="Last Name" name="lastName" />
+        <FormInput label="Email" name="email" />
+        <FormInput label="Password" name="password" />
+        <div className={styles.containerB}>
+          <Button type="submit">Sign up</Button>
+        </div>
+      </ValidatedForm>
+    </div>
   );
 };
 
