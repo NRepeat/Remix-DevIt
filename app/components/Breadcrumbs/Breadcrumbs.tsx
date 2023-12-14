@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
-import styles from "./styles.module.css";
 import { clsx } from "clsx";
+import styles from "./styles.module.css";
 interface BreadcrumbsProps {
   breadcrumbs: { label: string; link: string }[];
   admin: boolean;
@@ -8,7 +8,9 @@ interface BreadcrumbsProps {
 
 function Breadcrumbs({ breadcrumbs, admin }: BreadcrumbsProps) {
   return (
-    <div className={styles.breadcrumbs}>
+    <div
+      className={clsx(styles.breadcrumbs, { [styles.adminGridArea]: admin })}
+    >
       {breadcrumbs.map((breadcrumb, index) => (
         <span key={index}>
           {index > 0 && (

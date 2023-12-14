@@ -18,33 +18,3 @@ export const Button: FC<ButtonProps> = ({ children, className, ...props }) => (
     {children}
   </button>
 );
-
-// type Props = {
-//   children: React.ReactNode;
-//   onSubmit?: () => void;
-//   onClick?: () => void;
-//   disabled?: boolean;
-//   type?: "button" | "submit" | "reset";
-//   className?: string;
-// };
-
-// export const Button: FC<Props> = ({
-//   children,
-//   onSubmit,
-//   onClick,
-//   disabled = false,
-//   type = "button",
-//   className,
-// }) => {
-//   return (
-//     <button
-//       className={clsx(className)}
-//       type={type}
-//       onSubmit={onSubmit}
-//       onClick={onClick}
-//       disabled={disabled}
-//     >
-//       {children}
-//     </button>
-//   );
-// };

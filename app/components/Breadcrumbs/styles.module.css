@@ -29,5 +29,9 @@
 }
 
 .adminLast {
-  color: rgb(179, 179, 179);
+  color: gainsboro;
+}
+
+.adminGridArea {
+  grid-area: main-breadcrumbs;
 }

@@ -1,13 +1,20 @@
-import type { LoaderFunctionArgs } from "@remix-run/node";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import {
+  Link,
   isRouteErrorResponse,
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
+import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import { SearchBar } from "~/components/Searchbar/Searchbar";
+import Pagination from "~/components/Store/Pagination/Pagination";
 import { searchCustomer } from "~/services/customer.server";
-
+import adminCustomersStylesHref from "../styles/adminCustomersStylesHref.css";
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: adminCustomersStylesHref },
+];
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
     const url = new URL(request.url);
@@ -42,13 +49,29 @@ export function ErrorBoundary() {
     </div>
   );
 }
+
+const breadcrumbs = [{ label: "Customers", link: "/admin/customers" }];
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
-    <CustomersPanel
-      customers={data.customers.customers}
-      totalPages={data.customers.totalPages}
-      currentPage={data.page}
-    />
+    <>
+      <div className="breadcrumbs-container">
+        <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
+      </div>
+      <div className="search">
+        <SearchBar action="/admin/customers/" />
+        <Link className="link" to={"/admin/customers/customer/create"}>
+          Create customer
+        </Link>
+      </div>
+      <CustomersPanel customers={data.customers.customers} />
+      <div className="pagination-container">
+        <Pagination
+          admin={true}
+          currentPage={data.page}
+          totalPages={data.customers.totalPages}
+        />
+      </div>
+    </>
   );
 }

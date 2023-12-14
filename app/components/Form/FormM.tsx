@@ -22,6 +22,7 @@ const FormM: FC<FormMProps> = ({
       className={clsx(styles.form, className)}
       action={props.action}
       method={props.method}
+      onChange={props.onChange}
     >
       {children}
     </fetcher.Form>
@@ -30,6 +31,7 @@ const FormM: FC<FormMProps> = ({
       action={props.action}
       className={clsx(styles.form, className)}
       method={props.method}
+      onChange={props.onChange}
     >
       {children}
     </Form>

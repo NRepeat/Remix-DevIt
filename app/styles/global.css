@@ -9,10 +9,15 @@
   );
   --adminBreadcrumbsContainerArea: main-breadcrumbs;
   --adminMainContainerArea: main-container;
+  --fontFamily: "Chakra Petch", sans-serif;
   --adminPanelBgColor: #23462b;
   --storePageBgColor: rgb(16, 16, 16);
   --accentColor: rgb(53, 51, 180);
   --adminAccentColor: rgba(32, 94, 32, 0.767);
+}
+
+.body {
+  font-family: var(--fontFamily);
 }
 
 .bodyError {

@@ -36,7 +36,7 @@ const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
   }, [totalPages]);
 
   return (
-    <div className={styles.pag}>
+    <div className={clsx(styles.pag, { [styles.disable]: totalPages! <= 1 })}>
       {pages.map((page) => (
         <button
           key={page}
