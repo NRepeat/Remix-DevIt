@@ -1,31 +1,31 @@
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { json, redirect } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import SingleCart from "~/components/Admin/CartPanels/SingleCart/SingleCart";
 import { getCartByCustomerId } from "~/services/cart.server";
-import { searchProduct } from "~/services/product.server";
+import { getCustomerById } from "~/services/customer.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  invariant(params.id);
-  const url = new URL(request.url);
-  const searchQuery = url.searchParams.get("search");
-  const pageQuery = url.searchParams.get("page");
-  const page = pageQuery ? parseInt(pageQuery) : 1;
-  const customerId = parseInt(params.id);
+  try {
+    invariant(params.id);
+    const customerId = parseInt(params.id);
 
-  if (searchQuery === "") {
-    return redirect(`/admin/customers/customer/${customerId}/cart`);
+    const customer = await getCustomerById(customerId);
+    const cart = await getCartByCustomerId(customerId);
+    if (!customer || !cart) {
+      throw new Error("Customer Not Found");
+    }
+    return json({ customer, cart });
+  } catch (error) {
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
   }
-  const cart = await getCartByCustomerId(customerId);
-  const products = await searchProduct(searchQuery!, page, "novelty");
-
-  if (!cart) {
-    throw new Response("Cart Not Found", { status: 404 });
-  }
-  return json({ cart, customerId, products });
 };
 
 export default function () {
-  // const data = useLoaderData<typeof loader>();
+  const data = useLoaderData<typeof loader>();
 
-  return <></>;
+  return <SingleCart customer={data.customer} cart={data.cart} />;
 }

@@ -1,0 +1,38 @@
+.container {
+  grid-area: main-container;
+  overflow-y: scroll;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: stretch;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.card {
+  width: 250px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--acrylColorBg);
+}
+
+.imgWrapper {
+  max-height: 150px;
+  overflow: auto;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.info {
+}
+
+.action {
+}

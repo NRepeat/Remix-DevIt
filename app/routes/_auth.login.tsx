@@ -34,7 +34,9 @@ export async function action({ params, request }: ActionFunctionArgs) {
       },
     });
   } catch (error) {
-    throw new Response(`Error while login customer${error}`);
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
   }
 }
 

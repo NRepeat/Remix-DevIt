@@ -1,4 +1,4 @@
-import type { Cart } from "@prisma/client";
+import type { Cart, CartItem, Product } from "@prisma/client";
 
 export const createCart = async (id: number): Promise<Cart> => {
   try {
@@ -26,15 +26,15 @@ export const createCart = async (id: number): Promise<Cart> => {
   }
 };
 
-export const getCartByCustomerId = async (id: number) => {
+export const getCartByCustomerId = async (
+  id: number
+): Promise<
+  (Cart & { cartItems: CartItem[] & { product: Product }[] }) | null
+> => {
   try {
-    if (!id) {
-      throw new Error("Missing cart id");
-    }
     const cart = await prisma.cart.findUnique({
       where: { customerId: id },
       include: {
-        customer: true,
         cartItems: {
           include: {
             product: true,
@@ -42,6 +42,11 @@ export const getCartByCustomerId = async (id: number) => {
         },
       },
     });
+
+    if (!cart) {
+      throw new Error("Cart not found");
+    }
+
     return cart;
   } catch (error) {
     throw new Error("Error while attempting to find cart by id");

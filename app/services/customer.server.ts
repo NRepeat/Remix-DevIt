@@ -106,7 +106,7 @@ export const getAllCustomers = async (
           createdAt: true,
           updatedAt: true,
           cart: {
-            include: { cartItems: true },
+            include: { cartItems: { include: { product: true } } },
           },
         },
         skip,

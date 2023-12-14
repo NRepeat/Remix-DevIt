@@ -8,7 +8,9 @@ export async function action({ params }: ActionFunctionArgs) {
       await createCart(parseInt(params.id));
       redirect("/admin/customers");
     } catch (error) {
-      throw new Response("Error while creating cart ");
+      throw new Response("Oh no! Something went wrong!", {
+        status: 500,
+      });
     }
   return json({ success: true });
 }
