@@ -6,7 +6,7 @@ type MyInputProps = {
   label: string;
   type?: React.HTMLInputTypeAttribute | undefined;
   placeholder?: string;
-  value?: number | string;
+  value?: number | string | undefined;
 };
 
 export const FormInput = ({
@@ -22,7 +22,7 @@ export const FormInput = ({
     <div>
       <label htmlFor={name}>{label}</label>
       <Input
-        {...getInputProps({ value, type, id: name, placeholder, min: 0 })}
+        {...getInputProps({ value, type, id: name, placeholder, min: "0" })}
       />
       {error && <span className="my-error-class">{error}</span>}
     </div>

@@ -28,4 +28,11 @@ export const CreateProductDataSchema = withZod(
     images: z.string(),
   })
 );
-export const addProductToCartSchema = withZod(z.coerce.number().positive());
+export const addProductToCartSchema = withZod(
+  z.object({
+    quantity: z.coerce.number().positive(),
+    productId: z.coerce.number().positive(),
+    externalId: z.coerce.number().positive(),
+    cartId: z.coerce.number().positive(),
+  })
+);
