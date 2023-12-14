@@ -1,0 +1,13 @@
+.container {
+  grid-area: main;
+  background-color: var(--adminPanelBgColor);
+  padding: 1.2rem 1.4rem 1.4rem 1.2rem;
+  border: 1px solid gainsboro;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-rows: 55px 100%;
+  grid-template-columns: auto;
+  grid-template-areas:
+    "main-breadcrumbs"
+    "main-container";
+}

@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300;400;500;600&display=swap');
+
 :root {
-  --gradientColor: linear-gradient(
-    45deg,
-    rgb(47, 44, 221) 20%,
-    rgba(132, 105, 228, 0.874) 69%,
-    rgba(147, 162, 248, 0.774) 97%
-  );
+  --gradientColor: linear-gradient(45deg,
+      rgb(47, 44, 221) 20%,
+      rgba(132, 105, 228, 0.874) 69%,
+      rgba(147, 162, 248, 0.774) 97%);
+  --adminBreadcrumbsContainerArea: main-breadcrumbs;
+  --adminMainContainerArea: main-container;
   --adminPanelBgColor: #23462b;
   --storePageBgColor: rgb(16, 16, 16);
   --accentColor: rgb(53, 51, 180);

@@ -1,12 +1,12 @@
 import { Outlet } from "@remix-run/react";
-import CRUDPanel from "~/components/Admin/CRUD/CRUDPanel";
+import MainLayout from "~/components/Admin/MainLayout/MainLayout";
+
+
 
 export default function () {
   return (
-    <>
-      <CRUDPanel>
-        <Outlet />
-      </CRUDPanel>
-    </>
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
   );
 }

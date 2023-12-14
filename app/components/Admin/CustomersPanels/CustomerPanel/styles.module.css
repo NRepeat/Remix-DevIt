@@ -1,14 +1,27 @@
-.customersPanel {
-  grid-area: crud-main;
+.container {
+  grid-area: var(--adminMainContainerArea);
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
-.searchContainer {
+.search {
   display: inline-flex;
   width: 100%;
   justify-content: space-between;
 }
 
-.searchContainer > a {
+.notFound {
+  font-size: 1.5rem;
+  text-align: center;
+  color: rgb(215, 151, 32);
+  font-weight: bold;
+  letter-spacing: 5px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.link {
   color: rgb(255, 255, 255);
   display: inline-flex;
   align-items: center;
@@ -19,9 +32,9 @@
   cursor: pointer;
 }
 
-.container {
-  min-height: 100%;
+
+.wrapper {
   display: flex;
-  justify-content: space-between;
+  gap: 50px;
   flex-direction: column;
 }

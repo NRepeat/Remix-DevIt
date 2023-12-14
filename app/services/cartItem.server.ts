@@ -1,5 +1,4 @@
 import { isProductInStock } from "~/utils/validation.server";
-import { getProduct } from "./product.server";
 
 export interface CartItemArgs {
   cartId: number;
@@ -58,15 +57,11 @@ export const getCartItemById = async (cartItemId: number) => {
     throw new Error("Failed to get cart item by ID");
   }
 };
-export const updateCartItem = async (id: number, newData: any) => {
+export const updateCartItem = async (id: number, newData: number) => {
   try {
     const cartItem = await getCartItemById(id);
     if (!cartItem) {
       throw new Error(`Item didn't exist`);
-    }
-    const product = await getProduct(cartItem.productId);
-    if (product.stock <= newData) {
-      throw new Error(`Out of stock `);
     }
     const updatedCartItem = await prisma.cartItem.update({
       where: { id },

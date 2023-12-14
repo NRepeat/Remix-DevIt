@@ -5,7 +5,6 @@ import PageLayout from "~/Layout/PageLayout/PageLayout";
 import Sidebar from "~/components/Admin/Sidebar/Sidebar";
 import Footer from "~/components/Footer/Footer";
 import styles from "./styles.module.css";
-// const links = [{ slug: "dashboard", name: "Dashboard" }, { slug: "crud", name: "CRUD" }]
 
 const AdminPage: FC = () => {
   return (

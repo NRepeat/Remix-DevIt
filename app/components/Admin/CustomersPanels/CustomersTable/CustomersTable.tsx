@@ -1,13 +1,20 @@
 import type { SerializeFrom } from "@remix-run/node";
 import { Link, useSubmit } from "@remix-run/react";
 import type { FC } from "react";
-import type { CRUDPanelProps } from "../../CRUD/CRUDPanel";
+import type { CustomerWithoutPassword } from "~/services/customer.server";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import styles from "./styles.module.css";
 
-const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
+type CustomersTableProps = {
+  customers: CustomerWithoutPassword[];
+};
+
+const CustomersTable: FC<SerializeFrom<CustomersTableProps>> = ({
+  customers,
+}) => {
   const submit = useSubmit();
   return (
+
     <table className={styles.table}>
       <thead>
         <tr className={styles.head}>
@@ -21,7 +28,7 @@ const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
         </tr>
       </thead>
       <tbody>
-        {data.customers.customers.map((customer) => (
+        {customers.map((customer) => (
           <tr key={customer.id} className={styles.info}>
             <td>
               <input type="checkbox" name="id" id={`checkbox-${customer.id}`} />
@@ -66,4 +73,4 @@ const CustomerList: FC<SerializeFrom<CRUDPanelProps>> = ({ data }) => {
   );
 };
 
-export default CustomerList;
+export default CustomersTable;

@@ -29,12 +29,13 @@ export async function action({ request, params }: ActionFunctionArgs) {
       throw new Response("Missing required parameters");
     }
   } catch (error) {
-    throw new Response("Internal Server Error", { status: 500 });
+    throw new Response(`Internal Server Error ${error}`, { status: 500 });
   }
 }
 
 export function ErrorBoundary() {
   const error = useRouteError();
+
   if (isRouteErrorResponse(error)) {
     return <CartItemErrors error={error} />;
   }

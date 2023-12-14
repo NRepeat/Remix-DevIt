@@ -1,10 +1,6 @@
 import type { Cart, Customer } from "@prisma/client";
 import type { SuccessResult } from "remix-validated-form";
-export interface CustomerArgs {
-  email: string;
-  name: string;
-  secondName: string;
-}
+
 export interface CreateCustomerArgs {
   email: string;
   name: string;
@@ -97,7 +93,7 @@ export const login = async ({
 export const getAllCustomers = async (
   page: number
 ): Promise<{ customers: CustomerWithoutPassword[]; totalPages: number }> => {
-  const pageSize: number = 5;
+  const pageSize: number = 10;
   const skip = (page - 1) * pageSize;
   try {
     const [customers, totalCustomers] = await Promise.all([
@@ -223,31 +219,52 @@ export const deleteCustomer = async (
 };
 
 export const searchCustomer = async (
-  q: string | null,
+  search: string | null,
   page: number
 ): Promise<{ customers: CustomerWithoutPassword[]; totalPages: number }> => {
   try {
-    if (q === null) {
+    if (!search) {
       return await getAllCustomers(page);
     }
+    const pageSize: number = 10;
+    const skip = (page - 1) * pageSize;
 
-    const customers = await prisma.customer.findMany({
-      where: {
-        OR: [
-          { name: { contains: q, mode: "insensitive" } },
-          { secondName: { contains: q, mode: "insensitive" } },
-        ],
-      },
-      include: {
-        cart: {
-          include: {
-            cartItems: true,
+    const [customers, totalCustomers] = await Promise.all([
+      prisma.customer.findMany({
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          secondName: true,
+          createdAt: true,
+          updatedAt: true,
+          cart: {
+            include: { cartItems: true },
           },
         },
-      },
-    });
+        skip,
+        take: pageSize,
+        where: {
+          OR: [
+            { name: { contains: search, mode: "insensitive" } },
+            { secondName: { contains: search, mode: "insensitive" } },
+            { email: { contains: search, mode: "insensitive" } },
+          ],
+        },
+      }),
+      prisma.customer.count({
+        where: {
+          OR: [
+            { name: { contains: search, mode: "insensitive" } },
+            { secondName: { contains: search, mode: "insensitive" } },
+            { email: { contains: search, mode: "insensitive" } },
+          ],
+        },
+      }),
+    ]);
 
-    return { customers, totalPages: 0 };
+    const totalPages = Math.ceil(totalCustomers / pageSize);
+    return { customers, totalPages };
   } catch (error) {
     throw new Error(`Error during customer search: ${error}`);
   }
