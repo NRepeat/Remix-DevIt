@@ -23,10 +23,12 @@
 }
 
 .form > div > input {
-  min-width: 100%;
   outline: 1px solid var(--adminPanelBgColor);
 }
 
 .form > div {
+  display: flex;
   min-width: 100%;
+  width: 350px;
+  flex-direction: column;
 }

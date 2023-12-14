@@ -3,3 +3,11 @@
   display: flex;
   justify-content: center;
 }
+
+.nav {
+  grid-area: navigation;
+  background-color: var(--adminPanelBgColor);
+  height: 55px;
+  display: flex;
+  align-items: center;
+}

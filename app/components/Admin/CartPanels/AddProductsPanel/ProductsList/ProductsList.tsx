@@ -2,7 +2,7 @@ import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import type { AddProductProps } from "../AddProductsPanel";
-import ProductRow from "./Product/Product";
+import ProductRow from "../Product/Product";
 import styles from "./styles.module.css";
 
 const ProductsList: FC<SerializeFrom<AddProductProps>> = ({ data, cart }) => {

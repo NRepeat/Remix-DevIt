@@ -12,7 +12,7 @@ const AdminPage: FC = () => {
     <>
       <PageLayout isAdmin={true}>
         <Header>
-          <h1 className={styles.headerInfo}>Admin penal</h1>
+          <h1 className={styles.headerInfo}>Admin panel</h1>
         </Header>
         <Outlet />
 
