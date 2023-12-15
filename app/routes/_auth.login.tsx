@@ -1,6 +1,6 @@
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
 import { validationError } from "remix-validated-form";
-import LoginPage from "~/Pages/LoginPage/LoginPage";
+import LoginPage from "~/pages/LoginPage/LoginPage";
 import { existCustomer, login } from "~/services/customer.server";
 import { loginSchema } from "~/utils/formValidation";
 

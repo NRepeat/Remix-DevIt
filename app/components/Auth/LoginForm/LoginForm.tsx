@@ -21,7 +21,7 @@ const LoginForm: FC = () => {
         <Link to={"/"} className={styles.forgot}>
           Forgot password?
         </Link>
-        <SubmitButton />
+        <SubmitButton>Sign in</SubmitButton>
       </ValidatedForm>
       <div className={styles.reg}>
         New in Store? <Link to={"/registration"}>Register</Link>{" "}

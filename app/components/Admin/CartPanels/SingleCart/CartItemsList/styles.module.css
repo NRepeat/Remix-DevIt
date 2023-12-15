@@ -3,24 +3,49 @@
   overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
-  align-content: stretch;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 5px;
+  padding-top: 50px;
 }
 
 .card {
+  position: relative;
   width: 250px;
-  height: 300px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   background-color: var(--acrylColorBg);
+  overflow: hidden;
 }
 
 .imgWrapper {
   max-height: 150px;
   overflow: auto;
+}
+
+.inputs {
+  display: inline-flex;
+  justify-content: space-evenly;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputs > div:nth-child(1) {
+  width: 43%;
+}
+
+.inputs > div:nth-child(2) {
+  width: 90px;
+}
+
+.inputs > div:nth-child(3) {
+  width: 65px;
+  overflow: hidden;
 }
 
 .img {
@@ -31,8 +56,68 @@
   object-fit: cover;
 }
 
-.info {
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
-.action {
+.form > button {
+  height: 40px;
+  align-items: center;
+  width: 100%;
+}
+
+.form > button:hover {
+  background-color: var(--acrylColorBg);
+}
+
+.info {
+  background-color: rgba(6, 132, 243, 0.493);
+  color: white;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px;
+}
+
+.delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 20px;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(201, 21, 21);
+}
+
+.delete:hover {
+  background-color: var(--acrylColorBg);
+}
+
+.action > button:hover {
+  background-color: var(--acrylColorBg);
+}
+
+.action > button {
+  background-color: olivedrab;
+  width: 100%;
+  height: 40px;
+}
+
+.close {
+  width: 100%;
+  background-color: black;
+  color: white;
+}
+
+.priceWrapper {
+  padding-top: 10px;
+  border-top: 1px solid white;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-direction: row;
+  font-weight: 600;
 }

@@ -39,6 +39,7 @@ export const getCartByCustomerId = async (
           include: {
             product: true,
           },
+          orderBy: { productId: "asc" },
         },
       },
     });

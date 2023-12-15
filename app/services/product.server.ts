@@ -3,11 +3,13 @@ import { formatString } from "~/utils/formatting.server";
 import { prisma } from "~/utils/prisma.server";
 
 export interface ProductData {
-  products: Product[];
-  category?: Category;
+  products: ({
+    category?: Category;
+  } & Product)[];
   totalPages?: number;
   page?: number;
 }
+
 export interface SortField {
   rating: string;
   cheap: string;
@@ -78,6 +80,7 @@ export const getAllProducts = async (
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   const pageSize: number = 12;
   const skip = (page - 1) * pageSize;
+
   try {
     const [products, totalProductsCount] = await Promise.all([
       prisma.product.findMany({
@@ -90,7 +93,9 @@ export const getAllProducts = async (
       }),
       prisma.product.count(),
     ]);
+
     const totalPages = Math.ceil(totalProductsCount / pageSize);
+
     return { products, totalPages, page };
   } catch (error) {
     throw new Error(`Error during get all products ${error}`);
@@ -132,6 +137,7 @@ export const searchProduct = async (
           { description: { contains: q, mode: "insensitive" } },
         ],
       },
+      include: { category: true },
       orderBy: {
         [sortField]: sortType,
       },
@@ -167,5 +173,20 @@ export const getProductsByCategory = async (
     return { products };
   } catch (error) {
     throw new Error(`Error during products by category search: ${error}`);
+  }
+};
+
+export const updateProduct = async (
+  id: number,
+  data: { price: number; rating: number }
+) => {
+  try {
+    const product = await prisma.product.update({
+      where: { id },
+      data,
+    });
+    return product;
+  } catch (error) {
+    throw new Error(`Error during updating  products: ${error}`);
   }
 };

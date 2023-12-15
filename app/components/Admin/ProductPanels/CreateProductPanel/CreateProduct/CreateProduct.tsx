@@ -40,7 +40,7 @@ const CreateProduct: FC = () => {
         name="images"
       />
       <FormInput type="number" label="Price" name="price" />
-      <SubmitButton />
+      <SubmitButton>Create</SubmitButton>
     </ValidatedForm>
   );
 };

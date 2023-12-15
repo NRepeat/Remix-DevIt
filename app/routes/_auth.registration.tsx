@@ -1,7 +1,7 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { validationError } from "remix-validated-form";
-import RegistrationPage from "~/Pages/RegistrationPage/RegistrationPage";
+import RegistrationPage from "~/pages/RegistrationPage/RegistrationPage";
 import { createCustomer, existCustomer } from "~/services/customer.server";
 import { registrationSchema } from "~/utils/formValidation";
 

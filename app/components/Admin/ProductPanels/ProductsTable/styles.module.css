@@ -1,0 +1,66 @@
+.table {
+  width: 100%;
+}
+
+.head {
+  height: 55px;
+  color: white;
+  background-color: var(--acrylColorBg);
+}
+
+.name {
+  text-align: center;
+}
+
+.stock {
+  min-width: 50px;
+  text-align: center;
+}
+
+.rating {
+  text-align: center;
+}
+
+.checkbox {
+  max-width: 25px;
+  width: 25px;
+}
+
+.created {
+  min-width: 115px;
+}
+
+.imgWrapper {
+  max-height: 150px;
+  max-width: 190px;
+  min-width: 100px;
+  overflow: auto;
+}
+
+.description {
+  min-width: 250px;
+  max-width: 300px;
+  overflow-y: auto;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.info {
+  background-color: orange;
+  height: 40px;
+}
+
+.action {
+  min-width: 200px;
+  text-align: center;
+}
+
+.container {
+  overflow-y: auto;
+}

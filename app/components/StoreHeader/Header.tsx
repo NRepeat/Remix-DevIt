@@ -1,6 +1,6 @@
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import { SearchBar } from "../SearchBar/SearchBar";
+import { SearchBar } from "../Searchbar/Searchbar";
 import { CartIcon } from "../Store/CartInfo/CartInfo";
 import styles from "./styles.module.css";
 
