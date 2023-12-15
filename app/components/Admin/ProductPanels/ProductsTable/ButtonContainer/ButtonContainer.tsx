@@ -1,36 +1,39 @@
 import type { Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import { Link, useSubmit } from "@remix-run/react";
+import { Link } from "@remix-run/react";
+import { withZod } from "@remix-validated-form/with-zod";
 import clsx from "clsx";
 import React from "react";
-import { Button } from "~/components/Button/Button";
-import { handleSubmit } from "./Handle";
+import { ValidatedForm } from "remix-validated-form";
+import { z } from "zod";
+import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import styles from "./styles.module.css";
 
 export interface ButtonContainerProps {
   product: Product;
 }
+export const validationProductDelete = withZod(
+  z.object({
+    itemId: z.coerce.number(),
+  })
+);
 
 const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
   product,
 }) => {
-  const submit = useSubmit();
-
   return (
     <div className={styles.container}>
       <Link
-        className={clsx(styles.button, styles.edit)}
-        to={`customer/${product.id}/edit`}
+        className={clsx(styles.link, styles.edit)}
+        to={`/admin/products/product/${product.id}/edit`}
       >
-        <p>Edit</p>
+        Edit
       </Link>
-
-      <Button
-        className={clsx(styles.button, styles.delete)}
-        onClick={() => handleSubmit({ id: product.id, submit })}
-      >
-        <p>Delete</p>
-      </Button>
+      <ValidatedForm validator={validationProductDelete}>
+        <SubmitButton className={clsx(styles.button, styles.delete)}>
+          Delete
+        </SubmitButton>
+      </ValidatedForm>
     </div>
   );
 };

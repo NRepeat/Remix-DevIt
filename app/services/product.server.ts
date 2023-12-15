@@ -178,7 +178,13 @@ export const getProductsByCategory = async (
 
 export const updateProduct = async (
   id: number,
-  data: { price: number; rating: number }
+  data: {
+    img: string;
+    title: string;
+    description: string;
+    rating: number;
+    stock: number;
+  }
 ) => {
   try {
     const product = await prisma.product.update({
@@ -188,5 +194,25 @@ export const updateProduct = async (
     return product;
   } catch (error) {
     throw new Error(`Error during updating  products: ${error}`);
+  }
+};
+export const updateProductCategory = async (
+  id: number,
+
+  category: string
+) => {
+  try {
+    const product = await prisma.product.update({
+      where: {
+        id,
+      },
+      data: {
+        category: { update: { name: category, slug: category } },
+      },
+    });
+
+    return product;
+  } catch (error) {
+    throw new Error(`Error during updating products: ${error}`);
   }
 };

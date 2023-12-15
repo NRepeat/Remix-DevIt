@@ -12,12 +12,18 @@ import {
 import { editSchema } from "~/utils/formValidation";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-  invariant(params.id);
-  const customer = await getCustomerById(parseInt(params.id!));
-  if (!customer) {
-    throw new Response("Customer Not Found", { status: 404 });
+  try {
+    invariant(params.id);
+    const customer = await getCustomerById(parseInt(params.id));
+    if (!customer) {
+      throw new Error("Customer Not Found");
+    }
+    return json({ customer });
+  } catch (error) {
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
   }
-  return json({ customer });
 }
 export async function action({ params, request }: ActionFunctionArgs) {
   invariant(params.id);
@@ -28,13 +34,13 @@ export async function action({ params, request }: ActionFunctionArgs) {
     if (validatedCustomerData.error) {
       return validationError(validatedCustomerData.error);
     }
-    const updatableCustomer = await getCustomerById(parseInt(params.id));
-    if (updatableCustomer) {
+    const customer = await getCustomerById(parseInt(params.id));
+    if (customer) {
       const isExistCustomer = await existCustomer(
         validatedCustomerData.data.email
       );
       if (!isExistCustomer) {
-        await updateCustomer(updatableCustomer.id, validatedCustomerData);
+        await updateCustomer(customer.id, validatedCustomerData);
         return redirect("/admin/customers");
       }
       return validationError({

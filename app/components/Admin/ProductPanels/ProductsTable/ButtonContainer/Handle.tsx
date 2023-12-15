@@ -6,15 +6,15 @@ type HandleArgs = {
 };
 
 export const handleSubmit = ({ id, submit }: HandleArgs) => {
-  const isConfirmDeleteCustomer = confirm(`Confirm delete customer ${id}`);
-  if (!isConfirmDeleteCustomer) {
+  const isConfirmDeleteProduct = confirm(`Confirm delete product ${id}`);
+  if (!isConfirmDeleteProduct) {
     return;
   }
   submit(
     { id },
     {
-      method: "post",
-      action: `/admin/customers/customer/delete`,
+      method: "delete",
+      action: `/admin/products/product/delete`,
       navigate: false,
     }
   );

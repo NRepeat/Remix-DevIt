@@ -1,16 +1,17 @@
 .container {
   display: inline-flex;
   width: 100%;
-  height: 40px;
+  justify-content: space-between;
 }
 
-.button {
+.button,
+.link {
+  width: 100%;
   padding: 5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  width: 100%;
   cursor: pointer;
   color: black;
   text-align: center;
@@ -18,6 +19,7 @@
   font-weight: 600;
 }
 
+.link:hover,
 .button:hover {
   background-color: #68806e;
 }
