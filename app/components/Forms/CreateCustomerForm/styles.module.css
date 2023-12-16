@@ -29,6 +29,7 @@
 
 .form > div > input {
   width: max-content;
+  width: 500px;
   border-radius: 5px;
   outline: solid;
   outline-width: 2px;
