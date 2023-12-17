@@ -39,7 +39,10 @@ export async function action({ params, request }: ActionFunctionArgs) {
       const isExistCustomer = await existCustomer(
         validatedCustomerData.data.email
       );
-      if (!isExistCustomer) {
+      if (
+        !isExistCustomer ||
+        customer.email === validatedCustomerData.data.email
+      ) {
         await updateCustomer(customer.id, validatedCustomerData);
         return redirect("/admin/customers");
       }

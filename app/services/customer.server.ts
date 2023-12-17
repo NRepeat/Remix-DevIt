@@ -25,7 +25,7 @@ export const existCustomer = async (
   email: string
 ): Promise<CustomerWithoutPassword | null> => {
   try {
-    const existCustomer = await prisma.customer.findFirst({
+    const existCustomer = await prisma.customer.findUnique({
       where: { email: email },
       select: {
         id: true,

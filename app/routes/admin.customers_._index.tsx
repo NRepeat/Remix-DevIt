@@ -8,7 +8,7 @@ import {
 } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
-import { SearchBar } from "~/components/Searchbar/Searchbar";
+import { SearchBar } from "~/components/SearchBar/SearchBar";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import { searchCustomer } from "~/services/customer.server";
 import adminCustomersStylesHref from "../styles/adminCustomersStylesHref.css";

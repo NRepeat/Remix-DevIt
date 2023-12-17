@@ -11,7 +11,7 @@ import styles from "./styles.module.css";
 
 type FormProps = {
   formData: {
-    img: string;
+    thumbnail: string;
     title: string;
     description: string;
     category: Category;
@@ -24,7 +24,7 @@ type FormProps = {
 
 export const editProductSchema = withZod(
   z.object({
-    img: z.string(),
+    thumbnail: z.string(),
     title: z.string(),
     description: z.coerce.string(),
     category: z.string(),
@@ -40,7 +40,7 @@ const EditProductForm: FC<SerializeFrom<FormProps>> = ({ formData }) => {
         method="post"
         validator={editProductSchema}
         defaultValues={{
-          img: formData.img,
+          thumbnail: formData.thumbnail,
           title: formData.title,
           description: formData.description,
           category: formData.category.name,
@@ -49,7 +49,7 @@ const EditProductForm: FC<SerializeFrom<FormProps>> = ({ formData }) => {
         }}
         className={styles.form}
       >
-        <FormInput type="url" label="Image" name="img" />
+        <FormInput type="url" label="Image" name="thumbnail" />
         <FormInput label="Title" name="title" />
 
         <FormTextInput label="Description" name="description" />

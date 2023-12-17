@@ -1,7 +1,7 @@
 import type { LinksFunction } from "@remix-run/node";
 import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import AdminPage from "~/Pages/AdminPage/AdminPage";
 import HomeButton from "~/components/Errors/HomeButton/HomeButton";
-import AdminPage from "~/pages/AdminPage/AdminPage";
 import adminStylesHref from "../styles/adminStylesHref.css";
 
 export const links: LinksFunction = () => [

@@ -1,5 +1,5 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { validationError } from "remix-validated-form";
 import invariant from "tiny-invariant";
@@ -33,25 +33,14 @@ export async function action({ params, request }: ActionFunctionArgs) {
     const formData = Object.fromEntries(await request.formData());
 
     const validatedProductData = await editProductSchema.validate(formData);
-    console.log(
-      "🚀 ~ file: admin.products_.product.$id.edit.tsx:32 ~ action ~ validatedCustomerData:",
-      validatedProductData
-    );
     if (validatedProductData.error) {
       return validationError(validatedProductData.error);
     }
     const { category, ...productData } = validatedProductData.data;
     const product = await getProduct(parseInt(params.id));
-    const updatedProduct = await updateProduct(product.id, productData);
-    const updatedCategory = await updateProductCategory(product.id, category);
-    console.log(
-      "🚀 ~ file: admin.products_.product.$id.edit.tsx:41 ~ action ~ updatedCategory:",
-      updatedCategory
-    );
-    console.log(
-      "🚀 ~ file: admin.products_.product.$id.edit.tsx:39 ~ action ~ updatedProduct:",
-      updatedProduct
-    );
+    await updateProduct(product.id, productData);
+    await updateProductCategory(product.id, category);
+    return redirect("/admin/products");
   } catch (error) {
     throw new Response(`Error while updating customer${error}`);
   }

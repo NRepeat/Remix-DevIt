@@ -3,7 +3,7 @@ import { json, redirect } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import ProductsList from "~/components/Admin/ProductPanels/ProductsTable/ProductsList";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
-import { SearchBar } from "~/components/Searchbar/Searchbar";
+import { SearchBar } from "~/components/SearchBar/SearchBar";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import { searchProduct } from "~/services/product.server";
 import adminProductsStylesHref from "../styles/adminProductsStylesHref.css";

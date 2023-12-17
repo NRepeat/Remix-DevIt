@@ -1,12 +1,12 @@
 .container {
   display: inline-flex;
+  flex-direction: column;
   width: 100%;
   justify-content: space-between;
 }
 
 .button,
 .link {
-  width: 100%;
   padding: 5px;
   display: inline-flex;
   align-items: center;
@@ -30,4 +30,5 @@
 
 .delete {
   background-color: rgba(172, 6, 6, 0.767);
+  width: 100%;
 }

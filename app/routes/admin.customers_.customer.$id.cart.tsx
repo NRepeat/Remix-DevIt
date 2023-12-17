@@ -10,6 +10,7 @@ import SingleCart from "~/components/Admin/CartPanels/SingleCart/SingleCart";
 import { getCartByCustomerId } from "~/services/cart.server";
 import { deleteCartItem, updateCartItem } from "~/services/cartItem.server";
 import { getCustomerById } from "~/services/customer.server";
+import { updateProduct } from "~/services/product.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   try {
@@ -43,10 +44,10 @@ export async function action({ params, request }: ActionFunctionArgs) {
     }
 
     if (parsedFormData.data) {
-      // await updateProduct(parsedFormData.data.productId, {
-      //   price: parsedFormData.data.price,
-      //   rating: parsedFormData.data.rating,
-      // });
+      await updateProduct(parsedFormData.data.productId, {
+        price: parsedFormData.data.price,
+        rating: parsedFormData.data.rating,
+      });
       await updateCartItem(
         parsedFormData.data.itemId,
         parsedFormData.data.quantity

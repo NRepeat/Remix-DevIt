@@ -1,7 +1,7 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import StorePage from "~/pages/StorePage/StorePage";
+import StorePage from "~/Pages/StorePage/StorePage";
 import { createCart } from "~/services/cartSession.server";
 import {
   getAllProductCategories,

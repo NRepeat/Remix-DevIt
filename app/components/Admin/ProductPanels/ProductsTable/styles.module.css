@@ -56,6 +56,10 @@
   height: 40px;
 }
 
+.info:nth-child(even) {
+  background-color: rgba(255, 166, 0, 0.679);
+}
+
 .action {
   min-width: 200px;
   text-align: center;

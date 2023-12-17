@@ -11,7 +11,7 @@ export interface EditProductPanelProps {
 
 const EditProductPanel: FC<EditProductPanelProps> = ({ product }) => {
   const [formData, setFormData] = useState({
-    img: product.thumbnail,
+    thumbnail: product.thumbnail,
     title: product.title,
     description: product.description,
     category: product.category,
@@ -20,7 +20,7 @@ const EditProductPanel: FC<EditProductPanelProps> = ({ product }) => {
   });
   useEffect(() => {
     setFormData({
-      img: product.thumbnail,
+      thumbnail: product.thumbnail,
       title: product.title,
       description: product.description,
       category: product.category,
