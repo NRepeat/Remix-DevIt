@@ -1,6 +1,6 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { Outlet, isRouteErrorResponse, useRouteError } from "@remix-run/react";
+import { Outlet } from "@remix-run/react";
 import CRUDPanel from "~/components/Admin/MainLayout/MainLayout";
 import type { CreateProductArgs } from "~/services/product.server";
 import { createProduct } from "~/services/product.server";
@@ -19,20 +19,16 @@ export async function action({ params, request }: ActionFunctionArgs) {
         await createProduct(data);
         return json({ success: true });
       } catch (error) {
-        throw new Error(`${error}`);
+        throw new Error(`Error while creating products`);
       }
     }
   } catch (error) {
-    throw new Response(`${error}`);
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
   }
 }
-export function ErrorBoundary() {
-  const error = useRouteError();
 
-  if (isRouteErrorResponse(error)) {
-    <></>;
-  }
-}
 export default function () {
   return (
     <>

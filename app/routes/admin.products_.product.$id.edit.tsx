@@ -17,7 +17,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     const product = await getProduct(parseInt(params.id));
 
     if (!product) {
-      throw new Error("product Not Found");
+      throw new Error("Product Not Found");
     }
     return json({ product });
   } catch (error) {
@@ -42,7 +42,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
     await updateProductCategory(product.id, category);
     return redirect("/admin/products");
   } catch (error) {
-    throw new Response(`Error while updating customer${error}`);
+    throw new Response(`Error while updating customer`);
   }
 }
 

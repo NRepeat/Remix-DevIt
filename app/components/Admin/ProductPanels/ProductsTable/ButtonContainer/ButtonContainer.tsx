@@ -6,6 +6,7 @@ import clsx from "clsx";
 import React from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
+import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import styles from "./styles.module.css";
 
@@ -29,7 +30,8 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
       >
         Edit
       </Link>
-      <ValidatedForm validator={validationProductDelete}>
+      <ValidatedForm validator={validationProductDelete} method="delete">
+        <FormInput name="id" type="hidden" value={product.id} />
         <SubmitButton className={clsx(styles.button, styles.delete)}>
           Delete
         </SubmitButton>

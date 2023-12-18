@@ -22,15 +22,13 @@ export async function action({ params, request }: ActionFunctionArgs) {
       }
       return validationError({
         fieldErrors: {
-          email: "Email or password incorrect",
-          password: "Email or password incorrect",
+          password: "Email or password are incorrect",
         },
       });
     }
     return validationError({
       fieldErrors: {
-        email: "Email or password incorrect",
-        password: "Email or password incorrect",
+        password: "Email or password are incorrect",
       },
     });
   } catch (error) {

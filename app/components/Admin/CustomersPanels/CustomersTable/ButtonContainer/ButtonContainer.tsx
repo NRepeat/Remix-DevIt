@@ -1,21 +1,26 @@
 import type { SerializeFrom } from "@remix-run/node";
-import { Link, useSubmit } from "@remix-run/react";
+import { Link } from "@remix-run/react";
+import { withZod } from "@remix-validated-form/with-zod";
 import clsx from "clsx";
 import React from "react";
-import { Button } from "~/components/Button/Button";
+import { ValidatedForm } from "remix-validated-form";
+import { z } from "zod";
+import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
+import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
-import { handleSubmit } from "./Handle";
 import styles from "./styles.module.css";
 
 export interface ButtonContainerProps {
   customer: CustomerWithoutPassword;
 }
-
+export const validationCustomerDelete = withZod(
+  z.object({
+    customerId: z.coerce.number(),
+  })
+);
 const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
   customer,
 }) => {
-  const submit = useSubmit();
-
   return (
     <div className={styles.container}>
       <Link
@@ -24,13 +29,16 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
       >
         <p>Edit</p>
       </Link>
-
-      <Button
-        className={clsx(styles.button, styles.delete)}
-        onClick={() => handleSubmit({ id: customer.id, submit })}
+      <ValidatedForm
+        className={clsx(styles.form)}
+        method="delete"
+        validator={validationCustomerDelete}
       >
-        <p>Delete</p>
-      </Button>
+        <FormInput name="customerId" type="hidden" value={customer.id} />
+        <SubmitButton className={clsx(styles.button, styles.delete)}>
+          Delete
+        </SubmitButton>
+      </ValidatedForm>
     </div>
   );
 };

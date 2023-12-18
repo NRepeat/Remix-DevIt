@@ -54,7 +54,9 @@ export async function action({ params, request }: ActionFunctionArgs) {
     }
     return validationError({ fieldErrors: { password: "Updating error" } });
   } catch (error) {
-    throw new Response(`Error while updating customer${error}`);
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
   }
 }
 export default function () {

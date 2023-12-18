@@ -74,7 +74,7 @@ export const createProduct = async ({ data }: CreateProductArgs) => {
 
 export const getAllProducts = async (
   page: number,
-  sortName: string
+  sortName?: string
 ): Promise<ProductData> => {
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
@@ -119,8 +119,7 @@ export const getProduct = async (
 export const searchProduct = async (
   q: string,
   page: number,
-
-  sortName: string
+  sortName?: string
 ): Promise<ProductData> => {
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
@@ -159,7 +158,7 @@ export const getAllProductCategories = async (): Promise<Category[]> => {
 
 export const getProductsByCategory = async (
   c: string,
-  sortName: string
+  sortName?: string
 ): Promise<ProductData> => {
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];

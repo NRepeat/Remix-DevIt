@@ -3,7 +3,7 @@ import { Input } from "~/components/Input/Input";
 
 type MyInputProps = {
   name: string;
-  label: string;
+  label?: string;
   type?: React.HTMLInputTypeAttribute | undefined;
   placeholder?: string;
   value?: number | string | undefined;

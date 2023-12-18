@@ -16,19 +16,32 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("search");
   const pageQuery = url.searchParams.get("page");
-  const sort = url.searchParams.get("sort");
   const page = pageQuery ? parseInt(pageQuery) : 1;
 
   if (searchQuery === "") {
     return redirect("/admin/products");
   }
 
-  const products = await searchProduct(searchQuery!, page, sort!);
+  const products = await searchProduct(searchQuery!, page);
   if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
   return json({ products, page });
 };
+// export async function action({ params, request }: ActionFunctionArgs) {
+//   try {
+//     const formData = await request.formData();
+//     const parsedFormData = await validationCart.validate(formData);
+
+//     if (request.method === "DELETE") {
+//       const deleteData = await validationCartDelete.validate(formData);
+//       if (deleteData.data) {
+//         await deleteProd(deleteData.data.itemId);
+//         return json({ successes: true });
+//       }
+//     }}catch(error){
+
+//     }
 const breadcrumbs = [{ label: "Products", link: "/admin/products" }];
 
 export default function () {

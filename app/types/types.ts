@@ -1,3 +1,4 @@
+import type { Cart, Category, Product } from "@prisma/client";
 import type { SubmitFunction } from "@remix-run/react";
 import type { ProductData } from "~/services/product.server";
 
@@ -29,13 +30,7 @@ export interface StorePageProps {
       productId: string;
       quantity: number;
     }[];
-    categories: {
-      id: number;
-      slug: string;
-      name: string;
-      createdAt: Date;
-      updatedAt: Date;
-    }[];
+    categories: Category[];
   };
 }
 
@@ -46,35 +41,14 @@ export interface handleAddToCartProps {
   customerId: number;
   submit: SubmitFunction;
 }
-export type CartProduct = {
-  id: number;
-  externalId: number | null;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  categoryId: number;
-  thumbnail: string;
-  images: string[];
-  createdAt: string;
-  updatedAt: string;
-};
-export type CartT = {
-  id: number;
-  customerId: number | null;
-  createdAt: string;
-  updatedAt: string;
-};
+export type CartProduct = Product;
+
 export interface AddItemToCartButtonProps {
-  cart: CartT;
+  cart: Cart;
   product: CartProduct;
   customerId: number;
 }
 
 export interface ProductProps {
   product: CartProduct;
-  cart: CartT;
 }

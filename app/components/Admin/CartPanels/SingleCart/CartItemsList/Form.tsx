@@ -42,21 +42,16 @@ const FormCard: FC<FormProps> = ({ item }) => {
         method="post"
       >
         <div className={styles.inputs}>
-          <FormInput name="price" label="" placeholder="$" type="number" />{" "}
-          <FormInput name="quantity" label="" placeholder="#" type="number" />
+          <FormInput name="price" placeholder="$" type="number" />{" "}
+          <FormInput name="quantity" placeholder="#" type="number" />
           <FormInput type="text" label=" " placeholder="mmr" name="rating" />
-          <FormInput
-            label=""
-            name="productId"
-            type="hidden"
-            value={item.product.id}
-          />
-          <FormInput label="" name="itemId" value={item.id} type="hidden" />
+          <FormInput name="productId" type="hidden" value={item.product.id} />
+          <FormInput name="itemId" value={item.id} type="hidden" />
         </div>
         <SubmitButton>Save</SubmitButton>
       </ValidatedForm>
       <ValidatedForm validator={validationCartDelete} method="delete">
-        <FormInput label="" name="itemId" value={item.id} type="hidden" />
+        <FormInput name="itemId" value={item.id} type="hidden" />
         <SubmitButton className={styles.delete}>Delete</SubmitButton>
       </ValidatedForm>
     </>

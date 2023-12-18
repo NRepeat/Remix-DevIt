@@ -5,21 +5,6 @@ type HandleArgs = {
   submit: SubmitFunction;
 };
 
-export const handleSubmit = ({ id, submit }: HandleArgs) => {
-  const isConfirmDeleteCustomer = confirm(`Confirm delete customer ${id}`);
-  if (!isConfirmDeleteCustomer) {
-    return;
-  }
-  submit(
-    { id },
-    {
-      method: "post",
-      action: `/admin/customers/customer/delete`,
-      navigate: false,
-    }
-  );
-};
-
 export const handleCartCreate = ({ id, submit }: HandleArgs) => {
   submit(
     {},

@@ -1,4 +1,8 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import type {
+  ActionFunctionArgs,
+  LinksFunction,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import {
   Link,
@@ -7,14 +11,17 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
+import { validationCustomerDelete } from "~/components/Admin/CustomersPanels/CustomersTable/ButtonContainer/ButtonContainer";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import { SearchBar } from "~/components/SearchBar/SearchBar";
 import Pagination from "~/components/Store/Pagination/Pagination";
-import { searchCustomer } from "~/services/customer.server";
+import { deleteCustomer, searchCustomer } from "~/services/customer.server";
 import adminCustomersStylesHref from "../styles/adminCustomersStylesHref.css";
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: adminCustomersStylesHref },
 ];
+
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
     const url = new URL(request.url);
@@ -31,6 +38,28 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       status: 500,
     });
   }
+}
+
+export async function action({ request, params }: ActionFunctionArgs) {
+  console.log(
+    "🚀 ~ file: admin.customers_._index.tsx:41 ~ action ~ request:",
+    request
+  );
+  const formData = await request.formData();
+  if (!formData) {
+    throw new Error("Error while deleting customer ");
+  }
+  const validData = await validationCustomerDelete.validate(formData);
+  if (validData.data)
+    try {
+      await deleteCustomer(validData.data.customerId);
+      return redirect("/admin/customers");
+    } catch (error) {
+      throw new Response("Oh no! Something went wrong!", {
+        status: 500,
+      });
+    }
+  return json({ success: false });
 }
 
 export function ErrorBoundary() {
