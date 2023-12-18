@@ -17,6 +17,11 @@
 .checkbox {
   max-width: 25px;
   width: 25px;
+  padding: 20px;
+}
+
+.checkbox > input {
+  padding: 20px;
 }
 
 .created {
@@ -30,8 +35,14 @@
 }
 
 .info {
-  background-color: orange;
+  background-color: #fefefe;
+  color: rgb(8, 8, 8);
   height: 40px;
+}
+
+.info:nth-child(even) {
+  background-color: #fefefec9;
+  color: rgb(8, 8, 8);
 }
 
 .cartLink {

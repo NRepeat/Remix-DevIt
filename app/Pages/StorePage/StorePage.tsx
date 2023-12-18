@@ -8,20 +8,10 @@ import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import SortTypesList from "~/components/Store/Sort/SortTypesList";
 import StoreHeader from "~/components/StoreHeader/Header";
 import type { StorePageProps } from "~/types/types";
-import Sidebar from "../../components/SideBar/SideBar";
+import Sidebar from "../../components/Store/SideBar/SideBar";
 import styles from "./styles.module.css";
 
 const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
-  // const location = useLocation();
-
-  // const breadcrumbs = [
-  //   { label: "Home", link: "/products" },
-  //   {
-  //     label: `${location.search.slice(10)}`,
-  //     link: `/products/?category=${location.search.slice(10)}`,
-  //   },
-  // ];
-
   return (
     <>
       <PageLayout isAdmin={false}>
@@ -37,7 +27,6 @@ const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
               <SortTypesList />
             </div>
             <div className={styles.productsListContainer}>
-              {/* <Breadcrumbs admin={false} breadcrumbs={breadcrumbs} /> */}
               <ProductsList productsData={data.products} />
             </div>
             <div className={styles.paginationContainer}>

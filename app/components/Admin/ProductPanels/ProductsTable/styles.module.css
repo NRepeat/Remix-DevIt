@@ -27,6 +27,11 @@
 .checkbox {
   max-width: 25px;
   width: 25px;
+  padding: 20px;
+}
+
+.checkbox > input {
+  padding: 20px;
 }
 
 .created {
@@ -43,7 +48,10 @@
 .description {
   min-width: 250px;
   max-width: 300px;
-  overflow-y: auto;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  font-size: 0.9rem;
 }
 
 .img {
@@ -55,17 +63,20 @@
 }
 
 .info {
-  background-color: orange;
+  background-color: #fefefe;
+  color: rgb(8, 8, 8);
   height: 40px;
 }
 
 .info:nth-child(even) {
-  background-color: rgba(255, 166, 0, 0.679);
+  background-color: #fefefec9;
+  color: rgb(8, 8, 8);
 }
 
 .action {
   min-width: 200px;
   text-align: center;
+  overflow: hidden;
 }
 
 .container {

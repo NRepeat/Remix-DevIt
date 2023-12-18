@@ -4,12 +4,7 @@ import type {
   LoaderFunctionArgs,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import {
-  Link,
-  isRouteErrorResponse,
-  useLoaderData,
-  useRouteError,
-} from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
 import { validationCustomerDelete } from "~/components/Admin/CustomersPanels/CustomersTable/ButtonContainer/ButtonContainer";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
@@ -41,10 +36,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 }
 
 export async function action({ request, params }: ActionFunctionArgs) {
-  console.log(
-    "🚀 ~ file: admin.customers_._index.tsx:41 ~ action ~ request:",
-    request
-  );
   const formData = await request.formData();
   if (!formData) {
     throw new Error("Error while deleting customer ");
@@ -60,23 +51,6 @@ export async function action({ request, params }: ActionFunctionArgs) {
       });
     }
   return json({ success: false });
-}
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-  if (isRouteErrorResponse(error)) {
-    <div>
-      <h2>{error.status}</h2>
-      <p>{error.data}</p>
-      <p>We are already working on fixing it</p>
-    </div>;
-  }
-  return (
-    <div>
-      <h1>Error</h1>
-      <p>We are already working on fixing it</p>
-    </div>
-  );
 }
 
 const breadcrumbs = [{ label: "Customers", link: "/admin/customers" }];

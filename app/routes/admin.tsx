@@ -1,7 +1,6 @@
 import type { LinksFunction } from "@remix-run/node";
-import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 import AdminPage from "~/Pages/AdminPage/AdminPage";
-import HomeButton from "~/components/Errors/HomeButton/HomeButton";
+import AdminError from "~/components/Errors/AdminError/AdminError";
 import adminStylesHref from "../styles/adminStylesHref.css";
 
 export const links: LinksFunction = () => [
@@ -9,17 +8,7 @@ export const links: LinksFunction = () => [
 ];
 
 export function ErrorBoundary() {
-  const error = useRouteError();
-  if (isRouteErrorResponse(error)) {
-    return (
-      <div>
-        <h1>{error.status}</h1>
-        {error.statusText && <p>{error.statusText}</p>}
-        {error.data && <p>{error.data}</p>}
-        <HomeButton />
-      </div>
-    );
-  }
+  return <AdminError />;
 }
 
 export default function () {

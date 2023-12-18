@@ -46,7 +46,7 @@ const Table: FC<SerializeFrom<ProductData>> = ({ products }) => {
             <td className={styles.stock}> {product.stock}</td>
             <td>{new Date(product.createdAt).toLocaleDateString("en-GB")}</td>
 
-            <td>
+            <td className={styles.action}>
               <ButtonContainer product={product} />
             </td>
           </tr>

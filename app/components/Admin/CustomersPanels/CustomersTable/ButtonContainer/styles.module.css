@@ -34,5 +34,6 @@
 
 .delete {
   background-color: rgba(172, 6, 6, 0.767);
+  color: white;
   height: 40px;
 }
