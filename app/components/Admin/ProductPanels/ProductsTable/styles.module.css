@@ -1,11 +1,14 @@
 .table {
   width: 100%;
+  position: relative;
 }
 
 .head {
   height: 55px;
   color: white;
   background-color: var(--acrylColorBg);
+  top: 0;
+  position: sticky;
 }
 
 .name {

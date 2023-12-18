@@ -4,7 +4,7 @@ import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import { CreateProductDataSchema } from "~/utils/productValidation";
 import styles from "./styles.module.css";
-const CreateProduct: FC = () => {
+const CreateProductForm: FC = () => {
   const defaultValues = {
     stock: 0,
     discountPercentage: 0,
@@ -45,4 +45,4 @@ const CreateProduct: FC = () => {
   );
 };
 
-export default CreateProduct;
+export default CreateProductForm;

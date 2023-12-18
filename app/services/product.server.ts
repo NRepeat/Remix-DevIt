@@ -222,3 +222,14 @@ export const updateProductCategory = async (id: number, category: string) => {
     throw new Error(`Error during updating products: ${error}`);
   }
 };
+
+export const deleteProduct = async (id: number) => {
+  try {
+    const deletedProduct = await prisma.product.delete({
+      where: { id },
+    });
+    return deletedProduct;
+  } catch (error) {
+    throw new Error(`Error while deleting product ${error}`);
+  }
+};

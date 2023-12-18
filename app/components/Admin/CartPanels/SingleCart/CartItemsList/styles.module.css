@@ -1,6 +1,5 @@
 .container {
   grid-area: main-container;
-  overflow-y: scroll;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;

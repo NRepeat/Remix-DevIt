@@ -15,7 +15,7 @@ export interface ButtonContainerProps {
 }
 export const validationProductDelete = withZod(
   z.object({
-    itemId: z.coerce.number(),
+    productId: z.coerce.number(),
   })
 );
 
@@ -31,7 +31,7 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
         Edit
       </Link>
       <ValidatedForm validator={validationProductDelete} method="delete">
-        <FormInput name="id" type="hidden" value={product.id} />
+        <FormInput name="productId" type="hidden" value={product.id} />
         <SubmitButton className={clsx(styles.button, styles.delete)}>
           Delete
         </SubmitButton>

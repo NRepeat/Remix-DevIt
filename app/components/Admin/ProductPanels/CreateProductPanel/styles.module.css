@@ -1,13 +1,29 @@
 .panel {
-  grid-area: crud-main;
+  grid-area: main-container;
   display: flex;
   justify-content: center;
 }
 
 .nav {
-  grid-area: navigation;
-  background-color: var(--adminPanelBgColor);
-  height: 55px;
-  display: flex;
+  grid-area: main-search;
+  border-top: 1px solid gainsboro;
+  border-bottom: 1px solid gainsboro;
+  grid-area: main-search;
+  display: inline-flex;
   align-items: center;
+  color: white;
+  font-size: 1.2rem;
+  justify-content: space-between;
+}
+
+.link {
+  height: 40px;
+  align-items: center;
+  display: inline-flex;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.link:hover {
+  background-color: var(--acrylColorBg);
 }

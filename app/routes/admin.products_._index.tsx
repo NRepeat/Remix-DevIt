@@ -1,11 +1,16 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import type {
+  ActionFunctionArgs,
+  LinksFunction,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
+import { validationProductDelete } from "~/components/Admin/ProductPanels/ProductsTable/ButtonContainer/ButtonContainer";
 import ProductsList from "~/components/Admin/ProductPanels/ProductsTable/ProductsList";
 import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import { SearchBar } from "~/components/SearchBar/SearchBar";
 import Pagination from "~/components/Store/Pagination/Pagination";
-import { searchProduct } from "~/services/product.server";
+import { deleteProduct, searchProduct } from "~/services/product.server";
 import adminProductsStylesHref from "../styles/adminProductsStylesHref.css";
 
 export const links: LinksFunction = () => [
@@ -24,24 +29,30 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
   const products = await searchProduct(searchQuery!, page);
   if (!products) {
-    throw new Response("Page Not Found", { status: 404 });
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
   }
   return json({ products, page });
 };
-// export async function action({ params, request }: ActionFunctionArgs) {
-//   try {
-//     const formData = await request.formData();
-//     const parsedFormData = await validationCart.validate(formData);
+export async function action({ params, request }: ActionFunctionArgs) {
+  try {
+    const formData = await request.formData();
+    const validFormData = await validationProductDelete.validate(formData);
 
-//     if (request.method === "DELETE") {
-//       const deleteData = await validationCartDelete.validate(formData);
-//       if (deleteData.data) {
-//         await deleteProd(deleteData.data.itemId);
-//         return json({ successes: true });
-//       }
-//     }}catch(error){
+    if (request.method === "DELETE") {
+      if (validFormData.data) {
+        await deleteProduct(validFormData.data.productId);
+        return json({ successes: true });
+      }
+    }
+  } catch (error) {
+    throw new Response("Oh no! Something went wrong!", {
+      status: 500,
+    });
+  }
+}
 
-//     }
 const breadcrumbs = [{ label: "Products", link: "/admin/products" }];
 
 export default function () {
@@ -51,7 +62,7 @@ export default function () {
       <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
       <div className="search">
         <SearchBar action="/admin/products" />
-        <Link className="link" to={"/admin/customers/customer/create"}>
+        <Link className="link" to={"/admin/products/product/create"}>
           Create product
         </Link>
       </div>
