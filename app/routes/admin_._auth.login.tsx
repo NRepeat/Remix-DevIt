@@ -11,16 +11,15 @@ import { commitSession, getSession } from "~/services/session.server";
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
-    const user = await authenticator.authenticate("user-pass", request, {
+    let user = await authenticator.authenticate("member-pass", request, {
       throwOnError: true,
     });
+
     let session = await getSession(request.headers.get("Cookie"));
-    console.log("🚀 ~ file: _auth.login.tsx:15 ~ action ~ session:", session);
     session.set(authenticator.sessionKey, user);
     let headers = new Headers({ "Set-Cookie": await commitSession(session) });
-    console.log("🚀 ~ file: _auth.login.tsx:18 ~ action ~ headers:", headers);
     if ("member" in user && "isMember" in user) {
-      if (user.member && typeof user.member.email) {
+      if (user.isMember && typeof user.member?.email) {
         return redirect("/admin/", { headers });
       }
     }

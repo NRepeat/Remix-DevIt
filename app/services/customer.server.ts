@@ -1,5 +1,5 @@
 import type { Cart, Customer } from "@prisma/client";
-import type { SuccessResult } from "remix-validated-form";
+import type { SuccessResult, ValidationResult } from "remix-validated-form";
 
 export interface CreateCustomerArgs {
   email: string;
@@ -43,8 +43,11 @@ export const existCustomer = async (
 };
 export const createCustomer = async ({
   data,
-}: SuccessResult<CreateCustomerArgs>): Promise<CustomerWithoutPassword> => {
+}: ValidationResult<CreateCustomerArgs>): Promise<CustomerWithoutPassword> => {
   try {
+    if (!data) {
+      throw new Error("Registration data undefined");
+    }
     const customer = await prisma.customer.create({
       data: {
         email: data.email,
@@ -70,7 +73,10 @@ export const createCustomer = async ({
 
 export const login = async ({
   data,
-}: SuccessResult<LoginArgs>): Promise<CustomerWithoutPassword | null> => {
+}: ValidationResult<LoginArgs>): Promise<CustomerWithoutPassword> => {
+  if (!data) {
+    throw new Error("Error while attempting to login");
+  }
   try {
     const customer = await prisma.customer.findUnique({
       where: { email: data.email, password: data.password },
@@ -84,9 +90,9 @@ export const login = async ({
       },
     });
 
-    return customer;
+    return customer!;
   } catch (error) {
-    throw new Error(`${error}`);
+    throw new Error("Error while attempting to login");
   }
 };
 

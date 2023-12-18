@@ -1,35 +1,21 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { validationError } from "remix-validated-form";
+import { AuthorizationError } from "remix-auth";
 import RegistrationPage from "~/Pages/RegistrationPage/RegistrationPage";
-import { createCustomer, existCustomer } from "~/services/customer.server";
-import { registrationSchema } from "~/utils/formValidation";
+import { authenticator } from "~/services/auth.server";
 
 export async function action({ params, request }: ActionFunctionArgs) {
   try {
-    const formData = Object.fromEntries(await request.formData());
-
-    const validatedCustomerData = await registrationSchema.validate(formData);
-    if (validatedCustomerData.error) {
-      return validationError(validatedCustomerData.error);
-    }
-    const isExistCustomer = await existCustomer(
-      validatedCustomerData.data.email
-    );
-    if (isExistCustomer) {
-      return validationError({
-        fieldErrors: {
-          email: "This email already exist",
-        },
-      });
-    }
-    await createCustomer(validatedCustomerData);
-
-    return redirect("/products");
-  } catch (error) {
-    throw new Response("Oh no! Something went wrong!", {
-      status: 500,
+    return await authenticator.authenticate("user-reg", request, {
+      successRedirect: "/products",
+      failureRedirect: "/registration",
+      throwOnError: true,
     });
+  } catch (error) {
+    if (error instanceof Response) return error;
+    if (error instanceof AuthorizationError) {
+      throw new Error("Registration error");
+    }
+    throw new Response("Registration error", { status: 500 });
   }
 }
 

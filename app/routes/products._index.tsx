@@ -2,6 +2,7 @@ import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import StorePage from "~/Pages/StorePage/StorePage";
+import { authenticator } from "~/services/auth.server";
 import { createCart } from "~/services/cartSession.server";
 import {
   getAllProductCategories,
@@ -25,13 +26,13 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const sort = url.searchParams.get("sort");
   const page = pageQuery ? parseInt(pageQuery) : 1;
   const categories = await getAllProductCategories();
-
+  let user = await authenticator.isAuthenticated(request);
   if (categoryQuery !== "" && !!categoryQuery) {
     const products = await getProductsByCategory(categoryQuery!, sort!);
     if (!products) {
       throw new Response("Page Not Found", { status: 404 });
     }
-    return json({ products, page, cart: cart.items(), categories });
+    return json({ products, page, cart: cart.items(), categories, user });
   }
   if (categoryQuery === "") {
     return redirect("/products");
@@ -39,12 +40,11 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   if (searchQuery === "") {
     return redirect("/products");
   }
-
   const products = await searchProduct(searchQuery!, page, sort!);
   if (!products) {
     throw new Response("Page Not Found", { status: 404 });
   }
-  return json({ products, page, cart: cart.items(), categories });
+  return json({ products, page, cart: cart.items(), categories, user });
 };
 
 export default function () {

@@ -17,6 +17,16 @@
   height: 1px;
 }
 
+.btn {
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: max-content;
+  background-color: rgba(0, 0, 255, 0);
+  color: white;
+  cursor: pointer;
+}
+
 .searchBarCartWrapper {
   display: inline-flex;
   justify-content: flex-end;
