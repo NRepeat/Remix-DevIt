@@ -1,18 +1,15 @@
-// app/sessions.ts
-import { createCookieSessionStorage } from "@remix-run/node"; // or cloudflare/deno
+import { createCookieSessionStorage } from "@remix-run/node";
 
-const { getSession, commitSession, destroySession } =
-  createCookieSessionStorage({
-    // a Cookie from `createCookie` or the CookieOptions to create one
-    cookie: {
-      name: "__session",
-      httpOnly: true,
-      maxAge: 60 * 60 * 24 * 30, // best chose
-      path: "/",
-      sameSite: "lax",
-      secrets: ["s3cret1 pass"],
-      secure: false,
-    },
-  });
+// export the whole sessionStorage object
+export const sessionStorage = createCookieSessionStorage({
+  cookie: {
+    name: "_session",
+    sameSite: "lax",
+    path: "/",
+    httpOnly: true,
+    secrets: ["s3cr3t"],
+    secure: process.env.NODE_ENV === "production",
+  },
+});
 
-export { getSession, commitSession, destroySession };
+export let { getSession, commitSession, destroySession } = sessionStorage;

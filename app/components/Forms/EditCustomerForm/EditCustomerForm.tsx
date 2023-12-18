@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { Button } from "~/components/Button/Button";
-import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
+import { FormInput } from "~/components/Ui/Form/FormControl/ContolledInput/FormInput";
 import { editSchema } from "~/utils/formValidation";
 import styles from "./styles.module.css";
 type FormProps = {

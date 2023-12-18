@@ -4,7 +4,7 @@ import { withZod } from "@remix-validated-form/with-zod";
 import type { FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
-import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
+import { FormInput } from "~/components/Ui/Form/FormControl/ContolledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import styles from "./styles.module.css";
 export const validationCart = withZod(

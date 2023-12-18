@@ -6,5 +6,10 @@
     "source.fixAll.eslint": "explicit",
     "source.fixAll.format": "explicit",
     "source.organizeImports": "explicit"
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#073330",
+    "titleBar.activeBackground": "#094843",
+    "titleBar.activeForeground": "#F0FDFC"
   }
 }
