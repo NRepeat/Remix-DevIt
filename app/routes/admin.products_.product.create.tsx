@@ -1,4 +1,4 @@
-import { json, type ActionFunctionArgs } from "@remix-run/node";
+import { redirect, type ActionFunctionArgs } from "@remix-run/node";
 import CreateProduct from "~/components/Admin/ProductPanels/CreateProductPanel/CreateProduct";
 import type { CreateProductArgs } from "~/services/product.server";
 import { createProduct } from "~/services/product.server";
@@ -15,7 +15,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
       try {
         const data: CreateProductArgs = { data: validationResult.data };
         await createProduct(data);
-        return json({ success: true });
+        return redirect("/admin/products");
       } catch (error) {
         throw new Error(`Error while creating products`);
       }

@@ -17,7 +17,6 @@ const CreateProductForm: FC = () => {
       className={styles.form}
       defaultValues={defaultValues}
       validator={CreateProductDataSchema}
-      action="/admin/products"
       method="post"
     >
       <FormInput label="Product Name" name="title" />
