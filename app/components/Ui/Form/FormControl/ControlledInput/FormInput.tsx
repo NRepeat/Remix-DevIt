@@ -1,5 +1,5 @@
 import { useField } from "remix-validated-form";
-import { Input } from "~/components/Input/Input";
+import { Input } from "~/components/Ui/Input/Input";
 import styles from "./styles.module.css";
 type MyInputProps = {
   name: string;

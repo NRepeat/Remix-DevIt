@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
-import { FormInput } from "~/components/Ui/Form/FormControl/ContolledInput/FormInput";
+import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import { CreateProductDataSchema } from "~/utils/productValidation";
 import styles from "./styles.module.css";

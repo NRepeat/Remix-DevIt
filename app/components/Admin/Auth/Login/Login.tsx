@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 import { withZod } from "@remix-validated-form/with-zod";
 import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
-import { FormInput } from "~/components/Ui/Form/FormControl/ContolledInput/FormInput";
+import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import styles from "./styles.module.css";
 export const adminLoginSchema = withZod(

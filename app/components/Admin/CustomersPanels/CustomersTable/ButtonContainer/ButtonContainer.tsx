@@ -5,7 +5,7 @@ import clsx from "clsx";
 import React from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
-import { FormInput } from "~/components/Ui/Form/FormControl/ContolledInput/FormInput";
+import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import styles from "./styles.module.css";

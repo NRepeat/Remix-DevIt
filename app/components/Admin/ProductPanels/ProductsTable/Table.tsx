@@ -1,6 +1,6 @@
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
-import { Input } from "~/components/Input/Input";
+import { Input } from "~/components/Ui/Input/Input";
 import type { ProductData } from "~/services/product.server";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import styles from "./styles.module.css";

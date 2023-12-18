@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import { SearchBar } from "../SearchBar/SearchBar";
-import { CartIcon } from "../Store/CartInfo/CartInfo";
+import { SearchBar } from "../../Ui/SearchBar/SearchBar";
+import { CartIcon } from "../CartInfo/CartInfo";
 import styles from "./styles.module.css";
 
 const StoreHeader: FC = () => {

@@ -2,8 +2,8 @@ import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
 import EditCustomerForm from "~/components/Forms/EditCustomerForm/EditCustomerForm";
+import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import styles from "./styles.module.css";
 export interface EditCustomerPanelProps {

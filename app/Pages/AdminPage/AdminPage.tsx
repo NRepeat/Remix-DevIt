@@ -1,9 +1,9 @@
 import { Outlet } from "@remix-run/react";
 import type { FC } from "react";
-import Header from "~/Header/Header";
+import Footer from "~/Layout/Footer/Footer";
+import Header from "~/Layout/Header/Header";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
 import Sidebar from "~/components/Admin/Sidebar/Sidebar";
-import Footer from "~/components/Footer/Footer";
 import styles from "./styles.module.css";
 
 const AdminPage: FC = () => {

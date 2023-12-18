@@ -2,7 +2,7 @@ import type { Category, Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { useEffect, useState, type FC } from "react";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import EditProductForm from "./EditProductForm/EditProductForm";
 import styles from "./styles.module.css";
 export interface EditProductPanelProps {

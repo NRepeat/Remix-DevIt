@@ -4,8 +4,8 @@ import { withZod } from "@remix-validated-form/with-zod";
 import type { FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
-import { Button } from "~/components/Button/Button";
-import { FormInput } from "~/components/Ui/Form/FormControl/ContolledInput/FormInput";
+import { Button } from "~/components/Ui/Button/Button";
+import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { FormTextInput } from "~/components/Ui/Form/FormControl/ControlledTextArea/ControlledTextArea";
 import styles from "./styles.module.css";
 

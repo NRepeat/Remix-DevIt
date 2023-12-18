@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import CreateCustomerForm from "~/components/Admin/CustomersPanels/CreateCustomerPanel/CreateCustomerForm/CreateCustomerForm";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import styles from "./styles.module.css";
 const CreateCustomerPanel: FC = () => {
   const breadcrumbs = [
