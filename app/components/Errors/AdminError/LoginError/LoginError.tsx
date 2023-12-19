@@ -5,9 +5,7 @@ const LoginError = () => {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     return (
-      <>
-        <Login error={error} />
-      </>
+      <Login error={error} />
     );
   }
 };
