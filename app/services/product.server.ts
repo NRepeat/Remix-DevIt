@@ -126,7 +126,7 @@ export const searchProduct = async (
 ): Promise<ProductData> => {
   const take: number = 12;
   const skip = (page! - 1) * take;
-  let sortField = "expensive";
+  let sortField = "price";
   let sortType = "desc";
   if (sortName) {
     sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
@@ -172,7 +172,7 @@ export const getProductsByCategory = async (
   category: string,
   sortName?: string | null
 ): Promise<ProductData> => {
-  let sortField = "expensive";
+  let sortField = "price";
   let sortType = "desc";
   if (sortName) {
     sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];

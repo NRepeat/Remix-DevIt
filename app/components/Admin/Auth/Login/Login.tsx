@@ -20,7 +20,8 @@ const Login: FC<LoginProps> = ({ error }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <p className={styles.error}>{error?.data.slice(6)}</p>
+        {error && <p className={styles.error}>{error?.data}</p>}
+
         <ValidatedForm validator={adminLoginSchema} method="post">
           <h2 className={styles.title}>Login in administrator panel</h2>
 
@@ -41,12 +42,12 @@ const Login: FC<LoginProps> = ({ error }) => {
           </Link>
           <SubmitButton>Sign in</SubmitButton>
         </ValidatedForm>
-        <p>
+        {/* <p>
           Don't have login?
           <Link className={styles.register} to={"/admin/register"}>
             Register
           </Link>
-        </p>
+        </p> */}
       </div>
     </div>
   );

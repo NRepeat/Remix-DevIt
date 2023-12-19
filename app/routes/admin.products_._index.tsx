@@ -4,13 +4,14 @@ import type {
   LoaderFunctionArgs,
 } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData, useSubmit } from "@remix-run/react";
 import { validationProductDelete } from "~/components/Admin/ProductPanels/ProductsTable/ButtonContainer/ButtonContainer";
 import ProductsList from "~/components/Admin/ProductPanels/ProductsTable/ProductsList";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
+import { Button } from "~/components/Ui/Button/Button";
 import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
-import { deleteProduct, searchProduct } from "~/services/product.server";
+import { deleteProduct, getAllProducts } from "~/services/product.server";
 import adminProductsStylesHref from "../styles/adminProductsStylesHref.css";
 
 export const links: LinksFunction = () => [
@@ -27,7 +28,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return redirect("/admin/products");
   }
 
-  const products = await searchProduct(searchQuery!, page);
+  // const products = await searchProduct(searchQuery!, page);
+  const products = await getAllProducts(page);
   if (!products) {
     throw new Response("Oh no! Something went wrong!", {
       status: 500,
@@ -57,6 +59,7 @@ const breadcrumbs = [{ label: "Products", link: "/admin/products" }];
 
 export default function () {
   const data = useLoaderData<typeof loader>();
+  const submit = useSubmit();
   return (
     <>
       <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
@@ -65,6 +68,14 @@ export default function () {
         <Link className="link" to={"/admin/products/product/create"}>
           Create product
         </Link>
+        <Button
+          className="link"
+          onClick={() => {
+            submit({}, { action: "/products/sync", method: "post" });
+          }}
+        >
+          Sync
+        </Button>
       </div>
 
       <ProductsList products={data.products.products} />

@@ -3,7 +3,6 @@ import { json, redirect } from "@remix-run/node";
 import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
 import Login from "~/components/Admin/Auth/Login/Login";
-import LoginError from "~/components/Errors/AdminError/Login/LoginError";
 import { memberAuthenticator } from "~/services/adminAuth.server";
 
 export async function action({ params, request }: ActionFunctionArgs) {
@@ -37,9 +36,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }
 }
 
-export function ErrorBoundary() {
-  return <LoginError />;
-}
+// export function ErrorBoundary() {
+//   return <LoginError />;
+// }
 
 export default function () {
   return <Login />;

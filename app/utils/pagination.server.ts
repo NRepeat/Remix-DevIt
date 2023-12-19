@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const coerceNumber = z.coerce.number();
-const take = coerceNumber.parse(process.env.PRODUCT_TAKE);
+const take = coerceNumber.parse(process.env.PRODUCT_TAKE) || 12;
 
 type calculatePaginationSizeArgs = {
   page: number;
