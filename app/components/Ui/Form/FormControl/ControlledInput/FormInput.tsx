@@ -1,6 +1,6 @@
 import { useField } from "remix-validated-form";
-import { Input } from "~/components/Input/Input";
-
+import { Input } from "~/components/Ui/Input/Input";
+import styles from "./styles.module.css";
 type MyInputProps = {
   name: string;
   label?: string;
@@ -19,14 +19,14 @@ export const FormInput = ({
   const { error, getInputProps } = useField(name);
 
   return (
-    <div>
-      <label htmlFor={name}>{label}</label>
+    <div className={styles.container}>
+      <label className={styles.label} htmlFor={name}>
+        {label}
+      </label>
       <Input
         {...getInputProps({ value, type, id: name, placeholder, min: "0" })}
       />
-      {error && (
-        <span style={{ paddingBottom: "5px", paddingTop: "5px" }}>{error}</span>
-      )}
+      {error && <p className={styles.error}>{error}</p>}
     </div>
   );
 };

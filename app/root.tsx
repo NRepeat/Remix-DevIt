@@ -11,7 +11,7 @@ import {
   useLocation,
 } from "@remix-run/react";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
-import GlobalLoader from "./components/GlobalLoading/GlobalLoader";
+import GlobalLoader from "./components/Ui/GlobalLoading/GlobalLoader";
 import { createCart } from "./services/cartSession.server";
 import { getSession } from "./services/session.server";
 import globalStylesHref from "./styles/global.css";

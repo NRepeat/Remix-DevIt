@@ -6,7 +6,7 @@ import clsx from "clsx";
 import React from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
-import { FormInput } from "~/components/Ui/Form/FormControl/FormInput";
+import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import styles from "./styles.module.css";
 

@@ -7,9 +7,9 @@ import { json, redirect } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
 import { validationCustomerDelete } from "~/components/Admin/CustomersPanels/CustomersTable/ButtonContainer/ButtonContainer";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
-import { SearchBar } from "~/components/SearchBar/SearchBar";
 import Pagination from "~/components/Store/Pagination/Pagination";
+import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
+import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
 import { deleteCustomer, searchCustomer } from "~/services/customer.server";
 import adminCustomersStylesHref from "../styles/adminCustomersStylesHref.css";
 

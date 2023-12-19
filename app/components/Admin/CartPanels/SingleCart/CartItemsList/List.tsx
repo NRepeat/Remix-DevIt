@@ -1,5 +1,5 @@
 import { useState, type FC } from "react";
-import { Button } from "~/components/Button/Button";
+import { Button } from "~/components/Ui/Button/Button";
 import type { CartItemsListProps } from "./CartItemsList";
 import FormCard from "./Form";
 import styles from "./styles.module.css";

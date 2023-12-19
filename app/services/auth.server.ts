@@ -7,7 +7,6 @@ import {
   type CustomerWithoutPassword,
 } from "./customer.server";
 import type { Member } from "./member.server";
-import { loginMember } from "./member.server";
 import { sessionStorage } from "./session.server";
 
 export const authenticator = new Authenticator<
@@ -37,16 +36,16 @@ authenticator.use(
   "user-reg"
 );
 
-authenticator.use(
-  new FormStrategy(async ({ form }) => {
-    const validatedCustomerData = await loginSchema.validate(form);
+// authenticator.use(
+//   new FormStrategy(async ({ form }) => {
+//     const validatedCustomerData = await loginSchema.validate(form);
 
-    const user = await loginMember(validatedCustomerData);
+//     const user = await loginMember(validatedCustomerData);
 
-    if (user === null) {
-      throw new AuthorizationError("Email or password are incorrect");
-    }
-    return user;
-  }),
-  "member-pass"
-);
+//     if (user === null) {
+//       throw new AuthorizationError("Email or password are incorrect");
+//     }
+//     return user;
+//   }),
+//   "member-pass"
+// );

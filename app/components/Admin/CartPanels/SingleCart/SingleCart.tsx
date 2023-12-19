@@ -2,7 +2,7 @@ import type { Cart, CartItem, Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import CartItemsList from "./CartItemsList/CartItemsList";
 import styles from "./styles.module.css";

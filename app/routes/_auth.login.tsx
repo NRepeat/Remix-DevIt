@@ -18,12 +18,6 @@ export async function action({ request }: ActionFunctionArgs) {
     console.log("🚀 ~ file: _auth.login.tsx:15 ~ action ~ session:", session);
     session.set(authenticator.sessionKey, user);
     let headers = new Headers({ "Set-Cookie": await commitSession(session) });
-    console.log("🚀 ~ file: _auth.login.tsx:18 ~ action ~ headers:", headers);
-    if ("member" in user && "isMember" in user) {
-      if (user.member && typeof user.member.email) {
-        return redirect("/admin/", { headers });
-      }
-    }
 
     return redirect("/products", { headers });
   } catch (error) {

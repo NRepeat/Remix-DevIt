@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import Breadcrumbs from "~/components/Breadcrumbs/Breadcrumbs";
+import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import CreateProductForm from "./CreateProduct/CreateProductForm";
 import styles from "./styles.module.css";
 

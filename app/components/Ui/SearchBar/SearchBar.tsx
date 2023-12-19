@@ -1,8 +1,8 @@
 import { useNavigation, useSubmit } from "@remix-run/react";
 import type { FC } from "react";
 import { useEffect } from "react";
-import FormM from "~/components/Form/FormM";
-import { Input } from "~/components/Input/Input";
+import FormM from "~/components/Ui/Form/FormM";
+import { Input } from "~/components/Ui/Input/Input";
 import styles from "./styles.module.css";
 
 export interface SearchBarProps {

@@ -1,7 +1,7 @@
 import type { SerializeFrom } from "@remix-run/node";
 import { Link, useSubmit } from "@remix-run/react";
 import type { FC } from "react";
-import { Input } from "~/components/Input/Input";
+import { Input } from "~/components/Ui/Input/Input";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import { handleCartCreate } from "./ButtonContainer/Handle";
