@@ -33,12 +33,12 @@ const List: FC<ListProps> = ({
               key={i}
               className={clsx(styles.link, {
                 [styles.active]: navigation.pathname.startsWith(
-                  `/products/categories/${link.slug}`
+                  `/categories/${link.slug}`
                 ),
               })}
             >
               <Link
-                to={`/products/categories/${link.slug}`}
+                to={`/categories/${link.slug}`}
                 className={styles.button}
                 onClick={() => {
                   toggle(false);

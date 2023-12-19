@@ -80,7 +80,7 @@ function ProductRoute() {
     { label: "Home", link: "/" },
     {
       label: `${data.product.category.slug}`,
-      link: `/products/categories/${data.product.category.slug}`,
+      link: `/categories/${data.product.category.slug}`,
     },
     { label: `${data.product.title}`, link: "" },
   ];

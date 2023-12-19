@@ -13,7 +13,7 @@ const ProductListItem: FC<{
     <>
       {product ? (
         <div className={styles.card}>
-          <Link className={styles.link} to={`/products/product/${product.id}`}>
+          <Link className={styles.link} to={`/product/${product.id}`}>
             <div>
               <div className={styles.avatar}>
                 <img src={product.thumbnail} alt={product.title} />

@@ -69,12 +69,14 @@ export const createProduct = async ({ data }: CreateProductArgs) => {
         },
       },
     });
-  } catch (error) {}
+  } catch (error) {
+    throw new Error("Error creating product");
+  }
 };
 
 export const getAllProducts = async (
   page: number,
-  sortName?: string
+  sortName?: string | null
 ): Promise<ProductData> => {
   const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
   const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
@@ -117,32 +119,41 @@ export const getProduct = async (
 };
 
 export const searchProduct = async (
-  q: string,
-  page: number,
-  sortName?: string
-): Promise<ProductData> => {
-  const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
-  const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
-  if (q === "" || q === null) {
-    const products = await getAllProducts(page, sortName);
+  search: string,
+  page: number | null,
 
-    return products;
+  sortName?: string | null
+): Promise<ProductData> => {
+  const take: number = 12;
+  const skip = (page! - 1) * take;
+  let sortField = "expensive";
+  let sortType = "desc";
+  if (sortName) {
+    sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
+    sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   }
   try {
-    const products = await prisma.product.findMany({
-      where: {
-        OR: [
-          { title: { contains: q, mode: "insensitive" } },
-          { description: { contains: q, mode: "insensitive" } },
-        ],
-      },
-      include: { category: true },
-      orderBy: {
-        [sortField]: sortType,
-      },
-    });
+    const [products, totalProductsCount] = await Promise.all([
+      await prisma.product.findMany({
+        where: {
+          OR: [
+            { title: { contains: search, mode: "insensitive" } },
+            { description: { contains: search, mode: "insensitive" } },
+          ],
+        },
+        include: { category: true },
+        orderBy: {
+          [sortField]: sortType,
+        },
+        skip,
+        take,
+      }),
+      prisma.product.count(),
+    ]);
 
-    return { products };
+    const totalPages = Math.ceil(totalProductsCount / take);
+
+    return { products, totalPages };
   } catch (error) {
     throw new Error(`Error during product search: ${error}`);
   }
@@ -150,7 +161,8 @@ export const searchProduct = async (
 
 export const getAllProductCategories = async (): Promise<Category[]> => {
   try {
-    return prisma.category.findMany();
+    const category = prisma.category.findMany();
+    return category;
   } catch (error) {
     throw new Error(`Error during categories search: ${error}`);
   }
@@ -166,8 +178,6 @@ export const getProductsByCategory = async (
     sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
     sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   }
-
-  sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   try {
     const products = await prisma.product.findMany({
       where: { category: { slug: category } },

@@ -1,7 +1,5 @@
 import type { Cart, Category, Product } from "@prisma/client";
 import type { SubmitFunction } from "@remix-run/react";
-import type { CustomerWithoutPassword } from "~/services/customer.server";
-import type { Member } from "~/services/member.server";
 import type { ProductData } from "~/services/product.server";
 
 export type DummyProduct = {
@@ -33,7 +31,6 @@ export interface StorePageProps {
       quantity: number;
     }[];
     categories: Category[];
-    user: CustomerWithoutPassword | Member | null;
   };
 }
 
