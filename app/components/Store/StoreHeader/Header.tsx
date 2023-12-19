@@ -8,13 +8,13 @@ const StoreHeader: FC = () => {
   return (
     <div className={styles.header}>
       <div className={styles.titleWrapper}>
-        <Link className={styles.title} to={"/products"}>
+        <Link className={styles.title} to={"/"}>
           <h1>Store</h1>
         </Link>
       </div>
 
       <div className={styles.searchBarCartWrapper}>
-        <SearchBar action="/products/" />
+        <SearchBar action="/" />
         <CartIcon />
       </div>
     </div>

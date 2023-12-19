@@ -8,7 +8,7 @@ import { customerAuthenticator } from "~/services/auth.server";
 export async function action({ params, request }: ActionFunctionArgs) {
   try {
     return await customerAuthenticator.authenticate("customer-reg", request, {
-      successRedirect: "/products",
+      successRedirect: "/",
       throwOnError: true,
     });
   } catch (error) {

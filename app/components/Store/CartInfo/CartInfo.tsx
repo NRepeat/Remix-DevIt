@@ -1,7 +1,7 @@
 import { Link, useRouteLoaderData } from "@remix-run/react";
 import type { FC } from "react";
 import invariant from "tiny-invariant";
-import type { loader } from "~/routes/products._index";
+import type { loader } from "~/routes/_index";
 import FaCart from "./FaCart";
 import styles from "./styles.module.css";
 
@@ -9,9 +9,12 @@ export const CartIcon: FC = () => {
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");
 
-  const quantity = data.cart.reduce((accumulator, item) => {
-    return accumulator + item.quantity;
-  }, 0);
+  const quantity = data.cart.reduce(
+    (accumulator: number, item: { quantity: number }) => {
+      return accumulator + item.quantity;
+    },
+    0
+  );
 
   return (
     <Link className={styles.cart} to={"/cart"}>

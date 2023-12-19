@@ -5,7 +5,6 @@ import { validationError } from "remix-validated-form";
 import Login from "~/components/Admin/Auth/Login/Login";
 import LoginError from "~/components/Errors/AdminError/Login/LoginError";
 import { memberAuthenticator } from "~/services/adminAuth.server";
-import { findMember } from "~/services/member.server";
 
 export async function action({ params, request }: ActionFunctionArgs) {
   try {
@@ -30,11 +29,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const user = await memberAuthenticator.isAuthenticated(request);
     if (!user) {
-      throw new Error("You aren't logged in");
-    }
-    const isMember = await findMember({ email: user.email });
-    if (!isMember) {
-      throw new Error("You don't have permission to access");
+      return null;
     }
     return redirect("/admin");
   } catch (error) {
@@ -43,11 +38,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export function ErrorBoundary() {
-  return (
-    <>
-      <LoginError />
-    </>
-  );
+  return <LoginError />;
 }
 
 export default function () {

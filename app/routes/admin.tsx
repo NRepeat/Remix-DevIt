@@ -6,7 +6,6 @@ import {
 import AdminPage from "~/Pages/AdminPage/AdminPage";
 import AdminError from "~/components/Errors/AdminError/AdminError";
 import { memberAuthenticator } from "~/services/adminAuth.server";
-import { findMember } from "~/services/member.server";
 import adminStylesHref from "../styles/adminStylesHref.css";
 
 export const links: LinksFunction = () => [
@@ -19,10 +18,6 @@ export function ErrorBoundary() {
 export async function loader({ request }: LoaderFunctionArgs) {
   const user = await memberAuthenticator.isAuthenticated(request);
   if (!user) {
-    return redirect("/admin/login");
-  }
-  const isMember = await findMember({ email: user.email });
-  if (!isMember) {
     return redirect("/admin/login");
   }
   return null;

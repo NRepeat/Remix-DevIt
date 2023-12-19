@@ -157,14 +157,20 @@ export const getAllProductCategories = async (): Promise<Category[]> => {
 };
 
 export const getProductsByCategory = async (
-  c: string,
-  sortName?: string
+  category: string,
+  sortName?: string | null
 ): Promise<ProductData> => {
-  const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
-  const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
+  let sortField = "expensive";
+  let sortType = "desc";
+  if (sortName) {
+    sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
+    sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
+  }
+
+  sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   try {
     const products = await prisma.product.findMany({
-      where: { category: { slug: c } },
+      where: { category: { slug: category } },
       orderBy: {
         [sortField]: sortType,
       },

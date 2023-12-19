@@ -4,7 +4,7 @@ import { importDummyData } from "~/services/import.server";
 export async function action() {
   try {
     await importDummyData();
-    return redirect("/products/");
+    return redirect("/");
   } catch (error) {
     return json({ success: false, error });
   }

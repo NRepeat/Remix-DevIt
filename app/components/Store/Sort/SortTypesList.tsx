@@ -3,6 +3,8 @@ import styles from "./styles.module.css";
 
 function SortTypesList() {
   const [searchParams] = useSearchParams();
+  const submit = useSubmit();
+
   const search = searchParams.get("search");
   const page = searchParams.get("page");
   const category = searchParams.get("category");
@@ -27,7 +29,6 @@ function SortTypesList() {
     submit(formData);
   };
 
-  const submit = useSubmit();
   const sortLabel = [
     "Newest Arrivals",
     "By rating",

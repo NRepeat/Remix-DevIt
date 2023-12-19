@@ -1,11 +1,11 @@
 import { Authenticator, AuthorizationError } from "remix-auth";
 import { FormStrategy } from "remix-auth-form";
 import { adminLoginSchema } from "~/components/Admin/Auth/Login/Login";
+import { adminSessionStorage } from "./adminSession.server";
 import { findMember, type Member } from "./member.server";
-import { sessionStorage } from "./session.server";
 
 export const memberAuthenticator = new Authenticator<Member | null>(
-  sessionStorage
+  adminSessionStorage
 );
 
 memberAuthenticator.use(

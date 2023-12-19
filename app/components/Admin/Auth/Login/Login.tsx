@@ -42,9 +42,9 @@ const Login: FC<LoginProps> = ({ error }) => {
           <SubmitButton>Sign in</SubmitButton>
         </ValidatedForm>
         <p>
-          Don't have login?{" "}
+          Don't have login?
           <Link className={styles.register} to={"/admin/register"}>
-            Register{" "}
+            Register
           </Link>
         </p>
       </div>

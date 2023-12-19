@@ -22,7 +22,7 @@ const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ links }) => {
   const linksData = links.map((link) => ({
     slug: link.slug,
     label: link.name,
-    url: `/products/`,
+    url: `/`,
   }));
   return (
     <div ref={refM}>

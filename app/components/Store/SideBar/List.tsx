@@ -1,5 +1,4 @@
-import type { Location } from "@remix-run/react";
-import { useSubmit } from "@remix-run/react";
+import { Link, type Location } from "@remix-run/react";
 import clsx from "clsx";
 import type { FC } from "react";
 import styles from "./styles.module.css";
@@ -23,7 +22,6 @@ const List: FC<ListProps> = ({
   isOpen,
   toggle,
 }) => {
-  const submit = useSubmit();
   return (
     <>
       {isOpen && (
@@ -34,20 +32,20 @@ const List: FC<ListProps> = ({
             <li
               key={i}
               className={clsx(styles.link, {
-                [styles.active]: navigation.search.startsWith(
-                  `?category=${link.slug}`
+                [styles.active]: navigation.pathname.startsWith(
+                  `/products/categories/${link.slug}`
                 ),
               })}
             >
-              <button
+              <Link
+                to={`/products/categories/${link.slug}`}
                 className={styles.button}
                 onClick={() => {
                   toggle(false);
-                  submit({ category: link.slug }, { action: link.url });
                 }}
               >
                 <p className={styles.label}>{link.label} </p>
-              </button>
+              </Link>
             </li>
           ))}
         </ul>

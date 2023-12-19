@@ -4,7 +4,7 @@ import type {
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductLayout";
@@ -12,6 +12,7 @@ import Product from "~/components/Store/Product/Product";
 import ProductImages from "~/components/Store/Product/ProductImages/ProductImages";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
+import { customerAuthenticator } from "~/services/auth.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { getProduct } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
@@ -38,6 +39,16 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
+  const user = await customerAuthenticator.isAuthenticated(request);
+  if (!user) {
+    const session = await getSession(request.headers.get("cookie"));
+    session.flash("error", "To add item in cart, login please");
+
+    const headers = new Headers({ "Set-Cookie": await commitSession(session) });
+    return redirect("/login", {
+      headers,
+    });
+  }
   const formData = await request.formData();
   const productId = formData.get("productId");
   invariant(typeof productId === "string", "Missing product id");
@@ -66,10 +77,10 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 function ProductRoute() {
   const data = useLoaderData<typeof loader>();
   const breadcrumbs = [
-    { label: "Home", link: "/products" },
+    { label: "Home", link: "/" },
     {
       label: `${data.product.category.slug}`,
-      link: `/products/?category=${data.product.category.slug}`,
+      link: `/products/categories/${data.product.category.slug}`,
     },
     { label: `${data.product.title}`, link: "" },
   ];
