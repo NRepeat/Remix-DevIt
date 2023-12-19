@@ -1,0 +1,76 @@
+.pag {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  width: 100%;
+  gap: 5px;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: center;
+}
+
+.button {
+  border-radius: 2px;
+  height: 35px;
+  min-width: 35px;
+  border: 0;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+.button:hover {
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
+.link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+}
+
+.currentPage {
+  background-color: rgb(0, 26, 255);
+  color: white;
+}
+
+.disable {
+  display: none;
+}
+
+.adminButton {
+  height: 35px;
+  min-width: 35px;
+  border: 0;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  text-decoration: none;
+}
+
+.adminButton:hover {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(2, 117, 96);
+}
+
+.adminButton {
+  background-color: var(--adminPanelBgColor);
+  color: white;
+}
+
+.adminCurrentPage {
+  background-color: rgb(247, 247, 247);
+  border: 1px solid rgb(2, 117, 96);
+  color: black;
+}

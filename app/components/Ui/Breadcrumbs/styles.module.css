@@ -1,0 +1,37 @@
+.breadcrumbs {
+  display: flex;
+  grid-area: bread;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.link {
+  color: var(--accentColor);
+}
+
+.adminLink {
+  color: rgb(255, 255, 255);
+}
+
+.separator {
+  margin: 0 5px;
+  color: var(--accentColor);
+}
+
+.adminSeparator {
+  margin: 0 5px;
+  color: rgb(2, 117, 96);
+}
+
+.last {
+  color: rgb(255, 255, 255);
+}
+
+.adminLast {
+  color: gainsboro;
+}
+
+.adminGridArea {
+  grid-area: main-breadcrumbs;
+}

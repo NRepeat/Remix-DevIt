@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form > .containerB > button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 26, 255, 0);
+  font-weight: bold;
+  font-size: 1.2rem;
+  outline: solid;
+  outline-width: 2px;
+}
+
+.form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form > div > input {
+  width: max-content;
+  width: 500px;
+  border-radius: 5px;
+  outline: solid;
+  outline-width: 2px;
+  outline-color: black;
+}
+
+.form > div > label {
+  text-transform: capitalize;
+}
+
+.form > div > span {
+  max-width: 254px;
+  white-space: wrap;
+}
+
+.title {
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding-bottom: 20px;
+}
+
+.forgot {
+  width: 100%;
+  text-align: right;
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+}
+
+.reg {
+  padding-top: 10px;
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+.reg > a {
+  color: rgb(255, 255, 255);
+  text-decoration: underline;
+}

@@ -1,0 +1,63 @@
+.rootIndexContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  gap: 20px;
+
+  background: var(--gradientColor);
+}
+
+.rootIndexContainer > p {
+  padding-bottom: 130px;
+  font-size: 1.2rem;
+}
+
+.rootIndexContainer > h1 {
+  font-size: 3.5rem;
+}
+
+.link-container {
+  display: inline-flex;
+  gap: 10px;
+}
+
+.link-container > a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 15px;
+  background-color: black;
+  border-radius: 5px;
+  transition: background-color 0.1s;
+  border: 0;
+  min-width: 150px;
+}
+
+.link-container > a:nth-child(1) {
+  background-color: rgb(0, 26, 255);
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  padding: 15px;
+  background-color: black;
+  border-radius: 5px;
+  transition: background-color 0.1s;
+  border: 0;
+  cursor: pointer;
+}
+
+.link:hover {
+  background-color: white;
+  color: black;
+}

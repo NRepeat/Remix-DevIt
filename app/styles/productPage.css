@@ -1,0 +1,8 @@
+.productContainer {
+  background-color: black;
+}
+
+.breadcrumbs {
+  padding-top: 20px;
+  grid-area: bread;
+}

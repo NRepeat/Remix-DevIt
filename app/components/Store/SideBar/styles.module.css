@@ -1,0 +1,146 @@
+.gridSidebar {
+  background-color: var(--storePageBgColor);
+  overflow: hidden;
+  height: 100%;
+}
+
+.list {
+  display: none;
+}
+
+.list::-webkit-scrollbar {
+  width: 12px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.219);
+}
+
+.list::-webkit-scrollbar-thumb {
+  background-color: var(--accentColor);
+  border-radius: 20px;
+}
+
+.active {
+  background: var(--gradientColor);
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 1.2;
+  font-weight: lighter;
+  transition: all 0.2s;
+  position: relative;
+  width: 100%;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  background: var(--accentColor);
+  left: 0;
+  bottom: 0;
+  height: 1px;
+}
+
+.link:hover {
+  background: var(--gradientColor);
+}
+
+.active:hover {
+  background-color: rgba(255, 255, 255, 0.842);
+}
+
+.label {
+  padding-left: 20px;
+  color: white;
+}
+
+.button {
+  min-height: 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-decoration: none;
+  background-color: rgba(240, 248, 255, 0);
+}
+
+.hidden {
+  display: none;
+  position: relative;
+}
+
+.hidden::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  background: var(--gradientColor);
+  left: 0;
+  bottom: 0;
+  height: 1px;
+}
+
+.isHamburger {
+  position: absolute;
+  left: 15px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--storePageBgColor);
+  z-index: 100;
+}
+
+@media (min-width: 760px) {
+  .isHamburger {
+    width: 100%;
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .hidden {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--storePageBgColor);
+  }
+
+  .isHamburger {
+    width: 95%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    max-width: 250px;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid var(--accentColor);
+    z-index: 100;
+    margin-top: 83px;
+    overflow-y: scroll;
+
+    max-height: 80vh;
+  }
+
+  .isHamburger {
+    display: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+}

@@ -1,0 +1,87 @@
+.table {
+  width: 100%;
+}
+
+.head {
+  height: 55px;
+  color: white;
+  background-color: var(--acrylColorBg);
+  top: 0;
+  position: sticky;
+}
+
+.name {
+  min-width: 150px;
+}
+
+.checkbox {
+  max-width: 25px;
+  width: 25px;
+  padding: 20px;
+}
+
+.checkbox > input {
+  padding: 20px;
+}
+
+.created {
+  min-width: 115px;
+}
+
+.cart {
+  max-width: 100px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.info {
+  background-color: #fefefe;
+  color: rgb(8, 8, 8);
+  height: 40px;
+}
+
+.info:nth-child(even) {
+  background-color: #fefefec9;
+  color: rgb(8, 8, 8);
+}
+
+.cartLink {
+  background-color: white;
+}
+
+.cartLink:hover {
+  background-color: var(--adminPanelBgColor);
+}
+
+.cartLink > a {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  color: black;
+  height: 40px;
+  background-color: white;
+}
+
+.cartLink > button {
+  color: black;
+  height: 40px;
+  width: 100%;
+  background-color: white;
+  cursor: pointer;
+  font-family: var(--fontFamily);
+  font-weight: 600;
+}
+
+.cartLink > button:hover {
+  background-color: var(--acrylColorBg);
+}
+
+.cartLink > a:hover {
+  background-color: var(--acrylColorBg);
+}
+
+.action {
+  min-width: 200px;
+  text-align: center;
+}

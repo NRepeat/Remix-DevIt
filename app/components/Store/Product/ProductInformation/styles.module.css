@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 5px;
+}
+
+.description {
+  margin: 0;
+  font-weight: lighter;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.title {
+  color: white;
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.price {
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: larger;
+}
+
+.price:hover {
+  color: white;
+}
+
+.priceWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.rating {
+  color: rgb(255, 255, 255);
+}

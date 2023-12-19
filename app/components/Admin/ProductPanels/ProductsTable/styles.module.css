@@ -1,0 +1,84 @@
+.table {
+  width: 100%;
+  position: relative;
+}
+
+.head {
+  height: 55px;
+  color: white;
+  background-color: var(--acrylColorBg);
+  top: 0;
+  position: sticky;
+}
+
+.name {
+  text-align: center;
+}
+
+.stock {
+  min-width: 50px;
+  text-align: center;
+}
+
+.rating {
+  text-align: center;
+}
+
+.checkbox {
+  max-width: 25px;
+  width: 25px;
+  padding: 20px;
+}
+
+.checkbox > input {
+  padding: 20px;
+}
+
+.created {
+  min-width: 115px;
+}
+
+.imgWrapper {
+  max-height: 150px;
+  max-width: 190px;
+  min-width: 100px;
+  overflow: auto;
+}
+
+.description {
+  min-width: 250px;
+  max-width: 300px;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: wrap;
+  font-size: 0.9rem;
+}
+
+.img {
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.info {
+  background-color: #fefefe;
+  color: rgb(8, 8, 8);
+  height: 40px;
+}
+
+.info:nth-child(even) {
+  background-color: #fefefec9;
+  color: rgb(8, 8, 8);
+}
+
+.action {
+  min-width: 200px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  overflow-y: auto;
+}

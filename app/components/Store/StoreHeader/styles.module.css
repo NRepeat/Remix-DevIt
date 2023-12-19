@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  grid-area: header;
+  justify-content: space-between;
+  position: relative;
+  min-width: 290px;
+  width: 100%;
+}
+
+.header::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  background: var(--gradientColor);
+  left: 0;
+  bottom: 0;
+  height: 1px;
+}
+
+.btn {
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-width: max-content;
+  background-color: rgba(0, 0, 255, 0);
+  color: white;
+  cursor: pointer;
+}
+
+.searchBarCartWrapper {
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 50%;
+  gap: 30px;
+}
+
+.titleWrapper {
+  display: inline-block;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.title > h1 {
+  font-weight: bold;
+  font-size: 2rem;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  padding-bottom: 9px;
+}
+
+.title:hover {
+  color: rgb(182, 2, 182);
+}

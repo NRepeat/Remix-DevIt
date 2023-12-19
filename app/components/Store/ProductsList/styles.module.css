@@ -1,0 +1,28 @@
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  gap: 30px;
+  max-height: 75vh;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sort {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.noProducts {
+  color: white;
+  display: flex;
+  height: 100%;
+  align-items: center;
+}
