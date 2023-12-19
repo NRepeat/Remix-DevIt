@@ -5,6 +5,7 @@ import {
   useRouteError,
 } from "@remix-run/react";
 import styles from "./styles.module.css";
+
 const AdminError = () => {
   const error = useRouteError();
   const navigate = useNavigate();

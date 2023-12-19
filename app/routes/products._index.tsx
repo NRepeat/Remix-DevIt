@@ -2,7 +2,7 @@ import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import StorePage from "~/Pages/StorePage/StorePage";
-import { authenticator } from "~/services/auth.server";
+import { customerAuthenticator } from "~/services/auth.server";
 import { createCart } from "~/services/cartSession.server";
 import {
   getAllProductCategories,
@@ -26,7 +26,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const sort = url.searchParams.get("sort");
   const page = pageQuery ? parseInt(pageQuery) : 1;
   const categories = await getAllProductCategories();
-  let user = await authenticator.isAuthenticated(request);
+  let user = await customerAuthenticator.isAuthenticated(request);
   if (categoryQuery !== "" && !!categoryQuery) {
     const products = await getProductsByCategory(categoryQuery!, sort!);
     if (!products) {

@@ -16,7 +16,7 @@ export interface SidebarProps {
 
 const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ links }) => {
   const navigation = useLocation();
-  const [on, toggle] = useToggle(true);
+  const [on, toggle] = useToggle(false);
   const refM = useRef(null);
   useClickOutside(refM, () => toggle(false));
   const linksData = links.map((link) => ({

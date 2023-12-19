@@ -71,9 +71,9 @@ export const createCustomer = async ({
   }
 };
 
-export const login = async ({
-  data,
-}: ValidationResult<LoginArgs>): Promise<CustomerWithoutPassword> => {
+export const login = async (
+  data: LoginArgs
+): Promise<CustomerWithoutPassword> => {
   if (!data) {
     throw new Error("Error while attempting to login");
   }

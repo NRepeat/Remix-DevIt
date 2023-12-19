@@ -13,7 +13,9 @@
     rgba(69, 238, 164, 1) 87%
   );
 }
+
 .wrapper {
+  position: relative;
   width: 35%;
   gap: 50px;
   display: flex;
@@ -27,15 +29,18 @@
   -moz-box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.75);
   box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.75);
 }
+
 .title {
   font-size: 1.4rem;
 }
+
 .wrapper > form {
   display: flex;
   justify-content: center;
   flex-direction: column;
   gap: 20px;
 }
+
 .wrapper > form > button {
   width: 100%;
   background-color: rgb(23, 107, 83);
@@ -44,21 +49,39 @@
   cursor: pointer;
   color: aliceblue;
 }
+
 .wrapper > form > button:hover {
   background-color: rgb(53, 80, 73);
 }
+
 .wrapper > form > div > input {
   border: 1px solid gainsboro;
   border-radius: 5px;
 }
+
 .wrapper > form > div {
   gap: 5px;
 }
+
 .forgot {
   color: rgb(26, 171, 123);
   width: 100%;
   text-align: left;
 }
+
 .register {
   color: rgb(26, 171, 123);
+}
+
+.error {
+  top: -100px;
+  position: absolute;
+  display: inline-flex;
+  justify-content: center;
+  background-color: rgb(214, 22, 22);
+  padding: 20px;
+  border-radius: 5px;
+  -webkit-box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 10px 3px rgba(0, 0, 0, 0.75);
 }

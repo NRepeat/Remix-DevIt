@@ -1,15 +1,16 @@
+import type { ErrorResponse } from "@remix-run/node";
 import { type FC } from "react";
 import LoginForm from "~/components/Auth/LoginForm/LoginForm";
 import styles from "./styles.module.css";
 
-type LoginPageProps = {
-  error?: string;
+type LoginProps = {
+  error?: ErrorResponse;
 };
 
-const LoginPage: FC<LoginPageProps> = ({ error }) => {
+const LoginPage: FC<LoginProps> = ({ error }) => {
   return (
     <div className={styles.loginPage}>
-      <div className={styles.error}>{error}</div>
+      {error && <p className={styles.error}>{error?.data.slice(6)}</p>}
       <LoginForm />
     </div>
   );

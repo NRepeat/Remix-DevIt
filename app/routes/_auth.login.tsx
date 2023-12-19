@@ -1,51 +1,53 @@
 import {
+  json,
   redirect,
   type ActionFunctionArgs,
   type LoaderFunctionArgs,
 } from "@remix-run/node";
-import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
 import { AuthorizationError } from "remix-auth";
+import { validationError } from "remix-validated-form";
 import LoginPage from "~/Pages/LoginPage/LoginPage";
-import { authenticator } from "~/services/auth.server";
-import { commitSession, getSession } from "~/services/session.server";
+import LoginError from "~/components/Errors/LoginError /LoginError";
+import { customerAuthenticator } from "~/services/auth.server";
+import { existCustomer } from "~/services/customer.server";
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
-    const user = await authenticator.authenticate("user-pass", request, {
+    return await customerAuthenticator.authenticate("customer-auth", request, {
+      successRedirect: "/products",
       throwOnError: true,
     });
-    let session = await getSession(request.headers.get("Cookie"));
-    console.log("🚀 ~ file: _auth.login.tsx:15 ~ action ~ session:", session);
-    session.set(authenticator.sessionKey, user);
-    let headers = new Headers({ "Set-Cookie": await commitSession(session) });
-
-    return redirect("/products", { headers });
   } catch (error) {
-    if (error instanceof Response) return error;
-    if (error instanceof AuthorizationError) {
-      throw new Response(`${error.message}`);
+    if (error instanceof Response) {
+      return error;
     }
-    throw new Response("Authorization error", { status: 500 });
+    if (error instanceof AuthorizationError) {
+      return validationError({
+        fieldErrors: { password: `Email or password are incorrect` },
+      });
+    }
   }
+  return json({ success: true });
 }
 export async function loader({ request }: LoaderFunctionArgs) {
-  await authenticator.isAuthenticated(request, {
-    successRedirect: "/products",
-  });
-
-  return null;
-}
-
-export function ErrorBoundary() {
-  const error = useRouteError();
-  if (isRouteErrorResponse(error)) {
-    return (
-      <>
-        <LoginPage error={error.data} />
-      </>
-    );
+  try {
+    const user = await customerAuthenticator.isAuthenticated(request);
+    if (!user) {
+      return null;
+    }
+    const isCustomer = await existCustomer(user.email);
+    if (!isCustomer) {
+      throw new Error("You don't have permission to access");
+    }
+    return redirect("/login");
+  } catch (error) {
+    throw new Response(`${error}`);
   }
 }
+export function ErrorBoundary() {
+  return <LoginError />;
+}
+
 export default function () {
   return <LoginPage />;
 }

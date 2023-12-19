@@ -6,46 +6,46 @@ import {
   login,
   type CustomerWithoutPassword,
 } from "./customer.server";
-import type { Member } from "./member.server";
 import { sessionStorage } from "./session.server";
 
-export const authenticator = new Authenticator<
-  CustomerWithoutPassword | Member
->(sessionStorage);
+export const customerAuthenticator = new Authenticator<CustomerWithoutPassword>(
+  sessionStorage
+);
 
-authenticator.use(
-  new FormStrategy(async ({ form }) => {
-    const validatedCustomerData = await loginSchema.validate(form);
+customerAuthenticator.use(
+  new FormStrategy(async ({ form, context }) => {
+    if (!form) {
+      throw new Error("Customer login action error");
+    }
+    const validFromData = await loginSchema.validate(form);
 
-    const user = await login(validatedCustomerData);
+    if (validFromData.error) {
+      throw new AuthorizationError("Email or password are incorrect");
+    }
+
+    let user = await login(validFromData.data);
 
     if (user === null) {
       throw new AuthorizationError("Email or password are incorrect");
     }
     return user;
   }),
-  "user-pass"
+  "customer-auth"
 );
-authenticator.use(
+customerAuthenticator.use(
   new FormStrategy(async ({ form }) => {
+    if (!form) {
+      throw new Error("Customer registration action error");
+    }
     const validatedCustomerData = await registrationSchema.validate(form);
-
+    if (validatedCustomerData.error) {
+      throw new AuthorizationError("Email or password are incorrect");
+    }
     let user = await createCustomer(validatedCustomerData);
+    if (user === null) {
+      throw new AuthorizationError("Email or password are incorrect");
+    }
     return user;
   }),
-  "user-reg"
+  "customer-reg"
 );
-
-// authenticator.use(
-//   new FormStrategy(async ({ form }) => {
-//     const validatedCustomerData = await loginSchema.validate(form);
-
-//     const user = await loginMember(validatedCustomerData);
-
-//     if (user === null) {
-//       throw new AuthorizationError("Email or password are incorrect");
-//     }
-//     return user;
-//   }),
-//   "member-pass"
-// );

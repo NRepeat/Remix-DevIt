@@ -4,9 +4,11 @@ import { adminLoginSchema } from "~/components/Admin/Auth/Login/Login";
 import { findMember, type Member } from "./member.server";
 import { sessionStorage } from "./session.server";
 
-export const authenticator = new Authenticator<Member | null>(sessionStorage);
+export const memberAuthenticator = new Authenticator<Member | null>(
+  sessionStorage
+);
 
-authenticator.use(
+memberAuthenticator.use(
   new FormStrategy(async ({ form, context }) => {
     if (!form) {
       throw new Error("Admin login action error");
