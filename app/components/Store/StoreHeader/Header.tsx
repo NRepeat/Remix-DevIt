@@ -1,6 +1,8 @@
 import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { type FC } from "react";
+import LoginIcon from "~/icons/Header/Login";
+import ProfileIcon from "~/icons/Header/Profile";
 import SearchIcon from "~/icons/Header/Search";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import { SearchBar } from "../../Ui/SearchBar/SearchBar";
@@ -15,9 +17,13 @@ const isCustomerAuthenticated: FC<{ isCustomer: boolean }> = ({
   isCustomer,
 }) => {
   return isCustomer ? (
-    <Link to={"/"}>Profile</Link>
+    <Link title="Account" className={styles.profile} to={"/"}>
+      <ProfileIcon />
+    </Link>
   ) : (
-    <Link to={"/login"}>Sign in</Link>
+    <Link title="Sign in" className={styles.login} to={"/login"}>
+      <LoginIcon />
+    </Link>
   );
 };
 

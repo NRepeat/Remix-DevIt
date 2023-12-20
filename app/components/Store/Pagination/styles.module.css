@@ -1,20 +1,18 @@
 .pag {
+  grid-area: pagination;
   display: flex;
   flex-direction: row;
-  max-width: 100%;
-  width: 100%;
-  gap: 5px;
+  gap: 15px;
   align-items: center;
-  overflow-x: auto;
-  overflow-y: hidden;
   justify-content: center;
+  border-top: var(--storeInterfaceBorder);
+  padding-right: var(--storeInterfacePadding);
 }
 
 .button {
-  border-radius: 2px;
-  height: 35px;
-  min-width: 35px;
-  border: 0;
+  height: 2rem;
+  width: 2.5rem;
+  border: var(--storeInterfaceBorder);
   background-color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
@@ -24,7 +22,7 @@
 }
 
 .button:hover {
-  background-color: rgb(0, 0, 0);
+  background-color: var(--storeInterfaceButtonColor);
   color: white;
 }
 
@@ -38,7 +36,7 @@
 }
 
 .currentPage {
-  background-color: rgb(0, 26, 255);
+  background-color: var(--storeInterfaceAccentColor);
   color: white;
 }
 

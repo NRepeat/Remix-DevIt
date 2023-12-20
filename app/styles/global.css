@@ -11,7 +11,17 @@
   --adminMainContainerArea: main-container;
   --fontFamily: "Chakra Petch", sans-serif;
   --adminPanelBgColor: #23462b;
-  --storePageBgColor: rgb(16, 16, 16);
+  --storeHeaderBgColor: rgb(45, 45, 45);
+
+  --storeMainBgColor: rgb(208, 208, 208);
+  --storeHeaderAccentColor: rgb(238, 238, 238);
+  --storeLinkColor: rgb(28, 28, 28);
+  --storeInterfacePadding: 2rem;
+  --storeInterfaceButtonColor: rgb(45, 45, 45);
+  --storeInterfaceAccentColor: rgba(130, 130, 130, 0.5);
+  --storeInterfaceBorder: 1px solid rgba(130, 130, 130, 0.232);
+  --storeSidebarActiveColor: rgba(130, 130, 130, 0.5);
+  --storeHeaderInterfaceColor: rgb(228, 228, 228);
   --accentColor: rgb(53, 51, 180);
   --adminAccentColor: rgba(32, 94, 32, 0.767);
   --acrylColorBg: #68806e;

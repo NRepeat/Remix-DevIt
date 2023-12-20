@@ -3,8 +3,9 @@ import { parseAndValidateNumber } from "./validation.server";
 type calculatePaginationSizeArgs = {
   page: number;
 };
+const productTake = process.env.PRODUCT_TAKE || 24;
 
-const take = parseAndValidateNumber(process.env.PRODUCT_TAKE!) || 12;
+const take = parseAndValidateNumber(productTake);
 
 export function calculatePaginationSize(data: calculatePaginationSizeArgs): {
   skip: number;

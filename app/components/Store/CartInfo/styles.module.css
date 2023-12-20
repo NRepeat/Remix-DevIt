@@ -10,10 +10,6 @@
   fill: var(--accentColor);
 }
 
-.cartIcon:hover {
-  fill: white;
-}
-
 .quantity {
   position: absolute;
   top: 0;

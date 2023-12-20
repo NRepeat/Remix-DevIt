@@ -26,7 +26,7 @@ export default function () {
   const data = useLoaderData<typeof loader>();
   return (
     <section className="container">
-      <CategoryPage data={data} />;
+      <CategoryPage data={data} />
     </section>
   );
 }

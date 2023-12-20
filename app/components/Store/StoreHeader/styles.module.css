@@ -6,12 +6,16 @@
   justify-content: space-between;
   position: relative;
   width: 100%;
+  padding-left: var(--storeInterfacePadding);
+  padding-right: var(--storeInterfacePadding);
+  background-color: var(--storeHeaderBgColor);
 }
 
 .menu {
   display: inline-flex;
   grid-area: menu;
-  justify-content: center;
+  justify-content: flex-end;
+  gap: 50px;
 }
 
 .title {
@@ -29,16 +33,38 @@
   overflow: hidden;
   display: inline-flex;
   align-items: center;
-  background-color: #0a0a0a;
+  background-color: var(--storeHeaderBgColor);
 }
 
 .searchIcon {
-  padding-left: 15px;
-  fill: white;
+  fill: var(--storeHeaderInterfaceColor);
 }
 
 .searchBar {
-  background-color: #0a0a0a;
+  background-color: var(--storeHeaderBgColor);
   border: none;
-  padding: 10px 15px;
+}
+
+.searchBar > input {
+  padding-left: 10px;
+  color: var(--storeHeaderAccentColor);
+}
+
+.searchBar > input:focus {
+  outline: 1px solid var(--storeHeaderAccentColor);
+}
+
+.profile > svg {
+  fill: var(--storeHeaderInterfaceColor);
+}
+
+.login {
+  display: inline-flex;
+  align-items: center;
+}
+
+.login > svg {
+  fill: var(--storeHeaderInterfaceColor);
+  height: 30px;
+  width: 30px;
 }

@@ -31,7 +31,7 @@ const List: FC<ListProps> = ({
           {links.map((link, i) => (
             <li
               key={i}
-              className={clsx(styles.link, {
+              className={clsx(styles.li, {
                 [styles.active]: navigation.pathname.startsWith(
                   `/categories/${link.slug}`
                 ),
@@ -39,7 +39,7 @@ const List: FC<ListProps> = ({
             >
               <Link
                 to={`/categories/${link.slug}`}
-                className={styles.button}
+                className={styles.link}
                 onClick={() => {
                   toggle(false);
                 }}

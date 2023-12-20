@@ -11,10 +11,10 @@ import {
 import { getSession } from "~/services/session.server";
 
 import { parseAndValidateNumber } from "~/utils/validation.server";
-import productIndexStylesHref from "../styles/productIndex.css";
+import rootIndexStylesHref from "../styles/rootIndex.css";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: productIndexStylesHref },
+  { rel: "stylesheet", href: rootIndexStylesHref },
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -40,9 +40,5 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 export default function () {
   const data = useLoaderData<typeof loader>();
 
-  return (
-    <div className="bg-pd-index">
-      <StorePage data={data} />
-    </div>
-  );
+  return <StorePage data={data} />;
 }
