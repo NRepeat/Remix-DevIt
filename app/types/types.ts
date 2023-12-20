@@ -1,5 +1,6 @@
 import type { Cart, Category, Product } from "@prisma/client";
 import type { SubmitFunction } from "@remix-run/react";
+import type { CustomerWithoutPassword } from "~/services/customer.server";
 import type { ProductData } from "~/services/product.server";
 
 export type DummyProduct = {
@@ -24,6 +25,7 @@ export type ProductResponse = {
 };
 export interface StorePageProps {
   data: {
+    isCustomerAuthenticated: CustomerWithoutPassword | null;
     products: ProductData;
     page: number;
     cart: {
@@ -41,14 +43,13 @@ export interface handleAddToCartProps {
   customerId: number;
   submit: SubmitFunction;
 }
-export type CartProduct = Product;
 
 export interface AddItemToCartButtonProps {
   cart: Cart;
-  product: CartProduct;
+  product: Product;
   customerId: number;
 }
 
 export interface ProductProps {
-  product: CartProduct;
+  product: Product;
 }

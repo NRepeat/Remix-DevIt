@@ -19,7 +19,7 @@ memberAuthenticator.use(
       throw new AuthorizationError("Email or password are incorrect");
     }
 
-    let user = await findMember(validFromData.data);
+    const user = await findMember(validFromData.data);
 
     if (user === null) {
       throw new AuthorizationError("Email or password are incorrect");

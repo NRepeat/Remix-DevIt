@@ -10,11 +10,12 @@ import {
   updateProduct,
   updateProductCategory,
 } from "~/services/product.server";
+import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
     invariant(params.id);
-    const product = await getProduct(parseInt(params.id));
+    const product = await getProduct(parseAndValidateNumber(params.id));
 
     if (!product) {
       throw new Error("Product Not Found");
@@ -37,7 +38,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
       return validationError(validatedProductData.error);
     }
     const { category, ...productData } = validatedProductData.data;
-    const product = await getProduct(parseInt(params.id));
+    const product = await getProduct(parseAndValidateNumber(params.id));
     await updateProduct(product.id, productData);
     await updateProductCategory(product.id, category);
     return redirect("/admin/products");

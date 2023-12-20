@@ -16,7 +16,7 @@ const StorePage: FC<SerializeFrom<StorePageProps>> = ({ data }) => {
     <>
       <PageLayout isAdmin={false}>
         <Header>
-          <StoreHeader />
+          <StoreHeader customer={data.isCustomerAuthenticated} />
         </Header>
         <div className={styles.sidebar}>
           <Sidebar links={data.categories} />

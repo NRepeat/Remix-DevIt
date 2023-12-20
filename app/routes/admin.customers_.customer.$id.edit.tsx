@@ -10,11 +10,12 @@ import {
   updateCustomer,
 } from "~/services/customer.server";
 import { editSchema } from "~/utils/formValidation";
+import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
     invariant(params.id);
-    const customer = await getCustomerById(parseInt(params.id));
+    const customer = await getCustomerById(parseAndValidateNumber(params.id));
     if (!customer) {
       throw new Error("Customer Not Found");
     }
@@ -34,7 +35,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
     if (validatedCustomerData.error) {
       return validationError(validatedCustomerData.error);
     }
-    const customer = await getCustomerById(parseInt(params.id));
+    const customer = await getCustomerById(parseAndValidateNumber(params.id));
     if (customer) {
       const isExistCustomer = await existCustomer(
         validatedCustomerData.data.email

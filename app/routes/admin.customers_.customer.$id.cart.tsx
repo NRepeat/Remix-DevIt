@@ -11,11 +11,12 @@ import { getCartByCustomerId } from "~/services/cart.server";
 import { deleteCartItem, updateCartItem } from "~/services/cartItem.server";
 import { getCustomerById } from "~/services/customer.server";
 import { updateProduct } from "~/services/product.server";
+import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   try {
     invariant(params.id);
-    const customerId = parseInt(params.id);
+    const customerId = parseAndValidateNumber(params.id);
 
     const customer = await getCustomerById(customerId);
     const cart = await getCartByCustomerId(customerId);

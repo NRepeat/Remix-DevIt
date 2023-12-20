@@ -12,6 +12,8 @@ import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { Button } from "~/components/Ui/Button/Button";
 import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
 import { deleteProduct, getAllProducts } from "~/services/product.server";
+
+import { parseAndValidateNumber } from "~/utils/validation.server";
 import adminProductsStylesHref from "../styles/adminProductsStylesHref.css";
 
 export const links: LinksFunction = () => [
@@ -22,7 +24,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("search");
   const pageQuery = url.searchParams.get("page");
-  const page = pageQuery ? parseInt(pageQuery) : 1;
+  const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
 
   if (searchQuery === "") {
     return redirect("/admin/products");

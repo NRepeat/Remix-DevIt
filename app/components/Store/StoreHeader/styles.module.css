@@ -1,59 +1,44 @@
 .header {
-  display: flex;
+  display: grid;
   grid-area: header;
+  grid-template-columns: 300px auto 300px;
+  grid-template-areas: "search title  menu";
   justify-content: space-between;
   position: relative;
-  min-width: 290px;
   width: 100%;
 }
 
-.header::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  background: var(--gradientColor);
-  left: 0;
-  bottom: 0;
-  height: 1px;
-}
-
-.btn {
+.menu {
   display: inline-flex;
-  justify-content: flex-end;
-  align-items: center;
-  min-width: max-content;
-  background-color: rgba(0, 0, 255, 0);
-  color: white;
-  cursor: pointer;
-}
-
-.searchBarCartWrapper {
-  display: inline-flex;
-  justify-content: flex-end;
-  width: 100%;
-  max-width: 50%;
-  gap: 30px;
-}
-
-.titleWrapper {
-  display: inline-block;
+  grid-area: menu;
+  justify-content: center;
 }
 
 .title {
-  display: flex;
-  align-items: center;
-  height: 100%;
-}
-
-.title > h1 {
-  font-weight: bold;
-  font-size: 2rem;
-  color: white;
-  text-decoration: none;
+  font-size: 2.5rem;
+  font-weight: 700;
   cursor: pointer;
-  padding-bottom: 9px;
+  display: inline-flex;
+  align-items: center;
+  grid-area: title;
+  justify-self: center;
 }
 
-.title:hover {
-  color: rgb(182, 2, 182);
+.searchBarContainer {
+  grid-area: search;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  background-color: #0a0a0a;
+}
+
+.searchIcon {
+  padding-left: 15px;
+  fill: white;
+}
+
+.searchBar {
+  background-color: #0a0a0a;
+  border: none;
+  padding: 10px 15px;
 }

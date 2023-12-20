@@ -1,8 +1,8 @@
 import { useFetcher, useRouteLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
-import type { SerializeFrom } from "@remix-run/node";
 import type { Product } from "@prisma/client";
+import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 import type { loader } from "~/root";
 import styles from "./styles.module.css";
@@ -22,7 +22,7 @@ export const AddToCart: FC<SerializeFrom<AddToCartProps>> = ({ product }) => {
   return (
     <fetch.Form
       method="post"
-      action={`/products/product/${product.id}`}
+      action={`/product/${product.id}`}
       onSubmit={(event) => {
         if (cartItem && product.stock <= cartItem.quantity) {
           confirm("Out of stock.");

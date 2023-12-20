@@ -23,7 +23,7 @@ customerAuthenticator.use(
       throw new AuthorizationError("Email or password are incorrect");
     }
 
-    let user = await login(validFromData.data);
+    const user = await login(validFromData.data);
 
     if (user === null) {
       throw new AuthorizationError("Email or password are incorrect");
@@ -41,7 +41,7 @@ customerAuthenticator.use(
     if (validatedCustomerData.error) {
       throw new AuthorizationError("Email or password are incorrect");
     }
-    let user = await createCustomer(validatedCustomerData);
+    const user = await createCustomer(validatedCustomerData);
     if (user === null) {
       throw new AuthorizationError("Email or password are incorrect");
     }

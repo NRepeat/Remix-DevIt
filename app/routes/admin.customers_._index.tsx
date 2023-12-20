@@ -11,6 +11,8 @@ import Pagination from "~/components/Store/Pagination/Pagination";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
 import { deleteCustomer, searchCustomer } from "~/services/customer.server";
+
+import { parseAndValidateNumber } from "~/utils/validation.server";
 import adminCustomersStylesHref from "../styles/adminCustomersStylesHref.css";
 
 export const links: LinksFunction = () => [
@@ -25,7 +27,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       return redirect("/admin/customers");
     }
     const pageQuery = url.searchParams.get("page");
-    const page = pageQuery ? parseInt(pageQuery) : 1;
+    const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
     const customers = await searchCustomer(searchQuery, page);
     return json({ customers, page });
   } catch (error) {

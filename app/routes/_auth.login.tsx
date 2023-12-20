@@ -31,7 +31,7 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
-    let session = await getSession(request.headers.get("cookie"));
+    const session = await getSession(request.headers.get("cookie"));
     const data = { error: session.get("error") };
     if (data.error) {
       const headers = new Headers({
@@ -43,10 +43,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }
 
     const user = await customerAuthenticator.isAuthenticated(request);
-    if (!user) {
-      return null;
+    if (user) {
+      return redirect("/");
     }
-    return redirect("/");
+    return null;
   } catch (error) {
     throw new Response(`${error}`);
   }

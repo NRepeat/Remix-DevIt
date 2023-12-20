@@ -1,14 +1,5 @@
 .search {
   display: inline-flex;
   align-items: center;
-}
-
-.search > input {
-  width: 100%;
-  min-width: 140px;
-  height: 40px;
-  padding: 10px;
-  border-radius: 0px;
-  font-size: 1.1rem;
-  border: 1px solid gainsboro;
+  flex-direction: row;
 }

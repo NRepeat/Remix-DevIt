@@ -10,6 +10,6 @@ export interface InputProps
   className?: string;
 }
 
-export const Input: FC<InputProps> = ({ children, className, ...props }) => (
+export const Input: FC<InputProps> = ({ className, ...props }) => (
   <input className={clsx(styles.input, className)} {...props} />
 );

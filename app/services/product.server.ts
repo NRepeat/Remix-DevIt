@@ -79,10 +79,15 @@ export const getAllProducts = async (
   page: number,
   sortName?: string | null
 ): Promise<ProductData> => {
-  const sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
-  const sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
-  const pageSize: number = 12;
-  const skip = (page - 1) * pageSize;
+  const { skip, take } = calculatePaginationSize({ page });
+
+  let sortField = "price";
+  let sortType = "desc";
+
+  if (sortName) {
+    sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
+    sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
+  }
 
   try {
     const [products, totalProductsCount] = await Promise.all([
@@ -92,12 +97,12 @@ export const getAllProducts = async (
           [sortField]: sortType,
         },
         skip,
-        take: pageSize,
+        take,
       }),
       prisma.product.count(),
     ]);
 
-    const totalPages = Math.ceil(totalProductsCount / pageSize);
+    const totalPages = Math.ceil(totalProductsCount / take);
 
     return { products, totalPages, page };
   } catch (error) {
@@ -129,6 +134,7 @@ export const searchProduct = async (
 
   let sortField = "price";
   let sortType = "desc";
+
   if (sortName) {
     sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
     sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
