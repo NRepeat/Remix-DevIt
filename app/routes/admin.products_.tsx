@@ -3,10 +3,8 @@ import CRUDPanel from "~/components/Admin/MainLayout/MainLayout";
 
 export default function () {
   return (
-    <>
-      <CRUDPanel>
-        <Outlet />
-      </CRUDPanel>
-    </>
+    <CRUDPanel>
+      <Outlet />
+    </CRUDPanel>
   );
 }

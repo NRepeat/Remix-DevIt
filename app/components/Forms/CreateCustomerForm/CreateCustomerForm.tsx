@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
-import { Button } from "~/components/Ui/Button/Button";
 import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
+import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import { registrationSchema } from "~/utils/formValidation";
 import styles from "./styles.module.css";
 type FormProps = {
@@ -23,12 +23,28 @@ const CreateCustomerForm: FC<FormProps> = ({ formData }) => {
         validator={registrationSchema}
         className={styles.form}
       >
-        <FormInput label="Name" name="name" />
-        <FormInput label="Last Name" name="lastName" />
-        <FormInput label="Email" name="email" />
-        <FormInput label="Password" name="password" />
-        <div className={styles.containerB}>
-          <Button type="submit">Sign up</Button>
+        <FormInput type="text" placeholder="Name" label="Name" name="name" />
+        <FormInput
+          type="text"
+          placeholder="Last Name"
+          label="Last Name"
+          name="lastName"
+        />
+        <FormInput
+          type="email"
+          placeholder="Email"
+          name="email"
+          label="email"
+        />
+        <FormInput
+          type="password"
+          placeholder="Password"
+          name="password"
+          label="password"
+        />
+        <div className={styles.buttonContainer}>
+          <SubmitButton>Create</SubmitButton>
+          <div className={styles.bgButton}></div>
         </div>
       </ValidatedForm>
     </div>

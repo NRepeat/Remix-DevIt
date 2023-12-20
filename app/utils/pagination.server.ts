@@ -4,6 +4,7 @@ type calculatePaginationSizeArgs = {
   page: number;
 };
 const productTake = process.env.PRODUCT_TAKE || 24;
+console.log("🚀 ~ file: pagination.server.ts:7 ~  productTake:", productTake);
 
 const take = parseAndValidateNumber(productTake);
 

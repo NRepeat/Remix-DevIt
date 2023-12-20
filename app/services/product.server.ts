@@ -45,7 +45,8 @@ type ProductCreateData = {
 export type CreateProductArgs = {
   data: ProductCreateData;
 };
-
+let sortField = "price";
+let sortType = "desc";
 export const createProduct = async ({ data }: CreateProductArgs) => {
   try {
     await prisma.product.create({
@@ -80,9 +81,6 @@ export const getAllProducts = async (
   sortName?: string | null
 ): Promise<ProductData> => {
   const { skip, take } = calculatePaginationSize({ page });
-
-  let sortField = "price";
-  let sortType = "desc";
 
   if (sortName) {
     sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
@@ -174,10 +172,10 @@ export const getAllProductCategories = async (): Promise<Category[]> => {
 
 export const getProductsByCategory = async (
   category: string,
+  page: number,
   sortName?: string | null
 ): Promise<ProductData> => {
-  let sortField = "price";
-  let sortType = "desc";
+  const { skip, take } = calculatePaginationSize({ page });
   if (sortName) {
     sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
     sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
@@ -185,11 +183,15 @@ export const getProductsByCategory = async (
   try {
     const products = await prisma.product.findMany({
       where: { category: { slug: category } },
+      include: { category: true },
       orderBy: {
         [sortField]: sortType,
       },
+      skip,
+      take,
     });
-    return { products };
+    const totalPages = Math.ceil(products.length / take);
+    return { products, totalPages, page };
   } catch (error) {
     throw new Error(`Error during products by category search: ${error}`);
   }

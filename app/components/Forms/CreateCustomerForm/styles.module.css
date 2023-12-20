@@ -1,7 +1,7 @@
 .container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
+  min-width: 33%;
 }
 
 .form {
@@ -10,15 +10,41 @@
   gap: 10px;
 }
 
-.form > .containerB > button {
+.form > .buttonContainer > button {
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
-  background-color: rgba(0, 26, 255, 0);
+  background-color: rgb(255, 255, 255);
   font-weight: bold;
   font-size: 1.2rem;
   outline: solid;
-  outline-width: 2px;
+  outline-width: 1px;
+  z-index: 11;
+  height: 2.5rem;
+  transition:
+    transform 0.1s ease-in,
+    background-color 0.1s ease-in,
+    color 0.1s ease-in;
+}
+
+.buttonContainer {
+  padding-top: 2rem;
+  position: relative;
+}
+
+.bgButton {
+  position: absolute;
+  bottom: 0;
+  height: 2.5rem;
+  width: 100%;
+  z-index: 1;
+  background-color: rgb(0, 26, 255);
+  -webkit-box-shadow: inset 8px 8px 0px -4px rgba(0, 0, 0, 1);
+  -moz-box-shadow: inset 8px 8px 0px -4px rgba(0, 0, 0, 1);
+  box-shadow: inset 8px 8px 0px -4px rgba(0, 0, 0, 1);
+}
+
+.form > .buttonContainer > button:hover {
+  transform: translate(-6px, -6px);
 }
 
 .form > div {
@@ -28,12 +54,14 @@
 }
 
 .form > div > input {
-  width: max-content;
-  width: 500px;
-  border-radius: 5px;
   outline: solid;
-  outline-width: 2px;
+  outline-width: 1px;
   outline-color: black;
+  background-color: var(--storeInterfaceAccentColor);
+}
+
+.form > div > input:focus {
+  outline-color: rgb(0, 26, 255);
 }
 
 .form > div > label {
@@ -41,31 +69,5 @@
 }
 
 .form > div > span {
-  max-width: 254px;
   white-space: wrap;
-}
-
-.title {
-  text-align: left;
-  font-size: 1.5rem;
-  font-weight: bold;
-  padding-bottom: 20px;
-}
-
-.forgot {
-  width: 100%;
-  text-align: right;
-  color: rgb(255, 255, 255);
-  text-decoration: underline;
-}
-
-.reg {
-  padding-top: 10px;
-  display: inline-flex;
-  justify-content: space-between;
-}
-
-.reg > a {
-  color: rgb(255, 255, 255);
-  text-decoration: underline;
 }

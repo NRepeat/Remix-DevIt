@@ -9,19 +9,32 @@ import styles from "./styles.module.css";
 const LoginForm: FC = () => {
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Sign in </h2>
+      <h2 className={styles.title}>Login in </h2>
       <ValidatedForm
         method="post"
         validator={loginSchema}
         className={styles.form}
       >
-        <FormInput name="email" label="email" />
-        <FormInput name="password" label="password" />
+        <FormInput
+          type="email"
+          placeholder="Email"
+          name="email"
+          label="email"
+        />
+        <FormInput
+          type="password"
+          placeholder="Password"
+          name="password"
+          label="password"
+        />
 
         <Link to={"/"} className={styles.forgot}>
           Forgot password?
         </Link>
-        <SubmitButton>Sign in</SubmitButton>
+        <div className={styles.buttonContainer}>
+          <SubmitButton>Sign in</SubmitButton>
+          <div className={styles.bgButton}></div>
+        </div>
       </ValidatedForm>
       <div className={styles.reg}>
         New in Store? <Link to={"/registration"}>Register</Link>{" "}

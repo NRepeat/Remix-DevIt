@@ -14,7 +14,6 @@ const RegistrationForm: FC = () => {
         Already registered? <Link to={"/login"}>Sign in</Link>
       </div>
       <Link className={styles.back} to={"/"}>
-        {" "}
         Back to main page
       </Link>
     </div>

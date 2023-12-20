@@ -1,7 +1,7 @@
-import type { FC } from "react";
-import styles from "./styles.module.css";
 import type { Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
+import type { FC } from "react";
+import styles from "./styles.module.css";
 
 export interface SingleProduct {
   product: Product;
@@ -10,12 +10,9 @@ export interface SingleProduct {
 const ProductInformation: FC<SerializeFrom<SingleProduct>> = ({ product }) => {
   return (
     <div className={styles.container}>
+      <p className={styles.brand}> {product.brand}</p>
       <h2 className={styles.title}>{product.title}</h2>
-      <p className={styles.description}> {product.description}</p>
-      <div className={styles.priceWrapper}>
-        <p className={styles.price}>${product.price}</p>
-        <p className={styles.rating}>Rating {product.rating}/5</p>
-      </div>
+      <p className={styles.price}>${product.price}</p>
     </div>
   );
 };

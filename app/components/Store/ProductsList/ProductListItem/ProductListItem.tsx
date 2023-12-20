@@ -18,9 +18,7 @@ const ProductListItem: FC<{
               <div className={styles.avatar}>
                 <img src={product.thumbnail} alt={product.title} />
               </div>
-              <div>
-                <ProductInformation product={product} />
-              </div>
+              <ProductInformation product={product} />
             </div>
           </Link>
           <AddToCart product={product} />

@@ -1,16 +1,7 @@
 import type { Category } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
-import Footer from "~/Layout/Footer/Footer";
-import Header from "~/Layout/Header/Header";
-import PageLayout from "~/Layout/PageLayout/PageLayout";
-import Pagination from "~/components/Store/Pagination/Pagination";
-import ProductsList from "~/components/Store/ProductsList/ProductsList";
-import SortTypesList from "~/components/Store/Sort/SortTypesList";
-import StoreHeader from "~/components/Store/StoreHeader/Header";
 import type { ProductData } from "~/services/product.server";
-import Sidebar from "../../components/Store/SideBar/SideBar";
-import styles from "./styles.module.css";
 
 type CategoryPageProps = {
   data: {
@@ -23,7 +14,7 @@ type CategoryPageProps = {
 const SearchPage: FC<SerializeFrom<CategoryPageProps>> = ({ data }) => {
   return (
     <>
-      <PageLayout isAdmin={false}>
+      {/* <PageLayout isAdmin={false}>
         <Header>
           <StoreHeader />
         </Header>
@@ -50,7 +41,7 @@ const SearchPage: FC<SerializeFrom<CategoryPageProps>> = ({ data }) => {
         <div className={styles.footer}>
           <Footer />
         </div>
-      </PageLayout>
+      </PageLayout> */}
     </>
   );
 };

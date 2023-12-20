@@ -1,9 +1,7 @@
 .registrationPage {
-  background: var(--gradientColor);
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-area: main;
+  padding-bottom: 300px;
 }

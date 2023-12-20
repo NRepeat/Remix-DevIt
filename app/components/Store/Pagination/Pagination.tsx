@@ -4,7 +4,7 @@ import { clsx } from "clsx";
 import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 interface PaginationProps {
-  currentPage: number;
+  currentPage?: number;
   totalPages: number | undefined;
   admin: boolean;
 }

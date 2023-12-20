@@ -19,7 +19,10 @@
   --storeInterfacePadding: 2rem;
   --storeInterfaceButtonColor: rgb(45, 45, 45);
   --storeInterfaceAccentColor: rgba(130, 130, 130, 0.5);
-  --storeInterfaceBorder: 1px solid rgba(130, 130, 130, 0.232);
+  --storeInterfaceBorder: 1px solid rgba(130, 130, 130, 0.25);
+  --storeInterfaceBorderColor: rgba(130, 130, 130, 0.25);
+  --storeInterfaceCardBgColor: rgb(45, 45, 45);
+  --storeInterfaceGap: 2rem;
   --storeSidebarActiveColor: rgba(130, 130, 130, 0.5);
   --storeHeaderInterfaceColor: rgb(228, 228, 228);
   --accentColor: rgb(53, 51, 180);

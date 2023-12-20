@@ -1,13 +1,9 @@
 .loginPage {
-  background: var(--gradientColor);
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  gap: 50px;
+  grid-area: main;
+  padding-bottom: 300px;
 }
 
 .error {

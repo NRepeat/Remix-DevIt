@@ -10,7 +10,6 @@ import invariant from "tiny-invariant";
 import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductLayout";
 import Product from "~/components/Store/Product/Product";
 import ProductImages from "~/components/Store/Product/ProductImages/ProductImages";
-import StoreHeader from "~/components/Store/StoreHeader/Header";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { customerAuthenticator } from "~/services/auth.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
@@ -86,7 +85,7 @@ function ProductRoute() {
   ];
   return (
     <SingleProductLayout>
-      <StoreHeader />
+      {/* <StoreHeader /> */}
       <div className="breadcrumbs">
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
       </div>

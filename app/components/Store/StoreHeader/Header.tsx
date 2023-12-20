@@ -1,16 +1,14 @@
-import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { type FC } from "react";
 import LoginIcon from "~/icons/Header/Login";
 import ProfileIcon from "~/icons/Header/Profile";
 import SearchIcon from "~/icons/Header/Search";
-import type { CustomerWithoutPassword } from "~/services/customer.server";
 import { SearchBar } from "../../Ui/SearchBar/SearchBar";
 import { CartIcon } from "../CartInfo/CartInfo";
 import styles from "./styles.module.css";
 
 type StoreHeaderProps = {
-  customer?: SerializeFrom<CustomerWithoutPassword | null>;
+  customer: boolean;
 };
 
 const isCustomerAuthenticated: FC<{ isCustomer: boolean }> = ({
