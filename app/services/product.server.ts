@@ -1,5 +1,6 @@
 import type { Category, Product } from "@prisma/client";
 import { formatString } from "~/utils/formatting.server";
+import { calculatePaginationSize } from "~/utils/pagination.server";
 import { prisma } from "~/utils/prisma.server";
 
 export interface ProductData {
@@ -119,13 +120,13 @@ export const getProduct = async (
 };
 
 export const searchProduct = async (
-  search: string,
-  page: number | null,
+  page: number,
+  search?: string,
 
   sortName?: string | null
 ): Promise<ProductData> => {
-  const take: number = 12;
-  const skip = (page! - 1) * take;
+  const { skip, take } = calculatePaginationSize({ page });
+
   let sortField = "price";
   let sortType = "desc";
   if (sortName) {
@@ -133,25 +134,22 @@ export const searchProduct = async (
     sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
   }
   try {
-    const [products, totalProductsCount] = await Promise.all([
-      await prisma.product.findMany({
-        where: {
-          OR: [
-            { title: { contains: search, mode: "insensitive" } },
-            { description: { contains: search, mode: "insensitive" } },
-          ],
-        },
-        include: { category: true },
-        orderBy: {
-          [sortField]: sortType,
-        },
-        skip,
-        take,
-      }),
-      prisma.product.count(),
-    ]);
+    const products = await prisma.product.findMany({
+      where: {
+        OR: [
+          { title: { contains: search, mode: "insensitive" } },
+          { description: { contains: search, mode: "insensitive" } },
+        ],
+      },
+      include: { category: true },
+      orderBy: {
+        [sortField]: sortType,
+      },
+      skip,
+      take,
+    });
 
-    const totalPages = Math.ceil(totalProductsCount / take);
+    const totalPages = Math.ceil(products.length / take);
 
     return { products, totalPages };
   } catch (error) {

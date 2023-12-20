@@ -14,7 +14,7 @@ const StoreHeader: FC = () => {
       </div>
 
       <div className={styles.searchBarCartWrapper}>
-        <SearchBar action="/" />
+        <SearchBar action="/search/" />
         <CartIcon />
       </div>
     </div>

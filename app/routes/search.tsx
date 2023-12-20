@@ -1,7 +1,7 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import SearchPage from "~/Pages/SearchPage/SerachPage";
+import SearchPage from "~/Pages/SearchPage/SearchPage";
 import {
   getAllProductCategories,
   searchProduct,
@@ -15,18 +15,20 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("search");
   const sortType = url.searchParams.get("sort");
-  const page = url.searchParams.get("page");
+  const page = url.searchParams.get("page") ? url.searchParams.get("page") : 1
 
-  if (searchQuery) {
-    const products = await searchProduct(
-      searchQuery,
-      coerceNumber.parse(page),
-      sortType
-    );
-    const categories = await getAllProductCategories();
-
-    return json({ products, categories, page: coerceNumber.parse(page) });
+  if (searchQuery === "" || !searchQuery) {
+    return redirect("/")
   }
+
+  const products = await searchProduct(
+    coerceNumber.parse(page),
+    searchQuery,
+    sortType
+  );
+  const categories = await getAllProductCategories();
+
+  return json({ products, categories, page: coerceNumber.parse(page) });
 }
 
 export default function () {
