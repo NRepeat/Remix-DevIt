@@ -56,6 +56,13 @@
 
 .profile > svg {
   fill: var(--storeHeaderInterfaceColor);
+  height: 30px;
+  width: 30px;
+}
+
+.profile {
+  display: inline-flex;
+  align-items: center;
 }
 
 .login {

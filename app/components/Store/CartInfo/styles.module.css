@@ -7,7 +7,7 @@
 }
 
 .cartIcon {
-  fill: var(--accentColor);
+  fill: var(--storeInterfaceSecondColor);
 }
 
 .quantity {

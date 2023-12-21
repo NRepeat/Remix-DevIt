@@ -1,7 +1,12 @@
 .registrationPage {
-  display: flex;
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 5;
   align-items: center;
+  height: 100vh;
+  flex-direction: column;
   justify-content: center;
-  grid-area: main;
-  padding-bottom: 300px;
+  align-items: center;
 }

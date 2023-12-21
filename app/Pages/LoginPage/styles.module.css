@@ -1,16 +1,20 @@
 .loginPage {
-  display: flex;
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 5;
   align-items: center;
+  height: 100vh;
   flex-direction: column;
   justify-content: center;
-  grid-area: main;
-  padding-bottom: 300px;
+  align-items: center;
 }
 
 .error {
   display: inline-flex;
   align-items: center;
-  color: red;
+  color: rgb(63, 76, 252);
   font-size: 1.5rem;
   font-weight: 600;
   background-color: aliceblue;
