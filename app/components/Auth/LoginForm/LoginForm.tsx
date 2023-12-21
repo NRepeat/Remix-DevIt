@@ -39,7 +39,10 @@ const LoginForm: FC = () => {
       <div className={styles.reg}>
         New in Store? <Link to={"/registration"}>Register</Link>{" "}
       </div>
-      <Link to={"/"}> Back to main page</Link>
+      <Link className={styles.back} to={"/"}>
+        {" "}
+        Back to main page
+      </Link>
     </div>
   );
 };

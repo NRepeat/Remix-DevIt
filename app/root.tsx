@@ -16,15 +16,10 @@ import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageErro
 import GlobalLoader from "./components/Ui/GlobalLoading/GlobalLoader";
 import { customerAuthenticator } from "./services/auth.server";
 import { createCart } from "./services/cartSession.server";
-import {
-  getAllProductCategories,
-  getAllProducts,
-} from "./services/product.server";
+import { getAllProductCategories } from "./services/product.server";
 import { getSession } from "./services/session.server";
 import globalStylesHref from "./styles/global.css";
 import resetStylesHref from "./styles/reset.css";
-import { parseAndValidateNumber } from "./utils/validation.server";
-
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: resetStylesHref },
   { rel: "stylesheet", href: globalStylesHref },
@@ -36,15 +31,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const isCustomerAuthenticated =
     !!(await customerAuthenticator.isAuthenticated(request));
   const cart = createCart(session);
-  const url = new URL(request.url);
-  const pageQuery = url.searchParams.get("page");
-  const sort = url.searchParams.get("sort");
-  const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
   const categories = await getAllProductCategories();
-  const products = await getAllProducts(page, sort);
   return json({
-    products,
-    page,
     cart: cart.items(),
     categories,
     isCustomerAuthenticated,
@@ -68,10 +56,10 @@ export function ErrorBoundary() {
 }
 
 export default function App() {
+  const data = useLoaderData<typeof loader>();
   const nav = useLocation();
   let isAdmin = true;
   nav.pathname.includes("/admin") ? (isAdmin = true) : (isAdmin = false);
-  const data = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>

@@ -8,7 +8,7 @@ export interface MapListProps {
 }
 
 const MapList: FC<SerializeFrom<MapListProps>> = ({ productsData }) => {
-  const chunkedProducts = chunkProductData(productsData, 6);
+  const chunkedProducts = chunkProductData(productsData, 10);
   return (
     <>
       {productsData.products.length ? (

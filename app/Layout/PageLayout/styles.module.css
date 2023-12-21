@@ -1,10 +1,13 @@
 .gridLayout {
   display: grid;
   overflow-y: auto;
-  grid-template-rows: 70px min-content 3rem auto;
+  background-color: var(--storeMainBgColor);
+  grid-template-rows: 70px minmax(0px, 1fr) 100vh 250px 5rem auto;
   grid-template-columns: minmax(200px, max-content) auto auto;
   grid-template-areas:
     "header header header"
+    "sidebar breadcrumbs sort"
+    "sidebar main main"
     "sidebar main main"
     "sidebar pagination pagination"
     "footer footer footer";
@@ -24,6 +27,7 @@
 
 .sidebar {
   grid-area: sidebar;
+  border-right: var(--storeInterfaceBorder);
 }
 
 .main {

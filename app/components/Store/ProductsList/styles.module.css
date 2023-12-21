@@ -6,7 +6,8 @@
   flex-flow: row wrap;
   justify-content: flex-start;
   gap: 30px;
-  height: 100vh;
+  height: auto;
+
   padding-top: var(--storeInterfacePadding);
   padding-left: var(--storeInterfacePadding);
   padding-right: var(--storeInterfacePadding);
@@ -35,14 +36,9 @@
   align-items: flex-start;
   padding-bottom: 10px;
   position: relative;
+  border-bottom: var(--storeInterfaceBorder);
 }
 
-.li::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background-color: var(--storeInterfaceBorderColor);
+.li:last-child {
+  border-bottom: none;
 }

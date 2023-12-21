@@ -1,13 +1,19 @@
 .breadcrumbs {
   display: flex;
-  grid-area: bread;
+  grid-area: breadcrumbs;
   align-items: center;
   font-size: 1.2rem;
-  font-weight: bold;
+  font-weight: lighter;
+  padding-top: var(--storeInterfacePadding);
+  padding-left: var(--storeInterfacePadding);
 }
 
 .link {
-  color: var(--accentColor);
+  color: var(--storeLinkColor);
+}
+
+.link:hover {
+  text-decoration: underline;
 }
 
 .adminLink {
@@ -16,7 +22,7 @@
 
 .separator {
   margin: 0 5px;
-  color: var(--accentColor);
+  color: var(--storeInterfaceAccentColor);
 }
 
 .adminSeparator {
@@ -25,7 +31,7 @@
 }
 
 .last {
-  color: rgb(255, 255, 255);
+  color: var(--storeInterfaceAccentColor);
 }
 
 .adminLast {

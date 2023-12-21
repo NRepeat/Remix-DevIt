@@ -2,7 +2,6 @@ import type { Category } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import clsx from "clsx";
 import React from "react";
-import Sidebar from "~/components/Store/SideBar/SideBar";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import type { ProductData } from "~/services/product.server";
 import Footer from "../Footer/Footer";
@@ -29,11 +28,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, isAdmin, data }) => {
       <Header>
         <StoreHeader customer={data.isCustomerAuthenticated} />
       </Header>
-      <div className={styles.sidebar}>
-        <Sidebar links={data.categories} />
-      </div>
       {children}
-
       <Footer />
     </div>
   );

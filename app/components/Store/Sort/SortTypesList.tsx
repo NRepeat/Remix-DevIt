@@ -1,4 +1,5 @@
-import { Form, useSearchParams, useSubmit } from "@remix-run/react";
+import { useSearchParams, useSubmit } from "@remix-run/react";
+import FormM from "~/components/Ui/Form/FormM";
 import styles from "./styles.module.css";
 
 function SortTypesList() {
@@ -37,20 +38,23 @@ function SortTypesList() {
   ];
   const sortField = ["novelty", "rating", "cheap", "expensive"];
   return (
-    <Form>
-      <select
-        className={styles.sort}
-        id="sort"
-        name="sort"
-        onChange={HandleSubmit}
-      >
-        {sortLabel.map((type, i) => (
-          <option className={styles.option} key={i} value={sortField[i]}>
-            {type}
-          </option>
-        ))}
-      </select>
-    </Form>
+    <div className={styles.container}>
+      <p className={styles.title}>Sort by</p>
+      <FormM className={styles.sort} isFetcher={false}>
+        <select
+          className={styles.select}
+          id="sort"
+          name="sort"
+          onChange={HandleSubmit}
+        >
+          {sortLabel.map((type, i) => (
+            <option className={styles.option} key={i} value={sortField[i]}>
+              {type}
+            </option>
+          ))}
+        </select>
+      </FormM>
+    </div>
   );
 }
 

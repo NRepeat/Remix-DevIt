@@ -9,7 +9,6 @@ import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductLayout";
 import Product from "~/components/Store/Product/Product";
-import ProductImages from "~/components/Store/Product/ProductImages/ProductImages";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { customerAuthenticator } from "~/services/auth.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
@@ -84,14 +83,13 @@ function ProductRoute() {
     { label: `${data.product.title}`, link: "" },
   ];
   return (
-    <SingleProductLayout>
-      {/* <StoreHeader /> */}
-      <div className="breadcrumbs">
+    <>
+      <SingleProductLayout>
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
-      </div>
-      <Product data={data} />
-      <ProductImages product={data.product} />
-    </SingleProductLayout>
+
+        <Product data={data} />
+      </SingleProductLayout>
+    </>
   );
 }
 

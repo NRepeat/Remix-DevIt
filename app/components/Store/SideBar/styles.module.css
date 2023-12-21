@@ -1,6 +1,10 @@
 .gridSidebar {
-  padding-top: 2rem;
-  background-color: var(--storePageBgColor);
+  padding-top: var(--storeInterfacePadding);
+  background-color: var(--storeMainBgColor);
+}
+
+.sidebar {
+  grid-area: sidebar;
   border-right: var(--storeInterfaceBorder);
 }
 
@@ -9,8 +13,7 @@
 }
 
 .active {
-  background-color: var(--storeSidebarActiveColor);
-  color: white;
+  text-decoration: underline;
 }
 
 .li {
@@ -28,10 +31,9 @@
 
 .link {
   width: 100%;
-  height: auto;
-  min-height: 35px;
+  height: 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
 }
 

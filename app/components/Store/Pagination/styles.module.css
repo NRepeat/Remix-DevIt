@@ -8,6 +8,7 @@
   padding-right: var(--storeInterfacePadding);
   padding-top: 10px;
   border-top: var(--storeInterfaceBorder);
+  height: 50px;
 }
 
 .button {

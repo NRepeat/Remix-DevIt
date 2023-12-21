@@ -1,14 +1,14 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import SearchPage from "~/Pages/SearchPage/SearchPage";
+import ProductsList from "~/components/Store/ProductsList/ProductsList";
+import Sidebar from "~/components/Store/SideBar/SideBar";
 import {
   getAllProductCategories,
   searchProduct,
 } from "~/services/product.server";
 import categoryPage from "~/styles/categoryPage.css";
 import { parseAndValidateNumber } from "~/utils/validation.server";
-
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: categoryPage },
 ];
@@ -21,22 +21,22 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
   if (searchQuery === "" || !searchQuery) {
     return redirect("/");
   }
-
+  const categories = await getAllProductCategories();
   const products = await searchProduct(
     parseAndValidateNumber(page),
     searchQuery,
     sortType
   );
-  const categories = await getAllProductCategories();
 
-  return json({ products, categories, page: parseAndValidateNumber(page) });
+  return json({ products, page: parseAndValidateNumber(page), categories });
 }
 
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
-    <section className="container">
-      <SearchPage data={data} />;
-    </section>
+    <>
+      <ProductsList productsData={data.products} />
+      <Sidebar links={data.categories} />
+    </>
   );
 }

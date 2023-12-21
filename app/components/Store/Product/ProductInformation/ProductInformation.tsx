@@ -11,7 +11,7 @@ const ProductInformation: FC<SerializeFrom<SingleProduct>> = ({ product }) => {
   return (
     <div className={styles.container}>
       <p className={styles.brand}> {product.brand}</p>
-      <h2 className={styles.title}>{product.title}</h2>
+      <p className={styles.title}>{product.title}</p>
       <p className={styles.price}>${product.price}</p>
     </div>
   );

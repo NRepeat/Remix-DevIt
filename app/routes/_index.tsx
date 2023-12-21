@@ -1,6 +1,9 @@
 import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import Pagination from "~/components/Store/Pagination/Pagination";
+import ProductsList from "~/components/Store/ProductsList/ProductsList";
+import Sidebar from "~/components/Store/SideBar/SideBar";
 import { customerAuthenticator } from "~/services/auth.server";
 import { createCart } from "~/services/cartSession.server";
 import {
@@ -8,9 +11,6 @@ import {
   getAllProducts,
 } from "~/services/product.server";
 import { getSession } from "~/services/session.server";
-
-import Pagination from "~/components/Store/Pagination/Pagination";
-import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 import rootIndexStylesHref from "../styles/rootIndex.css";
 
@@ -44,6 +44,7 @@ export default function () {
   return (
     <>
       <ProductsList productsData={data.products} />
+      <Sidebar links={data.categories} />
       <Pagination
         admin={false}
         currentPage={data.page}

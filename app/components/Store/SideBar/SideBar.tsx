@@ -25,7 +25,7 @@ const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ links }) => {
     url: `/`,
   }));
   return (
-    <div ref={refM}>
+    <div className={styles.sidebar} ref={refM}>
       <div className={styles.hidden}>
         <Hamburger color="#ffffff" toggled={on} size={20} toggle={toggle} />
       </div>

@@ -8,5 +8,5 @@ export interface SingleProductLayoutPageLayoutProps {
 export const SingleProductLayout: FC<SingleProductLayoutPageLayoutProps> = ({
   children,
 }) => {
-  return <div className={styles.singleProductGrid}>{children}</div>;
+  return <section className={styles.singleProductGrid}>{children}</section>;
 };

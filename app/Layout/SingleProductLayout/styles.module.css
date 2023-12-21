@@ -1,19 +1,19 @@
 .singleProductGrid {
   display: grid;
-  height: 100vh;
-  grid-template-rows: 70px auto auto auto;
-  grid-template-columns: auto auto auto;
-  padding: 1.5rem 1rem 1.5rem 1rem;
+  grid-template-rows: auto auto 1fr;
+  grid-template-columns: minmax(max-content, 44%) auto;
   grid-template-areas:
-    "header header header"
-    "bread bread bread"
-    "main main main"
-    "footer footer footer";
-  overflow: auto;
-  background-color: black;
+    "breadcrumbs breadcrumbs"
+    "img info "
+    "like like";
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 6;
+  background-color: var(--storeMainBgColor);
 }
 
-@media (max-width: 999px) {
+/* @media (max-width: 999px) {
   .gridLayout {
     grid-template-rows: 70px auto auto auto;
     grid-template-columns: auto auto auto;
@@ -23,4 +23,4 @@
       "main main main"
       "footer footer footer";
   }
-}
+} */

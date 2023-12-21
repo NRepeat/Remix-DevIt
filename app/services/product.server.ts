@@ -128,11 +128,6 @@ export const searchProduct = async (
 
   sortName?: string | null
 ): Promise<ProductData> => {
-  const { skip, take } = calculatePaginationSize({ page });
-
-  let sortField = "price";
-  let sortType = "desc";
-
   if (sortName) {
     sortField = sortFieldMap[sortName as keyof typeof sortFieldMap];
     sortType = sortTypeMap[sortName as keyof typeof sortFieldMap];
@@ -149,13 +144,9 @@ export const searchProduct = async (
       orderBy: {
         [sortField]: sortType,
       },
-      skip,
-      take,
     });
 
-    const totalPages = Math.ceil(products.length / take);
-
-    return { products, totalPages };
+    return { products };
   } catch (error) {
     throw new Error(`Error during product search: ${error}`);
   }

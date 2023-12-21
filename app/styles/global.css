@@ -12,13 +12,13 @@
   --fontFamily: "Chakra Petch", sans-serif;
   --adminPanelBgColor: #23462b;
   --storeHeaderBgColor: rgb(45, 45, 45);
-
-  --storeMainBgColor: rgb(208, 208, 208);
+  --storeMainBgColor: rgb(247, 247, 247);
   --storeHeaderAccentColor: rgb(238, 238, 238);
   --storeLinkColor: rgb(28, 28, 28);
   --storeInterfacePadding: 2rem;
   --storeInterfaceButtonColor: rgb(45, 45, 45);
-  --storeInterfaceAccentColor: rgba(130, 130, 130, 0.5);
+  --storeInterfaceInputColor: rgba(141, 152, 245, 0.65);
+  --storeInterfaceAccentColor: rgba(102, 102, 102, 0.87);
   --storeInterfaceBorder: 1px solid rgba(130, 130, 130, 0.25);
   --storeInterfaceBorderColor: rgba(130, 130, 130, 0.25);
   --storeInterfaceCardBgColor: rgb(45, 45, 45);
@@ -41,5 +41,4 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  background: var(--gradientColor);
 }

@@ -16,27 +16,34 @@ const Pagination: React.FC<SerializeFrom<PaginationProps>> = ({
 }) => {
   const [searchParams] = useSearchParams();
   const sort = searchParams.get("sort");
+  const search = searchParams.get("search");
   const [pages, setPages] = useState<number[]>([]);
   const submit = useSubmit();
 
   const handleSubmit = (page: number) => {
-    if (sort!) {
+    if (sort) {
       submit({ page, sort });
+    } else if (search) {
+      submit({ page, search });
+      if (sort) submit({ page, sort, search });
     } else {
       submit({ page });
     }
   };
-
+  if (!totalPages) {
+    totalPages = 1;
+  }
   useEffect(() => {
     const tempPages = [];
-    for (let i = 1; i <= totalPages!; i++) {
-      tempPages.push(i);
-    }
+    if (totalPages)
+      for (let i = 1; i <= totalPages; i++) {
+        tempPages.push(i);
+      }
     setPages(tempPages);
   }, [totalPages]);
 
   return (
-    <div className={clsx(styles.pag, { [styles.disable]: totalPages! <= 1 })}>
+    <div className={clsx(styles.pag, { [styles.disable]: totalPages <= 1 })}>
       {pages.map((page) => (
         <button
           key={page}

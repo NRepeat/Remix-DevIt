@@ -1,6 +1,7 @@
 .loginPage {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   grid-area: main;
   padding-bottom: 300px;

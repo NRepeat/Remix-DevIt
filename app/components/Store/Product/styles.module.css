@@ -1,34 +1,69 @@
-.container {
-  grid-area: main;
-  grid-column: 1/2;
-}
-
 .poster {
-  max-width: 100%;
+  grid-area: img;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-self: center;
+  padding-left: 2rem;
+  padding-top: 2rem;
+  padding-right: 2rem;
 }
 
 .poster > img {
-  width: 100%;
   height: auto;
   object-fit: cover;
   aspect-ratio: 1.1;
 }
 
 .wrapper {
+  padding-right: 2rem;
+  grid-area: info;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-radius: 10px;
-  padding: 15px;
-  border: 2px solid var(--accentColor);
 }
 
 .information {
-  padding-top: 30px;
+  height: 100%;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  justify-content: space-between;
+}
+
+.information > form > button {
+  background-color: var(--storeHeaderAccentColor);
+}
+
+.description {
+  font-size: 1.5rem;
+  padding-top: 3rem;
+}
+
+.brand {
+  font-size: 1rem;
+  padding-top: 2rem;
+}
+
+.title {
+  font-size: 2rem;
+  padding-top: 0.5rem;
+}
+
+.price {
+  padding-top: 2rem;
+  color: red;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding-bottom: 2rem;
+}
+
+.prevPrice {
+  text-decoration: line-through;
+  color: gray;
+  font-weight: 300;
+}
+
+.rating {
+  padding-top: 1.5rem;
+  width: 100%;
+  text-align: center;
 }
