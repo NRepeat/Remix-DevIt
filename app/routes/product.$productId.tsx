@@ -9,10 +9,11 @@ import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductLayout";
 import Product from "~/components/Store/Product/Product";
+import ProductsLike from "~/components/Store/ProductsLike/ProductsLike";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { customerAuthenticator } from "~/services/auth.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
-import { getProduct } from "~/services/product.server";
+import { getProduct, getProductsByCategory } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
 import productPage from "../styles/productPage.css";
 
@@ -24,6 +25,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   invariant(params.productId, "Missing contactId param");
   const productId = Number(params.productId);
   const product = await getProduct(productId);
+  const productsByCAtegory = await getProductsByCategory(product.category.slug);
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createSessionCart(session);
   if (!product) {
@@ -31,6 +33,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   }
 
   return json({
+    productsByCAtegory,
     product,
     cart: cart.items()[product.id] || { productId: "", quantity: 0 },
   });
@@ -88,6 +91,8 @@ function ProductRoute() {
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
 
         <Product data={data} />
+
+        <ProductsLike data={data.productsByCAtegory} />
       </SingleProductLayout>
     </>
   );

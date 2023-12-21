@@ -6,6 +6,7 @@
   font-weight: lighter;
   padding-top: var(--storeInterfacePadding);
   padding-left: var(--storeInterfacePadding);
+  height: min-content;
 }
 
 .link {

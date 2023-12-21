@@ -28,11 +28,12 @@
 }
 
 .li {
+  align-content: flex-start;
   display: inline-flex;
   gap: var(--storeInterfaceGap);
   width: 100%;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   padding-bottom: 10px;
   position: relative;

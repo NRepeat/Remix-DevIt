@@ -20,6 +20,7 @@
 }
 
 .container {
+  height: min-content;
   grid-area: sort;
   padding-top: var(--storeInterfacePadding);
   padding-right: var(--storeInterfacePadding);

@@ -163,7 +163,7 @@ export const getAllProductCategories = async (): Promise<Category[]> => {
 
 export const getProductsByCategory = async (
   category: string,
-  page: number,
+  page?: number,
   sortName?: string | null
 ): Promise<ProductData> => {
   const { skip, take } = calculatePaginationSize({ page });

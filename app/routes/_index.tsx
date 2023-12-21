@@ -44,6 +44,7 @@ export default function () {
   return (
     <>
       <ProductsList productsData={data.products} />
+      <p className="title">Latest drops</p>
       <Sidebar links={data.categories} />
       <Pagination
         admin={false}

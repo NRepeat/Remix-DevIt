@@ -1,7 +1,7 @@
 import { parseAndValidateNumber } from "./validation.server";
 
 type calculatePaginationSizeArgs = {
-  page: number;
+  page?: number;
 };
 const productTake = process.env.PRODUCT_TAKE || 20;
 
@@ -12,7 +12,11 @@ export function calculatePaginationSize(data: calculatePaginationSizeArgs): {
   take: number;
 } {
   const validatedTake = Math.max(1, take);
-  const skip = (data.page - 1) * validatedTake;
+  let skip = 0;
+
+  if (data.page) {
+    skip = (data.page - 1) * validatedTake;
+  }
 
   return { skip, take: validatedTake };
 }

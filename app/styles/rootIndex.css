@@ -1,0 +1,7 @@
+.title {
+  padding-left: 2rem;
+  padding-top: 2rem;
+  font-size: 2rem;
+  display: inline-flex;
+  align-self: center;
+}

@@ -1,6 +1,6 @@
 import type { Category, Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import type { FC } from "react";
+import { useState, type FC } from "react";
 import { AddToCart } from "../AddToCart/AddToCart";
 import ProductImages from "./ProductImages/ProductImages";
 import styles from "./styles.module.css";
@@ -16,13 +16,22 @@ export interface SingleProduct {
 }
 
 const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {
+  const [imgIndex, setImageIndex] = useState(0);
+
+  const handleChangeImgIndex = (i: number) => {
+    setImageIndex(i);
+  };
   return (
     <>
       <div>
         <div className={styles.poster}>
-          <img src={data.product.thumbnail} alt={data.product.title} />
+          <img src={data.product.images[imgIndex]} alt={data.product.title} />
         </div>
-        <ProductImages product={data.product} />
+        <ProductImages
+          imageIndex={imgIndex}
+          handleChangeImgIndex={handleChangeImgIndex}
+          product={data.product}
+        />
       </div>
 
       <div className={styles.wrapper}>
@@ -31,12 +40,10 @@ const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {
           <p className={styles.title}>{data.product.title}</p>
           <p className={styles.description}>{data.product.description}</p>
           <p className={styles.price}>
-            {" "}
             <span className={styles.prevPrice}>${data.product.price}</span> $
             {(
-              data.product.price *
-              data.product.discountPercentage *
-              0.1
+              data.product.price / 1 -
+              data.product.discountPercentage / 0.1
             ).toFixed(2)}
           </p>
           <AddToCart product={data.product} />

@@ -1,10 +1,14 @@
 .container {
+  border-top: var(--storeInterfaceBorder);
+  padding-top: 2rem;
   grid-area: img;
   display: flex;
   gap: 10px;
   overflow-x: auto;
   padding-left: 2rem;
   padding-right: 2rem;
+  justify-content: space-between;
+  padding-bottom: 2rem;
 }
 
 .img {
@@ -13,4 +17,9 @@
   height: auto;
   object-fit: cover;
   aspect-ratio: 1.1;
+  cursor: pointer;
+}
+
+.active {
+  border: 1px solid rgb(82, 82, 245);
 }
