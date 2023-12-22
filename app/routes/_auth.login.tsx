@@ -9,6 +9,7 @@ import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
 import LoginPage from "~/Pages/LoginPage/LoginPage";
 import { customerAuthenticator } from "~/services/auth.server";
+import { CustomAuthorizationError } from "~/services/error.server";
 import { commitSession, getSession } from "~/services/session.server";
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -18,12 +19,15 @@ export async function action({ request }: ActionFunctionArgs) {
       throwOnError: true,
     });
   } catch (error) {
-    if (error instanceof Response) {
-      return error;
-    }
     if (error instanceof AuthorizationError) {
+      if (error.cause instanceof CustomAuthorizationError) {
+        if (error.cause.fieldErrors)
+          return validationError({
+            fieldErrors: error.cause.fieldErrors,
+          });
+      }
       return validationError({
-        fieldErrors: { password: `Email or password are incorrect` },
+        fieldErrors: { email: error.message },
       });
     }
   }
@@ -32,7 +36,7 @@ export async function action({ request }: ActionFunctionArgs) {
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const session = await getSession(request.headers.get("cookie"));
-    const data = { error: session.get("error") };
+    const data = { error: session.get("authorizationError") };
     if (data.error) {
       const headers = new Headers({
         "Set-Cookie": await commitSession(session),

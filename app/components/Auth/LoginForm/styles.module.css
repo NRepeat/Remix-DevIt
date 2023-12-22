@@ -11,7 +11,7 @@
   width: 100%;
 }
 
-.form>.buttonContainer>button {
+.form > .buttonContainer > button {
   width: 100%;
   padding: 10px;
   background-color: rgb(255, 255, 255);
@@ -43,21 +43,21 @@
   box-shadow: inset 8px 8px 0px -4px rgba(0, 0, 0, 1);
 }
 
-.form>.buttonContainer>button:hover {
+.form > .buttonContainer > button:hover {
   transform: translate(-6px, -6px);
 }
 
-.form>div {
+.form > div {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.form>div>input::placeholder {
+.form > div > input::placeholder {
   color: aliceblue;
 }
 
-.form>div>input {
+.form > div > input {
   outline: solid;
   outline-width: 1px;
   outline-color: black;
@@ -67,16 +67,16 @@
   box-shadow: inset 8px 8px 0px -6px rgba(0, 0, 0, 1);
 }
 
-.form>div>input:focus {
+.form > div > input:focus {
   outline-color: rgba(114, 127, 245);
   outline-width: 2px;
 }
 
-.form>div>label {
+.form > div > label {
   text-transform: capitalize;
 }
 
-.form>div>span {
+.form > div > span {
   white-space: wrap;
 }
 
@@ -104,12 +104,12 @@
   justify-content: space-between;
 }
 
-.reg>a {
+.reg > a {
   color: rgb(4, 4, 4);
   text-decoration: underline;
 }
 
-.reg>a:hover {
+.reg > a:hover {
   color: rgb(1, 1, 255);
 }
 

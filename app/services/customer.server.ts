@@ -1,5 +1,6 @@
 import type { Cart, Customer } from "@prisma/client";
 import type { SuccessResult, ValidationResult } from "remix-validated-form";
+import { AuthenticationError } from "./error.server";
 
 export interface CreateCustomerArgs {
   email: string;
@@ -67,6 +68,7 @@ export const createCustomer = async ({
 
     return customer;
   } catch (error) {
+    console.log("🚀 ~ file: customer.server.ts:70 ~ error:", error);
     throw new Error(`Failed to create customer`);
   }
 };
@@ -74,26 +76,23 @@ export const createCustomer = async ({
 export const login = async (
   data: LoginArgs
 ): Promise<CustomerWithoutPassword> => {
-  if (!data) {
-    throw new Error("Error while attempting to login");
-  }
-  try {
-    const customer = await prisma.customer.findUnique({
-      where: { email: data.email, password: data.password },
-      select: {
-        id: true,
-        email: true,
-        name: true,
-        secondName: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-    });
+  const customer = await prisma.customer.findUnique({
+    where: { email: data.email, password: data.password },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      secondName: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
 
-    return customer!;
-  } catch (error) {
-    throw new Error("Error while attempting to login");
+  if (customer === null) {
+    throw new AuthenticationError("Invalid email or password");
   }
+
+  return customer;
 };
 
 export const getAllCustomers = async (

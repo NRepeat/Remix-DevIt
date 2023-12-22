@@ -39,7 +39,6 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-
   // const session = await getSession(request.headers.get("cookie"));
   // session.flash("error", "To add item in cart, login please");
 

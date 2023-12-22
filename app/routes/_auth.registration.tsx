@@ -4,20 +4,24 @@ import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
 import RegistrationPage from "~/Pages/RegistrationPage/RegistrationPage";
 import { customerAuthenticator } from "~/services/auth.server";
+import { CustomAuthorizationError } from "~/services/error.server";
 
-export async function action({ params, request }: ActionFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   try {
     return await customerAuthenticator.authenticate("customer-reg", request, {
       successRedirect: "/",
       throwOnError: true,
     });
   } catch (error) {
-    if (error instanceof Response) {
-      return error;
-    }
     if (error instanceof AuthorizationError) {
+      if (error.cause instanceof CustomAuthorizationError) {
+        if (error.cause.fieldErrors)
+          return validationError({
+            fieldErrors: error.cause.fieldErrors,
+          });
+      }
       return validationError({
-        fieldErrors: { password: `Not valid data` },
+        fieldErrors: { email: error.message },
       });
     }
   }
