@@ -1,7 +1,7 @@
 .singleProductGrid {
   display: grid;
   grid-template-rows: auto auto min-content;
-  grid-template-columns: auto auto;
+  grid-template-columns: 40vw auto;
   grid-template-areas:
     "breadcrumbs breadcrumbs"
     "img info "

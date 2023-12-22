@@ -1,9 +1,9 @@
 .container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  min-width: 33%;
+  width: 30%;
 }
+
 
 .title {
   text-align: left;
@@ -30,11 +30,11 @@
   justify-content: space-between;
 }
 
-.reg > a {
+.reg>a {
   color: rgb(4, 4, 4);
   text-decoration: underline;
 }
 
-.reg > a:hover {
+.reg>a:hover {
   color: rgb(1, 1, 255);
 }

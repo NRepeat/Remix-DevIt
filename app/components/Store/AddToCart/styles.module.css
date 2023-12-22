@@ -5,6 +5,7 @@
   background-color: var(--storeMainBgColor);
   color: rgb(0, 0, 0);
   font-weight: bold;
+  font-size: 1.3rem;
   border: none;
   transition: all 0.1s;
   cursor: pointer;
