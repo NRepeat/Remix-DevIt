@@ -6,7 +6,6 @@
   grid-template-rows: 70px minmax(0px, 55px) auto 250px 5rem auto;
   grid-template-columns: minmax(200px, max-content) auto auto;
   grid-template-areas:
-    /* "header header header" */
     "sidebar breadcrumbs sort"
     "sidebar main main"
     "sidebar main main"
@@ -24,6 +23,10 @@
       "sidebar pagination pagination"
       "footer footer footer";
   }
+}
+
+.adminLayout {
+  display: grid;
 }
 
 .sidebar {

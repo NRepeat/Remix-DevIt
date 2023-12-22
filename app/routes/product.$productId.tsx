@@ -1,6 +1,5 @@
 import type {
   ActionFunctionArgs,
-  LinksFunction,
   LoaderFunctionArgs,
   MetaFunction,
 } from "@remix-run/node";
@@ -14,11 +13,6 @@ import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
-import productPage from "../styles/productPage.css";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: productPage },
-];
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   invariant(params.productId, "Missing contactId param");

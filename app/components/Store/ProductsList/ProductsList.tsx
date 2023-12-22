@@ -1,6 +1,7 @@
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 import type { ProductData } from "~/services/product.server";
+import { chunkProductData } from "~/utils/data";
 import ProductListItem from "./ProductListItem/ProductListItem";
 import styles from "./styles.module.css";
 export interface MapListProps {
@@ -11,7 +12,7 @@ const MapList: FC<SerializeFrom<MapListProps>> = ({ productsData }) => {
   const chunkedProducts = chunkProductData(productsData, 10);
   return (
     <>
-      {productsData.products.length ? (
+      {productsData.products.length > 1 ? (
         <ul className={styles.list}>
           {chunkedProducts.map((chunk, index) => (
             <li className={styles.li} key={index}>
@@ -23,7 +24,7 @@ const MapList: FC<SerializeFrom<MapListProps>> = ({ productsData }) => {
         </ul>
       ) : (
         <div className={styles.noProducts}>
-          <p>There are no products for this request</p>
+          <p>There are no products for this search request</p>
         </div>
       )}
     </>
@@ -31,15 +32,3 @@ const MapList: FC<SerializeFrom<MapListProps>> = ({ productsData }) => {
 };
 
 export default MapList;
-
-const chunkProductData = (
-  productData: SerializeFrom<ProductData>,
-  chunkSize: number
-) => {
-  const chunks = [];
-
-  for (let i = 0; i < productData.products.length; i += chunkSize) {
-    chunks.push(productData.products.slice(i, i + chunkSize));
-  }
-  return chunks;
-};

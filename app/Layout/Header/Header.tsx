@@ -6,7 +6,7 @@ export type Header = {
 };
 
 const Header: React.FC<Header> = ({ children }) => {
-  return <div className={styles.gridHeader}>{children}</div>;
+  return <header className={styles.gridHeader}>{children}</header>;
 };
 
 export default Header;

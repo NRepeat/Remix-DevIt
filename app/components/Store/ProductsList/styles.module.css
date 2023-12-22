@@ -21,10 +21,11 @@
 }
 
 .noProducts {
-  color: white;
+  color: rgb(0, 0, 0);
+  grid-area: main;
   display: flex;
-  height: 100%;
-  align-items: center;
+  align-items: flex-start;
+  padding-left: var(--storeInterfacePadding);
 }
 
 .li {

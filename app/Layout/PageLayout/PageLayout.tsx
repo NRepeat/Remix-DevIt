@@ -1,32 +1,48 @@
 import type { Category } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
+import { useLocation } from "@remix-run/react";
 import clsx from "clsx";
 import React from "react";
+import AdminHeader from "~/components/Admin/Header/Header";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
-import type { ProductData } from "~/services/product.server";
+import type {
+  isCustomerWithData,
+  isMemberWithData,
+} from "~/utils/validation.server";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import styles from "./styles.module.css";
+
 export interface PageLayoutProps {
-  children?: React.ReactNode;
-  isAdmin: boolean;
+  children: React.ReactNode;
+
   data: SerializeFrom<{
     cart: {
       productId: string;
       quantity: number;
     }[];
-    products?: ProductData;
     categories: Category[];
-    page?: number;
-    isCustomerAuthenticated: boolean;
+    isCustomerWithData: isCustomerWithData;
+    isMemberWithData: isMemberWithData;
   }>;
 }
 
-const PageLayout: React.FC<PageLayoutProps> = ({ children, isAdmin, data }) => {
+const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
+  const { isCustomerWithData, isMemberWithData } = data;
+  const nav = useLocation();
   return (
-    <div className={clsx(styles.gridLayout, { [styles.adminLayout]: isAdmin })}>
+    <div
+      className={clsx(
+        { [styles.gridLayout]: !isMemberWithData.isMember },
+        { [styles.adminLayout]: isMemberWithData.isMember }
+      )}
+    >
       <Header>
-        <StoreHeader customer={data.isCustomerAuthenticated} />
+        {isMemberWithData.member || nav.pathname.includes("/admin") ? (
+          <AdminHeader member={isMemberWithData.member} />
+        ) : (
+          <StoreHeader customer={isCustomerWithData.isCustomer} />
+        )}
       </Header>
       {children}
       <Footer />

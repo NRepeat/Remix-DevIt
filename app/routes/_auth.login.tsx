@@ -30,8 +30,8 @@ export async function action({ request }: ActionFunctionArgs) {
         fieldErrors: { email: error.message },
       });
     }
+    return error;
   }
-  return json({ success: true });
 }
 export async function loader({ request }: LoaderFunctionArgs) {
   try {

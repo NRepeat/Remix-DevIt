@@ -1,5 +1,4 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
 import RegistrationPage from "~/Pages/RegistrationPage/RegistrationPage";
@@ -24,8 +23,8 @@ export async function action({ request }: ActionFunctionArgs) {
         fieldErrors: { email: error.message },
       });
     }
+    return error;
   }
-  return json({ success: true });
 }
 
 export default function () {

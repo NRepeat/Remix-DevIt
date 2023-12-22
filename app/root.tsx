@@ -9,17 +9,17 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
-  useLocation,
 } from "@remix-run/react";
 import PageLayout from "./Layout/PageLayout/PageLayout";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
 import GlobalLoader from "./components/Ui/GlobalLoading/GlobalLoader";
-import { customerAuthenticator } from "./services/auth.server";
 import { createCart } from "./services/cartSession.server";
 import { getAllProductCategories } from "./services/product.server";
 import { getSession } from "./services/session.server";
 import globalStylesHref from "./styles/global.css";
 import resetStylesHref from "./styles/reset.css";
+import { isCustomer, isMember } from "./utils/validation.server";
+
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: resetStylesHref },
   { rel: "stylesheet", href: globalStylesHref },
@@ -28,14 +28,16 @@ export const links: LinksFunction = () => [
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const session = await getSession(request.headers.get("Cookie"));
-  const isCustomerAuthenticated =
-    !!(await customerAuthenticator.isAuthenticated(request));
+
+  const isMemberWithData = await isMember(request);
+  const isCustomerWithData = await isCustomer(request);
   const cart = createCart(session);
   const categories = await getAllProductCategories();
   return json({
     cart: cart.items(),
     categories,
-    isCustomerAuthenticated,
+    isCustomerWithData,
+    isMemberWithData,
   });
 };
 
@@ -57,9 +59,7 @@ export function ErrorBoundary() {
 
 export default function App() {
   const data = useLoaderData<typeof loader>();
-  const nav = useLocation();
-  let isAdmin = true;
-  nav.pathname.includes("/admin") ? (isAdmin = true) : (isAdmin = false);
+
   return (
     <html lang="en">
       <head>
@@ -69,10 +69,11 @@ export default function App() {
         <Links />
       </head>
       <body className="body">
-        <GlobalLoader isAdmin={isAdmin} />
-        <PageLayout data={data} isAdmin={false}>
+        <GlobalLoader isAdmin={data.isMemberWithData.isMember} />
+        <PageLayout data={data}>
           <Outlet />
         </PageLayout>
+        {/* <Outlet /> */}
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

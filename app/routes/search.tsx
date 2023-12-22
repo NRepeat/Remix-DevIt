@@ -7,10 +7,10 @@ import {
   getAllProductCategories,
   searchProduct,
 } from "~/services/product.server";
-import categoryPage from "~/styles/categoryPage.css";
+import searchPage from "~/styles/searchPage.css";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: categoryPage },
+  { rel: "stylesheet", href: searchPage },
 ];
 export async function loader({ request, params }: LoaderFunctionArgs) {
   const url = new URL(request.url);
@@ -35,6 +35,7 @@ export default function () {
   const data = useLoaderData<typeof loader>();
   return (
     <>
+      <p className="title">Search result</p>
       <ProductsList productsData={data.products} />
       <Sidebar links={data.categories} />
     </>
