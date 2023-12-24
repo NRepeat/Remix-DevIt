@@ -13,6 +13,7 @@ import {
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ request, params, context }: LoaderFunctionArgs) {
+  console.log("🚀 ~ file: route.tsx:16 ~ loader ~ params:", params)
   const url = new URL(request.url);
   const sortType = url.searchParams.get("sort");
   const pageQuery = url.searchParams.get("page");

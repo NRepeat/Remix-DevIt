@@ -7,10 +7,8 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration,
-  useLoaderData,
+  ScrollRestoration
 } from "@remix-run/react";
-import PageLayout from "./Layout/PageLayout/PageLayout";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
 import GlobalLoader from "./components/Ui/GlobalLoading/GlobalLoader";
 import { createCart } from "./services/cartSession.server";
@@ -58,7 +56,6 @@ export function ErrorBoundary() {
 }
 
 export default function App() {
-  const data = useLoaderData<typeof loader>();
 
   return (
     <html lang="en">
@@ -69,11 +66,8 @@ export default function App() {
         <Links />
       </head>
       <body className="body">
-        <GlobalLoader isAdmin={data.isMemberWithData.isMember} />
-        <PageLayout data={data}>
-          <Outlet />
-        </PageLayout>
-        {/* <Outlet /> */}
+
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

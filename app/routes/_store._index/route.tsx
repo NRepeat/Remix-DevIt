@@ -12,7 +12,7 @@ import {
 } from "~/services/product.server";
 import { getSession } from "~/services/session.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
-import rootIndexStylesHref from "../styles/rootIndex.css";
+import rootIndexStylesHref from "../../styles/rootIndex.css";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: rootIndexStylesHref },

@@ -6,9 +6,11 @@ import type {
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
+import Header from "~/Layout/Header/Header";
 import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductLayout";
 import Product from "~/components/Store/Product/Product";
 import ProductsLike from "~/components/Store/ProductsLike/ProductsLike";
+import StoreHeader from "~/components/Store/StoreHeader/Header";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
@@ -76,15 +78,19 @@ function ProductRoute() {
     { label: `${data.product.title}`, link: "" },
   ];
   return (
-    <>
+    <>        <Header>
+      <StoreHeader customer={true} />
+
+
+    </Header>
       <SingleProductLayout>
+
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
-
         <Product data={data} />
-
         <ProductsLike data={data.productsByCAtegory} />
       </SingleProductLayout>
     </>
+
   );
 }
 

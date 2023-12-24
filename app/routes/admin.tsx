@@ -17,7 +17,6 @@ export function ErrorBoundary() {
 }
 export async function loader({ request }: LoaderFunctionArgs) {
   const user = await memberAuthenticator.isAuthenticated(request);
-  console.log("🚀 ~ file: admin.tsx:20 ~ loader ~ user:", user);
   if (!user) {
     return redirect("/admin/login");
   }

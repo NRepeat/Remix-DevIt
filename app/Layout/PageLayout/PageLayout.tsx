@@ -1,9 +1,7 @@
 import type { Category } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import { useLocation } from "@remix-run/react";
 import clsx from "clsx";
 import React from "react";
-import AdminHeader from "~/components/Admin/Header/Header";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import type {
   isCustomerWithData,
@@ -28,21 +26,17 @@ export interface PageLayoutProps {
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
-  const { isCustomerWithData, isMemberWithData } = data;
-  const nav = useLocation();
+  const { isCustomerWithData } = data;
   return (
     <div
       className={clsx(
-        { [styles.gridLayout]: !isMemberWithData.isMember },
-        { [styles.adminLayout]: isMemberWithData.isMember }
+        styles.gridLayout
+
       )}
     >
       <Header>
-        {isMemberWithData.member || nav.pathname.includes("/admin") ? (
-          <AdminHeader member={isMemberWithData.member} />
-        ) : (
-          <StoreHeader customer={isCustomerWithData.isCustomer} />
-        )}
+
+        <StoreHeader customer={isCustomerWithData.isCustomer} />
       </Header>
       {children}
       <Footer />
