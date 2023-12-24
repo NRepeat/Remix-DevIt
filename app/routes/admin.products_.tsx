@@ -1,5 +1,5 @@
 import { Outlet } from "@remix-run/react";
-import CRUDPanel from "~/components/Admin/MainLayout/MainLayout";
+import CRUDPanel from "~/Layout/AdminMainLayout/MainLayout";
 
 export default function () {
   return (

@@ -22,7 +22,7 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
     const breadcrumbs = [
       { label: "Home", link: "/" },
       { label: "Categories", link: "/" },
-      { label: `${category}`, link: `/categories/${category}` },
+      { label: `${category}`, link: `` },
     ];
     const categories = await getAllProductCategories();
     return json({ products, categories, page, breadcrumbs });
@@ -33,7 +33,7 @@ export default function () {
 
   return (
     <>
-      <Breadcrumbs breadcrumbs={data.breadcrumbs} admin={false} />
+      <Breadcrumbs breadcrumbs={data.breadcrumbs} />
       <ProductsList productsData={data.products} />
       <SortTypesList />
       <Pagination

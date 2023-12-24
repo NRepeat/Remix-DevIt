@@ -30,13 +30,11 @@ const StoreHeader: FC<StoreHeaderProps> = ({ customer }) => {
     <div className={styles.header}>
       <div className={styles.searchBarContainer}>
         <SearchIcon className={styles.searchIcon} />
-
         <SearchBar className={styles.searchBar} action="/search/" />
       </div>
       <Link className={styles.title} to={"/"}>
         STORE
       </Link>
-
       <div className={styles.menu}>
         {isCustomerAuthenticated({ isCustomer: !!customer })}
         <CartIcon />

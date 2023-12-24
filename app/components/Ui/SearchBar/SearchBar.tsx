@@ -1,8 +1,7 @@
-import { useNavigation, useSubmit } from "@remix-run/react";
+import { Form, useNavigation, useSubmit } from "@remix-run/react";
 import clsx from "clsx";
 import type { FC } from "react";
 import React, { useEffect } from "react";
-import FormM from "~/components/Ui/Form/FormM";
 import { Input } from "~/components/Ui/Input/Input";
 import styles from "./styles.module.css";
 
@@ -30,8 +29,7 @@ export const SearchBar: FC<SearchBarProps> = ({
   }, [searchValue]);
 
   return (
-    <FormM
-      isFetcher={false}
+    <Form
       onChange={(event) => submit(event.currentTarget)}
       className={clsx(styles.search, className)}
       action={action}
@@ -48,6 +46,6 @@ export const SearchBar: FC<SearchBarProps> = ({
         type="search"
         className={className}
       />
-    </FormM>
+    </Form>
   );
 };

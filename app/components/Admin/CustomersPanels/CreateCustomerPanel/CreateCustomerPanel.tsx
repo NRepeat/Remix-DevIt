@@ -6,11 +6,11 @@ import styles from "./styles.module.css";
 const CreateCustomerPanel: FC = () => {
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
-    { label: `Create`, link: "" },
+    { label: `Create` },
   ];
   return (
     <>
-      <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className={styles.title}>
         Create form
         <Link className={styles.link} to={"/admin/customers/"}>

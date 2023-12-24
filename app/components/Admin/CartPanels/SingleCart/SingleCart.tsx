@@ -18,11 +18,11 @@ const SingleCart: FC<SerializeFrom<SingleCartProps>> = ({ customer, cart }) => {
   const breadcrumbs = [
     { label: "Customers", link: "/admin/customers" },
     { label: `${customer.name}`, link: "/admin/customers" },
-    { label: `Cart`, link: `/admin/customers/${customer.id}/cart` },
+    { label: `Cart`, link: `` },
   ];
   return (
     <>
-      <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className={styles.title}>
         Cart items
         <Link className={styles.link} to={"/admin/customers/"}>

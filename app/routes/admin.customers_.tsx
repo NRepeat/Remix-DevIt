@@ -1,5 +1,5 @@
 import { Outlet } from "@remix-run/react";
-import MainLayout from "~/components/Admin/MainLayout/MainLayout";
+import MainLayout from "~/Layout/AdminMainLayout/MainLayout";
 
 export default function () {
   return (

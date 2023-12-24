@@ -1,8 +1,4 @@
-import type {
-  ActionFunctionArgs,
-  LinksFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
@@ -13,11 +9,6 @@ import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
 import { deleteCustomer, searchCustomer } from "~/services/customer.server";
 
 import { parseAndValidateNumber } from "~/utils/validation.server";
-import adminCustomersStylesHref from "../styles/adminCustomersStylesHref.css";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: adminCustomersStylesHref },
-];
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
@@ -55,14 +46,12 @@ export async function action({ request, params }: ActionFunctionArgs) {
   return json({ success: false });
 }
 
-const breadcrumbs = [{ label: "Customers", link: "/admin/customers" }];
+const breadcrumbs = [{ label: "Customers", link: "" }];
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
     <>
-      <div className="breadcrumbs-container">
-        <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
-      </div>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className="search">
         <SearchBar action="/admin/customers/" />
         <Link className="link" to={"/admin/customers/customer/create"}>
@@ -70,13 +59,11 @@ export default function () {
         </Link>
       </div>
       <CustomersPanel customers={data.customers.customers} />
-      <div className="pagination-container">
-        <Pagination
-          admin={true}
-          currentPage={data.page}
-          totalPages={data.customers.totalPages}
-        />
-      </div>
+      <Pagination
+        admin={true}
+        currentPage={data.page}
+        totalPages={data.customers.totalPages}
+      />
     </>
   );
 }

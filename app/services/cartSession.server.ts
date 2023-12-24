@@ -19,14 +19,14 @@ export class Cart {
     this.session.set(SESSION_KEY, cart);
   }
 
-  addProduct(productId: string | number) {
+  addProduct(productId: number) {
     const cart = this.loadCart();
     cart[productId] = (cart[productId] ?? 0) + 1;
 
     this.saveCart(cart);
   }
 
-  removeProduct(productId: string | number) {
+  removeProduct(productId: number) {
     const cart = this.loadCart();
     delete cart[productId];
     this.saveCart(cart);

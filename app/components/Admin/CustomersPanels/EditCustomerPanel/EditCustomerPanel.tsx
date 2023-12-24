@@ -34,7 +34,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
   ];
   return (
     <>
-      <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className={styles.title}>
         Edit form
         <Link className={styles.link} to={"/admin/customers/"}>

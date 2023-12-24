@@ -1,5 +1,6 @@
-import { redirect, type LoaderFunctionArgs } from "@remix-run/node";
-import AdminPage from "~/Pages/AdminPage/AdminPage";
+import { json, redirect, type LoaderFunctionArgs } from "@remix-run/node";
+import { Outlet, useLoaderData } from "@remix-run/react";
+import AdminPageLayout from "~/Layout/AdminPageLayout/AdminPageLayout";
 import AdminError from "~/components/Errors/AdminError/AdminError";
 import { memberAuthenticator } from "~/services/adminAuth.server";
 // import adminStylesHref from "../styles/adminStylesHref.css";
@@ -16,13 +17,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
   if (!user) {
     return redirect("/admin/login");
   }
-  return null;
+  return json({ user });
 }
 export default function () {
+  const data = useLoaderData<typeof loader>();
   return (
-    <div className="bg-admin-index">
-      <AdminPage />
-      {/* <Outlet /> */}
-    </div>
+    <AdminPageLayout member={data.user}>
+      <Outlet />
+    </AdminPageLayout>
   );
 }

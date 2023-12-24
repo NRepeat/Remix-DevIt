@@ -1,6 +1,6 @@
 .container {
   grid-area: main;
-  background-color: var(--adminPanelBgColor);
+  background-color: rgb(245, 245, 245);
   padding: 1.2rem 1.4rem 1.4rem 1.2rem;
   display: grid;
   overflow-y: auto;

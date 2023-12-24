@@ -1,7 +1,11 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
+import Header from "~/Layout/Header/Header";
 import RegistrationPage from "~/Pages/RegistrationPage/RegistrationPage";
+import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { CustomAuthorizationError } from "~/services/error.server";
 
@@ -26,7 +30,26 @@ export async function action({ request }: ActionFunctionArgs) {
     return error;
   }
 }
+export async function loader({ request }: LoaderFunctionArgs) {
+  try {
+    const user = await customerAuthenticator.isAuthenticated(request);
+    if (user) {
+      return redirect("/");
+    }
+    return json({ user: false });
+  } catch (error) {
+    throw new Response(`${error}`);
+  }
+}
 
 export default function () {
-  return <RegistrationPage />;
+  const data = useLoaderData<typeof loader>();
+  return (
+    <>
+      <Header>
+        <StoreHeader customer={"user" in data ? data.user : false} />
+      </Header>
+      <RegistrationPage />
+    </>
+  );
 }

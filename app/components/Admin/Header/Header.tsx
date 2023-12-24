@@ -1,6 +1,7 @@
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import type { Member } from "~/services/member.server";
+import styles from "./styles.module.css";
 
 type AdminHeaderProps = {
   member: Member | undefined;
@@ -8,8 +9,7 @@ type AdminHeaderProps = {
 
 const AdminHeader: FC<AdminHeaderProps> = ({ member }) => {
   return (
-    <div>
-      {" "}
+    <div className={styles.header}>
       <h1>Admin Panel</h1>
       <div>
         <Link to={"/admin"}>

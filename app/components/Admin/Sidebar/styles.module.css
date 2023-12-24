@@ -1,8 +1,7 @@
 .gridSidebar {
-  background-color: var(--adminPanelBgColor);
-  border-right: 1px solid rgb(196, 196, 196);
-  overflow: hidden;
-  position: relative;
+  background-color: rgb(16, 16, 16);
+
+  grid-area: sidebar;
 }
 
 .list {

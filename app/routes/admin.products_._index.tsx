@@ -1,8 +1,4 @@
-import type {
-  ActionFunctionArgs,
-  LinksFunction,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Link, useLoaderData, useSubmit } from "@remix-run/react";
 import { validationProductDelete } from "~/components/Admin/ProductPanels/ProductsTable/ButtonContainer/ButtonContainer";
@@ -14,11 +10,6 @@ import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
 import { deleteProduct, getAllProducts } from "~/services/product.server";
 
 import { parseAndValidateNumber } from "~/utils/validation.server";
-import adminProductsStylesHref from "../styles/adminProductsStylesHref.css";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: adminProductsStylesHref },
-];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
@@ -57,21 +48,18 @@ export async function action({ params, request }: ActionFunctionArgs) {
   }
 }
 
-const breadcrumbs = [{ label: "Products", link: "/admin/products" }];
+const breadcrumbs = [{ label: "Products", link: "" }];
 
 export default function () {
   const data = useLoaderData<typeof loader>();
   const submit = useSubmit();
   return (
     <>
-      <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
-      <div className="search">
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <div>
         <SearchBar action="/admin/products" />
-        <Link className="link" to={"/admin/products/product/create"}>
-          Create product
-        </Link>
+        <Link to={"/admin/products/product/create"}>Create product</Link>
         <Button
-          className="link"
           onClick={() => {
             submit({}, { action: "/products/sync", method: "post" });
           }}

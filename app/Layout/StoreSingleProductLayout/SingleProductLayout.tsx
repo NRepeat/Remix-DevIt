@@ -1,5 +1,7 @@
 import type { FC } from "react";
 import React from "react";
+import StoreHeader from "~/components/Store/StoreHeader/Header";
+import Header from "../Header/Header";
 import styles from "./styles.module.css";
 
 export interface SingleProductLayoutPageLayoutProps {
@@ -8,5 +10,12 @@ export interface SingleProductLayoutPageLayoutProps {
 export const SingleProductLayout: FC<SingleProductLayoutPageLayoutProps> = ({
   children,
 }) => {
-  return <section className={styles.singleProductGrid}>{children}</section>;
+  return (
+    <section className={styles.singleProductGrid}>
+      <Header>
+        <StoreHeader customer={true} />
+      </Header>
+      {children}
+    </section>
+  );
 };

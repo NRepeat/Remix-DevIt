@@ -1,0 +1,11 @@
+.adminGrid {
+  display: grid;
+  overflow-y: auto;
+  background-color: var(--storeMainBgColor);
+  grid-template-rows: 50px 100vh min-content;
+  grid-template-columns: 200px auto;
+  grid-template-areas:
+    "header header"
+    "sidebar main "
+    "footer footer ";
+}

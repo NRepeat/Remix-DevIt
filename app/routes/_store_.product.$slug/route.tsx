@@ -6,11 +6,10 @@ import type {
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import Header from "~/Layout/Header/Header";
-import { SingleProductLayout } from "~/Layout/SingleProductLayout/SingleProductLayout";
+import { z } from "zod";
+import { SingleProductLayout } from "~/Layout/StoreSingleProductLayout/SingleProductLayout";
 import Product from "~/components/Store/Product/Product";
 import ProductsLike from "~/components/Store/ProductsLike/ProductsLike";
-import StoreHeader from "~/components/Store/StoreHeader/Header";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
@@ -35,20 +34,12 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  // const session = await getSession(request.headers.get("cookie"));
-  // session.flash("error", "To add item in cart, login please");
-
-  // const headers = new Headers({ "Set-Cookie": await commitSession(session) });
-  // return redirect("/login", {
-  //   headers,
-  // });
   const formData = await request.formData();
   const productId = formData.get("productId");
-  invariant(typeof productId === "string", "Missing product id");
   const session = await getSession(request.headers.get("Cookie"));
   const sessionCart = createSessionCart(session);
-
-  sessionCart.addProduct(productId);
+  const validateId = z.coerce.number();
+  sessionCart.addProduct(validateId.parse(productId));
 
   return json(
     { success: true },
@@ -79,12 +70,11 @@ function ProductRoute() {
   ];
   return (
     <>
-      {" "}
-      <Header>
+      {/* <Header>
         <StoreHeader customer={true} />
-      </Header>
+      </Header> */}
       <SingleProductLayout>
-        <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
+        <Breadcrumbs breadcrumbs={breadcrumbs} />
         <Product data={data} />
         <ProductsLike data={data.productsByCAtegory} />
       </SingleProductLayout>

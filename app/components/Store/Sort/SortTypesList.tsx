@@ -1,5 +1,4 @@
-import { useSearchParams, useSubmit } from "@remix-run/react";
-import FormM from "~/components/Ui/Form/FormM";
+import { Form, useSearchParams, useSubmit } from "@remix-run/react";
 import styles from "./styles.module.css";
 
 function SortTypesList() {
@@ -40,7 +39,7 @@ function SortTypesList() {
   return (
     <div className={styles.container}>
       <p className={styles.title}>Sort by</p>
-      <FormM className={styles.sort} isFetcher={false}>
+      <Form className={styles.sort}>
         <select
           className={styles.select}
           id="sort"
@@ -53,7 +52,7 @@ function SortTypesList() {
             </option>
           ))}
         </select>
-      </FormM>
+      </Form>
     </div>
   );
 }

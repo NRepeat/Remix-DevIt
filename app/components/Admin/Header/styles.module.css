@@ -1,0 +1,7 @@
+.header {
+  grid-area: header;
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: rgb(0, 255, 174);
+}

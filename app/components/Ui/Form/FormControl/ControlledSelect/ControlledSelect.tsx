@@ -35,7 +35,7 @@ const ControlledSelect: FC<SerializeFrom<MySelectProps>> = ({
           </option>
         ))}
       </select>
-      {error && <span className="my-error-class">{error}</span>}
+      {error && <span>{error}</span>}
     </div>
   );
 };

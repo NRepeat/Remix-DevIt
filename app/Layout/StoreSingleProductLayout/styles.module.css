@@ -1,16 +1,12 @@
 .singleProductGrid {
   display: grid;
   padding-top: 50px;
-  grid-template-rows: auto auto min-content;
+  grid-template-rows: 50px auto auto min-content;
   grid-template-columns: 40vw auto;
   grid-template-areas:
     "breadcrumbs breadcrumbs"
     "img info "
     "like like";
-  /* grid-column-start: 2;
-  grid-column-end: 4;
-  grid-row-start: 2;
-  grid-row-end: 5; */
   background-color: var(--storeMainBgColor);
 }
 

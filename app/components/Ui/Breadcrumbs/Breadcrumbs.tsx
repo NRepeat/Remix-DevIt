@@ -1,43 +1,33 @@
 import { Link } from "@remix-run/react";
-import { clsx } from "clsx";
+import type { FC } from "react";
 import styles from "./styles.module.css";
 interface BreadcrumbsProps {
-  breadcrumbs: { label: string; link: string }[];
-  admin: boolean;
+  breadcrumbs: { label: string; link?: string }[];
 }
 
-function Breadcrumbs({ breadcrumbs, admin }: BreadcrumbsProps) {
+const Breadcrumbs: FC<BreadcrumbsProps> = ({ breadcrumbs }) => {
   return (
-    <div
-      className={clsx(styles.breadcrumbs, { [styles.adminGridArea]: admin })}
-    >
+    <div className={styles.breadcrumbs}>
       {breadcrumbs.map((breadcrumb, index) => (
-        <span key={index}>
-          {index > 0 && (
-            <span
-              className={clsx(styles.separator, {
-                [styles.adminSeparator]: admin,
-              })}
-            >
-              /
-            </span>
+        <div key={index}>
+          {breadcrumb.link && (
+            <>
+              {index > 0 && <span className={styles.separator}>/</span>}
+              <Link className={styles.link} to={breadcrumb.link}>
+                {breadcrumb.label}
+              </Link>
+            </>
           )}
-          {breadcrumb.link && index + 1 < breadcrumbs.length ? (
-            <Link
-              className={clsx(styles.link, { [styles.adminLink]: admin })}
-              to={breadcrumb.link}
-            >
-              {breadcrumb.label}
-            </Link>
-          ) : (
-            <span className={clsx(styles.last, { [styles.adminLast]: admin })}>
-              {breadcrumb.label}
-            </span>
+          {!breadcrumb.link && (
+            <>
+              <span className={styles.separator}>/</span>
+              <span className={styles.last}>{breadcrumb.label}</span>
+            </>
           )}
-        </span>
+        </div>
       ))}
     </div>
   );
-}
+};
 
 export default Breadcrumbs;

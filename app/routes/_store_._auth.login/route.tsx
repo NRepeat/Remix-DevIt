@@ -7,7 +7,9 @@ import {
 import { useLoaderData } from "@remix-run/react";
 import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
+import Header from "~/Layout/Header/Header";
 import LoginPage from "~/Pages/LoginPage/LoginPage";
+import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { CustomAuthorizationError } from "~/services/error.server";
 import { commitSession, getSession } from "~/services/session.server";
@@ -50,7 +52,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     if (user) {
       return redirect("/");
     }
-    return null;
+    return json({ user: false });
   } catch (error) {
     throw new Response(`${error}`);
   }
@@ -58,5 +60,12 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
 export default function () {
   const data = useLoaderData<typeof loader>();
-  return <LoginPage error={data?.error} />;
+  return (
+    <>
+      <Header>
+        <StoreHeader customer={"user" in data ? data.user : false} />
+      </Header>
+      <LoginPage error={"error" in data ? data.error : false} />
+    </>
+  );
 }

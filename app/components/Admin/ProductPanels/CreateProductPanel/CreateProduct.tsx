@@ -6,13 +6,13 @@ import styles from "./styles.module.css";
 const breadcrumbs = [
   { label: "Products", link: "/admin/products" },
   { label: "Product", link: "/admin/products" },
-  { label: "Create product", link: "/admin/products" },
+  { label: "Create product", link: "" },
 ];
 
 const CreateProduct = () => {
   return (
     <>
-      <Breadcrumbs admin={true} breadcrumbs={breadcrumbs} />
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
 
       <div className={styles.nav}>
         Create form

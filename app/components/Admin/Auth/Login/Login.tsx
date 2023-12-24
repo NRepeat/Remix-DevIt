@@ -7,6 +7,7 @@ import { z } from "zod";
 import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import styles from "./styles.module.css";
+
 export const adminLoginSchema = withZod(
   z.object({
     email: z.string(),
@@ -42,12 +43,6 @@ const Login: FC<LoginProps> = ({ error }) => {
           </Link>
           <SubmitButton>Sign in</SubmitButton>
         </ValidatedForm>
-        {/* <p>
-          Don't have login?
-          <Link className={styles.register} to={"/admin/register"}>
-            Register
-          </Link>
-        </p> */}
       </div>
     </div>
   );
