@@ -36,10 +36,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
   }
 }
 
-// export function ErrorBoundary() {
-//   return <LoginError />;
-// }
-
 export default function () {
   return <Login />;
 }

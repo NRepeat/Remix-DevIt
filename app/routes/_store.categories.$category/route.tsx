@@ -3,7 +3,6 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
-import Sidebar from "~/components/Store/SideBar/SideBar";
 import SortTypesList from "~/components/Store/Sort/SortTypesList";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import {
@@ -35,7 +34,6 @@ export default function () {
   return (
     <>
       <Breadcrumbs breadcrumbs={data.breadcrumbs} admin={false} />
-      <Sidebar links={data.categories} />
       <ProductsList productsData={data.products} />
       <SortTypesList />
       <Pagination

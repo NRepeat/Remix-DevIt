@@ -2,6 +2,7 @@ import type { Category } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import clsx from "clsx";
 import React from "react";
+import Sidebar from "~/components/Store/SideBar/SideBar";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import type {
   isCustomerWithData,
@@ -32,6 +33,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
       <Header>
         <StoreHeader customer={isCustomerWithData.isCustomer} />
       </Header>
+      <Sidebar links={data.categories} />
       {children}
       <Footer />
     </div>

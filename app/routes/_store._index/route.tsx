@@ -3,7 +3,6 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
-import Sidebar from "~/components/Store/SideBar/SideBar";
 import { customerAuthenticator } from "~/services/auth.server";
 import { createCart } from "~/services/cartSession.server";
 import {
@@ -45,7 +44,6 @@ export default function () {
     <>
       <ProductsList productsData={data.products} />
       <p className="title">Latest drops</p>
-      <Sidebar links={data.categories} />
       <Pagination
         admin={false}
         currentPage={data.page}

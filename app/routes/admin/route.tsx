@@ -1,16 +1,12 @@
-import {
-  redirect,
-  type LinksFunction,
-  type LoaderFunctionArgs,
-} from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
+import { redirect, type LoaderFunctionArgs } from "@remix-run/node";
+import AdminPage from "~/Pages/AdminPage/AdminPage";
 import AdminError from "~/components/Errors/AdminError/AdminError";
 import { memberAuthenticator } from "~/services/adminAuth.server";
-import adminStylesHref from "../styles/adminStylesHref.css";
+// import adminStylesHref from "../styles/adminStylesHref.css";
 
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: adminStylesHref },
-];
+// export const links: LinksFunction = () => [
+//   { rel: "stylesheet", href: adminStylesHref },
+// ];
 
 export function ErrorBoundary() {
   return <AdminError />;
@@ -25,8 +21,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function () {
   return (
     <div className="bg-admin-index">
-      {/* <AdminPage /> */}
-      <Outlet />
+      <AdminPage />
+      {/* <Outlet /> */}
     </div>
   );
 }
