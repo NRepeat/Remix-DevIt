@@ -1,4 +1,4 @@
-import { formatString } from "~/utils/formatting.server";
+import { formatString, stringToSlug } from "~/utils/formatting.server";
 import { dummyProductDataSchema } from "~/utils/productValidation";
 import { fetchLimitedData } from "./dummy.server";
 
@@ -22,6 +22,7 @@ export async function importDummyData() {
           await prisma.product.create({
             data: {
               externalId: validatedProduct.id,
+              slug: stringToSlug(validatedProduct.title),
               brand: validatedProduct.brand,
               description: validatedProduct.description,
               discountPercentage: validatedProduct.discountPercentage,
@@ -35,7 +36,7 @@ export async function importDummyData() {
                 connectOrCreate: {
                   where: { slug: validatedProduct.category },
                   create: {
-                    slug: validatedProduct.category,
+                    slug: stringToSlug(validatedProduct.category),
                     name: formatString(validatedProduct.category),
                   },
                 },

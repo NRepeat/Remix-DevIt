@@ -14,6 +14,7 @@ datasource db {
 model Product {
   id                 Int        @id @default(autoincrement())
   externalId         Int?       @unique 
+  slug  String @default("")
   title              String 
   description        String
   price              Float

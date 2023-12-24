@@ -3,9 +3,7 @@ import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import PageLayout from "~/Layout/PageLayout/PageLayout";
 import { createCart } from "~/services/cartSession.server";
-import {
-  getAllProductCategories
-} from "~/services/product.server";
+import { getAllProductCategories } from "~/services/product.server";
 import { getSession } from "~/services/session.server";
 import { isCustomer, isMember } from "~/utils/validation.server";
 import rootIndexStylesHref from "../../styles/rootIndex.css";

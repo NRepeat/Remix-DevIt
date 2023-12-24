@@ -1,8 +1,7 @@
 import type { FC } from "react";
-
 const AdminPage: FC = () => {
   return (
-    // <PageLayout isAdmin={true}>
+    // <PageLayout >
     //   <Header>
     //     <h1 className={styles.headerInfo}>Admin panel</h1>
     //   </Header>

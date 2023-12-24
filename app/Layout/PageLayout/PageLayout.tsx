@@ -28,14 +28,8 @@ export interface PageLayoutProps {
 const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
   const { isCustomerWithData } = data;
   return (
-    <div
-      className={clsx(
-        styles.gridLayout
-
-      )}
-    >
+    <div className={clsx(styles.gridLayout)}>
       <Header>
-
         <StoreHeader customer={isCustomerWithData.isCustomer} />
       </Header>
       {children}

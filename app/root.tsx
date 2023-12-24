@@ -7,7 +7,7 @@ import {
   Meta,
   Outlet,
   Scripts,
-  ScrollRestoration
+  ScrollRestoration,
 } from "@remix-run/react";
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
 import GlobalLoader from "./components/Ui/GlobalLoading/GlobalLoader";
@@ -56,7 +56,6 @@ export function ErrorBoundary() {
 }
 
 export default function App() {
-
   return (
     <html lang="en">
       <head>
@@ -66,7 +65,6 @@ export default function App() {
         <Links />
       </head>
       <body className="body">
-
         <Outlet />
         <ScrollRestoration />
         <Scripts />

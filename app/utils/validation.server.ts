@@ -23,7 +23,7 @@ export async function isProductInStock(
   productId: number,
   requestedQuantity: number
 ): Promise<boolean> {
-  const product = await getProduct(productId);
+  const product = await getProduct({ id: productId });
   return product.stock >= requestedQuantity;
 }
 export function parseAndValidateNumber(number: number | string | null) {

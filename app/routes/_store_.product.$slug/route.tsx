@@ -17,9 +17,9 @@ import { getProduct, getProductsByCategory } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
-  invariant(params.productId, "Missing contactId param");
-  const productId = Number(params.productId);
-  const product = await getProduct(productId);
+  invariant(params.slug, "Missing slug param");
+  const slug = params.slug;
+  const product = await getProduct({ slug });
   const productsByCAtegory = await getProductsByCategory(product.category.slug);
   const session = await getSession(request.headers.get("Cookie"));
   const cart = createSessionCart(session);
@@ -78,19 +78,17 @@ function ProductRoute() {
     { label: `${data.product.title}`, link: "" },
   ];
   return (
-    <>        <Header>
-      <StoreHeader customer={true} />
-
-
-    </Header>
+    <>
+      {" "}
+      <Header>
+        <StoreHeader customer={true} />
+      </Header>
       <SingleProductLayout>
-
         <Breadcrumbs breadcrumbs={breadcrumbs} admin={false} />
         <Product data={data} />
         <ProductsLike data={data.productsByCAtegory} />
       </SingleProductLayout>
     </>
-
   );
 }
 

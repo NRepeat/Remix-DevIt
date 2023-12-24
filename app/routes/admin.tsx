@@ -3,7 +3,7 @@ import {
   type LinksFunction,
   type LoaderFunctionArgs,
 } from "@remix-run/node";
-import AdminPage from "~/Pages/AdminPage/AdminPage";
+import { Outlet } from "@remix-run/react";
 import AdminError from "~/components/Errors/AdminError/AdminError";
 import { memberAuthenticator } from "~/services/adminAuth.server";
 import adminStylesHref from "../styles/adminStylesHref.css";
@@ -25,7 +25,8 @@ export async function loader({ request }: LoaderFunctionArgs) {
 export default function () {
   return (
     <div className="bg-admin-index">
-      <AdminPage />
+      {/* <AdminPage /> */}
+      <Outlet />
     </div>
   );
 }

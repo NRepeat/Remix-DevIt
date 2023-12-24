@@ -1,7 +1,7 @@
 import { Link, useRouteLoaderData } from "@remix-run/react";
 import type { FC } from "react";
 import invariant from "tiny-invariant";
-import type { loader } from "~/routes/_index";
+import type { loader } from "~/root";
 import FaCart from "./FaCart";
 import styles from "./styles.module.css";
 

@@ -108,12 +108,17 @@ export const getAllProducts = async (
   }
 };
 
+type getProductArgs = {
+  id?: number;
+  slug?: string;
+};
+
 export const getProduct = async (
-  productId: number
+  data: getProductArgs
 ): Promise<Product & { category: Category }> => {
   try {
     const product = await prisma.product.findFirst({
-      where: { id: productId },
+      where: { OR: [{ id: data.id }, { slug: data.slug }] },
       include: { category: true },
     });
     return product!;
