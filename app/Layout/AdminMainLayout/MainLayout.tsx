@@ -6,7 +6,7 @@ type MainLayoutProps = {
 };
 
 const MainLayout: FC<MainLayoutProps> = ({ children }) => {
-  return <div className={styles.container}>{children}</div>;
+  return <div className={styles.mainGrid}>{children}</div>;
 };
 
 export default MainLayout;

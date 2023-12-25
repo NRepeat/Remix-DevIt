@@ -1,11 +1,9 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+import MainLayout from "~/Layout/AdminMainLayout/MainLayout";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
 import { validationCustomerDelete } from "~/components/Admin/CustomersPanels/CustomersTable/ButtonContainer/ButtonContainer";
-import Pagination from "~/components/Store/Pagination/Pagination";
-import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
-import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
 import { deleteCustomer, searchCustomer } from "~/services/customer.server";
 
 import { parseAndValidateNumber } from "~/utils/validation.server";
@@ -46,24 +44,11 @@ export async function action({ request, params }: ActionFunctionArgs) {
   return json({ success: false });
 }
 
-const breadcrumbs = [{ label: "Customers", link: "" }];
 export default function () {
   const data = useLoaderData<typeof loader>();
   return (
-    <>
-      <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <div className="search">
-        <SearchBar action="/admin/customers/" />
-        <Link className="link" to={"/admin/customers/customer/create"}>
-          Create customer
-        </Link>
-      </div>
-      <CustomersPanel customers={data.customers.customers} />
-      <Pagination
-        admin={true}
-        currentPage={data.page}
-        totalPages={data.customers.totalPages}
-      />
-    </>
+    <MainLayout>
+      <CustomersPanel data={data} />
+    </MainLayout>
   );
 }

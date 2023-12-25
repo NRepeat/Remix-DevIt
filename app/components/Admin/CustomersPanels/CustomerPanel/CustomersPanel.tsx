@@ -1,30 +1,52 @@
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 
+import { Link } from "@remix-run/react";
+import Pagination from "~/components/Store/Pagination/Pagination";
+import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
+import { SearchBar } from "~/components/Ui/SearchBar/SearchBar";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import CustomersTable from "../CustomersTable/CustomersTable";
 import styles from "./styles.module.css";
 
 type CustomersPanelProp = {
-  customers: CustomerWithoutPassword[];
+  data: SerializeFrom<{
+    customers: {
+      customers: CustomerWithoutPassword[];
+      totalPages: number;
+    };
+    page: number;
+  }>;
 };
+const breadcrumbs = [
+  { label: "Home", link: "/" },
+  { label: "Customers", link: "" },
+];
 
-const CustomersPanel: FC<SerializeFrom<CustomersPanelProp>> = ({
-  customers,
-}) => {
+const CustomersPanel: FC<SerializeFrom<CustomersPanelProp>> = ({ data }) => {
+  const { customers, page } = data;
   return (
     <>
-      <div className={styles.container}>
-        <div className={styles.wrapper}>
-          {customers.length > 0 ? (
-            <div className={styles.tableWrapper}>
-              <CustomersTable customers={customers} />
-            </div>
-          ) : (
-            <p className={styles.notFound}>Customers not found</p>
-          )}
-        </div>
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+
+      <div className={styles.search}>
+        <SearchBar action="/admin/customers/" />
+        <Link className="link" to={"/admin/customers/customer/create"}>
+          Create customer
+        </Link>
       </div>
+      <div className={styles.wrapper}>
+        {customers.customers.length > 0 ? (
+          <CustomersTable customers={customers.customers} />
+        ) : (
+          <p className={styles.notFound}>Customers not found</p>
+        )}
+      </div>
+      <Pagination
+        admin={true}
+        currentPage={page}
+        totalPages={customers.totalPages}
+      />
     </>
   );
 };

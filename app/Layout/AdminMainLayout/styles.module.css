@@ -1,14 +1,14 @@
-.container {
+.mainGrid {
   grid-area: main;
   background-color: rgb(245, 245, 245);
-  padding: 1.2rem 1.4rem 1.4rem 1.2rem;
+  padding: 2rem;
   display: grid;
   overflow-y: auto;
-  grid-template-rows: 55px 55px auto 40px;
+  grid-template-rows: auto auto auto 40px;
   grid-template-columns: auto;
   grid-template-areas:
-    "main-breadcrumbs"
-    "main-search"
-    "main-container"
-    "main-pagination";
+    "breadcrumbs"
+    "search"
+    "container"
+    "pagination";
 }

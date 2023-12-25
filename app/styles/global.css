@@ -7,8 +7,8 @@
     #7f89e4 51%,
     #7f89e4 100%
   );
-  --adminBreadcrumbsContainerArea: main-breadcrumbs;
-  --adminMainContainerArea: main-container;
+  --adminBreadcrumbsContainerArea: breadcrumbs;
+  --adminMainContainerArea: container;
   --fontFamily: "Chakra Petch", sans-serif;
   --adminPanelBgColor: #23462b;
   --storeHeaderBgColor: rgb(45, 45, 45);
