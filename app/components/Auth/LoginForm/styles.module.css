@@ -29,6 +29,9 @@
 
 .buttonContainer {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .bgButton {
@@ -47,17 +50,17 @@
   transform: translate(-6px, -6px);
 }
 
-.form > div {
+.form > div > div {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.form > div > input::placeholder {
+.form > div > div > input::placeholder {
   color: aliceblue;
 }
 
-.form > div > input {
+.form > div > div > input {
   outline: solid;
   outline-width: 1px;
   outline-color: black;
@@ -67,17 +70,13 @@
   box-shadow: inset 8px 8px 0px -6px rgba(0, 0, 0, 1);
 }
 
-.form > div > input:focus {
+.form > div > div > :focus {
   outline-color: rgba(114, 127, 245);
   outline-width: 2px;
 }
 
-.form > div > label {
+.form > div > div > label {
   text-transform: capitalize;
-}
-
-.form > div > span {
-  white-space: wrap;
 }
 
 .title {

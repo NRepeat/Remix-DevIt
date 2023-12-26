@@ -20,6 +20,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
     const customer = await getCustomerById(customerId);
     const cart = await getCartByCustomerId(customerId);
+    console.log("🚀 ~ file: route.tsx:23 ~ loader ~ cart:", cart);
     if (!customer || !cart) {
       throw new Error("Customer Not Found");
     }

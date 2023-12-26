@@ -14,8 +14,7 @@ const List: FC<CartItemsListProps> = ({ cart }) => {
   };
 
   return (
-    <>
-      {" "}
+    <div className={styles.container}>
       {cart.cartItems.map((item) => (
         <div className={styles.card} key={item.id}>
           {editingItemId === item.id && (
@@ -55,7 +54,7 @@ const List: FC<CartItemsListProps> = ({ cart }) => {
           )}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

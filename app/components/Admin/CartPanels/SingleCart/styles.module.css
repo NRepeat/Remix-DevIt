@@ -1,7 +1,7 @@
 .title {
   border-top: 1px solid gainsboro;
   border-bottom: 1px solid gainsboro;
-  grid-area: main-search;
+  grid-area: search;
   display: inline-flex;
   align-items: center;
   color: white;

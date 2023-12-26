@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
+import { FormTextInput } from "~/components/Ui/Form/FormControl/ControlledTextArea/ControlledTextArea";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
 import { CreateProductDataSchema } from "~/utils/productValidation";
 import styles from "./styles.module.css";
@@ -20,13 +21,40 @@ const CreateProductForm: FC = () => {
         validator={CreateProductDataSchema}
         method="post"
       >
-        <FormInput label="Product Name" name="title" />
-        <FormInput label="Product Brand" name="brand" />
-        <FormInput type="number" label="Stock" name="stock" />
-        <FormInput type="number" label="Discount %" name="discountPercentage" />
-        <FormInput type="number" label="Rating" name="rating" />
-        <FormInput label="Product Category" name="category" />
-        <FormInput label="Product Description" name="description" />
+        <FormInput
+          placeholder="Product Name"
+          label="Product Name"
+          name="title"
+        />
+        <FormInput placeholder="Brand" label="Product Brand" name="brand" />
+        <FormInput
+          placeholder="Stock"
+          type="number"
+          label="Stock"
+          name="stock"
+        />
+        <FormInput
+          placeholder="Discount"
+          type="number"
+          label="Discount %"
+          name="discountPercentage"
+        />
+        <FormInput
+          placeholder="Rating"
+          type="number"
+          label="Rating"
+          name="rating"
+        />
+        <FormInput
+          placeholder="Category"
+          label="Product Category"
+          name="category"
+        />
+        <FormTextInput
+          placeholder="Description"
+          label="Product Description"
+          name="description"
+        />
         <FormInput
           placeholder="https://example.com"
           type="url"

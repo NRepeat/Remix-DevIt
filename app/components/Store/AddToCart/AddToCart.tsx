@@ -30,7 +30,7 @@ export const AddToCart: FC<SerializeFrom<AddToCartProps>> = ({ product }) => {
         }
       }}
     >
-      <input name="productId" type="hidden" value={product.id} />
+      <input name="slug" type="hidden" value={product.slug} />
       <input name="productStock" type="hidden" value={product.stock} />
 
       <button className={styles.button} type="submit">

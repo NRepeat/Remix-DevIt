@@ -19,13 +19,15 @@ export const FormInput = ({
   const { error, getInputProps } = useField(name);
 
   return (
-    <div className={styles.container}>
-      <label className={styles.label} htmlFor={name}>
-        {label}
-      </label>
-      <Input
-        {...getInputProps({ value, type, id: name, placeholder, min: "0" })}
-      />
+    <div className={styles.input}>
+      <div className={styles.container}>
+        <label className={styles.label} htmlFor={name}>
+          {label}
+        </label>
+        <Input
+          {...getInputProps({ value, type, id: name, placeholder, min: "0" })}
+        />
+      </div>
       {error && <p className={styles.error}>{error}</p>}
     </div>
   );

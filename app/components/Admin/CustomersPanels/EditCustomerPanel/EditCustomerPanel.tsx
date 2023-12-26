@@ -41,9 +41,7 @@ const EditCustomerPanel: FC<SerializeFrom<EditCustomerPanelProps>> = ({
           Close edit form
         </Link>
       </div>
-      <div className={styles.wrapper}>
-        <EditCustomerForm formData={formData} />
-      </div>
+      <EditCustomerForm formData={formData} />
     </>
   );
 };

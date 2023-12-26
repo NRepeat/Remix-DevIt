@@ -63,6 +63,19 @@
   filter: drop-shadow(0px 1px 1px #000000);
 }
 
+.cartLink > a > svg:hover {
+  fill: green;
+  filter: drop-shadow(0px 1px 1px #000000);
+}
+
+.cartLink > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  width: 100%;
+}
+
 .cartLink > button > svg {
   padding: 5px;
 }

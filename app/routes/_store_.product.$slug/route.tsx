@@ -35,12 +35,16 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
-  const productId = formData.get("productId");
+  const slug = formData.get("slug");
+
+  if (!slug) {
+    return json({ success: false });
+  }
+  const product = await getProduct({ slug: z.coerce.string().parse(slug) });
   const session = await getSession(request.headers.get("Cookie"));
   const sessionCart = createSessionCart(session);
-  const validateId = z.coerce.number();
-  sessionCart.addProduct(validateId.parse(productId));
-
+  sessionCart.addProduct(product.id);
+  // await createCartItem({cartId})
   return json(
     { success: true },
     { headers: { "Set-Cookie": await commitSession(session) } }
@@ -70,9 +74,6 @@ function ProductRoute() {
   ];
   return (
     <>
-      {/* <Header>
-        <StoreHeader customer={true} />
-      </Header> */}
       <SingleProductLayout>
         <Breadcrumbs breadcrumbs={breadcrumbs} />
         <Product data={data} />

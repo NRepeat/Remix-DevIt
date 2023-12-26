@@ -23,15 +23,13 @@ const CreateCustomerForm: FC<FormProps> = ({ formData }) => {
         validator={registrationSchema}
         className={styles.form}
       >
-        <FormInput label="Name" name="name" />
-        <FormInput label="Last Name" name="lastName" />
-        <FormInput label="Email" name="email" />
-        <FormInput label="Password" name="password" />
-        <div className={styles.containerB}>
-          <Button className={styles.loginButton} type="submit">
-            Create
-          </Button>
-        </div>
+        <FormInput placeholder="Name" label="Name" name="name" />
+        <FormInput placeholder="Last Name" label="Last Name" name="lastName" />
+        <FormInput placeholder="Email" label="Email" name="email" />
+        <FormInput placeholder="Password" label="Password" name="password" />
+        <Button className={styles.loginButton} type="submit">
+          Create
+        </Button>
       </ValidatedForm>
     </div>
   );
