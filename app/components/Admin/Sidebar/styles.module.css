@@ -1,5 +1,5 @@
 .gridSidebar {
-  background-color: rgb(16, 16, 16);
+  background-color: rgb(28, 28, 28);
 
   grid-area: sidebar;
 }
@@ -10,11 +10,13 @@
 
 .active {
   color: rgb(255, 255, 255);
-  background-color: var(--acrylColorBg);
+  background-color: var(--adminAccentColor);
+  width: 100%;
 }
 
 .active > a {
   color: rgba(255, 255, 255);
+  width: 100%;
 }
 
 .link {
@@ -22,31 +24,35 @@
   font-family: var(--fontFamily);
   font-size: 1.1rem;
   color: white;
+  height: min-content;
+  word-wrap: break-word;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .link:hover {
-  background-color: var(--acrylColorBg);
+  background-color: rgb(99, 216, 179);
 }
 
 .list > li > a {
-  max-height: 50px;
-  height: 50px;
-  width: 90%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: flex-start;
   gap: 15px;
   text-decoration: none;
-  padding: 2.5px 10px 2.5px 10px;
+  padding-left: 2rem;
+  width: 100%;
 }
 
 .list > li > a > p {
-  padding-top: 5px;
+  max-width: 100px;
+  text-wrap: wrap;
 }
 
 .list > li > a > svg {
-  max-width: 24px;
-  max-height: 24px;
+  padding: 5px;
+  width: 30px;
+  height: 30px;
 }
 
 .hidden {
@@ -86,7 +92,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    padding: 10px 15px 10px 15px;
+    /* padding-left: 2rem; */
   }
 
   .isHamburger {

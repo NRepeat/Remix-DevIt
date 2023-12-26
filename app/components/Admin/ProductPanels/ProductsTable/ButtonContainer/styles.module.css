@@ -1,8 +1,8 @@
 .container {
   display: inline-flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   padding: 10px;
-  gap: 10px;
+  gap: 15px;
   width: 100%;
   overflow: hidden;
 }
@@ -23,16 +23,21 @@
 
 .link:hover,
 .button:hover {
-  background-color: #68806e;
+  filter: drop-shadow(0px 1px 1px #000000);
 }
 
 .edit {
-  color: black;
-  background-color: rgb(188, 199, 42);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.edit > svg {
+  fill: rgb(0, 17, 255);
 }
 
 .delete {
-  background-color: rgba(170, 7, 7, 0.767);
-  color: white;
-  width: 100%;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.delete > svg {
+  fill: rgb(243, 0, 0);
 }

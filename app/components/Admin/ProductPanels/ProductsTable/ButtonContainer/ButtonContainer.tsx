@@ -8,6 +8,8 @@ import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
 import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
+import Delete from "~/icons/Admin/Table/Delete";
+import Edit from "~/icons/Admin/Table/Edit";
 import styles from "./styles.module.css";
 
 export interface ButtonContainerProps {
@@ -25,15 +27,19 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
   return (
     <div className={styles.container}>
       <Link
+        title="Edit"
         className={clsx(styles.link, styles.edit)}
         to={`/admin/products/product/${product.id}/edit`}
       >
-        Edit
+        <Edit />
       </Link>
       <ValidatedForm validator={validationProductDelete} method="delete">
         <FormInput name="productId" type="hidden" value={product.id} />
-        <SubmitButton className={clsx(styles.button, styles.delete)}>
-          Delete
+        <SubmitButton
+          title="delete"
+          className={clsx(styles.button, styles.delete)}
+        >
+          <Delete />
         </SubmitButton>
       </ValidatedForm>
     </div>

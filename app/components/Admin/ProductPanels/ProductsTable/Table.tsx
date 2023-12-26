@@ -19,7 +19,7 @@ const Table: FC<SerializeFrom<ProductData>> = ({ products }) => {
           <td className={styles.category}>Category</td>
           <td className={styles.rating}>Rating</td>
           <td className={styles.stock}>Stock</td>
-          <td className={styles.createdAt}>Created at</td>
+          <td className={styles.created}>Created at</td>
           <td className={styles.action}>Action</td>
         </tr>
       </thead>
@@ -41,10 +41,12 @@ const Table: FC<SerializeFrom<ProductData>> = ({ products }) => {
             </td>
             <td className={styles.description}> {product.description}</td>
 
-            <td> {product.category?.slug}</td>
+            <td className={styles.category}> {product.category?.slug}</td>
             <td className={styles.rating}> {product.rating}</td>
             <td className={styles.stock}> {product.stock}</td>
-            <td>{new Date(product.createdAt).toLocaleDateString("en-GB")}</td>
+            <td className={styles.created}>
+              {new Date(product.createdAt).toLocaleDateString("en-GB")}
+            </td>
 
             <td className={styles.action}>
               <ButtonContainer product={product} />

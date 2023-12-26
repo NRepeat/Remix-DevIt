@@ -1,27 +1,37 @@
 .table {
-  width: 100%;
   position: relative;
+  table-layout: fixed;
 }
 
 .head {
   height: 55px;
-  color: white;
-  background-color: var(--acrylColorBg);
+  color: rgb(0, 0, 0);
+  background-color: var(--adminAccentColor);
   top: 0;
   position: sticky;
 }
 
 .name {
   text-align: center;
+  max-width: 200px;
+  padding: 10px;
 }
 
 .stock {
   min-width: 50px;
   text-align: center;
+  padding: 10px;
 }
 
 .rating {
+  padding: 10px;
   text-align: center;
+}
+
+.checkboxB {
+  max-width: 25px;
+  width: 25px;
+  padding: 20px;
 }
 
 .checkbox {
@@ -36,6 +46,7 @@
 
 .created {
   min-width: 115px;
+  padding: 10px;
 }
 
 .imgWrapper {
@@ -43,15 +54,14 @@
   max-width: 190px;
   min-width: 100px;
   overflow: auto;
+  padding: 10px;
 }
 
 .description {
-  min-width: 250px;
-  max-width: 300px;
-  margin: 0;
   text-overflow: ellipsis;
   white-space: wrap;
   font-size: 0.9rem;
+  padding: 10px;
 }
 
 .img {
@@ -60,6 +70,10 @@
   max-height: 200px;
   overflow: hidden;
   object-fit: cover;
+}
+
+.image {
+  padding: 10px;
 }
 
 .info {
@@ -74,11 +88,15 @@
 }
 
 .action {
-  min-width: 200px;
+  /* min-width: 200px; */
   text-align: center;
   overflow: hidden;
 }
 
 .container {
   overflow-y: auto;
+}
+
+.category {
+  padding: 10px;
 }

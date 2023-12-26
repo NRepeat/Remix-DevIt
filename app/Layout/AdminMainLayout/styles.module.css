@@ -1,7 +1,6 @@
 .mainGrid {
   grid-area: main;
-  background-color: rgb(245, 245, 245);
-  padding: 2rem;
+  background-color: rgb(220, 220, 220);
   display: grid;
   overflow-y: auto;
   grid-template-rows: auto auto auto 40px;

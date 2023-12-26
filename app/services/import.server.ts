@@ -7,6 +7,7 @@ export async function importDummyData() {
   let skip = 0;
   while (true) {
     const dummyProductsData = await fetchLimitedData(limit, skip);
+
     if (dummyProductsData.products.length < 1) {
       break;
     }
