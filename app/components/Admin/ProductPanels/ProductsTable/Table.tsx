@@ -1,4 +1,5 @@
-import type { SerializeFrom } from "@remix-run/node";
+import { type SerializeFrom } from "@remix-run/node";
+import { useNavigate } from "@remix-run/react";
 import type { FC } from "react";
 import { Input } from "~/components/Ui/Input/Input";
 import type { ProductData } from "~/services/product.server";
@@ -6,6 +7,10 @@ import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import styles from "./styles.module.css";
 
 const Table: FC<SerializeFrom<ProductData>> = ({ products }) => {
+  const navigate = useNavigate();
+  const handleClick = (id: number) => {
+    navigate(`/admin/products/product/${id}/edit`);
+  };
   return (
     <table className={styles.table}>
       <thead>
@@ -23,9 +28,13 @@ const Table: FC<SerializeFrom<ProductData>> = ({ products }) => {
           <td className={styles.action}>Action</td>
         </tr>
       </thead>
-      <tbody>
+      <tbody className={styles.body}>
         {products.map((product) => (
-          <tr key={product.id} className={styles.info}>
+          <tr
+            onClick={() => handleClick(product.id)}
+            key={product.id}
+            className={styles.info}
+          >
             <td className={styles.checkboxB}>
               <Input type="checkbox" name={`checkbox-${product.id}`} />
             </td>

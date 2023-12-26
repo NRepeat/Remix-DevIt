@@ -12,7 +12,7 @@ const MapList: FC<SerializeFrom<MapListProps>> = ({ productsData }) => {
   const chunkedProducts = chunkProductData(productsData, 10);
   return (
     <>
-      {productsData.products.length > 1 ? (
+      {productsData.products.length >= 1 ? (
         <ul className={styles.list}>
           {chunkedProducts.map((chunk, index) => (
             <li className={styles.li} key={index}>

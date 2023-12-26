@@ -14,8 +14,8 @@ const CreateProduct = () => {
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
 
-      <div className={styles.nav}>
-        Create form
+      <div className={styles.title}>
+        Edit form
         <Link className={styles.link} to={"/admin/products"}>
           Close create form
         </Link>

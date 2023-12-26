@@ -42,9 +42,7 @@ const EditProductPanel: FC<EditProductPanelProps> = ({ product }) => {
           Close edit form
         </Link>
       </div>
-      <div className={styles.wrapper}>
-        <EditProductForm formData={formData} />
-      </div>
+      <EditProductForm formData={formData} />
     </>
   );
 };

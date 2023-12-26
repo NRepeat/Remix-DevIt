@@ -17,9 +17,7 @@ const CreateCustomerPanel: FC = () => {
           Close create form
         </Link>
       </div>
-      <div className={styles.wrapper}>
-        <CreateCustomerForm />
-      </div>
+      <CreateCustomerForm />
     </>
   );
 };

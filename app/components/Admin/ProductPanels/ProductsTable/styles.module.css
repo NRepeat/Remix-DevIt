@@ -28,6 +28,12 @@
   text-align: center;
 }
 
+.body {
+  overflow-y: scroll;
+  max-height: 200px;
+  height: 200px;
+}
+
 .checkboxB {
   max-width: 25px;
   width: 25px;
@@ -80,6 +86,11 @@
   background-color: #fefefe;
   color: rgb(8, 8, 8);
   height: 40px;
+  cursor: pointer;
+}
+
+.info:hover {
+  transform: translate(-2px, -2px);
 }
 
 .info:nth-child(even) {
@@ -88,7 +99,6 @@
 }
 
 .action {
-  /* min-width: 200px; */
   text-align: center;
   overflow: hidden;
 }

@@ -57,12 +57,13 @@ const EditProductForm: FC<SerializeFrom<FormProps>> = ({ formData }) => {
         <FormInput label="Category" name="category" />
         <FormInput label="Rating" name="rating" />
         <FormInput label="Stock" name="stock" />
-        <div className={styles.containerB}>
-          <Button className={styles.loginButton} type="submit">
-            Save
-          </Button>
-        </div>
+        <Button type="submit">Save</Button>
       </ValidatedForm>
+      <img
+        className={styles.prevue}
+        src={formData.thumbnail}
+        alt={formData.title}
+      />
     </div>
   );
 };
