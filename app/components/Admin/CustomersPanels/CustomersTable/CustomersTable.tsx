@@ -1,7 +1,10 @@
 import type { SerializeFrom } from "@remix-run/node";
 import { Link, useSubmit } from "@remix-run/react";
 import type { FC } from "react";
+import { Button } from "~/components/Ui/Button/Button";
 import { Input } from "~/components/Ui/Input/Input";
+import Cart from "~/icons/Admin/Table/Cart";
+import Create from "~/icons/Admin/Table/Create";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import ButtonContainer from "./ButtonContainer/ButtonContainer";
 import { handleCartCreate } from "./ButtonContainer/Handle";
@@ -37,25 +40,28 @@ const CustomersTable: FC<SerializeFrom<CustomersTableProps>> = ({
               <Input type="checkbox" name={`checkbox-${customer.id}`} />
             </td>
             <td>
-              <p className={styles.bold}>
+              <p className={styles.name}>
                 {customer.name} {customer.secondName}
               </p>
             </td>
             <td> {customer.email}</td>
-            <td>{new Date(customer.createdAt).toLocaleDateString("en-GB")}</td>
+            <td className={styles.created}>
+              {new Date(customer.createdAt).toLocaleDateString("en-GB")}
+            </td>
             {customer.cart?.id ? (
               <td className={styles.cartLink}>
                 <Link to={`/admin/customers/customer/${customer.id}/cart`}>
-                  View cart
+                  <Cart />
                 </Link>
               </td>
             ) : (
               <td className={styles.cartLink}>
-                <button
+                <Button
+                  className={styles.create}
                   onClick={() => handleCartCreate({ id: customer.id, submit })}
                 >
-                  <p className={styles.create}> Create cart</p>
-                </button>
+                  <Create />
+                </Button>
               </td>
             )}
             <td>

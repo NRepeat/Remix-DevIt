@@ -26,7 +26,10 @@ const GlobalLoader: FC<GlobalLoaderProps> = ({ isAdmin }) => {
       role="progressbar"
       aria-hidden={!active}
       aria-valuetext={active ? "Loading" : undefined}
-      className={clsx(styles.loader, { [styles.active]: active })}
+      className={clsx(styles.loader, {
+        [styles.active]: active,
+        [styles.admin]: isAdmin,
+      })}
     >
       <div
         ref={ref}

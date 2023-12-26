@@ -7,6 +7,8 @@ import { ValidatedForm } from "remix-validated-form";
 import { z } from "zod";
 import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
 import { SubmitButton } from "~/components/Ui/Form/FormSubmit/FormSubmit";
+import Delete from "~/icons/Admin/Table/Delete";
+import Edit from "~/icons/Admin/Table/Edit";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import styles from "./styles.module.css";
 
@@ -27,7 +29,7 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
         className={clsx(styles.button, styles.edit)}
         to={`customer/${customer.id}/edit`}
       >
-        <p>Edit</p>
+        <Edit />
       </Link>
       <ValidatedForm
         className={clsx(styles.form)}
@@ -36,7 +38,7 @@ const ButtonContainer: React.FC<SerializeFrom<ButtonContainerProps>> = ({
       >
         <FormInput name="customerId" type="hidden" value={customer.id} />
         <SubmitButton className={clsx(styles.button, styles.delete)}>
-          Delete
+          <Delete />
         </SubmitButton>
       </ValidatedForm>
     </div>

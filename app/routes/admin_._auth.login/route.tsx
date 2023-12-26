@@ -30,7 +30,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     if (!user) {
       return null;
     }
-    return redirect("/admin");
+    return redirect("/admin/customers");
   } catch (error) {
     throw new Response(`${error}`);
   }

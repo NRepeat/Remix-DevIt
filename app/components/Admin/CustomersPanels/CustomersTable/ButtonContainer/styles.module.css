@@ -1,22 +1,19 @@
 .container {
   display: inline-flex;
+  /* flex-direction: column; */
+  padding: 10px;
+  gap: 15px;
   width: 100%;
-  height: 40px;
+  overflow: hidden;
 }
 
-.form {
-  width: 100%;
-  height: 40px;
-}
-
-.button {
+.button,
+.link {
   padding: 5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  width: 100%;
-
   cursor: pointer;
   color: black;
   text-align: center;
@@ -24,16 +21,23 @@
   font-weight: 600;
 }
 
+.link:hover,
 .button:hover {
-  background-color: #68806e;
+  filter: drop-shadow(0px 1px 1px #000000);
 }
 
 .edit {
-  background-color: rgb(188, 199, 42);
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.edit > svg {
+  fill: rgb(0, 17, 255);
 }
 
 .delete {
-  background-color: rgba(172, 6, 6, 0.767);
-  color: white;
-  height: 40px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.delete > svg {
+  fill: rgb(243, 0, 0);
 }

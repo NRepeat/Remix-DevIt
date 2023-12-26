@@ -77,7 +77,9 @@ export default function () {
           >
             Sync products
           </Button>
-          <Link to={"/admin/products/product/create"}>Create product</Link>
+          <Link className={styles.link} to={"/admin/products/product/create"}>
+            Create product
+          </Link>
         </div>
       </div>
       {"products" in data ? (

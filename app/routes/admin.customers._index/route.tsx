@@ -1,7 +1,6 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import MainLayout from "~/Layout/AdminMainLayout/MainLayout";
 import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
 import { validationCustomerDelete } from "~/components/Admin/CustomersPanels/CustomersTable/ButtonContainer/ButtonContainer";
 import { deleteCustomer, searchCustomer } from "~/services/customer.server";
@@ -46,9 +45,5 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
 export default function () {
   const data = useLoaderData<typeof loader>();
-  return (
-    <MainLayout>
-      <CustomersPanel data={data} />
-    </MainLayout>
-  );
+  return <CustomersPanel data={data} />;
 }

@@ -1,17 +1,21 @@
 .table {
-  width: 100%;
+  position: relative;
+  height: min-content;
+  table-layout: fixed;
 }
 
 .head {
   height: 55px;
-  color: white;
-  background-color: var(--acrylColorBg);
+  color: rgb(0, 0, 0);
+  background-color: var(--adminAccentColor);
   top: 0;
   position: sticky;
 }
 
 .name {
-  min-width: 150px;
+  text-align: left;
+  max-width: 200px;
+  padding: 10px;
 }
 
 .checkbox {
@@ -24,13 +28,18 @@
   padding: 20px;
 }
 
+.checkboxB {
+  max-width: 25px;
+  width: 25px;
+  padding: 20px;
+}
+
 .created {
-  min-width: 115px;
+  padding: 10px;
 }
 
 .cart {
-  max-width: 100px;
-  min-width: 100px;
+  padding: 10px;
   text-align: center;
 }
 
@@ -46,42 +55,24 @@
 }
 
 .cartLink {
-  background-color: white;
+  padding: 10px;
 }
 
-.cartLink:hover {
-  background-color: var(--adminPanelBgColor);
+.cartLink > button > svg:hover {
+  fill: green;
+  filter: drop-shadow(0px 1px 1px #000000);
 }
 
-.cartLink > a {
-  display: inline-flex;
-  align-items: center;
-  width: 100%;
-  justify-content: center;
-  color: black;
-  height: 40px;
-  background-color: white;
+.cartLink > button > svg {
+  padding: 5px;
 }
 
 .cartLink > button {
-  color: black;
-  height: 40px;
   width: 100%;
   background-color: white;
   cursor: pointer;
-  font-family: var(--fontFamily);
-  font-weight: 600;
-}
-
-.cartLink > button:hover {
-  background-color: var(--acrylColorBg);
-}
-
-.cartLink > a:hover {
-  background-color: var(--acrylColorBg);
 }
 
 .action {
-  min-width: 200px;
-  text-align: center;
+  padding: 10px;
 }

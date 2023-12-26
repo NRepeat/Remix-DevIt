@@ -31,17 +31,15 @@ const CustomersPanel: FC<SerializeFrom<CustomersPanelProp>> = ({ data }) => {
 
       <div className={styles.search}>
         <SearchBar action="/admin/customers/" />
-        <Link className="link" to={"/admin/customers/customer/create"}>
+        <Link className={styles.link} to={"/admin/customers/customer/create"}>
           Create customer
         </Link>
       </div>
-      <div className={styles.wrapper}>
-        {customers.customers.length > 0 ? (
-          <CustomersTable customers={customers.customers} />
-        ) : (
-          <p className={styles.notFound}>Customers not found</p>
-        )}
-      </div>
+      {customers.customers.length > 0 ? (
+        <CustomersTable customers={customers.customers} />
+      ) : (
+        <p className={styles.notFound}>Customers not found</p>
+      )}
       <Pagination
         admin={true}
         currentPage={page}
