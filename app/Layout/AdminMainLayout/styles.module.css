@@ -3,7 +3,7 @@
   background-color: rgb(220, 220, 220);
   display: grid;
   overflow-y: auto;
-  grid-template-rows: min-content min-content auto 40px;
+  grid-template-rows: min-content min-content 100vh 40px;
   grid-template-columns: auto;
   grid-template-areas:
     "breadcrumbs"

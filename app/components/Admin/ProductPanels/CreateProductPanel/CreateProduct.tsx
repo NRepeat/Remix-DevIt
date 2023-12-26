@@ -15,16 +15,12 @@ const CreateProduct = () => {
       <Breadcrumbs breadcrumbs={breadcrumbs} />
 
       <div className={styles.title}>
-        Edit form
+        Create form
         <Link className={styles.link} to={"/admin/products"}>
           Close create form
         </Link>
       </div>
-      <div className={styles.panel}>
-        <div className={styles.wrapper}>
-          <CreateProductForm />
-        </div>
-      </div>
+      <CreateProductForm />
     </>
   );
 };
