@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import React from "react";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import styles from "./styles.module.css";
 
@@ -16,6 +17,7 @@ export const SingleProductLayout: FC<SingleProductLayoutPageLayoutProps> = ({
         <StoreHeader customer={true} />
       </Header>
       {children}
+      <Footer />
     </section>
   );
 };

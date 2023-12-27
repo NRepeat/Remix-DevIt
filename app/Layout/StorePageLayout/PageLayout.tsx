@@ -16,7 +16,7 @@ export interface PageLayoutProps {
   data: SerializeFrom<{
     categories: Category[];
     isCustomerWithData: isCustomerWithData;
-    isMemberWithData: isMemberWithData;
+    isMemberWithData?: isMemberWithData;
   }>;
 }
 

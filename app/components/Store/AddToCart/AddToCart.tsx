@@ -2,16 +2,16 @@ import { useFetcher, useRouteLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 
 import type { Product } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 import type { loader } from "~/root";
+import type { SingleProduct } from "../Product/ProductInformation/ProductInformation";
 import styles from "./styles.module.css";
 
 export interface AddToCartProps {
   product: Product;
 }
 
-export const AddToCart: FC<SerializeFrom<AddToCartProps>> = ({ product }) => {
+export const AddToCart: FC<SingleProduct> = ({ product }) => {
   const fetch = useFetcher();
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");

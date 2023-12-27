@@ -1,14 +1,11 @@
-import type { Product } from "@prisma/client";
-import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import { AddToCart } from "~/components/Store/AddToCart/AddToCart";
+import type { SingleProduct } from "~/components/Store/Product/ProductInformation/ProductInformation";
 import ProductInformation from "~/components/Store/Product/ProductInformation/ProductInformation";
 import styles from "./styles.module.css";
 
-const ProductListItem: FC<{
-  product: SerializeFrom<Product>;
-}> = ({ product }) => {
+const ProductListItem: FC<SingleProduct> = ({ product }) => {
   return (
     <>
       {product ? (

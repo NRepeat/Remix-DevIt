@@ -1,9 +1,11 @@
 import type { FieldErrors } from "remix-validated-form";
 
-class CustomError extends Error {
-  constructor(message: string) {
+export class CustomError extends Error {
+  originalError?: Error;
+  constructor(message: string, error?: Error) {
     super(message);
     this.name = this.constructor.name;
+    this.originalError = error;
   }
 }
 
@@ -50,5 +52,36 @@ export class CustomAuthorizationError extends CustomError {
     this.cause = cause;
     this.message = message;
     this.fieldErrors = fieldErrors;
+  }
+}
+
+export class BadRequestError extends CustomError {
+  constructor(message = "Bad Request") {
+    super(message);
+    this.name = "BadRequestError";
+  }
+}
+type NotFoundErrorArgs = {
+  message: string;
+  error?: Error;
+};
+export class NotFoundError extends CustomError {
+  constructor({ message, error }: NotFoundErrorArgs) {
+    super(message);
+    this.name = "NotFoundError";
+  }
+}
+
+export class InternalServerError extends CustomError {
+  constructor(message = "Internal Server Error") {
+    super(message);
+    // this.name = "InternalServerError";
+  }
+}
+
+export class UnauthorizedError extends CustomError {
+  constructor(message = "Unauthorized") {
+    super(message);
+    // this.name = "UnauthorizedError";
   }
 }

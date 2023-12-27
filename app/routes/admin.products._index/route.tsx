@@ -15,6 +15,7 @@ import {
 import Table from "~/components/Admin/ProductPanels/ProductsTable/Table";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 import styles from "./styles.module.css";
+
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const searchQuery = url.searchParams.get("search");
@@ -22,7 +23,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
 
   if (searchQuery === null) {
-    const products = await getAllProducts(page);
+    const products = await getAllProducts({ page });
     if (products) {
       return json({ products, page });
     }
@@ -31,7 +32,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return redirect("/admin/products");
   }
 
-  const productsSearch = await searchProduct(page, searchQuery!);
+  const productsSearch = await searchProduct({ search: searchQuery! });
 
   return json({ productsSearch, page });
 };

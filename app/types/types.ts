@@ -53,3 +53,15 @@ export interface AddItemToCartButtonProps {
 export interface ProductProps {
   product: Product;
 }
+export type ProductCreateData = {
+  category: string;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  thumbnail: string;
+  images: string;
+};

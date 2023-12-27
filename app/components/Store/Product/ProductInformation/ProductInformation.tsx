@@ -1,13 +1,21 @@
-import type { Product } from "@prisma/client";
+import type { Category, Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import type { FC } from "react";
 import styles from "./styles.module.css";
 
 export interface SingleProduct {
-  product: Product;
+  product:
+    | SerializeFrom<
+        {
+          category?: Category;
+        } & Product
+      >
+    | ({
+        category?: Category;
+      } & Product);
 }
 
-const ProductInformation: FC<SerializeFrom<SingleProduct>> = ({ product }) => {
+const ProductInformation: FC<SingleProduct> = ({ product }) => {
   return (
     <div className={styles.container}>
       <p className={styles.brand}> {product.brand}</p>

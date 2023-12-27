@@ -39,8 +39,8 @@ export async function action({ params, request }: ActionFunctionArgs) {
     }
     const { category, ...productData } = validatedProductData.data;
     const product = await getProduct({ id: parseAndValidateNumber(params.id) });
-    await updateProduct(product.id, productData);
-    await updateProductCategory(product.id, category);
+    await updateProduct({ id: product.id, newData: productData });
+    await updateProductCategory({ id: product.id, category });
     return redirect("/admin/products");
   } catch (error) {
     throw new Response(`Error while updating customer`);

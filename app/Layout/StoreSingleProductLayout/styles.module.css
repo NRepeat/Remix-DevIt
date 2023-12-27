@@ -6,7 +6,8 @@
   grid-template-areas:
     "breadcrumbs breadcrumbs"
     "img info "
-    "like like";
+    "like like"
+    "footer footer";
   background-color: var(--storeMainBgColor);
 }
 

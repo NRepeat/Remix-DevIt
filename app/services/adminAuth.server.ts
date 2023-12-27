@@ -1,8 +1,14 @@
-import { Authenticator, AuthorizationError } from "remix-auth";
+import { Authenticator } from "remix-auth";
 import { FormStrategy } from "remix-auth-form";
 import { adminLoginSchema } from "~/components/Admin/Auth/Login/Login";
 import { adminSessionStorage } from "./adminSession.server";
-import { findMember, type Member } from "./member.server";
+import {
+  AuthenticationError,
+  CustomAuthorizationError,
+  FormFieldsError,
+  FormValidationError,
+} from "./error.server";
+import { findMember, loginMember, type Member } from "./member.server";
 
 export const memberAuthenticator = new Authenticator<Member | null>(
   adminSessionStorage
@@ -10,21 +16,37 @@ export const memberAuthenticator = new Authenticator<Member | null>(
 
 memberAuthenticator.use(
   new FormStrategy(async ({ form, context }) => {
-    if (!form) {
-      throw new Error("Admin login action error");
-    }
-    const validFromData = await adminLoginSchema.validate(form);
+    try {
+      const validFormData = await adminLoginSchema.validate(form);
 
-    if (validFromData.error) {
-      throw new AuthorizationError("Email or password are incorrect");
+      if (validFormData.error && validFormData.error.fieldErrors) {
+        const fieldsKey = Object.keys(validFormData.error.fieldErrors);
+        const fieldErrors = validFormData.error.fieldErrors;
+        throw new FormFieldsError("Login", fieldsKey, fieldErrors);
+      }
+      if (!validFormData.data) {
+        throw new FormValidationError("Login");
+      }
+      const isMember = await findMember({
+        email: validFormData.data.email,
+      });
+      if (isMember) {
+        try {
+          const member = await loginMember(validFormData.data);
+          return member;
+        } catch (error) {
+          throw new AuthenticationError("Email or password are incorrect");
+        }
+      }
+    } catch (error) {
+      if (
+        error instanceof FormValidationError ||
+        error instanceof AuthenticationError
+      ) {
+        throw new CustomAuthorizationError(error.message, error.name);
+      }
     }
-
-    const user = await findMember(validFromData.data);
-
-    if (user === null) {
-      throw new AuthorizationError("Email or password are incorrect");
-    }
-    return user;
+    throw new CustomAuthorizationError("Authorization error");
   }),
   "member-auth"
 );

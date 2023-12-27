@@ -22,11 +22,10 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return redirect("/");
   }
   const categories = await getAllProductCategories();
-  const products = await searchProduct(
-    parseAndValidateNumber(page),
-    searchQuery,
-    sortType
-  );
+  const products = await searchProduct({
+    search: searchQuery,
+    sortName: sortType,
+  });
 
   return json({ products, page: parseAndValidateNumber(page), categories });
 }

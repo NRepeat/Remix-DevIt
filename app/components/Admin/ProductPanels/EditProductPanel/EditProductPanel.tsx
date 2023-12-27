@@ -1,8 +1,9 @@
 import type { Category, Product } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
-import { Link } from "@remix-run/react";
+import { useNavigate } from "@remix-run/react";
 import { useEffect, useState, type FC } from "react";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
+import { Button } from "~/components/Ui/Button/Button";
 import EditProductForm from "./EditProductForm/EditProductForm";
 import styles from "./styles.module.css";
 export interface EditProductPanelProps {
@@ -33,14 +34,18 @@ const EditProductPanel: FC<EditProductPanelProps> = ({ product }) => {
     { label: `${product.title}`, link: "/admin/products" },
     { label: `Edit`, link: "" },
   ];
+  const navigate = useNavigate();
+  const handleBack = () => {
+    navigate(-1);
+  };
   return (
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
       <div className={styles.title}>
         Edit form
-        <Link className={styles.link} to={"/admin/products"}>
+        <Button onClick={handleBack} className={styles.link}>
           Close edit form
-        </Link>
+        </Button>
       </div>
       <EditProductForm formData={formData} />
     </>

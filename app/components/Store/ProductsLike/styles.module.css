@@ -18,3 +18,18 @@
   font-size: 2rem;
   padding-bottom: 2rem;
 }
+
+.error {
+  height: 100vh;
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+
+.link {
+  width: 200px;
+  color: black;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

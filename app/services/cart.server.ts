@@ -1,6 +1,6 @@
 import type { Cart, CartItem, Product } from "@prisma/client";
 
-export const createCart = async (id: number): Promise<Cart> => {
+export const createCart = async (id?: number): Promise<Cart> => {
   try {
     const existCart = await prisma.cart.findFirst({
       where: { customerId: id },
@@ -43,10 +43,6 @@ export const getCartByCustomerId = async (
         },
       },
     });
-
-    if (!cart) {
-      throw new Error("Cart not found");
-    }
 
     return cart;
   } catch (error) {

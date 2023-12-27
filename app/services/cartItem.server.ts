@@ -2,26 +2,24 @@ import { isProductInStock } from "~/utils/validation.server";
 
 export interface CartItemArgs {
   cartId: number;
-  productId: number;
   quantity: number;
   externalId: number;
 }
 
 export const createCartItem = async ({
   cartId,
-  productId,
-  quantity,
   externalId,
+  quantity,
 }: CartItemArgs) => {
   try {
     const existCartItem = await prisma.cartItem.findFirst({
-      where: { cartId, productId },
+      where: { cartId, productId: externalId },
     });
     if (existCartItem) {
       const updatedCartItem = await updateCartItem(existCartItem.id, quantity);
       return updatedCartItem;
     }
-    if (await isProductInStock(productId, quantity)) {
+    if (await isProductInStock(externalId, quantity)) {
       const newCartItem = await prisma.cartItem.create({
         data: {
           cartId,
@@ -30,9 +28,7 @@ export const createCartItem = async ({
         },
       });
 
-      if (newCartItem) {
-        return newCartItem;
-      }
+      return newCartItem;
     } else {
       throw new Error("Product is out of stock");
     }

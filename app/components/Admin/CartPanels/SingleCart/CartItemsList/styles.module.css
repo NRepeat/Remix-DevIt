@@ -1,50 +1,67 @@
-.container {
-  grid-area: container;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 5px;
-  padding-top: 50px;
+.table {
+  position: relative;
+  table-layout: fixed;
 }
 
-.card {
-  position: relative;
-  width: 250px;
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--acrylColorBg);
-  overflow: hidden;
+.head {
+  height: 55px;
+  color: rgb(0, 0, 0);
+  background-color: var(--adminAccentColor);
+  top: 0;
+  position: sticky;
+}
+
+.name {
+  text-align: center;
+  max-width: 200px;
+  padding: 10px;
+}
+
+.stock {
+  min-width: 50px;
+  text-align: center;
+  padding: 10px;
+}
+
+.rating {
+  padding: 10px;
+  text-align: center;
+}
+
+.checkboxB {
+  max-width: 25px;
+  width: 25px;
+  padding: 20px;
+}
+
+.checkbox {
+  max-width: 25px;
+  width: 25px;
+  padding: 20px;
+}
+
+.checkbox > input {
+  padding: 20px;
+}
+
+.created {
+  min-width: 115px;
+  padding: 10px;
 }
 
 .imgWrapper {
   max-height: 150px;
+  max-width: 190px;
+  min-width: 100px;
   overflow: auto;
+  padding: 10px;
 }
 
-.inputs {
-  display: inline-flex;
-  justify-content: space-evenly;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-}
-
-.inputs > div:nth-child(1) {
-  width: 43%;
-}
-
-.inputs > div:nth-child(2) {
-  width: 90px;
-}
-
-.inputs > div:nth-child(3) {
-  width: 65px;
-  overflow: hidden;
+.description {
+  text-overflow: ellipsis;
+  white-space: wrap;
+  font-size: 0.9rem;
+  padding: 10px;
 }
 
 .img {
@@ -55,68 +72,35 @@
   object-fit: cover;
 }
 
-.title {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.form > button {
-  height: 40px;
-  align-items: center;
-  width: 100%;
-}
-
-.form > button:hover {
-  background-color: var(--acrylColorBg);
+.image {
+  padding: 10px;
 }
 
 .info {
-  background-color: rgba(6, 132, 243, 0.493);
-  color: white;
-  min-height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 5px;
-}
-
-.delete {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 20px;
-  align-items: center;
-  width: 100%;
-  background-color: rgb(201, 21, 21);
-}
-
-.delete:hover {
-  background-color: var(--acrylColorBg);
-}
-
-.action > button:hover {
-  background-color: var(--acrylColorBg);
-}
-
-.action > button {
-  background-color: olivedrab;
-  width: 100%;
+  background-color: #fefefe;
+  color: rgb(8, 8, 8);
   height: 40px;
+  cursor: pointer;
 }
 
-.close {
-  width: 100%;
-  background-color: black;
-  color: white;
+.info:hover {
+  transform: translate(-2px, -2px);
 }
 
-.priceWrapper {
-  padding-top: 10px;
-  border-top: 1px solid white;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  flex-direction: row;
-  font-weight: 600;
+.info:nth-child(even) {
+  background-color: #fefefec9;
+  color: rgb(8, 8, 8);
+}
+
+.action {
+  text-align: center;
+  overflow: hidden;
+}
+
+.container {
+  overflow-y: auto;
+}
+
+.category {
+  padding: 10px;
 }

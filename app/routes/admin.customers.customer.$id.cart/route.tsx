@@ -20,7 +20,6 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 
     const customer = await getCustomerById(customerId);
     const cart = await getCartByCustomerId(customerId);
-    console.log("🚀 ~ file: route.tsx:23 ~ loader ~ cart:", cart);
     if (!customer || !cart) {
       throw new Error("Customer Not Found");
     }
@@ -46,9 +45,12 @@ export async function action({ params, request }: ActionFunctionArgs) {
     }
 
     if (parsedFormData.data) {
-      await updateProduct(parsedFormData.data.productId, {
-        price: parsedFormData.data.price,
-        rating: parsedFormData.data.rating,
+      await updateProduct({
+        id: parsedFormData.data.productId,
+        newData: {
+          price: parsedFormData.data.price,
+          rating: parsedFormData.data.rating,
+        },
       });
       await updateCartItem(
         parsedFormData.data.itemId,

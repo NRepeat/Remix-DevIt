@@ -4,6 +4,7 @@ import styles from "../styles.module.css";
 
 export default function NotFoundPageError() {
   const error = useRouteError();
+
   if (isRouteErrorResponse(error)) {
     return (
       <div className={styles.errorNotFound}>

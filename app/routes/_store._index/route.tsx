@@ -27,7 +27,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const sort = url.searchParams.get("sort");
   const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
   const categories = await getAllProductCategories();
-  const products = await getAllProducts(page, sort);
+  const products = await getAllProducts({ page, sortName: sort });
   return json({
     products,
     page,

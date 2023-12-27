@@ -18,7 +18,11 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
   const category = params.category;
   const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
   if (category) {
-    const products = await getProductsByCategory(category, page, sortType);
+    const products = await getProductsByCategory({
+      category,
+      page,
+      sortName: sortType,
+    });
     const breadcrumbs = [
       { label: "Home", link: "/" },
       { label: "Categories", link: "/" },

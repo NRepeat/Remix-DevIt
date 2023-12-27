@@ -1,12 +1,14 @@
 .title {
-  border-top: 1px solid gainsboro;
-  border-bottom: 1px solid gainsboro;
   grid-area: search;
   display: inline-flex;
   align-items: center;
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 1.2rem;
   justify-content: space-between;
+  height: 50px;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  background-color: var(--adminAccentColor);
 }
 
 .link {
@@ -18,5 +20,6 @@
 }
 
 .link:hover {
-  background-color: var(--acrylColorBg);
+  color: black;
+  text-decoration: underline;
 }

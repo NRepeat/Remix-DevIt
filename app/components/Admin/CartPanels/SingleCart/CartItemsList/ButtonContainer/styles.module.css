@@ -1,0 +1,43 @@
+.container {
+  display: inline-flex;
+  /* flex-direction: column; */
+  padding: 10px;
+  gap: 15px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.button,
+.link {
+  padding: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  color: black;
+  text-align: center;
+  font-family: var(--fontFamily);
+  font-weight: 600;
+}
+
+.link:hover,
+.button:hover {
+  filter: drop-shadow(0px 1px 1px #000000);
+}
+
+.edit {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.edit > svg {
+  fill: rgb(0, 17, 255);
+}
+
+.delete {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.delete > svg {
+  fill: rgb(243, 0, 0);
+}
