@@ -12,6 +12,7 @@ import LoginPage from "~/Pages/LoginPage/LoginPage";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { CustomAuthorizationError } from "~/services/error.server";
+import { CustomResponse } from "~/services/responseError.server";
 import { commitSession, getSession } from "~/services/session.server";
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -54,7 +55,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }
     return json({ user: false });
   } catch (error) {
-    throw new Response(`${error}`);
+    return new CustomResponse(
+      { success: false, error: "Unauthorized " },
+      { status: 401 }
+    );
   }
 }
 

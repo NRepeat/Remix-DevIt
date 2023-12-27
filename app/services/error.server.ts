@@ -61,12 +61,12 @@ export class BadRequestError extends CustomError {
     this.name = "BadRequestError";
   }
 }
-type NotFoundErrorArgs = {
+type ErrorArgs = {
   message: string;
   error?: Error;
 };
 export class NotFoundError extends CustomError {
-  constructor({ message, error }: NotFoundErrorArgs) {
+  constructor({ message, error }: ErrorArgs) {
     super(message);
     this.name = "NotFoundError";
   }
@@ -80,8 +80,8 @@ export class InternalServerError extends CustomError {
 }
 
 export class UnauthorizedError extends CustomError {
-  constructor(message = "Unauthorized") {
+  constructor({ message, error }: ErrorArgs) {
     super(message);
-    // this.name = "UnauthorizedError";
+    this.name = "UnauthorizedError";
   }
 }

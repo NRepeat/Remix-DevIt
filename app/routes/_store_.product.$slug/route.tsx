@@ -101,6 +101,10 @@ export const action = async ({ request }: ActionFunctionArgs) => {
         { status: 404, statusText: error.message }
       );
     }
+    throw new CustomResponse(
+      { success: false, error: "Unknown Error" },
+      { status: 500 }
+    );
   }
 };
 

@@ -5,20 +5,28 @@ import PageLayout from "~/Layout/StorePageLayout/PageLayout";
 import GlobalLoader from "~/components/Ui/GlobalLoading/GlobalLoader";
 import { createCart } from "~/services/cartSession.server";
 import { getAllProductCategories } from "~/services/product.server";
+import { CustomResponse } from "~/services/responseError.server";
 import { getSession } from "~/services/session.server";
 import { isCustomer } from "~/utils/validation.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const session = await getSession(request.headers.get("Cookie"));
-  const isCustomerWithData = await isCustomer(request);
-  const cart = createCart(session);
-  const categories = await getAllProductCategories();
+  try {
+    const session = await getSession(request.headers.get("Cookie"));
+    const isCustomerWithData = await isCustomer(request);
+    const cart = createCart(session);
+    const categories = await getAllProductCategories();
 
-  return json({
-    cart: cart.items(),
-    categories,
-    isCustomerWithData,
-  });
+    return json({
+      cart: cart.items(),
+      categories,
+      isCustomerWithData,
+    });
+  } catch (error) {
+    return new CustomResponse(
+      { success: false, error: "Unknown Error" },
+      { status: 500 }
+    );
+  }
 };
 
 export default function () {

@@ -17,7 +17,7 @@ type ProductDeleteErrorArgs = {
 export class ProductNotFoundError extends CustomError {
   method?: string;
   constructor({ method, originalError }: ProductNotFoundErrorArgs) {
-    super(`Product not found for method ${method}`, originalError);
+    super(`Products not found `, originalError);
     this.method = method;
   }
 }

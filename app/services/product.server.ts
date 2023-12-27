@@ -129,7 +129,6 @@ export const getAllProducts = async (
 
     const totalProductsCount = await prisma.product.count();
     const totalPages = Math.ceil(totalProductsCount / take);
-
     return { products, totalPages, page };
   } catch (error) {
     if (error instanceof Error) {
@@ -204,6 +203,7 @@ export const searchProduct = async (
 export const getAllProductCategories = async (): Promise<Category[]> => {
   try {
     const category = prisma.category.findMany();
+    // throw new Error("dws");
     return category;
   } catch (error) {
     if (error instanceof Error) {
