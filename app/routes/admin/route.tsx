@@ -20,7 +20,6 @@ export default function () {
   return (
     <AdminPageLayout member={data.user}>
       <GlobalLoader isAdmin />
-
       <Outlet />
     </AdminPageLayout>
   );

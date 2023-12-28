@@ -35,7 +35,6 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
     return json({ products, page: parseAndValidateNumber(page), categories });
   } catch (error) {
-    console.log("🚀 ~ file: route.tsx:36 ~ loader ~ error:", error);
     if (error instanceof ProductNotFoundError) {
       throw new CustomResponse(
         { success: false, error: error.message },

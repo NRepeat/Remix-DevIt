@@ -305,6 +305,7 @@ export const deleteProduct = async (id: number) => {
     const deletedProduct = await prisma.product.delete({
       where: { id },
     });
+
     return deletedProduct;
   } catch (error) {
     throw new Error(`Error while deleting product ${error}`);

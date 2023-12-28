@@ -43,6 +43,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
 
     if (request.method === "DELETE") {
       if (validFormData.data) {
+
         await deleteProduct(validFormData.data.productId);
         return json({ successes: true });
       }
@@ -55,13 +56,14 @@ export async function action({ params, request }: ActionFunctionArgs) {
 }
 
 const breadcrumbs = [
-  { label: "Home", link: "/" },
+  { label: "Home", link: "/admin" },
   { label: "Products", link: "" },
 ];
 
 export default function () {
   const data = useLoaderData<typeof loader>();
   const submit = useSubmit();
+
   return (
     <>
       <Breadcrumbs breadcrumbs={breadcrumbs} />
