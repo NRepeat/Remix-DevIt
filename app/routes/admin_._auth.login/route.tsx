@@ -4,6 +4,7 @@ import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
 import Login from "~/components/Admin/Auth/Login/Login";
 import { memberAuthenticator } from "~/services/adminAuth.server";
+import { InternalServerResponse, UnauthorizedResponse } from "~/services/responseError.server";
 
 export async function action({ params, request }: ActionFunctionArgs) {
   try {
@@ -32,7 +33,15 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }
     return redirect("/admin/customers");
   } catch (error) {
-    throw new Response(`${error}`);
+    if (error instanceof Error) {
+      return new UnauthorizedResponse(
+        error
+      );
+    }
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
 }
 

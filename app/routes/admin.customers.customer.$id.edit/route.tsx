@@ -9,6 +9,8 @@ import {
   getCustomerById,
   updateCustomer,
 } from "~/services/customer.server";
+import { CustomerUpdateError } from "~/services/customerError.server";
+import { InternalServerResponse } from "~/services/responseError.server";
 import { editSchema } from "~/utils/formValidation";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
@@ -55,9 +57,17 @@ export async function action({ params, request }: ActionFunctionArgs) {
     }
     return validationError({ fieldErrors: { password: "Updating error" } });
   } catch (error) {
-    throw new Response("Oh no! Something went wrong!", {
-      status: 500,
-    });
+    if (error instanceof CustomerUpdateError) {
+      throw new InternalServerResponse(
+        { success: false, error: "Error while updating customer data" },
+        { status: 500 }
+      );
+    }
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
+
   }
 }
 export default function () {

@@ -10,7 +10,7 @@ import {
   getAllProducts,
 } from "~/services/product.server";
 import { ProductNotFoundError } from "~/services/productError.server";
-import { CustomResponse } from "~/services/responseError.server";
+import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
 import { getSession } from "~/services/session.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 import rootIndexStylesHref from "../../styles/rootIndex.css";
@@ -38,12 +38,14 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     });
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new CustomResponse(
-        { success: false, error: error.message },
-        { status: 404, statusText: error.message }
+      throw new NotFoundResponse(
+        { error }
       );
     }
-    throw new Error(`Error ${error}`);
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
 };
 export function ErrorBoundary() {

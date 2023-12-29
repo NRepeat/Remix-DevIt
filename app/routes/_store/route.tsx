@@ -5,7 +5,7 @@ import PageLayout from "~/Layout/StorePageLayout/PageLayout";
 import GlobalLoader from "~/components/Ui/GlobalLoading/GlobalLoader";
 import { createCart } from "~/services/cartSession.server";
 import { getAllProductCategories } from "~/services/product.server";
-import { CustomResponse } from "~/services/responseError.server";
+import { InternalServerResponse } from "~/services/responseError.server";
 import { getSession } from "~/services/session.server";
 import { isCustomer } from "~/utils/validation.server";
 
@@ -22,8 +22,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       isCustomerWithData,
     });
   } catch (error) {
-    return new CustomResponse(
-      { success: false, error: "Unknown Error" },
+    return new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
       { status: 500 }
     );
   }

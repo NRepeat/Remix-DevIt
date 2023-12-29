@@ -4,16 +4,30 @@ import AdminPageLayout from "~/Layout/AdminPageLayout/AdminPageLayout";
 import AdminError from "~/components/Errors/AdminError/AdminError";
 import GlobalLoader from "~/components/Ui/GlobalLoading/GlobalLoader";
 import { memberAuthenticator } from "~/services/adminAuth.server";
+import { InternalServerResponse, UnauthorizedResponse } from "~/services/responseError.server";
 
 export function ErrorBoundary() {
   return <AdminError />;
 }
 export async function loader({ request }: LoaderFunctionArgs) {
-  const user = await memberAuthenticator.isAuthenticated(request);
-  if (!user) {
-    return redirect("/admin/login");
+  try {
+    const user = await memberAuthenticator.isAuthenticated(request);
+    if (!user) {
+      return redirect("/admin/login");
+    }
+    return json({ user });
+  } catch (error) {
+    if (error instanceof Error) {
+      return new UnauthorizedResponse(
+        error
+      );
+    }
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
-  return json({ user });
+
 }
 export default function () {
   const data = useLoaderData<typeof loader>();

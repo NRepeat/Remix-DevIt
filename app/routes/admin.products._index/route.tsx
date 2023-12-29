@@ -13,29 +13,49 @@ import {
 } from "~/services/product.server";
 
 import Table from "~/components/Admin/ProductPanels/ProductsTable/Table";
+import { NotFoundError } from "~/services/error.server";
+import { ProductNotFoundError } from "~/services/productError.server";
+import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 import styles from "./styles.module.css";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-  const searchQuery = url.searchParams.get("search");
-  const pageQuery = url.searchParams.get("page");
-  const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
+  try {
+    const url = new URL(request.url);
+    const searchQuery = url.searchParams.get("search");
+    const pageQuery = url.searchParams.get("page");
+    const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
 
-  if (searchQuery === null) {
-    const products = await getAllProducts({ page });
-    if (products) {
-      return json({ products, page });
+    if (searchQuery === null) {
+      const products = await getAllProducts({ page });
+      if (products) {
+        return json({ products, page });
+      }
     }
-  }
-  if (searchQuery === "") {
-    return redirect("/admin/products");
-  }
+    if (searchQuery === "") {
+      return redirect("/admin/products");
+    }
 
-  const productsSearch = await searchProduct({ search: searchQuery! });
+    const productsSearch = await searchProduct({ search: searchQuery! });
 
-  return json({ productsSearch, page });
-};
+    return json({ productsSearch, page });
+  } catch (error) {
+    if (error instanceof ProductNotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    } else if (error instanceof NotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    }
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
+  }
+}
+
 export async function action({ params, request }: ActionFunctionArgs) {
   try {
     const formData = await request.formData();

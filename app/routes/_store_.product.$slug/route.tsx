@@ -20,9 +20,10 @@ import { createCartItem } from "~/services/cartItem.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { NotFoundError } from "~/services/error.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
+import { ProductNotFoundError } from "~/services/productError.server";
 import {
-  CustomResponse,
-  NotFoundSingleProductPage,
+  InternalServerResponse,
+  NotFoundResponse
 } from "~/services/responseError.server";
 import { commitSession, getSession } from "~/services/session.server";
 import styles from "./styles.module.css";
@@ -44,8 +45,15 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       cart: cart.items()[product.id],
     });
   } catch (error) {
-    const slug = params.slug;
-    throw new NotFoundSingleProductPage(`Product:"${slug}" not found`);
+    if (error instanceof ProductNotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    }
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
 };
 
@@ -95,14 +103,17 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       { headers: { "Set-Cookie": await commitSession(session) } }
     );
   } catch (error) {
-    if (error instanceof NotFoundError) {
-      throw new CustomResponse(
-        { success: false, error: error.message },
-        { status: 404, statusText: error.message }
+    if (error instanceof ProductNotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    } else if (error instanceof NotFoundError) {
+      throw new NotFoundResponse(
+        { error }
       );
     }
-    throw new CustomResponse(
-      { success: false, error: "Unknown Error" },
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
       { status: 500 }
     );
   }

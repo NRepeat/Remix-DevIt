@@ -9,7 +9,7 @@ import {
   searchProduct,
 } from "~/services/product.server";
 import { ProductNotFoundError } from "~/services/productError.server";
-import { CustomResponse } from "~/services/responseError.server";
+import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
 import searchPage from "~/styles/searchPage.css";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 export const links: LinksFunction = () => [
@@ -36,12 +36,14 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return json({ products, page: parseAndValidateNumber(page), categories });
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new CustomResponse(
-        { success: false, error: error.message },
-        { status: 404, statusText: error.message }
+      throw new NotFoundResponse(
+        { error }
       );
     }
-    throw new Error(`Error:${error}`);
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
 }
 export function ErrorBoundary() {

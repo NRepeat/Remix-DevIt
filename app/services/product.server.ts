@@ -263,6 +263,7 @@ export const updateProduct = async (data: updateProductArgs) => {
         originalError: error,
       });
     }
+
     throw new Error(`${error}`);
   }
 };
@@ -296,7 +297,7 @@ export const updateProductCategory = async (
         originalError: error,
       });
     }
-    throw new Error(`${error}`);
+    throw new Error(`Error while attempting to update product category`);
   }
 };
 

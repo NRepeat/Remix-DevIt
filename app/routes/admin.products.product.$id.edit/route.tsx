@@ -5,11 +5,14 @@ import { validationError } from "remix-validated-form";
 import invariant from "tiny-invariant";
 import { editProductSchema } from "~/components/Admin/ProductPanels/EditProductPanel/EditProductForm/EditProductForm";
 import EditProductPanel from "~/components/Admin/ProductPanels/EditProductPanel/EditProductPanel";
+import { NotFoundError } from "~/services/error.server";
 import {
   getProduct,
   updateProduct,
   updateProductCategory,
 } from "~/services/product.server";
+import { ProductNotFoundError, ProductUpdateError } from "~/services/productError.server";
+import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -43,8 +46,27 @@ export async function action({ params, request }: ActionFunctionArgs) {
     await updateProductCategory({ id: product.id, category });
     return redirect("/admin/products");
   } catch (error) {
-    throw new Response(`Error while updating customer`);
+    if (error instanceof ProductNotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    } else if (error instanceof NotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    } else if (error instanceof ProductUpdateError) {
+      throw new InternalServerResponse(
+        { success: false, error: "Error while updating product data" },
+        { status: 500 }
+      );
+    }
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
+
+
 }
 
 export default function () {

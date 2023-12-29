@@ -28,7 +28,7 @@ export default function NotFoundPageError() {
     return (
       <>
         <div className={styles.errorNotFound}>
-          <h1 className={styles.heading}>Unknown Error</h1>
+          <h1 className={styles.heading}>Oh no! Something went wrong!</h1>
           <h2 className="">Page not found</h2>
           <HomeButton />
         </div>

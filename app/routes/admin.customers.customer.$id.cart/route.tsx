@@ -3,14 +3,16 @@ import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
 import {
-  validationCart,
-  validationCartDelete,
+  validationCartDelete
 } from "~/components/Admin/CartPanels/SingleCart/CartItemsList/Form";
 import SingleCart from "~/components/Admin/CartPanels/SingleCart/SingleCart";
 import { getCartByCustomerId } from "~/services/cart.server";
-import { deleteCartItem, updateCartItem } from "~/services/cartItem.server";
+import { deleteCartItem } from "~/services/cartItem.server";
+import { CartItemDeleteError } from "~/services/cartItemError.server";
 import { getCustomerById } from "~/services/customer.server";
-import { updateProduct } from "~/services/product.server";
+import { CustomerNotFoundError } from "~/services/customerError.server";
+import { NotFoundError } from "~/services/error.server";
+import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -21,10 +23,19 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     const customer = await getCustomerById(customerId);
     const cart = await getCartByCustomerId(customerId);
     if (!customer || !cart) {
-      throw new Error("Customer Not Found");
+      throw new NotFoundError({ message: "Customer Not Found" });
     }
     return json({ customer, cart });
   } catch (error) {
+    if (error instanceof CustomerNotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    } else if (error instanceof NotFoundError) {
+      throw new NotFoundResponse(
+        { error }
+      );
+    }
     throw new Response("Oh no! Something went wrong!", {
       status: 500,
     });
@@ -34,7 +45,6 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
 export async function action({ params, request }: ActionFunctionArgs) {
   try {
     const formData = await request.formData();
-    const parsedFormData = await validationCart.validate(formData);
 
     if (request.method === "DELETE") {
       const deleteData = await validationCartDelete.validate(formData);
@@ -44,25 +54,20 @@ export async function action({ params, request }: ActionFunctionArgs) {
       }
     }
 
-    if (parsedFormData.data) {
-      await updateProduct({
-        id: parsedFormData.data.productId,
-        newData: {
-          price: parsedFormData.data.price,
-          rating: parsedFormData.data.rating,
-        },
-      });
-      await updateCartItem(
-        parsedFormData.data.itemId,
-        parsedFormData.data.quantity
-      );
 
-      return json({ successes: true });
-    }
+    return json({ successes: true });
   } catch (error) {
-    throw new Response("Oh no! Something went wrong!", {
-      status: 500,
-    });
+    if (error instanceof CartItemDeleteError) {
+      throw new InternalServerResponse(
+        { success: false, error: "Error while deleting cart item" },
+        { status: 500 }
+      );
+    }
+
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
 }
 

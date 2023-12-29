@@ -8,6 +8,7 @@ import RegistrationPage from "~/Pages/RegistrationPage/RegistrationPage";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { CustomAuthorizationError } from "~/services/error.server";
+import { InternalServerResponse } from "~/services/responseError.server";
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
@@ -38,7 +39,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }
     return json({ user: false });
   } catch (error) {
-    throw new Response(`${error}`);
+    throw new InternalServerResponse(
+      { success: false, error: "Oh no! Something went wrong!" },
+      { status: 500 }
+    );
   }
 }
 

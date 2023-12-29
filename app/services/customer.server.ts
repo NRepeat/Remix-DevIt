@@ -1,5 +1,11 @@
 import type { Cart, Customer } from "@prisma/client";
 import type { SuccessResult, ValidationResult } from "remix-validated-form";
+import {
+  CustomerCreateError,
+  CustomerDeleteError,
+  CustomerNotFoundError,
+  CustomerUpdateError,
+} from "./customerError.server";
 import { AuthenticationError } from "./error.server";
 
 export interface CreateCustomerArgs {
@@ -39,7 +45,13 @@ export const existCustomer = async (
     });
     return existCustomer;
   } catch (error) {
-    throw new Error(`An error occurred during find exist customer ${error}`);
+    if (error instanceof Error) {
+      throw new CustomerNotFoundError({
+        method: "existCustomer",
+        error,
+      });
+    }
+    throw new Error(`An error occurred during find exist customer`);
   }
 };
 export const createCustomer = async ({
@@ -68,7 +80,9 @@ export const createCustomer = async ({
 
     return customer;
   } catch (error) {
-    console.log("🚀 ~ file: customer.server.ts:70 ~ error:", error);
+    if (error instanceof Error) {
+      throw new CustomerCreateError(error);
+    }
     throw new Error(`Failed to create customer`);
   }
 };
@@ -123,6 +137,12 @@ export const getAllCustomers = async (
     const totalPages = Math.ceil(totalCustomers / pageSize);
     return { customers, totalPages };
   } catch (error) {
+    if (error instanceof Error) {
+      throw new CustomerNotFoundError({
+        method: "getAllCustomers",
+        error,
+      });
+    }
     throw new Error("Error while attempting to get all customers");
   }
 };
@@ -151,7 +171,13 @@ export const getCustomerById = async (
 
     return customer;
   } catch (error) {
-    throw new Error(`Error while attempting to get customer by ID: ${error}`);
+    if (error instanceof Error) {
+      throw new CustomerNotFoundError({
+        method: "getCustomerById",
+        error,
+      });
+    }
+    throw new Error(`Error while attempting to get customer by ID`);
   }
 };
 export const updateCustomer = async (
@@ -178,7 +204,10 @@ export const updateCustomer = async (
 
     return updatedCustomer;
   } catch (error) {
-    throw new Error(`Error while attempting to update customer: ${error}`);
+    if (error instanceof Error) {
+      throw new CustomerUpdateError(error);
+    }
+    throw new Error(`Error while attempting to update customer`);
   }
 };
 
@@ -219,7 +248,10 @@ export const deleteCustomer = async (
 
     return deletedCustomer;
   } catch (error) {
-    throw new Error(`Error while attempting to delete customer: ${error}`);
+    if (error instanceof Error) {
+      throw new CustomerDeleteError(error);
+    }
+    throw new Error(`Error while attempting to delete customer`);
   }
 };
 
@@ -271,6 +303,12 @@ export const searchCustomer = async (
     const totalPages = Math.ceil(totalCustomers / pageSize);
     return { customers, totalPages };
   } catch (error) {
-    throw new Error(`Error during customer search: ${error}`);
+    if (error instanceof Error) {
+      throw new CustomerNotFoundError({
+        method: "searchCustomer",
+        error,
+      });
+    }
+    throw new Error(`Error while attempting to search customer`);
   }
 };

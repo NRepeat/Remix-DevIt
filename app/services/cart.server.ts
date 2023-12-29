@@ -1,4 +1,5 @@
 import type { Cart, CartItem, Product } from "@prisma/client";
+import { CartCreateError } from "./cartItemError.server";
 
 export const createCart = async (id?: number): Promise<Cart> => {
   try {
@@ -22,6 +23,9 @@ export const createCart = async (id?: number): Promise<Cart> => {
     });
     return newCart;
   } catch (error) {
+    if (error instanceof Error) {
+      throw new CartCreateError(error);
+    }
     throw new Error("Error while attempting to create new cart");
   }
 };

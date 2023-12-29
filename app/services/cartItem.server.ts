@@ -1,4 +1,5 @@
 import { isProductInStock } from "~/utils/validation.server";
+import { CartItemDeleteError } from "./cartItemError.server";
 
 export interface CartItemArgs {
   cartId: number;
@@ -76,6 +77,9 @@ export const deleteCartItem = async (id: number) => {
     });
     return deletedCartItem;
   } catch (error) {
+    if (error instanceof Error) {
+      throw new CartItemDeleteError(error);
+    }
     throw new Error(`Error while deleting cart item ${error}`);
   }
 };
