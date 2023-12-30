@@ -23,7 +23,7 @@ import { getProduct, getProductsByCategory } from "~/services/product.server";
 import { ProductNotFoundError } from "~/services/productError.server";
 import {
   InternalServerResponse,
-  NotFoundResponse
+  NotFoundResponse,
 } from "~/services/responseError.server";
 import { commitSession, getSession } from "~/services/session.server";
 import styles from "./styles.module.css";
@@ -46,9 +46,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     });
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     }
     throw new InternalServerResponse(
       { success: false, error: "Oh no! Something went wrong!" },
@@ -104,13 +102,9 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     );
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     }
     throw new InternalServerResponse(
       { success: false, error: "Oh no! Something went wrong!" },

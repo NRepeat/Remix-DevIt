@@ -12,7 +12,10 @@ import {
   getProductsByCategory,
 } from "~/services/product.server";
 import { ProductNotFoundError } from "~/services/productError.server";
-import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
+import {
+  InternalServerResponse,
+  NotFoundResponse,
+} from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ request, params, context }: LoaderFunctionArgs) {
@@ -42,13 +45,9 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
     return json({ products, categories, page, breadcrumbs });
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     }
     throw new InternalServerResponse(
       { success: false, error: "Oh no! Something went wrong!" },

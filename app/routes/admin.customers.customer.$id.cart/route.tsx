@@ -2,9 +2,7 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import invariant from "tiny-invariant";
-import {
-  validationCartDelete
-} from "~/components/Admin/CartPanels/SingleCart/CartItemsList/Form";
+import { validationCartDelete } from "~/components/Admin/CartPanels/SingleCart/CartItemsList/Form";
 import SingleCart from "~/components/Admin/CartPanels/SingleCart/SingleCart";
 import { getCartByCustomerId } from "~/services/cart.server";
 import { deleteCartItem } from "~/services/cartItem.server";
@@ -12,7 +10,10 @@ import { CartItemDeleteError } from "~/services/cartItemError.server";
 import { getCustomerById } from "~/services/customer.server";
 import { CustomerNotFoundError } from "~/services/customerError.server";
 import { NotFoundError } from "~/services/error.server";
-import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
+import {
+  InternalServerResponse,
+  NotFoundResponse,
+} from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -28,13 +29,9 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     return json({ customer, cart });
   } catch (error) {
     if (error instanceof CustomerNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     }
     throw new Response("Oh no! Something went wrong!", {
       status: 500,
@@ -53,7 +50,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
         return json({ successes: true });
       }
     }
-
 
     return json({ successes: true });
   } catch (error) {

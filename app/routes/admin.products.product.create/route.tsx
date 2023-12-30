@@ -16,7 +16,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
       await createProduct({ data: validationResult.data });
       return redirect("/admin/products");
     }
-
   } catch (error) {
     if (error instanceof ProductCreateError) {
       throw new InternalServerResponse(
@@ -31,7 +30,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
     );
   }
 }
-
 
 export default function () {
   return <CreateProduct />;

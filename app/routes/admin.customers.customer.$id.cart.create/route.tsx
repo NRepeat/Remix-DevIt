@@ -5,7 +5,6 @@ import { CartCreateError } from "~/services/cartItemError.server";
 import { InternalServerResponse } from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
-
 export async function action({ params }: ActionFunctionArgs) {
   try {
     invariant(params.id);

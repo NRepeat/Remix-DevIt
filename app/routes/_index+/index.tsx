@@ -10,7 +10,10 @@ import {
   getAllProducts,
 } from "~/services/product.server";
 import { ProductNotFoundError } from "~/services/productError.server";
-import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
+import {
+  InternalServerResponse,
+  NotFoundResponse,
+} from "~/services/responseError.server";
 import { getSession } from "~/services/session.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 import rootIndexStylesHref from "../../styles/rootIndex.css";
@@ -38,9 +41,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     });
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     }
     throw new InternalServerResponse(
       { success: false, error: "Oh no! Something went wrong!" },

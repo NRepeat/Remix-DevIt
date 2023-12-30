@@ -1,12 +1,18 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/CustomersPanel";
+import { Outlet } from "@remix-run/react";
+import MainLayout from "~/Layout/AdminMainLayout/MainLayout";
 import { validationCustomerDelete } from "~/components/Admin/CustomersPanels/CustomersTable/ButtonContainer/ButtonContainer";
 import { deleteCustomer, searchCustomer } from "~/services/customer.server";
-import { CustomerDeleteError, CustomerNotFoundError } from "~/services/customerError.server";
+import {
+  CustomerDeleteError,
+  CustomerNotFoundError,
+} from "~/services/customerError.server";
 import { NotFoundError } from "~/services/error.server";
-import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
+import {
+  InternalServerResponse,
+  NotFoundResponse,
+} from "~/services/responseError.server";
 
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
@@ -23,13 +29,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     return json({ customers, page });
   } catch (error) {
     if (error instanceof CustomerNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     }
     throw new InternalServerResponse(
       { success: false, error: "Oh no! Something went wrong!" },
@@ -63,6 +65,9 @@ export async function action({ request, params }: ActionFunctionArgs) {
 }
 
 export default function () {
-  const data = useLoaderData<typeof loader>();
-  return <CustomersPanel data={data} />;
+  return (
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
+  );
 }

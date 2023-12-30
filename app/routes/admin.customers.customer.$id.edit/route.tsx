@@ -67,7 +67,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
       { success: false, error: "Oh no! Something went wrong!" },
       { status: 500 }
     );
-
   }
 }
 export default function () {

@@ -11,8 +11,14 @@ import {
   updateProduct,
   updateProductCategory,
 } from "~/services/product.server";
-import { ProductNotFoundError, ProductUpdateError } from "~/services/productError.server";
-import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
+import {
+  ProductNotFoundError,
+  ProductUpdateError,
+} from "~/services/productError.server";
+import {
+  InternalServerResponse,
+  NotFoundResponse,
+} from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -47,13 +53,9 @@ export async function action({ params, request }: ActionFunctionArgs) {
     return redirect("/admin/products");
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     } else if (error instanceof ProductUpdateError) {
       throw new InternalServerResponse(
         { success: false, error: "Error while updating product data" },
@@ -65,8 +67,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
       { status: 500 }
     );
   }
-
-
 }
 
 export default function () {

@@ -15,7 +15,10 @@ import {
 import Table from "~/components/Admin/ProductPanels/ProductsTable/Table";
 import { NotFoundError } from "~/services/error.server";
 import { ProductNotFoundError } from "~/services/productError.server";
-import { InternalServerResponse, NotFoundResponse } from "~/services/responseError.server";
+import {
+  InternalServerResponse,
+  NotFoundResponse,
+} from "~/services/responseError.server";
 import { parseAndValidateNumber } from "~/utils/validation.server";
 import styles from "./styles.module.css";
 
@@ -41,20 +44,16 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return json({ productsSearch, page });
   } catch (error) {
     if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse(
-        { error }
-      );
+      throw new NotFoundResponse({ error });
     }
     throw new InternalServerResponse(
       { success: false, error: "Oh no! Something went wrong!" },
       { status: 500 }
     );
   }
-}
+};
 
 export async function action({ params, request }: ActionFunctionArgs) {
   try {
@@ -63,7 +62,6 @@ export async function action({ params, request }: ActionFunctionArgs) {
 
     if (request.method === "DELETE") {
       if (validFormData.data) {
-
         await deleteProduct(validFormData.data.productId);
         return json({ successes: true });
       }
