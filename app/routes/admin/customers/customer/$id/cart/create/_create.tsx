@@ -10,7 +10,7 @@ export async function action({ params }: ActionFunctionArgs) {
     invariant(params.id);
     if (params.id) {
       await createCart(parseAndValidateNumber(params.id));
-      redirect("/admin/customers");
+      return redirect("/admin/customers");
     }
   } catch (error) {
     if (error instanceof CartCreateError) {
