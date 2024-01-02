@@ -6,6 +6,7 @@ import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import List from "./CartItemsList/List";
 import styles from "./styles.module.css";
+
 export type CartWithCartItems = Cart & {
   cartItems: CartItem[] & { product: Product }[];
 };

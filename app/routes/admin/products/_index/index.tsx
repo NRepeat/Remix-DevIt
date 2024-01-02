@@ -13,13 +13,10 @@ import {
 } from "~/services/product.server";
 
 import Table from "~/components/Admin/ProductPanels/ProductsTable/Table";
-import { NotFoundError } from "~/services/error.server";
-import { ProductNotFoundError } from "~/services/productError.server";
-import {
-  InternalServerResponse,
-  NotFoundResponse,
-} from "~/services/responseError.server";
-import { parseAndValidateNumber } from "~/utils/validation.server";
+
+import { z } from "zod";
+import { ValidationError } from "~/services/error.server";
+import { getHTTPError } from "~/services/errorResponse.server";
 import styles from "./styles.module.css";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -27,49 +24,42 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     const url = new URL(request.url);
     const searchQuery = url.searchParams.get("search");
     const pageQuery = url.searchParams.get("page");
-    const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
+    const page = pageQuery ? z.coerce.number().parse(pageQuery) : 1;
 
     if (searchQuery === null) {
       const products = await getAllProducts({ page });
-      if (products) {
-        return json({ products, page });
-      }
+      return json({ products, page });
     }
     if (searchQuery === "") {
       return redirect("/admin/products");
     }
 
-    const productsSearch = await searchProduct({ search: searchQuery! });
+    const productsSearch = await searchProduct({ search: searchQuery });
 
     return json({ productsSearch, page });
   } catch (error) {
-    if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse({ error });
-    } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse({ error });
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 };
 
-export async function action({ params, request }: ActionFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   try {
     const formData = await request.formData();
-    const validFormData = await validationProductDelete.validate(formData);
 
     if (request.method === "DELETE") {
-      if (validFormData.data) {
-        await deleteProduct(validFormData.data.productId);
-        return json({ successes: true });
+      const validFormData = await validationProductDelete.validate(formData);
+
+      if (validFormData.error) {
+        throw new ValidationError({
+          message: "Error in delete product form",
+          code: 4000,
+        });
       }
+      await deleteProduct(validFormData.data.productId);
+      return json({ successes: true });
     }
   } catch (error) {
-    throw new Response("Oh no! Something went wrong!", {
-      status: 500,
-    });
+    getHTTPError(error);
   }
 }
 

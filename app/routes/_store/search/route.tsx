@@ -1,32 +1,23 @@
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import type { LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+import { z } from "zod";
 import StoreRouteError from "~/components/Errors/RouteError/StoreRouteError";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import Sidebar from "~/components/Store/SideBar/SideBar";
+import { getHTTPError } from "~/services/errorResponse.server";
 import {
   getAllProductCategories,
   searchProduct,
 } from "~/services/product.server";
-import { ProductNotFoundError } from "~/services/productError.server";
-import {
-  InternalServerResponse,
-  NotFoundResponse,
-} from "~/services/responseError.server";
-import searchPage from "~/styles/searchPage.css";
-import { parseAndValidateNumber } from "~/utils/validation.server";
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: searchPage },
-];
+
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
     const url = new URL(request.url);
     const searchQuery = url.searchParams.get("search");
     const sortType = url.searchParams.get("sort");
-    const page = url.searchParams.get("page")
-      ? url.searchParams.get("page")
-      : 1;
-
+    const pageQuery = url.searchParams.get("page");
+    const page = pageQuery ? z.coerce.number().parse(pageQuery) : 1;
     if (searchQuery === "" || !searchQuery) {
       return redirect("/");
     }
@@ -36,15 +27,9 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
       sortName: sortType,
     });
 
-    return json({ products, page: parseAndValidateNumber(page), categories });
+    return json({ products, page, categories });
   } catch (error) {
-    if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse({ error });
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 }
 export function ErrorBoundary() {

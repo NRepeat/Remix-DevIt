@@ -11,19 +11,22 @@ export type isMemberWithDataPromise = Promise<{
 
 export type isCustomerWithDataPromise = Promise<{
   isCustomer: boolean;
-  customer?: CustomerWithoutPassword | null;
+  customer: CustomerWithoutPassword | null;
 }>;
 export type isMemberWithData = { isMember: boolean; member?: Member };
 
 export type isCustomerWithData = {
   isCustomer: boolean;
-  customer?: CustomerWithoutPassword | null;
+  customer: CustomerWithoutPassword | null;
 };
 export async function isProductInStock(
   productId: number,
   requestedQuantity: number
 ): Promise<boolean> {
   const product = await getProduct({ id: productId });
+  if (!product) {
+    return false;
+  }
   return product.stock >= requestedQuantity;
 }
 export function parseAndValidateNumber(number: number | string | null) {
@@ -40,7 +43,7 @@ export async function isMember(request: Request): isMemberWithDataPromise {
 export async function isCustomer(request: Request): isCustomerWithDataPromise {
   const customer = await customerAuthenticator.isAuthenticated(request);
   if (!customer) {
-    return { isCustomer: false };
+    return { isCustomer: false, customer: null };
   }
   return { isCustomer: true, customer };
 }

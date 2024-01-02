@@ -25,7 +25,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
   return (
     <section className={styles.gridLayout}>
       <Header>
-        <StoreHeader customer={isCustomerWithData.isCustomer} />
+        <StoreHeader customer={isCustomerWithData.customer} />
       </Header>
       <Sidebar links={data.categories} />
       {children}

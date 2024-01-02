@@ -1,27 +1,14 @@
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
-import invariant from "tiny-invariant";
+import { z } from "zod";
 import { createCart } from "~/services/cart.server";
-import { CartCreateError } from "~/services/cartItemError.server";
-import { InternalServerResponse } from "~/services/responseError.server";
-import { parseAndValidateNumber } from "~/utils/validation.server";
+import { getHTTPError } from "~/services/errorResponse.server";
 
 export async function action({ params }: ActionFunctionArgs) {
   try {
-    invariant(params.id);
-    if (params.id) {
-      await createCart(parseAndValidateNumber(params.id));
-      return redirect("/admin/customers");
-    }
+    const id = z.coerce.number().parse(params.id);
+    await createCart(id);
+    return redirect("/admin/customers");
   } catch (error) {
-    if (error instanceof CartCreateError) {
-      throw new InternalServerResponse(
-        { success: false, error: "Error while creating cart" },
-        { status: 500 }
-      );
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 }

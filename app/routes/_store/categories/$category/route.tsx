@@ -6,16 +6,13 @@ import Pagination from "~/components/Store/Pagination/Pagination";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import SortTypesList from "~/components/Store/Sort/SortTypesList";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
-import { NotFoundError } from "~/services/error.server";
+import { NotFound } from "~/services/error.server";
+import { getHTTPError } from "~/services/errorResponse.server";
 import {
   getAllProductCategories,
   getProductsByCategory,
 } from "~/services/product.server";
-import { ProductNotFoundError } from "~/services/productError.server";
-import {
-  InternalServerResponse,
-  NotFoundResponse,
-} from "~/services/responseError.server";
+
 import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ request, params, context }: LoaderFunctionArgs) {
@@ -25,9 +22,7 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
     const pageQuery = url.searchParams.get("page");
     const category = params.category;
     if (!category) {
-      throw new NotFoundError({
-        message: `Category not found`,
-      });
+      throw new NotFound({ message: `Category not found`, code: 404 });
     }
     const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
 
@@ -44,15 +39,7 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
     const categories = await getAllProductCategories();
     return json({ products, categories, page, breadcrumbs });
   } catch (error) {
-    if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse({ error });
-    } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse({ error });
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 }
 export function ErrorBoundary() {

@@ -9,7 +9,6 @@ import {
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
-import invariant from "tiny-invariant";
 import { z } from "zod";
 import Product from "~/components/Store/Product/Product";
 import ProductsLike from "~/components/Store/ProductsLike/ProductsLike";
@@ -18,26 +17,28 @@ import { customerAuthenticator } from "~/services/auth.server";
 import { createCart, getCartByCustomerId } from "~/services/cart.server";
 import { createCartItem } from "~/services/cartItem.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
-import { NotFoundError } from "~/services/error.server";
+import { NotFound } from "~/services/error.server";
+import { getHTTPError } from "~/services/errorResponse.server";
+import { UnauthorizedError } from "~/services/httpErrors.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
-import { ProductNotFoundError } from "~/services/productError.server";
-import {
-  InternalServerResponse,
-  NotFoundResponse,
-} from "~/services/responseError.server";
 import { commitSession, getSession } from "~/services/session.server";
 import styles from "./styles.module.css";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   try {
-    invariant(params.slug, "Missing slug param");
+    const session = await getSession(request.headers.get("Cookie"));
+    if (!session) {
+      throw new UnauthorizedError("Session not found or invalid");
+    }
+    const cart = createSessionCart(session);
     const slug = params.slug;
     const product = await getProduct({ slug });
+    if (!product) {
+      throw new NotFound({ message: `Product ${slug}`, code: 4000 });
+    }
     const productsByCategory = await getProductsByCategory({
       category: product.category.slug,
     });
-    const session = await getSession(request.headers.get("Cookie"));
-    const cart = createSessionCart(session);
 
     return json({
       productsByCategory,
@@ -45,33 +46,28 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       cart: cart.items()[product.id],
     });
   } catch (error) {
-    if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse({ error });
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   try {
+    const session = await getSession(request.headers.get("Cookie"));
+    if (!session) {
+      throw new UnauthorizedError("Session not found or invalid");
+    }
+    const sessionCart = createSessionCart(session);
     const formData = await request.formData();
     const slug = formData.get("slug");
     if (!slug) {
-      throw new NotFoundError({ message: "Product slug not found" });
+      throw new NotFound({ message: "Product slug not found", code: 4211 });
     }
 
     const product = await getProduct({ slug: z.coerce.string().parse(slug) });
     if (!product || !product.externalId) {
-      throw new NotFoundError({
-        message: `Product ${product.title} not found`,
-      });
+      throw new NotFound({ message: `Product ${slug}`, code: 4000 });
     }
 
-    const session = await getSession(request.headers.get("Cookie"));
-    const sessionCart = createSessionCart(session);
     const customer = await customerAuthenticator.isAuthenticated(request);
 
     const addToCart = async (cartId: number) => {
@@ -101,15 +97,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       { headers: { "Set-Cookie": await commitSession(session) } }
     );
   } catch (error) {
-    if (error instanceof ProductNotFoundError) {
-      throw new NotFoundResponse({ error });
-    } else if (error instanceof NotFoundError) {
-      throw new NotFoundResponse({ error });
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 };
 
@@ -130,7 +118,7 @@ export function ErrorBoundary() {
     return (
       <>
         <p className={styles.error}>
-          {error.statusText} {error.status}
+          {error.data} {error.status}
         </p>
         <Breadcrumbs />
         <ProductsLike />

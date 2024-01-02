@@ -1,12 +1,10 @@
 import type { Cart, Customer } from "@prisma/client";
 import type { SuccessResult, ValidationResult } from "remix-validated-form";
 import {
-  CustomerCreateError,
-  CustomerDeleteError,
-  CustomerNotFoundError,
-  CustomerUpdateError,
-} from "./customerError.server";
-import { AuthenticationError } from "./error.server";
+  CustomerError,
+  UnexpectedError,
+  ValidationError,
+} from "./error.server";
 
 export interface CreateCustomerArgs {
   email: string;
@@ -45,13 +43,9 @@ export const existCustomer = async (
     });
     return existCustomer;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CustomerNotFoundError({
-        method: "existCustomer",
-        error,
-      });
-    }
-    throw new Error(`An error occurred during find exist customer`);
+    throw new CustomerError({
+      message: `An error occurred during find exist customer`,
+    }).notFound();
   }
 };
 export const createCustomer = async ({
@@ -59,7 +53,10 @@ export const createCustomer = async ({
 }: ValidationResult<CreateCustomerArgs>): Promise<CustomerWithoutPassword> => {
   try {
     if (!data) {
-      throw new Error("Registration data undefined");
+      throw new ValidationError({
+        message: "Registration data undefined",
+        code: 6222,
+      });
     }
     const customer = await prisma.customer.create({
       data: {
@@ -80,33 +77,37 @@ export const createCustomer = async ({
 
     return customer;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CustomerCreateError(error);
-    }
-    throw new Error(`Failed to create customer`);
+    throw new CustomerError({ message: `Failed to create customer` }).create();
   }
 };
 
 export const login = async (
   data: LoginArgs
 ): Promise<CustomerWithoutPassword> => {
-  const customer = await prisma.customer.findUnique({
-    where: { email: data.email, password: data.password },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      secondName: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-  });
+  try {
+    const customer = await prisma.customer.findUnique({
+      where: { email: data.email, password: data.password },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        secondName: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
 
-  if (customer === null) {
-    throw new AuthenticationError("Invalid email or password");
+    if (customer === null) {
+      throw new CustomerError({ message: "Invalid email or password" }).login();
+    }
+
+    return customer;
+  } catch (error) {
+    throw new UnexpectedError({
+      message: "Unexpected error while login customer",
+      code: 2222,
+    });
   }
-
-  return customer;
 };
 
 export const getAllCustomers = async (
@@ -137,22 +138,15 @@ export const getAllCustomers = async (
     const totalPages = Math.ceil(totalCustomers / pageSize);
     return { customers, totalPages };
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CustomerNotFoundError({
-        method: "getAllCustomers",
-        error,
-      });
-    }
-    throw new Error("Error while attempting to get all customers");
+    throw new CustomerError({
+      message: "Error while attempting to get all customers",
+    }).notFound();
   }
 };
 
 export const getCustomerById = async (
   customerId: number
 ): Promise<CustomerWithoutPassword | null> => {
-  if (!customerId) {
-    throw new Error(`Missing customer id`);
-  }
   try {
     const customer = await prisma.customer.findUnique({
       where: { id: customerId },
@@ -171,13 +165,7 @@ export const getCustomerById = async (
 
     return customer;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CustomerNotFoundError({
-        method: "getCustomerById",
-        error,
-      });
-    }
-    throw new Error(`Error while attempting to get customer by ID`);
+    throw new CustomerError({ message: `Customer not found` }).notFound();
   }
 };
 export const updateCustomer = async (
@@ -204,10 +192,9 @@ export const updateCustomer = async (
 
     return updatedCustomer;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CustomerUpdateError(error);
-    }
-    throw new Error(`Error while attempting to update customer`);
+    throw new CustomerError({
+      message: `Error while attempting to update customer`,
+    }).update();
   }
 };
 
@@ -215,11 +202,6 @@ export const deleteCustomer = async (
   customerId: number
 ): Promise<CustomerWithoutPassword | null> => {
   try {
-    const existingCustomer = await getCustomerById(customerId);
-    if (!existingCustomer) {
-      throw new Error(`Customer with ID ${customerId} not found`);
-    }
-
     const deletedCustomer = await prisma.customer.delete({
       where: { id: customerId },
       select: {
@@ -248,10 +230,7 @@ export const deleteCustomer = async (
 
     return deletedCustomer;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CustomerDeleteError(error);
-    }
-    throw new Error(`Error while attempting to delete customer`);
+    throw new CustomerError({ message: `Customer not deleted` }).delete();
   }
 };
 
@@ -303,12 +282,8 @@ export const searchCustomer = async (
     const totalPages = Math.ceil(totalCustomers / pageSize);
     return { customers, totalPages };
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CustomerNotFoundError({
-        method: "searchCustomer",
-        error,
-      });
-    }
-    throw new Error(`Error while attempting to search customer`);
+    throw new CustomerError({
+      message: `Error while attempting to search customer`,
+    }).notFound();
   }
 };

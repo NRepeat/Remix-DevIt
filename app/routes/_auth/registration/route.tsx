@@ -8,7 +8,7 @@ import RegistrationPage from "~/Pages/RegistrationPage/RegistrationPage";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { CustomAuthorizationError } from "~/services/error.server";
-import { InternalServerResponse } from "~/services/responseError.server";
+import { getHTTPError } from "~/services/errorResponse.server";
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
@@ -37,12 +37,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
     if (user) {
       return redirect("/");
     }
-    return json({ user: false });
+    return json({ user });
   } catch (error) {
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 }
 
@@ -51,7 +48,7 @@ export default function () {
   return (
     <>
       <Header>
-        <StoreHeader customer={"user" in data ? data.user : false} />
+        <StoreHeader customer={data.user} />
       </Header>
       <RegistrationPage />
     </>

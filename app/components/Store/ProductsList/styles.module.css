@@ -1,13 +1,7 @@
 .list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  gap: 30px;
-  height: auto;
-
+  flex-direction: column;
+  gap: 1rem;
   padding-top: var(--storeInterfacePadding);
   padding-left: var(--storeInterfacePadding);
   padding-right: var(--storeInterfacePadding);
@@ -29,13 +23,10 @@
 }
 
 .li {
-  align-content: flex-start;
-  display: inline-flex;
-  gap: var(--storeInterfaceGap);
   width: 100%;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(4, 1fr);
   padding-bottom: 10px;
   position: relative;
   border-bottom: var(--storeInterfaceBorder);

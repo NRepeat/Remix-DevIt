@@ -1,18 +1,21 @@
 import type { FieldErrors } from "remix-validated-form";
 
+type ErrorArgs = {
+  message: string;
+  code: number;
+};
+type CustomErrorConstructor = {
+  message: string;
+  code?: number;
+};
+
 export class CustomError extends Error {
-  originalError?: Error;
-  constructor(message: string, error?: Error) {
+  code?: number;
+  constructor({ message, code }: CustomErrorConstructor) {
     super(message);
     this.name = this.constructor.name;
-    this.originalError = error;
-  }
-}
-
-export class AuthenticationError extends CustomError {
-  constructor(message: string) {
-    super(message);
     this.message = message;
+    this.code = code;
   }
 }
 
@@ -21,7 +24,7 @@ export class FormValidationError extends CustomError {
   fieldErrors?: FieldErrors;
 
   constructor(formName: string, fieldErrors?: FieldErrors) {
-    super(`Data is incorrect in form: ${formName}`);
+    super({ message: `Data is incorrect in form: ${formName}` });
     this.formName = formName;
     this.fieldErrors = fieldErrors;
   }
@@ -47,7 +50,7 @@ export class CustomAuthorizationError extends CustomError {
   cause?: string;
   fieldErrors?: FieldErrors;
   constructor(message: string, cause?: string, fieldErrors?: FieldErrors) {
-    super(`Access is denied ${cause}`);
+    super({ message: `Access is denied ${cause}` });
     this.name = "CustomAuthorizationError";
     this.cause = cause;
     this.message = message;
@@ -55,33 +58,150 @@ export class CustomAuthorizationError extends CustomError {
   }
 }
 
-export class BadRequestError extends CustomError {
-  constructor(message = "Bad Request") {
-    super(message);
-    this.name = "BadRequestError";
+export class UnexpectedError extends CustomError {
+  constructor({ message, code }: ErrorArgs) {
+    super({ message, code });
   }
 }
-type ErrorArgs = {
-  message: string;
-  error?: Error;
-};
-export class NotFoundError extends CustomError {
-  constructor({ message, error }: ErrorArgs) {
-    super(message);
-    this.name = "NotFoundError";
+export class ValidationError extends CustomError {
+  constructor({ message, code }: ErrorArgs) {
+    super({ message, code });
   }
 }
 
-export class InternalServerError extends CustomError {
-  constructor(message = "Internal Server Error") {
-    super(message);
-    // this.name = "InternalServerError";
+export class NotFound extends CustomError {
+  constructor({ message, code }: ErrorArgs) {
+    super({ message, code });
   }
 }
 
-export class UnauthorizedError extends CustomError {
-  constructor({ message, error }: ErrorArgs) {
-    super(message);
-    this.name = "UnauthorizedError";
+export class CreateError extends CustomError {
+  constructor({ message, code }: ErrorArgs) {
+    super({ message, code });
+  }
+}
+export class UpdateError extends CustomError {
+  constructor({ message, code }: ErrorArgs) {
+    super({ message, code });
+  }
+}
+export class DeleteError extends CustomError {
+  constructor({ message, code }: ErrorArgs) {
+    super({ message, code });
+  }
+}
+export class AuthenticationError extends CustomError {
+  constructor({ message, code }: ErrorArgs) {
+    super({ message, code });
+  }
+}
+export class ProductError extends CustomError {
+  create() {
+    return new CreateError({
+      message: "Product not created",
+      code: 4101,
+    });
+  }
+  update() {
+    return new UpdateError({
+      message: "Product not updated",
+      code: 4201,
+    });
+  }
+  delete() {
+    return new DeleteError({
+      message: "Product not deleted",
+      code: 4301,
+    });
+  }
+  notFound() {
+    return new NotFound({
+      message: "Product not found",
+      code: 4001,
+    });
+  }
+}
+export class CustomerError extends CustomError {
+  login() {
+    return new AuthenticationError({
+      message: "Customer not logged",
+      code: 6011,
+    });
+  }
+  create() {
+    return new CreateError({
+      message: "Customer not created",
+      code: 6101,
+    });
+  }
+  update() {
+    return new UpdateError({
+      message: "Customer not updated",
+      code: 6201,
+    });
+  }
+  delete() {
+    return new DeleteError({
+      message: "Customer not deleted",
+      code: 6301,
+    });
+  }
+  notFound() {
+    return new NotFound({
+      message: "Customer not found",
+      code: 6001,
+    });
+  }
+}
+export class CartError extends CustomError {
+  create() {
+    return new CreateError({
+      message: "Cart not created",
+      code: 7101,
+    });
+  }
+  update() {
+    return new UpdateError({
+      message: "Cart not updated",
+      code: 7201,
+    });
+  }
+  delete() {
+    return new DeleteError({
+      message: "Cart not deleted",
+      code: 7301,
+    });
+  }
+  notFound() {
+    return new NotFound({
+      message: "Cart not found",
+      code: 7001,
+    });
+  }
+}
+export class CartItemError extends CustomError {
+  create() {
+    return new CreateError({
+      message: "CartItem not created",
+      code: 8101,
+    });
+  }
+  update() {
+    return new UpdateError({
+      message: "CartItem not updated",
+      code: 8201,
+    });
+  }
+  delete() {
+    return new DeleteError({
+      message: "CartItem not deleted",
+      code: 8301,
+    });
+  }
+  notFound() {
+    return new NotFound({
+      message: "CartItem not found",
+      code: 8001,
+    });
   }
 }

@@ -1,4 +1,3 @@
-import type { ErrorResponse } from "@remix-run/react";
 import { Link } from "@remix-run/react";
 import { withZod } from "@remix-validated-form/with-zod";
 import type { FC } from "react";
@@ -15,13 +14,13 @@ export const adminLoginSchema = withZod(
   })
 );
 type LoginProps = {
-  error?: ErrorResponse;
+  error?: string;
 };
 const Login: FC<LoginProps> = ({ error }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        {error && <p className={styles.error}>{error?.data}</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
         <ValidatedForm validator={adminLoginSchema} method="post">
           <h2 className={styles.title}>Login in administrator panel</h2>

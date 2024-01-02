@@ -1,5 +1,5 @@
 import { isProductInStock } from "~/utils/validation.server";
-import { CartItemDeleteError } from "./cartItemError.server";
+import { CartItemError } from "./error.server";
 
 export interface CartItemArgs {
   cartId: number;
@@ -13,9 +13,7 @@ export const createCartItem = async ({
   quantity,
 }: CartItemArgs) => {
   try {
-    const existCartItem = await prisma.cartItem.findFirst({
-      where: { cartId, productId: externalId },
-    });
+    const existCartItem = await getCartItemById(cartId);
     if (existCartItem) {
       const updatedCartItem = await updateCartItem(existCartItem.id, quantity);
       return updatedCartItem;
@@ -30,11 +28,11 @@ export const createCartItem = async ({
       });
 
       return newCartItem;
-    } else {
-      throw new Error("Product is out of stock");
     }
   } catch (error) {
-    throw new Error(`Failed to create/update cart item ${error}`);
+    throw new CartItemError({
+      message: `Failed to create/update cart item ${error}`,
+    }).create();
   }
 };
 
@@ -47,26 +45,24 @@ export const getCartItemById = async (cartItemId: number) => {
         product: true,
       },
     });
-    if (cartItem) {
-      return cartItem;
-    }
+    return cartItem;
   } catch (error) {
-    throw new Error("Failed to get cart item by ID");
+    throw new CartItemError({
+      message: "Failed to get cart item by ID",
+    }).notFound();
   }
 };
 export const updateCartItem = async (id: number, newData: number) => {
   try {
-    const cartItem = await getCartItemById(id);
-    if (!cartItem) {
-      throw new Error(`Item didn't exist`);
-    }
     const updatedCartItem = await prisma.cartItem.update({
       where: { id },
       data: { quantity: newData },
     });
     return updatedCartItem;
   } catch (error) {
-    throw new Error(`Error while updating cart item ${error}`);
+    throw new CartItemError({
+      message: `Error while updating cart item `,
+    }).update();
   }
 };
 
@@ -77,9 +73,8 @@ export const deleteCartItem = async (id: number) => {
     });
     return deletedCartItem;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new CartItemDeleteError(error);
-    }
-    throw new Error(`Error while deleting cart item ${error}`);
+    throw new CartItemError({
+      message: `Error while deleting cart item `,
+    }).delete();
   }
 };

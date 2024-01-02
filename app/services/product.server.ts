@@ -3,11 +3,7 @@ import type { ProductCreateData } from "~/types/types";
 import { formatString } from "~/utils/formatting.server";
 import { calculatePaginationSize } from "~/utils/pagination.server";
 import { prisma } from "~/utils/prisma.server";
-import {
-  ProductCreateError,
-  ProductNotFoundError,
-  ProductUpdateError,
-} from "./productError.server";
+import { ProductError } from "./error.server";
 
 export interface ProductData {
   products: ({
@@ -71,6 +67,7 @@ const sortTypeMap: SortField = {
 export type CreateProductArgs = {
   data: ProductCreateData;
 };
+
 let sortField = "price";
 let sortType = "desc";
 export const createProduct = async ({ data }: CreateProductArgs) => {
@@ -100,10 +97,9 @@ export const createProduct = async ({ data }: CreateProductArgs) => {
 
     return product;
   } catch (error) {
-    throw new ProductCreateError({
-      cause: "Error during product creation",
-      product: JSON.stringify(data),
-    });
+    throw new ProductError({
+      message: "Error while creating product",
+    }).create();
   }
 };
 
@@ -129,41 +125,29 @@ export const getAllProducts = async (
 
     const totalProductsCount = await prisma.product.count();
     const totalPages = Math.ceil(totalProductsCount / take);
+
     return { products, totalPages, page };
   } catch (error) {
-    if (error instanceof Error) {
-      throw new ProductNotFoundError({
-        method: "getAllProducts",
-        originalError: error,
-      });
-    }
-    throw new Error(`${error}`);
+    throw new ProductError({ message: `Products not found` }).notFound();
   }
 };
 
 export const getProduct = async (
   data: getProductArgs
-): Promise<Product & { category: Category }> => {
+): Promise<(Product & { category: Category }) | null> => {
   try {
     const { externalId, id, slug } = data;
+
     const product = await prisma.product.findFirst({
       where: {
         OR: [{ id }, { slug }, { externalId }],
       },
       include: { category: true },
     });
-    if (!product) {
-      throw new Error("Product not found");
-    }
+
     return product;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new ProductNotFoundError({
-        method: "getProduct",
-        originalError: error,
-      });
-    }
-    throw new Error(`${error}`);
+    throw new ProductError({ message: `Product not found` }).notFound();
   }
 };
 
@@ -190,29 +174,15 @@ export const searchProduct = async (
     });
     return { products };
   } catch (error) {
-    if (error instanceof Error) {
-      throw new ProductNotFoundError({
-        method: "searchProduct",
-        originalError: error,
-      });
-    }
-    throw new Error(`${error}`);
+    throw new ProductError({ message: `Products not found` }).notFound();
   }
 };
-
 export const getAllProductCategories = async (): Promise<Category[]> => {
   try {
     const category = prisma.category.findMany();
-    // throw new Error("dws");
     return category;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new ProductNotFoundError({
-        method: "getAllProductCategories",
-        originalError: error,
-      });
-    }
-    throw new Error(`${error}`);
+    throw new ProductError({ message: `Categories not found` }).notFound();
   }
 };
 
@@ -238,13 +208,7 @@ export const getProductsByCategory = async (
     const totalPages = Math.ceil(products.length / take);
     return { products, totalPages, page };
   } catch (error) {
-    if (error instanceof Error) {
-      throw new ProductNotFoundError({
-        method: "getProductsByCategory",
-        originalError: error,
-      });
-    }
-    throw new Error(`${error}`);
+    throw new ProductError({ message: `Products not found` }).notFound();
   }
 };
 
@@ -257,14 +221,7 @@ export const updateProduct = async (data: updateProductArgs) => {
     });
     return product;
   } catch (error) {
-    if (error instanceof Error) {
-      throw new ProductUpdateError({
-        method: `updateProduct`,
-        originalError: error,
-      });
-    }
-
-    throw new Error(`${error}`);
+    throw new ProductError({ message: `Product not updated` }).update();
   }
 };
 
@@ -291,13 +248,9 @@ export const updateProductCategory = async (
       data: { category: { update: categoryData } },
     });
   } catch (error) {
-    if (error instanceof Error) {
-      throw new ProductUpdateError({
-        method: `updateProductCategory`,
-        originalError: error,
-      });
-    }
-    throw new Error(`Error while attempting to update product category`);
+    throw new ProductError({
+      message: `Product category not updated`,
+    }).update();
   }
 };
 
@@ -309,6 +262,8 @@ export const deleteProduct = async (id: number) => {
 
     return deletedProduct;
   } catch (error) {
-    throw new Error(`Error while deleting product ${error}`);
+    throw new ProductError({
+      message: `Product category not updated`,
+    }).delete();
   }
 };

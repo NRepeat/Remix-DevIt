@@ -2,34 +2,30 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { validationError } from "remix-validated-form";
-import invariant from "tiny-invariant";
+import { z } from "zod";
 import EditCustomerPanel from "~/components/Admin/CustomersPanels/EditCustomerPanel/EditCustomerPanel";
 import {
   existCustomer,
   getCustomerById,
   updateCustomer,
 } from "~/services/customer.server";
-import { CustomerUpdateError } from "~/services/customerError.server";
-import { InternalServerResponse } from "~/services/responseError.server";
+import { NotFound } from "~/services/error.server";
+import { getHTTPError } from "~/services/errorResponse.server";
+import { BadRequest } from "~/services/httpErrors.server";
 import { editSchema } from "~/utils/formValidation";
-import { parseAndValidateNumber } from "~/utils/validation.server";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
-    invariant(params.id);
-    const customer = await getCustomerById(parseAndValidateNumber(params.id));
+    const customer = await getCustomerById(z.coerce.number().parse(params.id));
     if (!customer) {
-      throw new Error("Customer Not Found");
+      throw new NotFound({ message: "Customer Not Found", code: 6000 });
     }
     return json({ customer });
   } catch (error) {
-    throw new Response("Oh no! Something went wrong!", {
-      status: 500,
-    });
+    getHTTPError(error);
   }
 }
 export async function action({ params, request }: ActionFunctionArgs) {
-  invariant(params.id);
   try {
     const formData = Object.fromEntries(await request.formData());
 
@@ -37,7 +33,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
     if (validatedCustomerData.error) {
       return validationError(validatedCustomerData.error);
     }
-    const customer = await getCustomerById(parseAndValidateNumber(params.id));
+    const customer = await getCustomerById(z.coerce.number().parse(params.id));
     if (customer) {
       const isExistCustomer = await existCustomer(
         validatedCustomerData.data.email
@@ -55,18 +51,9 @@ export async function action({ params, request }: ActionFunctionArgs) {
         },
       });
     }
-    return validationError({ fieldErrors: { password: "Updating error" } });
+    throw new BadRequest("Error while edit customer");
   } catch (error) {
-    if (error instanceof CustomerUpdateError) {
-      throw new InternalServerResponse(
-        { success: false, error: "Error while updating customer data" },
-        { status: 500 }
-      );
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 }
 export default function () {

@@ -1,20 +1,20 @@
+import type { SerializeFrom } from "@remix-run/node";
 import { Link } from "@remix-run/react";
 import { type FC } from "react";
 import LoginIcon from "~/icons/Header/Login";
 import ProfileIcon from "~/icons/Header/Profile";
 import SearchIcon from "~/icons/Header/Search";
+import type { CustomerWithoutPassword } from "~/services/customer.server";
 import { SearchBar } from "../../Ui/SearchBar/SearchBar";
 import { CartIcon } from "../CartInfo/CartInfo";
 import styles from "./styles.module.css";
 
 type StoreHeaderProps = {
-  customer: boolean;
+  customer: SerializeFrom<CustomerWithoutPassword> | null;
 };
 
-const isCustomerAuthenticated: FC<{ isCustomer: boolean }> = ({
-  isCustomer,
-}) => {
-  return isCustomer ? (
+const isCustomerAuthenticated: FC<StoreHeaderProps> = ({ customer }) => {
+  return customer ? (
     <Link title="Account" className={styles.profile} to={"/"}>
       <ProfileIcon />
     </Link>
@@ -36,7 +36,7 @@ const StoreHeader: FC<StoreHeaderProps> = ({ customer }) => {
         STORE
       </Link>
       <div className={styles.menu}>
-        {isCustomerAuthenticated({ isCustomer: !!customer })}
+        {isCustomerAuthenticated({ customer })}
         <CartIcon />
       </div>
     </div>

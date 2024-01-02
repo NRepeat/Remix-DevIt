@@ -6,7 +6,7 @@ const StoreRouteError = () => {
   if (isRouteErrorResponse(error)) {
     return (
       <p className={styles.error}>
-        {error.statusText} {error.status}
+        {error.data} {error.status}
       </p>
     );
   }

@@ -2,7 +2,7 @@
   display: grid;
   padding-top: 50px;
   grid-template-rows: 50px auto auto min-content;
-  grid-template-columns: 40vw auto;
+  grid-template-columns: min-content auto;
   grid-template-areas:
     "breadcrumbs breadcrumbs"
     "img info "

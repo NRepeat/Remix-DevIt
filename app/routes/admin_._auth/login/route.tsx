@@ -1,51 +1,48 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
 import { AuthorizationError } from "remix-auth";
 import { validationError } from "remix-validated-form";
 import Login from "~/components/Admin/Auth/Login/Login";
 import { memberAuthenticator } from "~/services/adminAuth.server";
-import {
-  InternalServerResponse,
-  UnauthorizedResponse,
-} from "~/services/responseError.server";
+import { CustomAuthorizationError } from "~/services/error.server";
+import { getHTTPError } from "~/services/errorResponse.server";
 
-export async function action({ params, request }: ActionFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   try {
     return await memberAuthenticator.authenticate("member-auth", request, {
       successRedirect: "/admin",
       throwOnError: true,
     });
   } catch (error) {
-    if (error instanceof Response) {
-      return error;
-    }
     if (error instanceof AuthorizationError) {
+      if (error.cause instanceof CustomAuthorizationError) {
+        if (error.cause.fieldErrors)
+          return validationError({
+            fieldErrors: error.cause.fieldErrors,
+          });
+      }
       return validationError({
-        fieldErrors: { password: `Email or password are incorrect` },
+        fieldErrors: { email: error.message },
       });
     }
+    return error;
   }
-  return json({ success: true });
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
     const user = await memberAuthenticator.isAuthenticated(request);
     if (!user) {
-      return null;
+      return json({ error: "Unauthorized" });
     }
     return redirect("/admin/customers");
   } catch (error) {
-    if (error instanceof Error) {
-      return new UnauthorizedResponse(error);
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 }
 
 export default function () {
-  return <Login />;
+  const data = useLoaderData<typeof loader>();
+  return <Login error={data.error} />;
 }

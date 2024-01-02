@@ -23,6 +23,10 @@ customerAuthenticator.use(
   new FormStrategy(async ({ form }) => {
     try {
       const validFormData = await loginSchema.validate(form);
+      console.log(
+        "🚀 ~ file: auth.server.ts:26 ~ newFormStrategy ~ validFormData:",
+        validFormData
+      );
 
       if (validFormData.error && validFormData.error.fieldErrors) {
         const fieldsKey = Object.keys(validFormData.error.fieldErrors);
@@ -41,7 +45,10 @@ customerAuthenticator.use(
           const user = await login(validFormData.data);
           return user;
         } catch (error) {
-          throw new AuthenticationError("Email or password are incorrect");
+          throw new AuthenticationError({
+            message: "Email or password are incorrect",
+            code: 3000,
+          });
         }
       }
     } catch (error) {
@@ -53,7 +60,7 @@ customerAuthenticator.use(
       }
     }
 
-    throw new CustomAuthorizationError("Authorization error");
+    throw new CustomAuthorizationError("Email or password are incorrect");
   }),
   "customer-auth"
 );
@@ -72,7 +79,10 @@ customerAuthenticator.use(
       }
       const isCustomer = await existCustomer(validFormData.data.email);
       if (isCustomer) {
-        throw new AuthenticationError("Email already in use");
+        throw new AuthenticationError({
+          message: "Email already in use",
+          code: 3200,
+        });
       }
 
       const user = await createCustomer(validFormData);

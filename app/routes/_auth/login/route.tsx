@@ -12,11 +12,7 @@ import LoginPage from "~/Pages/LoginPage/LoginPage";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { CustomAuthorizationError } from "~/services/error.server";
-import {
-  InternalServerResponse,
-  UnauthorizedResponse,
-} from "~/services/responseError.server";
-import { commitSession, getSession } from "~/services/session.server";
+import { getHTTPError } from "~/services/errorResponse.server";
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
@@ -41,30 +37,13 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 export async function loader({ request }: LoaderFunctionArgs) {
   try {
-    const session = await getSession(request.headers.get("cookie"));
-    const data = { error: session.get("authorizationError") };
-    if (data.error) {
-      const headers = new Headers({
-        "Set-Cookie": await commitSession(session),
-      });
-      return json(data, {
-        headers,
-      });
-    }
-
     const user = await customerAuthenticator.isAuthenticated(request);
     if (user) {
       return redirect("/");
     }
-    return json({ user: false });
+    return json({ user });
   } catch (error) {
-    if (error instanceof Error) {
-      return new UnauthorizedResponse(error);
-    }
-    throw new InternalServerResponse(
-      { success: false, error: "Oh no! Something went wrong!" },
-      { status: 500 }
-    );
+    getHTTPError(error);
   }
 }
 
@@ -73,9 +52,9 @@ export default function () {
   return (
     <>
       <Header>
-        <StoreHeader customer={"user" in data ? data.user : false} />
+        <StoreHeader customer={data.user} />
       </Header>
-      <LoginPage error={"error" in data ? data.error : false} />
+      <LoginPage error={"error"} />
     </>
   );
 }

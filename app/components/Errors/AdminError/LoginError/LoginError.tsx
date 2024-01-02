@@ -4,7 +4,7 @@ import Login from "~/components/Admin/Auth/Login/Login";
 const LoginError = () => {
   const error = useRouteError();
   if (isRouteErrorResponse(error)) {
-    return <Login error={error} />;
+    return <Login error={error.data} />;
   }
 };
 export default LoginError;
