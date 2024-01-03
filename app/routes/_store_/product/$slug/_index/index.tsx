@@ -18,7 +18,7 @@ import { createCart, getCartByCustomerId } from "~/services/cart.server";
 import { createCartItem } from "~/services/cartItem.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { NotFound } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import { UnauthorizedError } from "~/services/httpErrors.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
 import { commitSession, getSession } from "~/services/session.server";
@@ -46,7 +46,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
       cart: cart.items()[product.id],
     });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 };
 
@@ -97,7 +97,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       { headers: { "Set-Cookie": await commitSession(session) } }
     );
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 };
 

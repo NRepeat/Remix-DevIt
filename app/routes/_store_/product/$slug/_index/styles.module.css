@@ -1,6 +1,4 @@
 .error {
-  /* gridArea: "info", fontSize: "1.5rem"/ */
-  /* grid-area: info; */
   font-size: 1.5rem;
   color: red;
   display: grid;

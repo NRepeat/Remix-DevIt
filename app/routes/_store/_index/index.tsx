@@ -6,13 +6,15 @@ import StoreRouteError from "~/components/Errors/RouteError/StoreRouteError";
 import Pagination from "~/components/Store/Pagination/Pagination";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import { createCart } from "~/services/cartSession.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import { UnauthorizedError } from "~/services/httpErrors.server";
 import {
   getAllProductCategories,
   getAllProducts,
 } from "~/services/product.server";
 import { getSession } from "~/services/session.server";
+import styles from "./styles.module.css";
+
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
@@ -36,7 +38,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       categories,
     });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 };
 export function ErrorBoundary() {
@@ -48,7 +50,7 @@ export default function () {
   return (
     <>
       <ProductsList productsData={data.products} />
-      <p className="title">Latest drops</p>
+      <p className={styles.title}>Latest drops</p>
       <Pagination
         admin={false}
         currentPage={data.page}

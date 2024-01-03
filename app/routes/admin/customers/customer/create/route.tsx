@@ -2,7 +2,7 @@ import { redirect, type ActionFunctionArgs } from "@remix-run/node";
 import { validationError } from "remix-validated-form";
 import CreateCustomerPanel from "~/components/Admin/CustomersPanels/CreateCustomerPanel/CreateCustomerPanel";
 import { createCustomer, existCustomer } from "~/services/customer.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 
 import { registrationSchema } from "~/utils/formValidation";
 
@@ -26,7 +26,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
 
     return redirect("/admin/customers");
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 

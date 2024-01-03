@@ -7,7 +7,7 @@ import { z } from "zod";
 import { editProductSchema } from "~/components/Admin/ProductPanels/EditProductPanel/EditProductForm/EditProductForm";
 import EditProductPanel from "~/components/Admin/ProductPanels/EditProductPanel/EditProductPanel";
 import { NotFound } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import {
   getProduct,
   updateProduct,
@@ -25,7 +25,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     }
     return json({ product });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 
@@ -49,7 +49,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
     await updateProductCategory({ id: product.id, category });
     return redirect("/admin/products");
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 

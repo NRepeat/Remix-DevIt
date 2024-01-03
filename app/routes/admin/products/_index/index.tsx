@@ -16,7 +16,7 @@ import Table from "~/components/Admin/ProductPanels/ProductsTable/Table";
 
 import { z } from "zod";
 import { ValidationError } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import styles from "./styles.module.css";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
@@ -38,7 +38,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
     return json({ productsSearch, page });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 };
 
@@ -59,7 +59,7 @@ export async function action({ request }: ActionFunctionArgs) {
       return json({ successes: true });
     }
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 

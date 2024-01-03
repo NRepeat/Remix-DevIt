@@ -1,3 +1,4 @@
+import type { HttpError } from "http-errors";
 import createHttpError from "http-errors";
 
 export class BadRequest {
@@ -7,7 +8,9 @@ export class BadRequest {
     this.httpError = createHttpError(400, { message });
   }
 }
-
+export function BadRequests(message: string): HttpError {
+  return createHttpError(400, { message });
+}
 export class UnauthorizedError {
   httpError: createHttpError.HttpError<401>;
 

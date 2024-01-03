@@ -15,7 +15,7 @@ type StoreHeaderProps = {
 
 const isCustomerAuthenticated: FC<StoreHeaderProps> = ({ customer }) => {
   return customer ? (
-    <Link title="Account" className={styles.profile} to={"/"}>
+    <Link title="Account" className={styles.profile} to={"/account"}>
       <ProfileIcon />
     </Link>
   ) : (

@@ -7,7 +7,7 @@ import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import SortTypesList from "~/components/Store/Sort/SortTypesList";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { NotFound } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import {
   getAllProductCategories,
   getProductsByCategory,
@@ -39,7 +39,7 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
     const categories = await getAllProductCategories();
     return json({ products, categories, page, breadcrumbs });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 export function ErrorBoundary() {

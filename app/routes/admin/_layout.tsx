@@ -4,7 +4,7 @@ import AdminPageLayout from "~/Layout/AdminPageLayout/AdminPageLayout";
 import AdminError from "~/components/Errors/AdminError/AdminError";
 import GlobalLoader from "~/components/Ui/GlobalLoading/GlobalLoader";
 import { memberAuthenticator } from "~/services/adminAuth.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 
 export function ErrorBoundary() {
   return <AdminError />;
@@ -17,7 +17,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }
     return json({ user });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 export default function () {

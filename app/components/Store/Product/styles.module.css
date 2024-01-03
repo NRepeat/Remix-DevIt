@@ -1,4 +1,12 @@
+.container {
+  padding-top: 2rem;
+  display: flex;
+  grid-column-start: 0;
+  grid-column-end: 3;
+}
+
 .poster {
+  border-top: var(--storeInterfaceBorder);
   grid-area: img;
   display: flex;
   justify-content: flex-start;
@@ -9,13 +17,14 @@
   padding-bottom: 2rem;
 }
 
-.poster > img {
+.poster>img {
   height: auto;
   object-fit: cover;
   aspect-ratio: 1.1;
 }
 
 .wrapper {
+  border-top: var(--storeInterfaceBorder);
   padding-right: 2rem;
   padding-left: 2rem;
   grid-area: info;
@@ -23,6 +32,7 @@
   justify-content: center;
   flex-direction: column;
   padding-bottom: 2rem;
+  width: 100%;
   border-left: var(--storeInterfaceBorder);
 }
 
@@ -33,7 +43,7 @@
   flex-direction: column;
 }
 
-.information > form > button {
+.information>form>button {
   background-color: var(--storeHeaderAccentColor);
 }
 

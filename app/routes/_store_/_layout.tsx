@@ -1,25 +1,31 @@
-import { json, type LoaderFunctionArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
-import { SingleProductLayout } from "~/Layout/StoreSingleProductLayout/SingleProductLayout";
+import type { LoaderFunctionArgs } from "react-router";
+import Footer from "~/Layout/Footer/Footer";
+import Header from "~/Layout/Header/Header";
+import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
+
 
 export async function loader({ request }: LoaderFunctionArgs) {
-  try {
-    const customer = await customerAuthenticator.isAuthenticated(request);
-    return json({ customer });
-  } catch (error) {
-    getHTTPError(error);
-  }
+	try {
+		const customer = await customerAuthenticator.isAuthenticated(request);
+		return json({ customer });
+	} catch (error) {
+		getResponseError(error);
+	}
 }
 
-export function ProductRoute() {
-  const data = useLoaderData<typeof loader>();
-  return (
-    <SingleProductLayout customer={data.customer}>
-      <Outlet />
-    </SingleProductLayout>
-  );
+export default function () {
+	const data = useLoaderData<typeof loader>();
+	return (
+		<>
+			<Header>
+				<StoreHeader customer={data.customer} />
+			</Header>
+			<Outlet />
+			<Footer />
+		</>
+	);
 }
-
-export default ProductRoute;

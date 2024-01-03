@@ -5,51 +5,46 @@ import styles from "./styles.module.css";
 
 export interface ListProps {
   links: {
-    label: string;
-    url: string;
     slug: string;
+    name: string;
+    path: string
   }[];
   navigation: Location;
-  isHamburger: boolean;
-  isOpen: boolean;
-  toggle: (nextValue?: any) => void;
 }
 
 const List: FC<ListProps> = ({
   links,
   navigation,
-  isHamburger,
-  isOpen,
-  toggle,
 }) => {
+  console.log("🚀 ~ file: List.tsx:19 ~ navigation:", links[0], navigation.pathname, navigation.pathname.includes(
+    navigation.pathname
+  ))
+
   return (
     <>
-      {isOpen && (
-        <ul
-          className={clsx(styles.list, { [styles.isHamburger]: isHamburger })}
-        >
-          {links.map((link, i) => (
-            <li
-              key={i}
-              className={clsx(styles.li, {
-                [styles.active]: navigation.pathname.startsWith(
-                  `/categories/${link.slug}`
-                ),
-              })}
+
+      <ul
+        className={clsx(styles.list)}
+      >
+        {links.map((link, i) => (
+          <li
+            key={i}
+            className={clsx(styles.li)}
+          >
+
+            <Link
+              to={`${link.path}`}
+              className={styles.link}
             >
-              <Link
-                to={`/categories/${link.slug}`}
-                className={styles.link}
-                onClick={() => {
-                  toggle(false);
-                }}
-              >
-                <p className={styles.label}>{link.label} </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
+              <p className={clsx(styles.label, {
+                [styles.active]: navigation.pathname.includes(
+                  `${link.path}`
+                ),
+              })}>{link.name} </p>
+            </Link>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };

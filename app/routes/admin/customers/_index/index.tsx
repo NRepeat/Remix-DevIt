@@ -6,7 +6,7 @@ import CustomersPanel from "~/components/Admin/CustomersPanels/CustomerPanel/Cus
 import { validationCustomerDelete } from "~/components/Admin/CustomersPanels/CustomersTable/ButtonContainer/ButtonContainer";
 import { deleteCustomer, searchCustomer } from "~/services/customer.server";
 import { ValidationError } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
@@ -20,7 +20,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
     const customers = await searchCustomer(searchQuery, page);
     return json({ customers, page });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 
@@ -37,7 +37,7 @@ export async function action({ request }: ActionFunctionArgs) {
     await deleteCustomer(validData.data.customerId);
     return redirect("/admin/customers");
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 

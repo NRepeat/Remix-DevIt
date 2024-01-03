@@ -5,11 +5,12 @@ import { z } from "zod";
 import StoreRouteError from "~/components/Errors/RouteError/StoreRouteError";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import Sidebar from "~/components/Store/SideBar/SideBar";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import {
   getAllProductCategories,
   searchProduct,
 } from "~/services/product.server";
+import styles from "./styles.module.css";
 
 export async function loader({ request, params }: LoaderFunctionArgs) {
   try {
@@ -29,7 +30,7 @@ export async function loader({ request, params }: LoaderFunctionArgs) {
 
     return json({ products, page, categories });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 export function ErrorBoundary() {
@@ -39,7 +40,7 @@ export default function () {
   const data = useLoaderData<typeof loader>();
   return (
     <>
-      <p className="title">Search result</p>
+      <p className={styles.title}>Search result</p>
       <ProductsList productsData={data.products} />
       <Sidebar links={data.categories} />
     </>

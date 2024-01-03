@@ -1,0 +1,9 @@
+.title {
+	padding-left: 2rem;
+	padding-top: 2rem;
+	grid-area: breadcrumbs;
+	font-weight: 600;
+	font-size: 1.5rem;
+	width: 100%;
+	border-bottom: var(--storeInterfaceBorder);
+}

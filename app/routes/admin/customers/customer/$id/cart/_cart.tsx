@@ -8,7 +8,7 @@ import { getCartByCustomerId } from "~/services/cart.server";
 import { deleteCartItem } from "~/services/cartItem.server";
 import { getCustomerById } from "~/services/customer.server";
 import { NotFound, ValidationError } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 
 export const loader = async ({ params }: LoaderFunctionArgs) => {
   try {
@@ -24,7 +24,7 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     }
     return json({ customer, cart });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 };
 
@@ -45,7 +45,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
     return json({ successes: false });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 

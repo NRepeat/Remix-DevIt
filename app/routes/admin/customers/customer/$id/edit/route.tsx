@@ -10,7 +10,7 @@ import {
   updateCustomer,
 } from "~/services/customer.server";
 import { NotFound } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import { BadRequest } from "~/services/httpErrors.server";
 import { editSchema } from "~/utils/formValidation";
 
@@ -22,7 +22,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     }
     return json({ customer });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 export async function action({ params, request }: ActionFunctionArgs) {
@@ -53,7 +53,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
     }
     throw new BadRequest("Error while edit customer");
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 export default function () {

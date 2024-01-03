@@ -2,14 +2,14 @@ import { Link } from "@remix-run/react";
 import type { FC } from "react";
 import styles from "./styles.module.css";
 interface BreadcrumbsProps {
-  breadcrumbs?: { label: string; link?: string }[];
+  breadcrumbs: { label: string; link?: string }[];
 }
 
 const Breadcrumbs: FC<BreadcrumbsProps> = ({ breadcrumbs }) => {
   const errorBreadcrumbs = [
     { label: "Buy", link: "/" },
     { label: "Something", link: "/" },
-    { label: "else", link: "/" },
+    { label: "Else", link: "/" },
   ];
   return (
     <>

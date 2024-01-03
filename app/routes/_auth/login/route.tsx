@@ -12,7 +12,7 @@ import LoginPage from "~/Pages/LoginPage/LoginPage";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { CustomAuthorizationError } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 
 export async function action({ request }: ActionFunctionArgs) {
   try {
@@ -43,7 +43,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     }
     return json({ user });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 

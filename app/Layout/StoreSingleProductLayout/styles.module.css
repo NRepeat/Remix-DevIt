@@ -10,15 +10,3 @@
     "footer footer";
   background-color: var(--storeMainBgColor);
 }
-
-/* @media (max-width: 999px) {
-  .gridLayout {
-    grid-template-rows: 70px auto auto auto;
-    grid-template-columns: auto auto auto;
-    grid-template-areas:
-      "header header header"
-      "bread bread bread"
-      "main main main"
-      "footer footer footer";
-  }
-} */

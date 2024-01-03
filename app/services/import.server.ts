@@ -1,4 +1,4 @@
-import { formatString, stringToSlug } from "~/utils/formatting.server";
+import { formatString, stringToSlug } from "~/utils/formatting";
 import { dummyProductDataSchema } from "~/utils/productValidation";
 import { fetchLimitedData } from "./dummy.server";
 

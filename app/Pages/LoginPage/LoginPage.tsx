@@ -9,7 +9,7 @@ type LoginProps = {
 const LoginPage: FC<LoginProps> = ({ error }) => {
   return (
     <div className={styles.loginPage}>
-      {error && <p className={styles.error}>{error}</p>}
+      {/* {error && <p className={styles.error}>{error}</p>} */}
       <LoginForm />
     </div>
   );

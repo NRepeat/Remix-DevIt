@@ -17,10 +17,11 @@ type LoginProps = {
   error?: string;
 };
 const Login: FC<LoginProps> = ({ error }) => {
+  // { error && <p className={styles.error}>{error}</p> }
+
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        {error && <p className={styles.error}>{error}</p>}
 
         <ValidatedForm validator={adminLoginSchema} method="post">
           <h2 className={styles.title}>Login in administrator panel</h2>

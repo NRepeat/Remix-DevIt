@@ -22,7 +22,7 @@ const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {
     setImageIndex(i);
   };
   return (
-    <>
+    <div className={styles.container}>
       <div>
         <div className={styles.poster}>
           <img src={data.product.images[imgIndex]} alt={data.product.title} />
@@ -53,7 +53,7 @@ const SingleProduct: FC<SerializeFrom<SingleProduct>> = ({ data }) => {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

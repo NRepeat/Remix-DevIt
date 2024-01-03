@@ -2,7 +2,7 @@ import { redirect, type ActionFunctionArgs } from "@remix-run/node";
 import { validationError } from "remix-validated-form";
 import CreateProduct from "~/components/Admin/ProductPanels/CreateProductPanel/CreateProduct";
 import { FormFieldsError } from "~/services/error.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import { createProduct } from "~/services/product.server";
 import { CreateProductDataSchema } from "~/utils/productValidation";
 
@@ -29,7 +29,7 @@ export async function action({ request }: ActionFunctionArgs) {
           fieldErrors: error.fieldErrors,
         });
     }
-    getHTTPError(error);
+    getResponseError(error);
   }
 }
 export default function () {

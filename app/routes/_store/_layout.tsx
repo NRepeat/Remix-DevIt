@@ -4,7 +4,7 @@ import { Outlet, useLoaderData } from "@remix-run/react";
 import PageLayout from "~/Layout/StorePageLayout/PageLayout";
 import GlobalLoader from "~/components/Ui/GlobalLoading/GlobalLoader";
 import { createCart } from "~/services/cartSession.server";
-import { getHTTPError } from "~/services/errorResponse.server";
+import { getResponseError } from "~/services/errorResponse.server";
 import { UnauthorizedError } from "~/services/httpErrors.server";
 import { getAllProductCategories } from "~/services/product.server";
 
@@ -27,7 +27,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
       isCustomerWithData,
     });
   } catch (error) {
-    getHTTPError(error);
+    getResponseError(error);
   }
 };
 

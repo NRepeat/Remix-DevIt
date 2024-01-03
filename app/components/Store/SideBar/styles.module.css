@@ -1,16 +1,12 @@
 .gridSidebar {
+  grid-area: sidebar;
   padding-top: var(--storeInterfacePadding);
   background-color: var(--storeMainBgColor);
-}
-
-.sidebar {
-  grid-area: sidebar;
   border-right: var(--storeInterfaceBorder);
 }
 
-.list {
-  display: none;
-}
+
+
 
 .active {
   text-decoration: underline;
@@ -25,11 +21,11 @@
 .label {
   padding-left: var(--storeInterfacePadding);
   color: var(--storeLinkColor);
-  text-decoration: none;
   font-size: 1.2rem;
 }
 
 .link {
+  text-decoration: underline;
   width: 100%;
   height: 2rem;
   display: flex;
@@ -41,57 +37,15 @@
   text-decoration: underline;
 }
 
-.hidden {
-  display: none;
-  position: relative;
-}
 
-.isHamburger {
-  position: absolute;
+
+
+
+.list {
   list-style: none;
-
   display: flex;
   flex-direction: column;
-  background-color: var(--storePageBgColor);
-}
-
-@media (min-width: 760px) {
-  .isHamburger {
-    width: 100%;
-    max-width: 250px;
-  }
-}
-
-@media (max-width: 1000px) {
-  .hidden {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--storePageBgColor);
-  }
-
-  .isHamburger {
-    width: 95%;
-  }
-}
-
-@media (min-width: 1000px) {
-  .list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-    padding-right: var(--storeInterfacePadding);
-    padding-bottom: var(--storeInterfacePadding);
-  }
-
-  .isHamburger {
-    display: none;
-  }
-
-  .hidden {
-    display: none;
-  }
+  gap: 1.2rem;
+  padding-right: var(--storeInterfacePadding);
+  padding-bottom: var(--storeInterfacePadding);
 }

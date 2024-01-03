@@ -1,9 +1,14 @@
 import type { Category, Product } from "@prisma/client";
 import type { ProductCreateData } from "~/types/types";
-import { formatString } from "~/utils/formatting.server";
+import { formatString } from "~/utils/formatting";
 import { calculatePaginationSize } from "~/utils/pagination.server";
 import { prisma } from "~/utils/prisma.server";
-import { ProductError } from "./error.server";
+import {
+  ProductCreateError,
+  ProductDeleteError,
+  ProductNotFound,
+  ProductUpdateError,
+} from "./productError.server";
 
 export interface ProductData {
   products: ({
@@ -97,9 +102,7 @@ export const createProduct = async ({ data }: CreateProductArgs) => {
 
     return product;
   } catch (error) {
-    throw new ProductError({
-      message: "Error while creating product",
-    }).create();
+    throw new ProductCreateError();
   }
 };
 
@@ -122,13 +125,12 @@ export const getAllProducts = async (
       skip,
       take,
     });
-
+    throw new ProductNotFound();
     const totalProductsCount = await prisma.product.count();
     const totalPages = Math.ceil(totalProductsCount / take);
-
     return { products, totalPages, page };
   } catch (error) {
-    throw new ProductError({ message: `Products not found` }).notFound();
+    throw new ProductNotFound();
   }
 };
 
@@ -147,7 +149,7 @@ export const getProduct = async (
 
     return product;
   } catch (error) {
-    throw new ProductError({ message: `Product not found` }).notFound();
+    throw new ProductNotFound();
   }
 };
 
@@ -174,7 +176,7 @@ export const searchProduct = async (
     });
     return { products };
   } catch (error) {
-    throw new ProductError({ message: `Products not found` }).notFound();
+    throw new ProductNotFound();
   }
 };
 export const getAllProductCategories = async (): Promise<Category[]> => {
@@ -182,7 +184,7 @@ export const getAllProductCategories = async (): Promise<Category[]> => {
     const category = prisma.category.findMany();
     return category;
   } catch (error) {
-    throw new ProductError({ message: `Categories not found` }).notFound();
+    throw new ProductNotFound();
   }
 };
 
@@ -208,7 +210,7 @@ export const getProductsByCategory = async (
     const totalPages = Math.ceil(products.length / take);
     return { products, totalPages, page };
   } catch (error) {
-    throw new ProductError({ message: `Products not found` }).notFound();
+    throw new ProductNotFound();
   }
 };
 
@@ -221,7 +223,7 @@ export const updateProduct = async (data: updateProductArgs) => {
     });
     return product;
   } catch (error) {
-    throw new ProductError({ message: `Product not updated` }).update();
+    throw new ProductUpdateError();
   }
 };
 
@@ -248,9 +250,7 @@ export const updateProductCategory = async (
       data: { category: { update: categoryData } },
     });
   } catch (error) {
-    throw new ProductError({
-      message: `Product category not updated`,
-    }).update();
+    throw new ProductUpdateError();
   }
 };
 
@@ -262,8 +262,6 @@ export const deleteProduct = async (id: number) => {
 
     return deletedProduct;
   } catch (error) {
-    throw new ProductError({
-      message: `Product category not updated`,
-    }).delete();
+    throw new ProductDeleteError();
   }
 };

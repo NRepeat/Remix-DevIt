@@ -95,32 +95,7 @@ export class AuthenticationError extends CustomError {
     super({ message, code });
   }
 }
-export class ProductError extends CustomError {
-  create() {
-    return new CreateError({
-      message: "Product not created",
-      code: 4101,
-    });
-  }
-  update() {
-    return new UpdateError({
-      message: "Product not updated",
-      code: 4201,
-    });
-  }
-  delete() {
-    return new DeleteError({
-      message: "Product not deleted",
-      code: 4301,
-    });
-  }
-  notFound() {
-    return new NotFound({
-      message: "Product not found",
-      code: 4001,
-    });
-  }
-}
+
 export class CustomerError extends CustomError {
   login() {
     return new AuthenticationError({
