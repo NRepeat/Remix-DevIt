@@ -8,7 +8,7 @@ export interface SidebarProps {
   links: {
     slug: string;
     name: string;
-    path: string
+    path: string;
   }[];
 }
 
@@ -17,10 +17,7 @@ const Sidebar: FC<SerializeFrom<SidebarProps>> = ({ links }) => {
 
   return (
     <nav className={styles.gridSidebar}>
-      <List
-        links={links}
-        navigation={navigation}
-      />
+      <List links={links} navigation={navigation} />
     </nav>
   );
 };

@@ -15,7 +15,6 @@ import {
 import { getSession } from "~/services/session.server";
 import styles from "./styles.module.css";
 
-
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
     const session = await getSession(request.headers.get("Cookie"));

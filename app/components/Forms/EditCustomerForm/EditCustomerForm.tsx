@@ -30,8 +30,14 @@ const EditCustomerForm: FC<FormProps> = ({ formData }) => {
       >
         <FormInput placeholder="Name" label="Name" name="name" />
         <FormInput placeholder="Last Name" label="Last Name" name="lastName" />
-        <FormInput placeholder="Email" label="Email" name="email" />
-        {/* <FormInput placeholder="Password" label="Password" name="password" /> */}
+        <FormInput
+          placeholder="Email"
+          type="email"
+          label="Email"
+          name="email"
+        />
+        <FormInput type="hidden" value={formData.id} name="id" />
+
         <Button className={styles.loginButton} type="submit">
           Save
         </Button>

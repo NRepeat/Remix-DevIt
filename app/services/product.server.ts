@@ -125,7 +125,6 @@ export const getAllProducts = async (
       skip,
       take,
     });
-    throw new ProductNotFound();
     const totalProductsCount = await prisma.product.count();
     const totalPages = Math.ceil(totalProductsCount / take);
     return { products, totalPages, page };

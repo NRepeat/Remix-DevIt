@@ -21,10 +21,11 @@ export interface PageLayoutProps {
 }
 
 const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
-
-  const categoriesLinksArr = data.categories.map((category) =>
-    ({ slug: category.slug, name: category.name, path: `/categories/${category.slug}` })
-  )
+  const categoriesLinksArr = data.categories.map((category) => ({
+    slug: category.slug,
+    name: category.name,
+    path: `/categories/${category.slug}`,
+  }));
   const { isCustomerWithData } = data;
   return (
     <section className={styles.gridLayout}>

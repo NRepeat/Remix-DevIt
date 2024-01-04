@@ -5,7 +5,6 @@
   padding-left: 16px;
 }
 
-
 .wrapper {
   display: inline-flex;
   width: 100%;
@@ -13,8 +12,7 @@
   padding-bottom: 1.5rem;
 }
 
-
-.form>button {
+.form > button {
   width: 33%;
   height: 3rem;
   font-size: 1.2rem;

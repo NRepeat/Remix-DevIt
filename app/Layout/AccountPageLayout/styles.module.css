@@ -1,11 +1,10 @@
 .section {
-	padding-top: 50px;
-	grid-template-rows: 50px auto;
-	grid-template-columns: 250px 2fr;
-	display: grid;
-	background-color: var(--storeMainBgColor);
-	grid-template-areas:
-		"sidebar breadcrumbs"
-		"sidebar main"
-	;
+  padding-top: 50px;
+  grid-template-rows: 50px auto;
+  grid-template-columns: 250px 2fr;
+  display: grid;
+  background-color: var(--storeMainBgColor);
+  grid-template-areas:
+    "sidebar breadcrumbs"
+    "sidebar main";
 }

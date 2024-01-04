@@ -38,11 +38,16 @@ export function ErrorBoundary() {
 }
 export default function () {
   const data = useLoaderData<typeof loader>();
+  const categoriesLinksArr = data.categories.map((category) => ({
+    slug: category.slug,
+    name: category.name,
+    path: `/categories/${category.slug}`,
+  }));
   return (
     <>
       <p className={styles.title}>Search result</p>
       <ProductsList productsData={data.products} />
-      <Sidebar links={data.categories} />
+      <Sidebar links={categoriesLinksArr} />
     </>
   );
 }

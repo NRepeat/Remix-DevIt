@@ -1,8 +1,8 @@
 .title {
-	font-size: 1.5rem;
-	grid-area: breadcrumbs;
-	display: inline-flex;
-	align-items: center;
-	padding-left: 2rem;
-	border-bottom: var(--storeInterfaceBorder);
+  font-size: 1.5rem;
+  grid-area: breadcrumbs;
+  display: inline-flex;
+  align-items: center;
+  padding-left: 2rem;
+  border-bottom: var(--storeInterfaceBorder);
 }

@@ -3,7 +3,7 @@ import { SingleProductLayout } from "~/Layout/StoreSingleProductLayout/SinglePro
 
 export function ProductRoute() {
   return (
-    <SingleProductLayout >
+    <SingleProductLayout>
       <Outlet />
     </SingleProductLayout>
   );

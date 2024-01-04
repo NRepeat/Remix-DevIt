@@ -225,7 +225,6 @@ export const updateCustomer = async (
 export const updateCustomerByEmail = async (
   data: SuccessResult<UpdateCustomerArgs>
 ): Promise<CustomerWithoutPassword> => {
-  console.log("🚀 ~ file: customer.server.ts:228 ~ data:", data);
   try {
     const updatedCustomer = await prisma.customer.update({
       where: { email: data.data.email },
@@ -246,7 +245,6 @@ export const updateCustomerByEmail = async (
 
     return updatedCustomer;
   } catch (error) {
-    console.log("🚀 ~ file: customer.server.ts:249 ~ error:", error);
     throw new CustomerError({
       message: `Error while attempting to update customer`,
     }).update();

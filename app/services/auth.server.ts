@@ -23,10 +23,6 @@ customerAuthenticator.use(
   new FormStrategy(async ({ form }) => {
     try {
       const validFormData = await loginSchema.validate(form);
-      console.log(
-        "🚀 ~ file: auth.server.ts:26 ~ newFormStrategy ~ validFormData:",
-        validFormData
-      );
 
       if (validFormData.error && validFormData.error.fieldErrors) {
         const fieldsKey = Object.keys(validFormData.error.fieldErrors);

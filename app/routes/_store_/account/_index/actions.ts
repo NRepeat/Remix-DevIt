@@ -4,7 +4,9 @@ import { validationError } from "remix-validated-form";
 import { passwordValidator } from "~/Pages/Account/Details/ChangePasswordForm/ChangePasswordForm";
 import {
   checkPassword,
-  updateCustomerByEmail,
+  existCustomer,
+  getCustomerById,
+  updateCustomer,
   updateCustomerPassword,
 } from "~/services/customer.server";
 import { getResponseError } from "~/services/errorResponse.server";
@@ -15,14 +17,10 @@ type PasswordValidatedForm = ValidationResult<{
   currentPassword: string;
   newPassword: string;
   confirmPassword: string;
-  email: string;
+  emailP: string;
 }>;
 
 export async function updatePassword(validatedFormData: PasswordValidatedForm) {
-  console.log(
-    "🚀 ~ file: actions.ts:23 ~ updatePassword ~ validatedFormData:",
-    validatedFormData
-  );
   try {
     if (validatedFormData.error) {
       throw BadRequests();
@@ -31,7 +29,7 @@ export async function updatePassword(validatedFormData: PasswordValidatedForm) {
       confirmPassword,
       currentPassword: password,
       newPassword,
-      email,
+      emailP: email,
     } = validatedFormData.data;
 
     if (confirmPassword === newPassword) {
@@ -55,32 +53,30 @@ type CustomerInformationValidatedFormData = ValidationResult<{
   email: string;
   name: string;
   lastName: string;
+  id: number;
 }>;
 export async function updateCustomerInformation(
   validatedFormData: CustomerInformationValidatedFormData
 ) {
-  console.log(
-    "🚀 ~ file: actions.ts:63 ~ validatedFormData:",
-    validatedFormData
-  );
   try {
     if (validatedFormData.error) {
       throw BadRequests();
     }
-    // const isExistCustomer = await existCustomer(validatedFormData.data.email);
-    // console.log("🚀 ~ file: actions.ts:72 ~ isExistCustomer:", isExistCustomer);
-    // if (isExistCustomer) {
-    //   return validationError({
-    //     fieldErrors: {
-    //       email: "This email already exist",
-    //     },
-    //   });
-    // }
-
-    await updateCustomerByEmail(validatedFormData);
-    return redirect("/account");
+    const customer = await getCustomerById(validatedFormData.data.id);
+    if (customer) {
+      const isExistCustomer = await existCustomer(validatedFormData.data.email);
+      if (!isExistCustomer || customer.email === validatedFormData.data.email) {
+        await updateCustomer(validatedFormData.data.id, validatedFormData);
+        return redirect("/account");
+      }
+      return validationError({
+        fieldErrors: {
+          email: "This email already exist",
+        },
+      });
+    }
+    throw BadRequests();
   } catch (error) {
-    console.log("🚀 ~ file: actions.ts:83 ~ error:", error);
     getResponseError(error);
   }
 }
@@ -88,10 +84,7 @@ export async function updateCustomerInformation(
 export async function resolveAction(formData: FormData) {
   try {
     const validatedCustomerEditFormData = await editSchema.validate(formData);
-    console.log(
-      "🚀 ~ file: actions.ts:81 ~ resolveAction ~ validatedCustomerEditFormData:",
-      validatedCustomerEditFormData
-    );
+
     if (validatedCustomerEditFormData) {
       return await updateCustomerInformation(validatedCustomerEditFormData);
     }

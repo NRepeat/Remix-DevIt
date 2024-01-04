@@ -17,7 +17,7 @@
   padding-bottom: 2rem;
 }
 
-.poster>img {
+.poster > img {
   height: auto;
   object-fit: cover;
   aspect-ratio: 1.1;
@@ -43,7 +43,7 @@
   flex-direction: column;
 }
 
-.information>form>button {
+.information > form > button {
   background-color: var(--storeHeaderAccentColor);
 }
 

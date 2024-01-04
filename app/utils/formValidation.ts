@@ -33,6 +33,7 @@ export const customerEditZObject = z.object({
     .string()
     .min(1, { message: "Email is required" })
     .email("Must be a valid email"),
+  id: z.coerce.number(),
 });
 
 export const editSchema = withZod(customerEditZObject);

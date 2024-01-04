@@ -5,9 +5,6 @@
   border-right: var(--storeInterfaceBorder);
 }
 
-
-
-
 .active {
   text-decoration: underline;
 }
@@ -36,10 +33,6 @@
 .li:hover .label {
   text-decoration: underline;
 }
-
-
-
-
 
 .list {
   list-style: none;

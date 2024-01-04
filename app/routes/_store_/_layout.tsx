@@ -7,25 +7,24 @@ import StoreHeader from "~/components/Store/StoreHeader/Header";
 import { customerAuthenticator } from "~/services/auth.server";
 import { getResponseError } from "~/services/errorResponse.server";
 
-
 export async function loader({ request }: LoaderFunctionArgs) {
-	try {
-		const customer = await customerAuthenticator.isAuthenticated(request);
-		return json({ customer });
-	} catch (error) {
-		getResponseError(error);
-	}
+  try {
+    const customer = await customerAuthenticator.isAuthenticated(request);
+    return json({ customer });
+  } catch (error) {
+    getResponseError(error);
+  }
 }
 
 export default function () {
-	const data = useLoaderData<typeof loader>();
-	return (
-		<>
-			<Header>
-				<StoreHeader customer={data.customer} />
-			</Header>
-			<Outlet />
-			<Footer />
-		</>
-	);
+  const data = useLoaderData<typeof loader>();
+  return (
+    <>
+      <Header>
+        <StoreHeader customer={data.customer} />
+      </Header>
+      <Outlet />
+      <Footer />
+    </>
+  );
 }

@@ -22,7 +22,6 @@ const Login: FC<LoginProps> = ({ error }) => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-
         <ValidatedForm validator={adminLoginSchema} method="post">
           <h2 className={styles.title}>Login in administrator panel</h2>
 

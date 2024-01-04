@@ -5,16 +5,14 @@ import { customerAuthenticator } from "~/services/auth.server";
 import { getResponseError } from "~/services/errorResponse.server";
 
 export function loader({ request }: LoaderFunctionArgs) {
-	try {
-		const authCustomer = customerAuthenticator.isAuthenticated(request)
-		return json({ authCustomer })
-	} catch (error) {
-		getResponseError(error)
-	}
+  try {
+    const authCustomer = customerAuthenticator.isAuthenticated(request);
+    return json({ authCustomer });
+  } catch (error) {
+    getResponseError(error);
+  }
 }
 
-
-
 export default function () {
-	return <AccountPage />
+  return <AccountPage />;
 }

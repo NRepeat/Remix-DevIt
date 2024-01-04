@@ -4,8 +4,8 @@
   border-bottom: var(--storeInterfaceBorder);
 }
 
-.form>div>div>input {
-  width: min-content;
+.form > div > div > input {
+  width: fit-content;
 }
 
 .name {
@@ -20,7 +20,7 @@
   padding-bottom: 2rem;
 }
 
-.form>button {
+.form > button {
   width: 33%;
   height: 3rem;
   font-size: 1.2rem;

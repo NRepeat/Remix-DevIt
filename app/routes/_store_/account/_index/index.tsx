@@ -9,37 +9,37 @@ import { resolveAction } from "./actions";
 import styles from "./styles.module.css";
 
 export async function loader({ request }: LoaderFunctionArgs) {
-	try {
-		const authCustomer = await customerAuthenticator.isAuthenticated(request)
-		if (!authCustomer) {
-			return redirect("/login")
-		}
-		const customer = await getCustomer(authCustomer.id)
-		if (!customer) {
-			return redirect("/login")
-		}
-		return json({ customer })
-	} catch (error) {
-		getResponseError(error)
-	}
+  try {
+    const authCustomer = await customerAuthenticator.isAuthenticated(request);
+    if (!authCustomer) {
+      return redirect("/login");
+    }
+    const customer = await getCustomer(authCustomer.id);
+    if (!customer) {
+      return redirect("/login");
+    }
+    return json({ customer });
+  } catch (error) {
+    getResponseError(error);
+  }
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-	try {
-		const formData = await request.formData();
-		await resolveAction(formData)
-		return redirect("/account/")
-	} catch (error) {
-		getResponseError(error);
-	}
+  try {
+    const formData = await request.formData();
+    await resolveAction(formData);
+    return redirect("/account/");
+  } catch (error) {
+    getResponseError(error);
+  }
 }
 
 export default function () {
-	const data = useLoaderData<typeof loader>()
-	return (
-		<>
-			<h2 className={styles.title}>My Details</h2>
-			<Details customer={data.customer} />
-		</>
-	);
+  const data = useLoaderData<typeof loader>();
+  return (
+    <>
+      <h2 className={styles.title}>My Details</h2>
+      <Details customer={data.customer} />
+    </>
+  );
 }

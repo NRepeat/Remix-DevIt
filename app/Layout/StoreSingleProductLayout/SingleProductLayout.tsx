@@ -4,15 +4,9 @@ import styles from "./styles.module.css";
 
 export interface SingleProductLayoutPageLayoutProps {
   children: React.ReactNode;
-
 }
 export const SingleProductLayout: FC<SingleProductLayoutPageLayoutProps> = ({
   children,
 }) => {
-  return (
-    <section className={styles.singleProductGrid}>
-
-      {children}
-    </section>
-  );
+  return <section className={styles.singleProductGrid}>{children}</section>;
 };

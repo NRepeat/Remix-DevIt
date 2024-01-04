@@ -4,10 +4,10 @@
   flex-direction: column;
   padding: 2rem;
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
-.container>form {
+.container > form {
   display: flex;
   flex-direction: column;
 }
