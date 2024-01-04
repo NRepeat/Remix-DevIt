@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import React from "react";
-import Footer from "../Footer/Footer";
 import styles from "./styles.module.css";
 
 export interface SingleProductLayoutPageLayoutProps {
@@ -14,7 +13,6 @@ export const SingleProductLayout: FC<SingleProductLayoutPageLayoutProps> = ({
     <section className={styles.singleProductGrid}>
 
       {children}
-      <Footer />
     </section>
   );
 };

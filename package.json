@@ -17,6 +17,10 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.3",
+    "@mui/material": "^5.15.3",
     "@prisma/client": "^5.7.1",
     "@reactuses/core": "^4.0.10",
     "@remix-run/css-bundle": "^2.3.0",

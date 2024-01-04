@@ -28,7 +28,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   try {
     const session = await getSession(request.headers.get("Cookie"));
     if (!session) {
-      throw new UnauthorizedError("Session not found or invalid");
+      throw UnauthorizedError("Session not found or invalid");
     }
     const cart = createSessionCart(session);
     const slug = params.slug;
@@ -54,7 +54,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   try {
     const session = await getSession(request.headers.get("Cookie"));
     if (!session) {
-      throw new UnauthorizedError("Session not found or invalid");
+      throw UnauthorizedError("Session not found or invalid");
     }
     const sessionCart = createSessionCart(session);
     const formData = await request.formData();
@@ -120,7 +120,6 @@ export function ErrorBoundary() {
         <p className={styles.error}>
           {error.data} {error.status}
         </p>
-        <Breadcrumbs />
         <ProductsLike />
       </>
     );

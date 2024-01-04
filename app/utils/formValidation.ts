@@ -26,13 +26,13 @@ export const registrationSchema = withZod(
   })
 );
 
-export const editSchema = withZod(
-  z.object({
-    name: z.string().min(1, { message: "Name is required" }),
-    lastName: z.string().min(1, { message: "Last Name is required" }),
-    email: z
-      .string()
-      .min(1, { message: "Email is required" })
-      .email("Must be a valid email"),
-  })
-);
+export const customerEditZObject = z.object({
+  name: z.string().min(1, { message: "Name is required" }),
+  lastName: z.string().min(1, { message: "Last Name is required" }),
+  email: z
+    .string()
+    .min(1, { message: "Email is required" })
+    .email("Must be a valid email"),
+});
+
+export const editSchema = withZod(customerEditZObject);

@@ -1,0 +1,27 @@
+.form {
+  gap: 1rem;
+  padding-bottom: 8px;
+  border-bottom: var(--storeInterfaceBorder);
+}
+
+.form>div>div>input {
+  width: min-content;
+}
+
+.name {
+  width: 100%;
+  display: inline-flex;
+  gap: 15%;
+  padding-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+.form>button {
+  width: 33%;
+  height: 3rem;
+  font-size: 1.2rem;
+}

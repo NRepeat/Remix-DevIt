@@ -143,7 +143,31 @@ export const getAllCustomers = async (
     }).notFound();
   }
 };
+export const getCustomer = async (
+  customerId: number
+): Promise<Customer | null> => {
+  try {
+    const customer = await prisma.customer.findUnique({
+      where: { id: customerId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        secondName: true,
+        createdAt: true,
+        updatedAt: true,
+        password: true,
+        cart: {
+          include: { cartItems: true },
+        },
+      },
+    });
 
+    return customer;
+  } catch (error) {
+    throw new CustomerError({ message: `Customer not found` }).notFound();
+  }
+};
 export const getCustomerById = async (
   customerId: number
 ): Promise<CustomerWithoutPassword | null> => {
@@ -192,6 +216,37 @@ export const updateCustomer = async (
 
     return updatedCustomer;
   } catch (error) {
+    throw new CustomerError({
+      message: `Error while attempting to update customer`,
+    }).update();
+  }
+};
+
+export const updateCustomerByEmail = async (
+  data: SuccessResult<UpdateCustomerArgs>
+): Promise<CustomerWithoutPassword> => {
+  console.log("🚀 ~ file: customer.server.ts:228 ~ data:", data);
+  try {
+    const updatedCustomer = await prisma.customer.update({
+      where: { email: data.data.email },
+      data: {
+        name: data.data.name,
+        secondName: data.data.lastName,
+        email: data.data.email,
+      },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        secondName: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+
+    return updatedCustomer;
+  } catch (error) {
+    console.log("🚀 ~ file: customer.server.ts:249 ~ error:", error);
     throw new CustomerError({
       message: `Error while attempting to update customer`,
     }).update();
@@ -285,5 +340,44 @@ export const searchCustomer = async (
     throw new CustomerError({
       message: `Error while attempting to search customer`,
     }).notFound();
+  }
+};
+
+export const checkPassword = async (
+  email: string,
+  password: string
+): Promise<boolean> => {
+  try {
+    const isValidPassword = await prisma.customer.findUnique({
+      where: { email, password },
+    });
+    return !!isValidPassword;
+  } catch (error) {
+    throw new CustomerError({ message: "" }).notFound();
+  }
+};
+
+type UpdateCustomerPasswordArgs = {
+  email: string;
+  password: string;
+  newPassword: string;
+};
+export const updateCustomerPassword = async ({
+  email,
+  password,
+  newPassword,
+}: UpdateCustomerPasswordArgs) => {
+  try {
+    const updatePassword = prisma.customer.update({
+      where: { email },
+      data: { password: newPassword },
+      select: {
+        email: true,
+        name: true,
+      },
+    });
+    return updatePassword;
+  } catch (error) {
+    throw new Error("");
   }
 };

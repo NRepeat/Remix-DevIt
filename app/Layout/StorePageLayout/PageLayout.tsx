@@ -23,7 +23,7 @@ export interface PageLayoutProps {
 const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
 
   const categoriesLinksArr = data.categories.map((category) =>
-    ({ slug: category.slug, name: category.name, path: `categories/${category.slug}` })
+    ({ slug: category.slug, name: category.name, path: `/categories/${category.slug}` })
   )
   const { isCustomerWithData } = data;
   return (

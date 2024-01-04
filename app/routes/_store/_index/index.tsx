@@ -20,7 +20,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
     const session = await getSession(request.headers.get("Cookie"));
     if (!session) {
-      throw new UnauthorizedError("Session not found or invalid");
+      throw UnauthorizedError("Session not found or invalid");
     }
 
     const cart = createCart(session);

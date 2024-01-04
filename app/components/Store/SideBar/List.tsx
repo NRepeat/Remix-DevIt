@@ -16,9 +16,7 @@ const List: FC<ListProps> = ({
   links,
   navigation,
 }) => {
-  console.log("🚀 ~ file: List.tsx:19 ~ navigation:", links[0], navigation.pathname, navigation.pathname.includes(
-    navigation.pathname
-  ))
+  console.log("🚀 ~ file: List.tsx:19 ~ navigation:", navigation.pathname === links[0].path)
 
   return (
     <>
@@ -37,9 +35,9 @@ const List: FC<ListProps> = ({
               className={styles.link}
             >
               <p className={clsx(styles.label, {
-                [styles.active]: navigation.pathname.includes(
+                [styles.active]: navigation.pathname ===
                   `${link.path}`
-                ),
+                ,
               })}>{link.name} </p>
             </Link>
           </li>

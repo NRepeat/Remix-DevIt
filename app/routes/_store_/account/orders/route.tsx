@@ -1,7 +1,7 @@
-import Details from "~/Pages/Account/Details/Details";
+// import Details from "~/Pages/Account/Details/Details";
 
-export default function () {
-	return (
-		<Details />
-	);
-}
+// export default function () {
+// 	return (
+// 		<Details />
+// 	);
+// }

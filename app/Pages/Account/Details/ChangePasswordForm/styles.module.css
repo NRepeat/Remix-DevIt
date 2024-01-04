@@ -1,0 +1,21 @@
+.form {
+  gap: 1rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  padding-left: 16px;
+}
+
+
+.wrapper {
+  display: inline-flex;
+  width: 100%;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+
+.form>button {
+  width: 33%;
+  height: 3rem;
+  font-size: 1.2rem;
+}

@@ -7,7 +7,6 @@ import { createCart } from "~/services/cartSession.server";
 import { getResponseError } from "~/services/errorResponse.server";
 import { UnauthorizedError } from "~/services/httpErrors.server";
 import { getAllProductCategories } from "~/services/product.server";
-
 import { getSession } from "~/services/session.server";
 import { isCustomer } from "~/utils/validation.server";
 
@@ -15,7 +14,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
     const session = await getSession(request.headers.get("Cookie"));
     if (!session) {
-      throw new UnauthorizedError("Session not found or invalid");
+      throw UnauthorizedError("Session not found or invalid");
     }
     const isCustomerWithData = await isCustomer(request);
     const cart = createCart(session);

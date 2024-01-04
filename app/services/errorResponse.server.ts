@@ -1,5 +1,16 @@
 import type { HttpError } from "http-errors";
-import { BadRequests, InternalServerError } from "./httpErrors.server";
+import type { CustomError } from "./error.server";
+import {
+  BadRequests,
+  InternalServerError,
+  UnauthorizedError,
+} from "./httpErrors.server";
+import {
+  ProductCreateError,
+  ProductDeleteError,
+  ProductNotFound,
+  ProductUpdateError,
+} from "./productError.server";
 
 // export const getResponseErrosr = (error: unknown) => {
 //   let errorRequest;
@@ -42,33 +53,31 @@ import { BadRequests, InternalServerError } from "./httpErrors.server";
 // };
 interface ErrorMappingType {
   [key: string]: {
+    class?: new () => CustomError;
     httpError: (message: string) => HttpError;
   };
 }
-const ErrorMapping: ErrorMappingType = {
+
+const errorMapping: ErrorMappingType = {
   ProductCreateError: {
+    class: ProductCreateError,
     httpError: BadRequests,
   },
-  // ProductUpdateError: { class: ProductUpdateError, httpError: BadRequest },
-  // ProductDeleteError: { class: ProductDeleteError, httpError: BadRequest },
-  // ProductNotFound: { class: ProductNotFound, httpError: NotFoundError },
+  ProductUpdateError: { class: ProductUpdateError, httpError: BadRequests },
+  ProductDeleteError: { class: ProductDeleteError, httpError: BadRequests },
+  ProductNotFound: { class: ProductNotFound, httpError: BadRequests },
+  UnauthorizedError: { httpError: UnauthorizedError },
 };
 
 function createHttpError(error: unknown) {
-  let responseError;
-  let errorType;
-
   if (error instanceof Object) {
-    errorType = ErrorMapping[`${error.constructor.name}`];
+    const errorType = errorMapping[`${error.constructor.name}`];
+    if (errorType && errorType.class && error instanceof errorType.class) {
+      return errorType.httpError(error.message);
+    } else {
+      return InternalServerError();
+    }
   }
-
-  if (errorType && error instanceof errorType) {
-    responseError = errorType.httpError(error.message).httpError;
-  } else {
-    responseError = new InternalServerError().httpError;
-  }
-
-  return responseError;
 }
 
 export const getResponseError = (error: unknown) => {
