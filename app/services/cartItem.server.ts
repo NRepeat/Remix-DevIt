@@ -1,33 +1,31 @@
-import { isProductInStock } from "~/utils/validation.server";
 import {
   CartItemCreateError,
   CartItemDeleteError,
   CartItemNotFound,
   CartItemUpdateError,
 } from "./cartItemError.server";
+import { getProduct } from "./product.server";
 
 export interface CartItemArgs {
   cartId: number;
+  productId: number;
   quantity: number;
-  externalId: number;
+  externalId?: number;
 }
 
 export const createCartItem = async ({
   cartId,
-  externalId,
+  productId,
   quantity,
+  externalId,
 }: CartItemArgs) => {
   try {
-    const existCartItem = await getCartItemById(cartId);
-    if (existCartItem) {
-      const updatedCartItem = await updateCartItem(existCartItem.id, quantity);
-      return updatedCartItem;
-    }
-    if (await isProductInStock(externalId, quantity)) {
+    const product = await getProduct({ id: productId, externalId });
+    if (product) {
       const newCartItem = await prisma.cartItem.create({
         data: {
           cartId,
-          productId: externalId,
+          productId,
           quantity,
         },
       });
@@ -61,6 +59,10 @@ export const updateCartItem = async (id: number, newData: number) => {
     });
     return updatedCartItem;
   } catch (error) {
+    console.log(
+      "🚀 ~ file: cartItem.server.ts:63 ~ updateCartItem ~ error:",
+      error
+    );
     throw new CartItemUpdateError();
   }
 };

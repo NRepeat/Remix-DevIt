@@ -16,13 +16,11 @@ export const AddToCart: FC<SingleProduct> = ({ product }) => {
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   invariant(data, "Missing data");
 
-  const cartItem = data.cart.find(
-    (item) => item.productId === product.id.toString()
-  );
+  const cartItem = data.cart.find((item) => item.productId === product.id);
   return (
     <fetch.Form
       method="post"
-      action={`/product/${product.id}`}
+      action={`/product/${product.slug}`}
       onSubmit={(event) => {
         if (cartItem && product.stock <= cartItem.quantity) {
           confirm("Out of stock.");
@@ -31,7 +29,6 @@ export const AddToCart: FC<SingleProduct> = ({ product }) => {
       }}
     >
       <input name="slug" type="hidden" value={product.slug} />
-      <input name="productStock" type="hidden" value={product.stock} />
 
       <button className={styles.button} type="submit">
         {cartItem?.quantity && cartItem?.quantity < 0

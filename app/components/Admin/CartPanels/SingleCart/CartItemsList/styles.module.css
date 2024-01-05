@@ -84,12 +84,17 @@
 }
 
 .info:hover {
-  transform: translate(-2px, -2px);
+  /* transform: translate(-2px, -2px); */
+  background-color: var(--adminAccentColor);
 }
 
 .info:nth-child(even) {
   background-color: #fefefec9;
   color: rgb(8, 8, 8);
+}
+
+.info:nth-child(even):hover {
+  background-color: var(--adminAccentColor);
 }
 
 .action {

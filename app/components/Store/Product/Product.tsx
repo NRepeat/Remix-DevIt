@@ -8,10 +8,6 @@ import styles from "./styles.module.css";
 export interface SingleProduct {
   data: {
     product: Product & { category: Category };
-    cart: {
-      productId: string;
-      quantity: number;
-    };
   };
 }
 

@@ -3,13 +3,12 @@
   overflow-y: auto;
   padding-top: 50px;
   background-color: var(--storeMainBgColor);
-  grid-template-rows: 70px minmax(0px, 55px) auto 250px 5rem auto;
+  grid-template-rows: 70px 100vh 50px auto auto;
   grid-template-columns: minmax(200px, max-content) auto auto;
   grid-template-areas:
     "sidebar breadcrumbs sort"
     "sidebar main main"
-    "sidebar main main"
-    "sidebar pagination pagination"
+    "pagination pagination pagination"
     "footer footer footer";
 }
 

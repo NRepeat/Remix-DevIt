@@ -1,9 +1,9 @@
+import type { Product } from "@prisma/client";
 import { z } from "zod";
 import { memberAuthenticator } from "~/services/adminAuth.server";
 import { customerAuthenticator } from "~/services/auth.server";
 import type { CustomerWithoutPassword } from "~/services/customer.server";
 import type { Member } from "~/services/member.server";
-import { getProduct } from "~/services/product.server";
 export type isMemberWithDataPromise = Promise<{
   isMember: boolean;
   member?: Member;
@@ -20,11 +20,10 @@ export type isCustomerWithData = {
   customer: CustomerWithoutPassword | null;
 };
 export async function isProductInStock(
-  productId: number,
+  product: Product,
   requestedQuantity: number
 ): Promise<boolean> {
-  const product = await getProduct({ id: productId });
-  if (!product) {
+  if (product.stock <= 0) {
     return false;
   }
   return product.stock >= requestedQuantity;

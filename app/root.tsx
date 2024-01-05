@@ -12,6 +12,7 @@ import {
 import NotFoundPageError from "./components/Errors/NotFoundPage/NotFoundPageError";
 import GlobalLoader from "./components/Ui/GlobalLoading/GlobalLoader";
 import { createCart } from "./services/cartSession.server";
+import { getResponseError } from "./services/errorResponse.server";
 import { getAllProductCategories } from "./services/product.server";
 import { getSession } from "./services/session.server";
 import globalStylesHref from "./styles/global.css";
@@ -25,18 +26,22 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const session = await getSession(request.headers.get("Cookie"));
+  try {
+    const session = await getSession(request.headers.get("Cookie"));
 
-  const isMemberWithData = await isMember(request);
-  const isCustomerWithData = await isCustomer(request);
-  const cart = createCart(session);
-  const categories = await getAllProductCategories();
-  return json({
-    cart: cart.items(),
-    categories,
-    isCustomerWithData,
-    isMemberWithData,
-  });
+    const isMemberWithData = await isMember(request);
+    const isCustomerWithData = await isCustomer(request);
+    const cart = createCart(session);
+    const categories = await getAllProductCategories();
+    return json({
+      cart: cart.items(),
+      categories,
+      isCustomerWithData,
+      isMemberWithData,
+    });
+  } catch (error) {
+    getResponseError(error);
+  }
 };
 
 export function ErrorBoundary() {

@@ -32,7 +32,7 @@ const List: FC<CartItemsListProps> = ({ cart }) => {
       <tbody className={styles.body}>
         {cart.cartItems.map((item) => (
           <tr
-            onClick={() => handleClick(item.id)}
+            onClick={() => handleClick(item.productId)}
             key={item.id}
             className={styles.info}
           >

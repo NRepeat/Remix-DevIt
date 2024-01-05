@@ -1,14 +1,12 @@
 .pag {
   grid-area: pagination;
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   gap: 15px;
   align-items: center;
   justify-content: center;
   padding-right: var(--storeInterfacePadding);
-  padding-top: 10px;
   border-top: var(--storeInterfaceBorder);
-  height: 50px;
+  /* height: 50px; */
 }
 
 .button {

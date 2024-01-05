@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { ValidatedForm } from "remix-validated-form";
 import { Button } from "~/components/Ui/Button/Button";
 import { FormInput } from "~/components/Ui/Form/FormControl/ControlledInput/FormInput";
+import { Input } from "~/components/Ui/Input/Input";
 import { editSchema } from "~/utils/formValidation";
 import styles from "./styles.module.css";
 type FormProps = {
@@ -36,7 +37,7 @@ const EditCustomerForm: FC<FormProps> = ({ formData }) => {
           label="Email"
           name="email"
         />
-        <FormInput type="hidden" value={formData.id} name="id" />
+        <Input type="hidden" value={formData.id} name="id" />
 
         <Button className={styles.loginButton} type="submit">
           Save

@@ -3,6 +3,7 @@
   padding-top: var(--storeInterfacePadding);
   background-color: var(--storeMainBgColor);
   border-right: var(--storeInterfaceBorder);
+  overflow-y: auto;
 }
 
 .active {

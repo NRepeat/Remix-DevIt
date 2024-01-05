@@ -12,6 +12,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     const customer = await customerAuthenticator.isAuthenticated(request);
     return json({ customer });
   } catch (error) {
+    console.log("🚀 ~ file: _layout.tsx:15 ~ loader ~ error:", error);
     getResponseError(error);
   }
 }

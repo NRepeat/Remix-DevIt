@@ -5,11 +5,14 @@ import {
   CartNotFound,
   CartUpdateError,
 } from "./cartError.server";
-
-export const createCart = async (id?: number): Promise<Cart> => {
+export type CartWithItems = Cart & {
+  cartItems: CartItem[] & { product: Product }[];
+};
+export const createCart = async (id?: number): Promise<CartWithItems> => {
   try {
     const existCart = await prisma.cart.findFirst({
       where: { customerId: id },
+      include: { cartItems: { include: { product: true } } },
     });
 
     if (existCart) {
@@ -18,6 +21,7 @@ export const createCart = async (id?: number): Promise<Cart> => {
     if (!id) {
       const newCart = await prisma.cart.create({
         data: {},
+        include: { cartItems: { include: { product: true } } },
       });
       return newCart;
     }
@@ -25,6 +29,7 @@ export const createCart = async (id?: number): Promise<Cart> => {
       data: {
         customerId: id,
       },
+      include: { cartItems: { include: { product: true } } },
     });
     return newCart;
   } catch (error) {
@@ -34,9 +39,7 @@ export const createCart = async (id?: number): Promise<Cart> => {
 
 export const getCartByCustomerId = async (
   id: number
-): Promise<
-  (Cart & { cartItems: CartItem[] & { product: Product }[] }) | null
-> => {
+): Promise<CartWithItems | null> => {
   try {
     const cart = await prisma.cart.findUnique({
       where: { customerId: id },
@@ -56,7 +59,7 @@ export const getCartByCustomerId = async (
   }
 };
 
-export const getCartById = async (cartId: number) => {
+export const getCartById = async (cartId: number): Promise<CartWithItems> => {
   try {
     const cart = await prisma.cart.findUnique({
       where: { id: cartId },
@@ -69,6 +72,9 @@ export const getCartById = async (cartId: number) => {
         },
       },
     });
+    if (!cart) {
+      throw new CartNotFound();
+    }
     return cart;
   } catch (error) {
     throw new CartNotFound();

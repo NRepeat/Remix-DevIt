@@ -1,27 +1,19 @@
-import type {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  MetaFunction,
-} from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import {
   isRouteErrorResponse,
   useLoaderData,
   useRouteError,
 } from "@remix-run/react";
-import { z } from "zod";
 import Product from "~/components/Store/Product/Product";
 import ProductsLike from "~/components/Store/ProductsLike/ProductsLike";
 import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
-import { customerAuthenticator } from "~/services/auth.server";
-import { createCart, getCartByCustomerId } from "~/services/cart.server";
-import { createCartItem } from "~/services/cartItem.server";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { NotFound } from "~/services/error.server";
 import { getResponseError } from "~/services/errorResponse.server";
 import { UnauthorizedError } from "~/services/httpErrors.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
-import { commitSession, getSession } from "~/services/session.server";
+import { getSession } from "~/services/session.server";
 import styles from "./styles.module.css";
 
 export const loader = async ({ request, params }: LoaderFunctionArgs) => {
@@ -39,63 +31,12 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     const productsByCategory = await getProductsByCategory({
       category: product.category.slug,
     });
-
+    const cartItems = cart.items()[product.id];
     return json({
       productsByCategory,
       product,
-      cart: cart.items()[product.id],
+      cart: cartItems,
     });
-  } catch (error) {
-    getResponseError(error);
-  }
-};
-
-export const action = async ({ request }: ActionFunctionArgs) => {
-  try {
-    const session = await getSession(request.headers.get("Cookie"));
-    if (!session) {
-      throw UnauthorizedError("Session not found or invalid");
-    }
-    const sessionCart = createSessionCart(session);
-    const formData = await request.formData();
-    const slug = formData.get("slug");
-    if (!slug) {
-      throw new NotFound("Product slug not found");
-    }
-
-    const product = await getProduct({ slug: z.coerce.string().parse(slug) });
-    if (!product || !product.externalId) {
-      throw new NotFound(`Product ${slug}`);
-    }
-
-    const customer = await customerAuthenticator.isAuthenticated(request);
-
-    const addToCart = async (cartId: number) => {
-      const promises = sessionCart.items().map(async (item) => {
-        await createCartItem({
-          cartId,
-          externalId: z.coerce.number().parse(item.productId),
-          quantity: item.quantity,
-        });
-      });
-      await Promise.all(promises);
-    };
-
-    if (customer) {
-      sessionCart.addProduct(product.externalId);
-      const cart = await getCartByCustomerId(customer.id);
-      const cartId = cart ? cart.id : (await createCart(customer.id)).id;
-      await addToCart(cartId);
-    } else {
-      sessionCart.addProduct(product.externalId);
-      const cartId = (await createCart()).id;
-      await addToCart(cartId);
-    }
-
-    return json(
-      { success: true },
-      { headers: { "Set-Cookie": await commitSession(session) } }
-    );
   } catch (error) {
     getResponseError(error);
   }
