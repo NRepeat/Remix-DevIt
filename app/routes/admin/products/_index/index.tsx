@@ -50,10 +50,7 @@ export async function action({ request }: ActionFunctionArgs) {
       const validFormData = await validationProductDelete.validate(formData);
 
       if (validFormData.error) {
-        throw new ValidationError({
-          message: "Error in delete product form",
-          code: 4000,
-        });
+        throw new ValidationError();
       }
       await deleteProduct(validFormData.data.productId);
       return json({ successes: true });

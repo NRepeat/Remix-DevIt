@@ -17,10 +17,10 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
     const cart = await getCartByCustomerId(customerId);
 
     if (!customer) {
-      throw new NotFound({ message: "Customer not found", code: 6004 });
+      throw new NotFound();
     }
     if (!cart) {
-      throw new NotFound({ message: "Cart not found", code: 7004 });
+      throw new NotFound();
     }
     return json({ customer, cart });
   } catch (error) {
@@ -34,10 +34,7 @@ export async function action({ request }: ActionFunctionArgs) {
       const formData = await request.formData();
       const deleteData = await validationCartDelete.validate(formData);
       if (deleteData.error) {
-        throw new ValidationError({
-          message: "Error in delete cart item form",
-          code: 8000,
-        });
+        throw new ValidationError();
       }
       await deleteCartItem(deleteData.data.itemId);
       return json({ successes: true });

@@ -11,14 +11,14 @@ import {
 } from "~/services/customer.server";
 import { NotFound } from "~/services/error.server";
 import { getResponseError } from "~/services/errorResponse.server";
-import { BadRequests } from "~/services/httpErrors.server";
+import { BadRequest } from "~/services/httpErrors.server";
 import { editSchema } from "~/utils/formValidation";
 
 export async function loader({ params }: LoaderFunctionArgs) {
   try {
     const customer = await getCustomerById(z.coerce.number().parse(params.id));
     if (!customer) {
-      throw new NotFound({ message: "Customer Not Found", code: 6000 });
+      throw new NotFound();
     }
     return json({ customer });
   } catch (error) {
@@ -51,7 +51,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
         },
       });
     }
-    throw BadRequests("Error while edit customer");
+    throw BadRequest("Error while edit customer");
   } catch (error) {
     getResponseError(error);
   }

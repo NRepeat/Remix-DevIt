@@ -1,5 +1,10 @@
 import { isProductInStock } from "~/utils/validation.server";
-import { CartItemError } from "./error.server";
+import {
+  CartItemCreateError,
+  CartItemDeleteError,
+  CartItemNotFound,
+  CartItemUpdateError,
+} from "./cartItemError.server";
 
 export interface CartItemArgs {
   cartId: number;
@@ -30,9 +35,7 @@ export const createCartItem = async ({
       return newCartItem;
     }
   } catch (error) {
-    throw new CartItemError({
-      message: `Failed to create/update cart item ${error}`,
-    }).create();
+    throw new CartItemCreateError();
   }
 };
 
@@ -47,9 +50,7 @@ export const getCartItemById = async (cartItemId: number) => {
     });
     return cartItem;
   } catch (error) {
-    throw new CartItemError({
-      message: "Failed to get cart item by ID",
-    }).notFound();
+    throw new CartItemNotFound();
   }
 };
 export const updateCartItem = async (id: number, newData: number) => {
@@ -60,9 +61,7 @@ export const updateCartItem = async (id: number, newData: number) => {
     });
     return updatedCartItem;
   } catch (error) {
-    throw new CartItemError({
-      message: `Error while updating cart item `,
-    }).update();
+    throw new CartItemUpdateError();
   }
 };
 
@@ -73,8 +72,6 @@ export const deleteCartItem = async (id: number) => {
     });
     return deletedCartItem;
   } catch (error) {
-    throw new CartItemError({
-      message: `Error while deleting cart item `,
-    }).delete();
+    throw new CartItemDeleteError();
   }
 };

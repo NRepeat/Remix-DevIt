@@ -34,7 +34,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
     const slug = params.slug;
     const product = await getProduct({ slug });
     if (!product) {
-      throw new NotFound({ message: `Product ${slug}`, code: 4000 });
+      throw new NotFound(`Product ${slug}`);
     }
     const productsByCategory = await getProductsByCategory({
       category: product.category.slug,
@@ -60,12 +60,12 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     const formData = await request.formData();
     const slug = formData.get("slug");
     if (!slug) {
-      throw new NotFound({ message: "Product slug not found", code: 4211 });
+      throw new NotFound("Product slug not found");
     }
 
     const product = await getProduct({ slug: z.coerce.string().parse(slug) });
     if (!product || !product.externalId) {
-      throw new NotFound({ message: `Product ${slug}`, code: 4000 });
+      throw new NotFound(`Product ${slug}`);
     }
 
     const customer = await customerAuthenticator.isAuthenticated(request);

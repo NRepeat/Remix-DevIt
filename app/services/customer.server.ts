@@ -1,10 +1,13 @@
 import type { Cart, Customer } from "@prisma/client";
 import type { SuccessResult, ValidationResult } from "remix-validated-form";
 import {
-  CustomerError,
-  UnexpectedError,
-  ValidationError,
-} from "./error.server";
+  CustomerAuthenticationError,
+  CustomerCreateError,
+  CustomerDeleteError,
+  CustomerNotFound,
+  CustomerUpdateError,
+} from "./customerError.server";
+import { UnexpectedError, ValidationError } from "./error.server";
 
 export interface CreateCustomerArgs {
   email: string;
@@ -43,9 +46,7 @@ export const existCustomer = async (
     });
     return existCustomer;
   } catch (error) {
-    throw new CustomerError({
-      message: `An error occurred during find exist customer`,
-    }).notFound();
+    throw new CustomerNotFound();
   }
 };
 export const createCustomer = async ({
@@ -53,10 +54,7 @@ export const createCustomer = async ({
 }: ValidationResult<CreateCustomerArgs>): Promise<CustomerWithoutPassword> => {
   try {
     if (!data) {
-      throw new ValidationError({
-        message: "Registration data undefined",
-        code: 6222,
-      });
+      throw new ValidationError();
     }
     const customer = await prisma.customer.create({
       data: {
@@ -77,7 +75,7 @@ export const createCustomer = async ({
 
     return customer;
   } catch (error) {
-    throw new CustomerError({ message: `Failed to create customer` }).create();
+    throw new CustomerCreateError();
   }
 };
 
@@ -98,15 +96,12 @@ export const login = async (
     });
 
     if (customer === null) {
-      throw new CustomerError({ message: "Invalid email or password" }).login();
+      throw new CustomerAuthenticationError();
     }
 
     return customer;
   } catch (error) {
-    throw new UnexpectedError({
-      message: "Unexpected error while login customer",
-      code: 2222,
-    });
+    throw new UnexpectedError();
   }
 };
 
@@ -138,9 +133,7 @@ export const getAllCustomers = async (
     const totalPages = Math.ceil(totalCustomers / pageSize);
     return { customers, totalPages };
   } catch (error) {
-    throw new CustomerError({
-      message: "Error while attempting to get all customers",
-    }).notFound();
+    throw new CustomerNotFound();
   }
 };
 export const getCustomer = async (
@@ -165,7 +158,7 @@ export const getCustomer = async (
 
     return customer;
   } catch (error) {
-    throw new CustomerError({ message: `Customer not found` }).notFound();
+    throw new CustomerNotFound();
   }
 };
 export const getCustomerById = async (
@@ -189,7 +182,7 @@ export const getCustomerById = async (
 
     return customer;
   } catch (error) {
-    throw new CustomerError({ message: `Customer not found` }).notFound();
+    throw new CustomerNotFound();
   }
 };
 export const updateCustomer = async (
@@ -216,9 +209,7 @@ export const updateCustomer = async (
 
     return updatedCustomer;
   } catch (error) {
-    throw new CustomerError({
-      message: `Error while attempting to update customer`,
-    }).update();
+    throw new CustomerNotFound();
   }
 };
 
@@ -245,9 +236,7 @@ export const updateCustomerByEmail = async (
 
     return updatedCustomer;
   } catch (error) {
-    throw new CustomerError({
-      message: `Error while attempting to update customer`,
-    }).update();
+    throw new CustomerUpdateError();
   }
 };
 
@@ -283,7 +272,7 @@ export const deleteCustomer = async (
 
     return deletedCustomer;
   } catch (error) {
-    throw new CustomerError({ message: `Customer not deleted` }).delete();
+    throw new CustomerDeleteError();
   }
 };
 
@@ -335,9 +324,7 @@ export const searchCustomer = async (
     const totalPages = Math.ceil(totalCustomers / pageSize);
     return { customers, totalPages };
   } catch (error) {
-    throw new CustomerError({
-      message: `Error while attempting to search customer`,
-    }).notFound();
+    throw new CustomerNotFound();
   }
 };
 
@@ -351,7 +338,7 @@ export const checkPassword = async (
     });
     return !!isValidPassword;
   } catch (error) {
-    throw new CustomerError({ message: "" }).notFound();
+    throw new CustomerNotFound();
   }
 };
 
@@ -376,6 +363,6 @@ export const updateCustomerPassword = async ({
     });
     return updatePassword;
   } catch (error) {
-    throw new Error("");
+    throw new CustomerUpdateError();
   }
 };

@@ -29,10 +29,7 @@ export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
     const validData = await validationCustomerDelete.validate(formData);
     if (validData.error) {
-      throw new ValidationError({
-        message: "Error in delete customer form",
-        code: 6000,
-      });
+      throw new ValidationError();
     }
     await deleteCustomer(validData.data.customerId);
     return redirect("/admin/customers");

@@ -1,7 +1,6 @@
 import type { Customer } from "@prisma/client";
 import type { SerializeFrom } from "@remix-run/node";
 import { type FC } from "react";
-import NestedList from "./NestedList/NestedList";
 import PersonalInformationForm from "./PersonalInformationForm/PersonalInformationForm";
 import styles from "./styles.module.css";
 
@@ -20,7 +19,7 @@ const Details: FC<DetailsProps> = ({ customer }) => {
   return (
     <main className={styles.container}>
       <PersonalInformationForm defaultCustomerValues={defaultCustomerValues} />
-      <NestedList customer={customer} />
+      {/* <NestedList customer={customer} /> */}
     </main>
   );
 };

@@ -41,10 +41,7 @@ customerAuthenticator.use(
           const user = await login(validFormData.data);
           return user;
         } catch (error) {
-          throw new AuthenticationError({
-            message: "Email or password are incorrect",
-            code: 3000,
-          });
+          throw new AuthenticationError("Email or password are incorrect");
         }
       }
     } catch (error) {
@@ -75,10 +72,7 @@ customerAuthenticator.use(
       }
       const isCustomer = await existCustomer(validFormData.data.email);
       if (isCustomer) {
-        throw new AuthenticationError({
-          message: "Email already in use",
-          code: 3200,
-        });
+        throw new AuthenticationError("Email already in use");
       }
 
       const user = await createCustomer(validFormData);

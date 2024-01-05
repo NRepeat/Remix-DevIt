@@ -21,7 +21,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     });
 
     if (!product) {
-      throw new NotFound({ message: "Product Not Found", code: 4004 });
+      throw new NotFound();
     }
     return json({ product });
   } catch (error) {
@@ -43,7 +43,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
       id: z.coerce.number().parse(params.id),
     });
     if (!product) {
-      throw new NotFound({ message: "Product Not Found", code: 4004 });
+      throw new NotFound();
     }
     await updateProduct({ id: product.id, newData: productData });
     await updateProductCategory({ id: product.id, category });

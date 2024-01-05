@@ -1,5 +1,10 @@
 import type { Cart, CartItem, Product } from "@prisma/client";
-import { CartError } from "./error.server";
+import {
+  CartCreateError,
+  CartDeleteError,
+  CartNotFound,
+  CartUpdateError,
+} from "./cartError.server";
 
 export const createCart = async (id?: number): Promise<Cart> => {
   try {
@@ -23,9 +28,7 @@ export const createCart = async (id?: number): Promise<Cart> => {
     });
     return newCart;
   } catch (error) {
-    throw new CartError({
-      message: "Error while attempting to create new cart",
-    }).create();
+    throw new CartCreateError();
   }
 };
 
@@ -49,9 +52,7 @@ export const getCartByCustomerId = async (
 
     return cart;
   } catch (error) {
-    throw new CartError({
-      message: "Error while attempting to find cart by id",
-    }).notFound();
+    throw new CartNotFound();
   }
 };
 
@@ -70,9 +71,7 @@ export const getCartById = async (cartId: number) => {
     });
     return cart;
   } catch (error) {
-    throw new CartError({
-      message: "Error while attempting to find cart by id",
-    }).notFound();
+    throw new CartNotFound();
   }
 };
 export const updateCart = async (cartId: number, newData: any) => {
@@ -83,9 +82,7 @@ export const updateCart = async (cartId: number, newData: any) => {
     });
     return updatedCart;
   } catch (error) {
-    throw new CartError({
-      message: `Error while attempting to update cart`,
-    }).update();
+    throw new CartUpdateError();
   }
 };
 
@@ -96,8 +93,6 @@ export const deleteCart = async (cartId: number) => {
     });
     return deletedCart;
   } catch (error) {
-    throw new CartError({
-      message: `Error while attempting to delete cart`,
-    });
+    throw new CartDeleteError();
   }
 };

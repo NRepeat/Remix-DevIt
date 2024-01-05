@@ -1,8 +1,33 @@
 import type { HttpError } from "http-errors";
-import type { CustomError } from "./error.server";
 import {
-  BadRequests,
+  CartCreateError,
+  CartDeleteError,
+  CartNotFound,
+  CartUpdateError,
+} from "./cartError.server";
+import {
+  CartItemCreateError,
+  CartItemDeleteError,
+  CartItemNotFound,
+  CartItemUpdateError,
+} from "./cartItemError.server";
+import {
+  CustomerAuthenticationError,
+  CustomerCreateError,
+  CustomerDeleteError,
+  CustomerNotFound,
+  CustomerUpdateError,
+} from "./customerError.server";
+import {
+  NotFound,
+  UnexpectedError,
+  ValidationError,
+  type CustomError,
+} from "./error.server";
+import {
+  BadRequest,
   InternalServerError,
+  NotFoundError,
   UnauthorizedError,
 } from "./httpErrors.server";
 import {
@@ -12,45 +37,6 @@ import {
   ProductUpdateError,
 } from "./productError.server";
 
-// export const getResponseErrosr = (error: unknown) => {
-//   let errorRequest;
-//   let responseError;
-//   if (error instanceof BadRequest) {
-//     errorRequest = new BadRequest(error.httpError.message);
-//     responseError = errorRequest?.httpError;
-//   }
-//   if (error instanceof ZodError) {
-//     errorRequest = new BadRequest(error.issues[0].message);
-//     responseError = errorRequest?.httpError;
-//   }
-//   if (error instanceof CreateError) {
-//     errorRequest = new BadRequest(error.message);
-//     responseError = errorRequest?.httpError;
-//   }
-//   if (error instanceof UnauthorizedError) {
-//     responseError = error.httpError;
-//   }
-//   if (error instanceof NotFound) {
-//     errorRequest = new NotFoundError(error.message);
-//     responseError = errorRequest?.httpError;
-//   }
-//   if (error instanceof DeleteError) {
-//     errorRequest = new BadRequest(error.message);
-//     responseError = errorRequest?.httpError;
-//   }
-//   if (responseError) {
-//     throw new Response(responseError.message, {
-//       status: responseError.status,
-//       statusText: responseError.name,
-//     });
-//   }
-//   errorRequest = new InternalServerError();
-//   responseError = errorRequest?.httpError;
-//   throw new Response(responseError.message, {
-//     status: responseError.status,
-//     statusText: responseError.name,
-//   });
-// };
 interface ErrorMappingType {
   [key: string]: {
     class?: new () => CustomError;
@@ -61,12 +47,35 @@ interface ErrorMappingType {
 const errorMapping: ErrorMappingType = {
   ProductCreateError: {
     class: ProductCreateError,
-    httpError: BadRequests,
+    httpError: BadRequest,
   },
-  ProductUpdateError: { class: ProductUpdateError, httpError: BadRequests },
-  ProductDeleteError: { class: ProductDeleteError, httpError: BadRequests },
-  ProductNotFound: { class: ProductNotFound, httpError: BadRequests },
+  ProductUpdateError: { class: ProductUpdateError, httpError: BadRequest },
+  ProductDeleteError: { class: ProductDeleteError, httpError: BadRequest },
+  ProductNotFound: { class: ProductNotFound, httpError: BadRequest },
   UnauthorizedError: { httpError: UnauthorizedError },
+  CustomerCreateError: { class: CustomerCreateError, httpError: BadRequest },
+  CustomerUpdateError: { class: CustomerUpdateError, httpError: BadRequest },
+  CustomerDeleteError: { class: CustomerDeleteError, httpError: BadRequest },
+  CustomerNotFound: { class: CustomerNotFound, httpError: NotFoundError },
+  CustomerAuthenticationError: {
+    class: CustomerAuthenticationError,
+    httpError: BadRequest,
+  },
+  ValidationError: { class: ValidationError, httpError: BadRequest },
+  UnexpectedError: {
+    class: UnexpectedError,
+    httpError: InternalServerError,
+  },
+  CartCreateError: { class: CartCreateError, httpError: BadRequest },
+  CartUpdateError: { class: CartUpdateError, httpError: BadRequest },
+  CartDeleteError: { class: CartDeleteError, httpError: BadRequest },
+  CartNotFound: { class: CartNotFound, httpError: NotFoundError },
+  CartItemCreateError: { class: CartItemCreateError, httpError: BadRequest },
+  CartItemUpdateError: { class: CartItemUpdateError, httpError: BadRequest },
+  CartItemDeleteError: { class: CartItemDeleteError, httpError: BadRequest },
+  CartItemNotFound: { class: CartItemNotFound, httpError: NotFoundError },
+  ZodError: { httpError: BadRequest },
+  NotFound: { class: NotFound, httpError: NotFoundError },
 };
 
 function createHttpError(error: unknown) {

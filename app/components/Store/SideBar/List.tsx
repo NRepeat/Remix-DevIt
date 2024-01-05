@@ -18,9 +18,12 @@ const List: FC<ListProps> = ({ links, navigation }) => {
       <ul className={clsx(styles.list)}>
         {links.map((link, i) => (
           <li key={i} className={clsx(styles.li)}>
-            <Link to={`${link.path}`} className={clsx(styles.link, {
-              [styles.active]: navigation.pathname === `${link.path}`,
-            })}>
+            <Link
+              to={`${link.path}`}
+              className={clsx(styles.link, {
+                [styles.active]: navigation.pathname === `${link.path}`,
+              })}
+            >
               <p
                 className={clsx(styles.label, {
                   [styles.active]: navigation.pathname === `${link.path}`,

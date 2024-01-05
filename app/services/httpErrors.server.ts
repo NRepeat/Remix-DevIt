@@ -1,6 +1,6 @@
 import type { HttpError } from "http-errors";
 import createHttpError from "http-errors";
-export function BadRequests(message?: string): HttpError {
+export function BadRequest(message?: string): HttpError {
   return createHttpError(400, { message });
 }
 

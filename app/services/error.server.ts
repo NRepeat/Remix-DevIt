@@ -1,9 +1,5 @@
 import type { FieldErrors } from "remix-validated-form";
 
-type ErrorArgs = {
-  message: string;
-  code: number;
-};
 type CustomErrorConstructor = {
   message: string;
   code?: number;
@@ -59,124 +55,23 @@ export class CustomAuthorizationError extends CustomError {
 }
 
 export class UnexpectedError extends CustomError {
-  constructor({ message, code }: ErrorArgs) {
-    super({ message, code });
+  constructor(message = "Unexpected error", error?: unknown) {
+    super({ message });
   }
 }
 export class ValidationError extends CustomError {
-  constructor({ message, code }: ErrorArgs) {
-    super({ message, code });
+  constructor(message = "Validation error", error?: unknown) {
+    super({ message });
   }
 }
 
 export class NotFound extends CustomError {
-  constructor({ message, code }: ErrorArgs) {
-    super({ message, code });
-  }
-}
-
-export class CreateError extends CustomError {
-  constructor({ message, code }: ErrorArgs) {
-    super({ message, code });
-  }
-}
-export class UpdateError extends CustomError {
-  constructor({ message, code }: ErrorArgs) {
-    super({ message, code });
-  }
-}
-export class DeleteError extends CustomError {
-  constructor({ message, code }: ErrorArgs) {
-    super({ message, code });
+  constructor(message = "NotFound ", error?: unknown) {
+    super({ message });
   }
 }
 export class AuthenticationError extends CustomError {
-  constructor({ message, code }: ErrorArgs) {
-    super({ message, code });
-  }
-}
-
-export class CustomerError extends CustomError {
-  login() {
-    return new AuthenticationError({
-      message: "Customer not logged",
-      code: 6011,
-    });
-  }
-  create() {
-    return new CreateError({
-      message: "Customer not created",
-      code: 6101,
-    });
-  }
-  update() {
-    return new UpdateError({
-      message: "Customer not updated",
-      code: 6201,
-    });
-  }
-  delete() {
-    return new DeleteError({
-      message: "Customer not deleted",
-      code: 6301,
-    });
-  }
-  notFound() {
-    return new NotFound({
-      message: "Customer not found",
-      code: 6001,
-    });
-  }
-}
-export class CartError extends CustomError {
-  create() {
-    return new CreateError({
-      message: "Cart not created",
-      code: 7101,
-    });
-  }
-  update() {
-    return new UpdateError({
-      message: "Cart not updated",
-      code: 7201,
-    });
-  }
-  delete() {
-    return new DeleteError({
-      message: "Cart not deleted",
-      code: 7301,
-    });
-  }
-  notFound() {
-    return new NotFound({
-      message: "Cart not found",
-      code: 7001,
-    });
-  }
-}
-export class CartItemError extends CustomError {
-  create() {
-    return new CreateError({
-      message: "CartItem not created",
-      code: 8101,
-    });
-  }
-  update() {
-    return new UpdateError({
-      message: "CartItem not updated",
-      code: 8201,
-    });
-  }
-  delete() {
-    return new DeleteError({
-      message: "CartItem not deleted",
-      code: 8301,
-    });
-  }
-  notFound() {
-    return new NotFound({
-      message: "CartItem not found",
-      code: 8001,
-    });
+  constructor(message: string, error?: unknown) {
+    super({ message });
   }
 }

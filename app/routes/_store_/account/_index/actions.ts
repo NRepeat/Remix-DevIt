@@ -10,7 +10,7 @@ import {
   updateCustomerPassword,
 } from "~/services/customer.server";
 import { getResponseError } from "~/services/errorResponse.server";
-import { BadRequests } from "~/services/httpErrors.server";
+import { BadRequest } from "~/services/httpErrors.server";
 import { editSchema } from "~/utils/formValidation";
 
 type PasswordValidatedForm = ValidationResult<{
@@ -23,7 +23,7 @@ type PasswordValidatedForm = ValidationResult<{
 export async function updatePassword(validatedFormData: PasswordValidatedForm) {
   try {
     if (validatedFormData.error) {
-      throw BadRequests();
+      throw BadRequest();
     }
     const {
       confirmPassword,
@@ -60,7 +60,7 @@ export async function updateCustomerInformation(
 ) {
   try {
     if (validatedFormData.error) {
-      throw BadRequests();
+      throw BadRequest();
     }
     const customer = await getCustomerById(validatedFormData.data.id);
     if (customer) {
@@ -75,7 +75,7 @@ export async function updateCustomerInformation(
         },
       });
     }
-    throw BadRequests();
+    throw BadRequest();
   } catch (error) {
     getResponseError(error);
   }
@@ -93,7 +93,7 @@ export async function resolveAction(formData: FormData) {
     if (validatedCustomerPasswordFormData) {
       return await updatePassword(validatedCustomerPasswordFormData);
     }
-    throw BadRequests();
+    throw BadRequest();
   } catch (error) {
     getResponseError(error);
   }

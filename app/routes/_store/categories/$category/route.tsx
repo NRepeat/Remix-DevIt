@@ -22,7 +22,7 @@ export async function loader({ request, params, context }: LoaderFunctionArgs) {
     const pageQuery = url.searchParams.get("page");
     const category = params.category;
     if (!category) {
-      throw new NotFound({ message: `Category not found`, code: 404 });
+      throw new NotFound();
     }
     const page = pageQuery ? parseAndValidateNumber(pageQuery) : 1;
 

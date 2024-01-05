@@ -35,10 +35,7 @@ memberAuthenticator.use(
           const member = await loginMember(validFormData.data);
           return member;
         } catch (error) {
-          throw new AuthenticationError({
-            message: "Email or password are incorrect",
-            code: 3000,
-          });
+          throw new AuthenticationError("Email or password are incorrect");
         }
       }
     } catch (error) {
