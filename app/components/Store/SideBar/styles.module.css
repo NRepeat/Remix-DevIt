@@ -28,10 +28,12 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  text-decoration: none;
 }
 
-.li:hover .label {
+.label:hover {
   text-decoration: underline;
+  color: black;
 }
 
 .list {
