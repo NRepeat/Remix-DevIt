@@ -11,7 +11,7 @@ import Breadcrumbs from "~/components/Ui/Breadcrumbs/Breadcrumbs";
 import { createCart as createSessionCart } from "~/services/cartSession.server";
 import { NotFound } from "~/services/error.server";
 import { getResponseError } from "~/services/errorResponse.server";
-import { UnauthorizedError } from "~/services/httpErrors.server";
+import { createUnauthorizedError } from "~/services/httpErrors.server";
 import { getProduct, getProductsByCategory } from "~/services/product.server";
 import { getSession } from "~/services/session.server";
 import styles from "./styles.module.css";
@@ -20,7 +20,7 @@ export const loader = async ({ request, params }: LoaderFunctionArgs) => {
   try {
     const session = await getSession(request.headers.get("Cookie"));
     if (!session) {
-      throw UnauthorizedError("Session not found or invalid");
+      throw createUnauthorizedError("Session not found or invalid");
     }
     const cart = createSessionCart(session);
     const slug = params.slug;

@@ -39,6 +39,7 @@ customerAuthenticator.use(
       if (isCustomer) {
         try {
           const user = await login(validFormData.data);
+
           return user;
         } catch (error) {
           throw new AuthenticationError("Email or password are incorrect");

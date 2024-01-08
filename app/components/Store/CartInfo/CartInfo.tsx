@@ -1,14 +1,14 @@
 import { Link, useRouteLoaderData } from "@remix-run/react";
 import type { FC } from "react";
 import type { loader } from "~/root";
-import { BadRequest } from "~/services/httpErrors.server";
+import { createBadRequest } from "~/services/httpErrors.server";
 import FaCart from "./FaCart";
 import styles from "./styles.module.css";
 
 export const CartIcon: FC = () => {
   const data = useRouteLoaderData<typeof loader>("root"); //return the loader data by route id
   if (!data) {
-    throw BadRequest();
+    throw createBadRequest();
   }
 
   const cart = data.cart ?? 0;

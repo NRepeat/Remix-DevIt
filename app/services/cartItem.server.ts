@@ -59,10 +59,6 @@ export const updateCartItem = async (id: number, newData: number) => {
     });
     return updatedCartItem;
   } catch (error) {
-    console.log(
-      "🚀 ~ file: cartItem.server.ts:63 ~ updateCartItem ~ error:",
-      error
-    );
     throw new CartItemUpdateError();
   }
 };

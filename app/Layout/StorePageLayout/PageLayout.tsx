@@ -3,10 +3,8 @@ import type { SerializeFrom } from "@remix-run/node";
 import React from "react";
 import Sidebar from "~/components/Store/SideBar/SideBar";
 import StoreHeader from "~/components/Store/StoreHeader/Header";
-import type {
-  isCustomerWithData,
-  isMemberWithData,
-} from "~/utils/validation.server";
+import type { CustomerWithoutPassword } from "~/services/customer.server";
+import type { isMemberWithData } from "~/utils/validation.server";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import styles from "./styles.module.css";
@@ -15,7 +13,7 @@ export interface PageLayoutProps {
   children: React.ReactNode;
   data: SerializeFrom<{
     categories: Category[];
-    isCustomerWithData: isCustomerWithData;
+    customer: CustomerWithoutPassword | null;
     isMemberWithData?: isMemberWithData;
   }>;
 }
@@ -26,11 +24,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({ children, data }) => {
     name: category.name,
     path: `/categories/${category.slug}`,
   }));
-  const { isCustomerWithData } = data;
+  const { customer } = data;
   return (
     <section className={styles.gridLayout}>
       <Header>
-        <StoreHeader customer={isCustomerWithData.customer} />
+        <StoreHeader customer={customer} />
       </Header>
       <Sidebar links={categoriesLinksArr} />
       {children}

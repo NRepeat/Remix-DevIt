@@ -7,7 +7,7 @@ import Pagination from "~/components/Store/Pagination/Pagination";
 import ProductsList from "~/components/Store/ProductsList/ProductsList";
 import { createCart } from "~/services/cartSession.server";
 import { getResponseError } from "~/services/errorResponse.server";
-import { UnauthorizedError } from "~/services/httpErrors.server";
+import { createUnauthorizedError } from "~/services/httpErrors.server";
 import {
   getAllProductCategories,
   getAllProducts,
@@ -19,7 +19,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   try {
     const session = await getSession(request.headers.get("Cookie"));
     if (!session) {
-      throw UnauthorizedError("Session not found or invalid");
+      throw createUnauthorizedError("Session not found or invalid");
     }
 
     const cart = createCart(session);

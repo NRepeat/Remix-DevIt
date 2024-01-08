@@ -11,7 +11,7 @@ import {
 } from "~/services/customer.server";
 import { NotFound } from "~/services/error.server";
 import { getResponseError } from "~/services/errorResponse.server";
-import { BadRequest } from "~/services/httpErrors.server";
+import { createBadRequest } from "~/services/httpErrors.server";
 import { editSchema } from "~/utils/formValidation";
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -51,7 +51,7 @@ export async function action({ params, request }: ActionFunctionArgs) {
         },
       });
     }
-    throw BadRequest("Error while edit customer");
+    throw createBadRequest("Error while edit customer");
   } catch (error) {
     getResponseError(error);
   }

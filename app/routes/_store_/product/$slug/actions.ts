@@ -9,6 +9,10 @@ import { getProduct } from "~/services/product.server";
 export const addToCart = async (cart: CartWithItems, sessionCart: Cart) => {
   try {
     const cartSessionItems = sessionCart.items();
+    console.log(
+      "🚀 ~ file: actions.ts:12 ~ addToCart ~ cartSessionItems:",
+      cartSessionItems
+    );
 
     const { cartItems } = cart;
 

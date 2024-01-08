@@ -9,12 +9,7 @@ export type SessionCart = {
 
 export class Cart {
   // eslint-disable-next-line no-useless-constructor
-  constructor(private session: Session) {
-    console.log(
-      "🚀 ~ file: cartSession.server.ts:13 ~ Cart ~ session:",
-      session
-    );
-  }
+  constructor(private session: Session) {}
 
   loadCart() {
     const cart: SessionCart = this.session.get(SESSION_KEY) ?? {
@@ -35,22 +30,14 @@ export class Cart {
   }
   saveCart(cart: SessionCart) {
     this.session.set(SESSION_KEY, cart);
-    console.log(
-      "🚀 ~ file: cartSession.server.ts:38 ~ Cart ~ saveCart ~ cart:",
-      this.session
-    );
   }
 
   addProduct(productId: number, quantity?: number) {
     console.log(
-      "🚀 ~ file: cartSession.server.ts:46 ~ Cart ~ addProduct ~ productId:",
-      productId
+      "🚀 ~ file: cartSession.server.ts:36 ~ Cart ~ addProduct ~ quantity:",
+      quantity
     );
     const cart = this.loadCart();
-    console.log(
-      "🚀 ~ file: cartSession.server.ts:47 ~ Cart ~ addProduct ~ cart:",
-      cart.items
-    );
 
     const existingItem = cart.items.find(
       (item) => item.productId === productId
@@ -61,7 +48,18 @@ export class Cart {
 
     this.saveCart(cart);
   }
+  syncProducts(productId: number, quantity: number) {
+    const cart = this.loadCart();
 
+    const existingItem = cart.items.find(
+      (item) => item.productId === productId
+    );
+    existingItem
+      ? (existingItem.quantity = quantity)
+      : cart.items.push({ productId, quantity });
+
+    this.saveCart(cart);
+  }
   removeProduct(productId: number) {
     const cart = this.loadCart();
     const indexToRemove = cart.items.findIndex(
