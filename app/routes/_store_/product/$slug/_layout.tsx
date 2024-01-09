@@ -36,17 +36,20 @@ export const action = async ({ request }: ActionFunctionArgs) => {
           { success: true },
           { headers: { "Set-Cookie": await commitSession(session) } }
         );
-      } else {
-        const newCustomerCart = await createCart(customer.id);
-        sessionCart.setCartId(newCustomerCart.id);
-        sessionCart.addProduct(product.id);
-        await addToCart(newCustomerCart, sessionCart);
-        return json(
-          { success: true },
-          { headers: { "Set-Cookie": await commitSession(session) } }
-        );
       }
-    } else if (sessionCartId) {
+
+      const newCustomerCart = await createCart(customer.id);
+      sessionCart.setCartId(newCustomerCart.id);
+      sessionCart.addProduct(product.id);
+      await addToCart(newCustomerCart, sessionCart);
+      return json(
+        { success: true },
+        { headers: { "Set-Cookie": await commitSession(session) } }
+      )
+    }
+
+
+    if (sessionCartId && !customer) {
       const anonymCart = await getCartById(sessionCartId);
       if (anonymCart) {
         sessionCart.addProduct(product.id);
@@ -56,20 +59,16 @@ export const action = async ({ request }: ActionFunctionArgs) => {
           { headers: { "Set-Cookie": await commitSession(session) } }
         );
       }
-      const newAnonymCart = await createCart();
-      sessionCart.setCartId(newAnonymCart.id);
-      sessionCart.addProduct(product.id);
-      await addToCart(newAnonymCart, sessionCart);
-      return json(
-        { success: true },
-        { headers: { "Set-Cookie": await commitSession(session) } }
-      );
     }
-
+    const newAnonymCart = await createCart();
+    sessionCart.setCartId(newAnonymCart.id);
+    sessionCart.addProduct(product.id);
+    await addToCart(newAnonymCart, sessionCart);
     return json(
       { success: true },
       { headers: { "Set-Cookie": await commitSession(session) } }
     );
+
   } catch (error) {
     getResponseError(error);
   }
